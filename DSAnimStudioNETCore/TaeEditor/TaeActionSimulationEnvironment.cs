@@ -985,7 +985,7 @@ namespace DSAnimStudio.TaeEditor
                                             float angleToTarget_YAxis = (float)Math.Atan2(-dirVectorToTarget.Z, dirVectorToTarget.X);
 
 
-                                            // X COMPONENT: ROTATE AROUND CIRCLE (STRAFE LEFT/RIGHT)
+                                            // X 分量：绕圈旋转（左右横移）
                                             float angleToRotateXComponent = -(float)Math.Asin(Math.Abs(x) / (2 * distToTarget));
                                             if (x < 0)
                                                 angleToRotateXComponent *= -1;
@@ -1003,7 +1003,7 @@ namespace DSAnimStudio.TaeEditor
                                         }
 
 
-                                        // Y COMPONENT: ROTATE AROUND CIRCLE VERTICALLY (????)
+                                        // Y 分量：绕圈垂直旋转（????）
                                         if (y != 0)
                                         {
                                             dirVectorToTarget = (TestChrTargetPos.Value - MODEL.CurrentTransformPosition);
@@ -1026,7 +1026,7 @@ namespace DSAnimStudio.TaeEditor
                                             MODEL.AddRootMotion(Matrix.CreateTranslation(vectorY));
                                         }
 
-                                        // Z COMPONENT: CHANGE CIRCLE RADIUS (APPROACH/LEAVE)
+                                        // Z 分量：改变圆的半径（靠近/远离）
                                         if (z != 0)
                                         {
                                             dirVectorToTarget = (TestChrTargetPos.Value - MODEL.CurrentTransformPosition);
@@ -1157,7 +1157,7 @@ namespace DSAnimStudio.TaeEditor
             }
             
             // ------------
-            // AFTER EVENTS
+            // 事件之后
             // ------------
 
             for (int i = 0; i < TaeAnimRequest_TaeAddAnim.Length; i++)

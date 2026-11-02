@@ -107,7 +107,7 @@ namespace DSAnimStudio.TaeEditor
 
         public TaeActionSimulationEnvironment ActionSim;
 
-        //TODO: Make this prevent selection changing while editing stuff (affects: Ctrl+A, maybe more)
+        //TODO: 让它在编辑内容期间阻止选择发生变化（影响：Ctrl+A，还有更多）
         public bool CanChangeSelectionRightNow = true;
 
         public NewGraphLayoutManager LayoutManager;

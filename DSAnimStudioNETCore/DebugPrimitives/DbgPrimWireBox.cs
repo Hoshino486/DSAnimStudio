@@ -44,7 +44,7 @@ namespace DSAnimStudio.DebugPrimitives
                 var max = Vector3.One;
 
                 // 下面这些名字的 3 个字母： 
-                // [T]op/[B]ottom, [F]ront/[B]ack, [L]eft/[R]ight
+                // [T]op 表示顶部/[B]ottom 表示底部, [F]ront 表示前/[B]ack 表示后, [L]eft 表示左/[R]ight 表示右
                 var tfl = new Vector3(min.X, max.Y, max.Z);
                 var tfr = new Vector3(max.X, max.Y, max.Z);
                 var bfr = new Vector3(max.X, min.Y, max.Z);

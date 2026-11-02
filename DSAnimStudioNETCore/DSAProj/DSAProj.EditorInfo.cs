@@ -375,7 +375,7 @@ namespace DSAnimStudio
 
 
 
-                    //TEST. DELETE THIS
+                    //测试。删掉这一段
                     //ImGuiDebugDrawer.DrawRect(imguiWindowActualRect, Color.Red, 0, 16);
                     //ImGuiDebugDrawer.DrawRect(imguiWindowClipRect, Color.Lime, 0, 4);
                     
@@ -384,7 +384,7 @@ namespace DSAnimStudio
                     //    new Vector2(8, 8), 
                     //    Color.Cyan, 0, 2);
                     ////ImGui.Button("Test button");
-                    //TEST END
+                    //测试结束
 
                     Vector2 windowPos = ImGui.GetWindowPos();
                     Vector2 windowSize = ImGui.GetWindowSize();

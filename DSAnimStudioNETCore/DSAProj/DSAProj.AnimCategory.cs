@@ -89,7 +89,7 @@ namespace DSAnimStudio
             }
 
             /// <summary>
-            /// GUID used for ImGui tagging (to prevent control interference).
+            /// 用于 ImGui 标记的 GUID（用于避免控件相互干扰）。
             /// </summary>
             [JsonIgnore]
             public readonly string GUID = Guid.NewGuid().ToString();

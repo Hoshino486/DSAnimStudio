@@ -349,7 +349,7 @@ namespace DSAnimStudio
                     vert.BoneWeights[0] = 1;
                 }
 
-                // Apply normal W channel bone index (for some weapons etc)
+                // 应用法线 W 通道的骨骼索引（用于部分武器等）
                 if (!bufferUsesBoneIndices)
                 {
                     int boneIndex = vert.NormalW; 
@@ -491,7 +491,7 @@ namespace DSAnimStudio
 
                 MeshVertices[i].Position = new Vector3(vert.Position.X, vert.Position.Y, vert.Position.Z);
 
-                // DEBUG TEST
+                // DEBUG 测试
                 //if (flvr.Header.Version > 0x2000D)
                 //{
                 //    MeshVertices[i].Position += new Vector3(0, 0.38f, 0);
@@ -926,7 +926,7 @@ namespace DSAnimStudio
                         vert.BoneWeights[0] = 1;
                     }
 
-                    // Apply normal W channel bone index (for some weapons etc)
+                    // 应用法线 W 通道的骨骼索引（用于部分武器等）
                     if (!bufferUsesBoneIndices)
                     {
                         int boneIndex = vert.NormalW;

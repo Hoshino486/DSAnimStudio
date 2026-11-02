@@ -93,7 +93,7 @@ namespace EventInput
         /// <summary>
         /// 用给定的 GameWindow 初始化 TextInput。
         /// </summary>
-        /// <param name="window">The XNA window to which text input should be linked.</param>
+        /// <param name="window">文本输入应关联到的 XNA 窗口。</param>
         public static void Initialize(GameWindow window) 
         { 
             if (initialized) 

@@ -412,8 +412,8 @@ namespace DSAnimStudio
 
                 if (includeCardinalShadows)
                 {
-                    // Rather than dividing diagonals by sqrt(2) to shorten them to correct length, we are
-                    // multiplying the cardinals by sqrt(2) to make them longer, so diagonals are same thickness they were originally
+                    // 与其将对角线除以 sqrt(2) 以缩短到正确长度，我们改为
+                    // 将基向量乘以 sqrt(2) 使其变长，让对角线保持原来的粗细
                     // 而且新的基本方向向量长度是对的，大概就这个意思
                     //shadowThickness *= sqrt2;
 

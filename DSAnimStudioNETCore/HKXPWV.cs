@@ -221,7 +221,7 @@ namespace SoulsFormats
 
             /// <summary>
             /// 用最常见的取值创建一个默认的 AnimBoneEntry
-            /// field values: SkeletonParamRowID = -1, Unk2 = 0.
+            /// 字段值：SkeletonParamRowID = -1，Unk2 = 0。
             /// </summary>
             public AnimBoneEntry()
             {
@@ -265,12 +265,12 @@ namespace SoulsFormats
 
             /// <summary>
             /// 这根 ragdoll Bone 被破坏时要播放的 Anim ID。
-            /// Plays animation a99_XXXX in the TAE.
+            /// 在 TAE 中播放动画 a99_XXXX。
             /// </summary>
             public short DamageAnimID { get; set; } = -1;
 
             /// <summary>
-            /// Defines which NPC part group (if any) this ragdoll bone's collider is assigned.
+            /// 定义此布娃娃骨骼的碰撞体被分配到哪个 NPC 部件组（如果有）。
             /// 用于 EMEVD 里的 NPC 部位事件，或者敌人的弱点。
             /// </summary>
             public byte NPCPartGroupIndex { get; set; } = 0;

@@ -297,7 +297,7 @@ namespace DSAnimStudio.LiveRefresh
                                     throw new NotImplementedException();
                                 Memory.WriteBytes(crashFixPtr, writeBytes);
 
-                                //OLD VERSION
+                                //旧版本
                                 //var buffer = new byte[]
                                 //{
                                 //    0x48, 0xBB, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,     // mov rbx,0000000000000000 (ChrReload_DataSetup)

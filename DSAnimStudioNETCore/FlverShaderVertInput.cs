@@ -114,7 +114,7 @@ namespace DSAnimStudio
         /// <summary>
         /// 判断是否等于另一个对象。
         /// </summary>
-        /// <param name="obj">Object to compare to.</param>
+        /// <param name="obj">要比较的对象。</param>
         /// <returns>两个对象是否相等。</returns>
         public override bool Equals(object obj)
         {
@@ -161,9 +161,9 @@ namespace DSAnimStudio
         /// <summary>
         /// 返回两个 Vertex 是否相等。
         /// </summary>
-        /// <param name="left">Left side to compare.</param>
-        /// <param name="right">Right side to compare.</param>
-        /// <returns>If equal.</returns>
+        /// <param name="left">要比较的左侧。</param>
+        /// <param name="right">要比较的右侧。</param>
+        /// <returns>是否相等。</returns>
         public static bool operator ==(FlverShaderVertInput left, FlverShaderVertInput right)
         {
             return (
@@ -190,8 +190,8 @@ namespace DSAnimStudio
         /// <summary>
         /// 返回两个 Vertex 是否不相等。
         /// </summary>
-        /// <param name="left">Left side to compare.</param>
-        /// <param name="right">Right side to compare.</param>
+        /// <param name="left">要比较的左侧。</param>
+        /// <param name="right">要比较的右侧。</param>
         /// <returns>是否不相等。</returns>
         public static bool operator !=(FlverShaderVertInput left, FlverShaderVertInput right)
         {

@@ -89,10 +89,10 @@ namespace DSAnimStudio
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects)
+                    // TODO: 释放托管状态（托管对象）
                 }
 
-                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: 释放非托管资源（非托管对象）并重写终结器
                 // TODO：把大字段置为 null
                 disposedValue = true;
             }
@@ -101,13 +101,13 @@ namespace DSAnimStudio
         // // TODO：只有当 'Dispose(bool disposing)' 里有释放非托管资源的代码时，才需要重写终结器
         // ~DX11Shader()
         // {
-        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     // 不要更改此代码。将清理代码放入 'Dispose(bool disposing)' 方法中
         //     Dispose(disposing: false);
         // }
 
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            // 不要更改此代码。将清理代码放入 'Dispose(bool disposing)' 方法中
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }

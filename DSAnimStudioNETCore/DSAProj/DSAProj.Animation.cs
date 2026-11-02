@@ -151,7 +151,7 @@ namespace DSAnimStudio
 
 
             /// <summary>
-            /// GUID used for ImGui tagging (to prevent control interference).
+            /// 用于 ImGui 标记的 GUID（用于避免控件相互干扰）。
             /// </summary>
             public readonly string GUID = Guid.NewGuid().ToString();
 
@@ -633,7 +633,7 @@ namespace DSAnimStudio
 
                     if (value)
                     {
-                        // If just marked as modified then this is not good data to save[?]
+                        // 如果只是被标记为已修改，那么这不是适合保存的数据[?]
                         SerializedCache = null;
                     }
                     //else

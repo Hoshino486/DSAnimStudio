@@ -102,7 +102,7 @@ namespace DSAnimStudio
                     if (curOperatorType != prevOperatorType)
                         Conditions[i].Operator = curOperatorType;
 
-                    // Column 5 = Operand
+                    // 第 5 列 = Operand
                     ImGui.TableNextColumn();
                     bool anyOperandFieldFocused = false;
                     Conditions[i].ShowImGuiControlForOperand(proj, ref anyOperandFieldFocused);

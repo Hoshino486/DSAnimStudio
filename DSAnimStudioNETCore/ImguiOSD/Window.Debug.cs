@@ -657,7 +657,7 @@ namespace DSAnimStudio.ImguiOSD
             }
 
             
-            // Rename to doHit_Contents
+            // 重命名为 doHit_Contents
             void doHit(ParamData.AtkParam.Hit hit)
             {
                 ImGui.InputFloat(nameof(hit.Radius), ref hit.Radius);

@@ -17,7 +17,7 @@ namespace DSAnimStudio
         public int TransformTrackCount => data_interleaved.TransformTrackCount;
         public List<NewBlendableTransform> Transforms => data_interleaved.Transforms;
 
-        // Index into array = hkx bone index, result = transform track index.
+        // 数组索引 = hkx 骨骼索引，结果 = 变换轨道索引。
         private int[] HkxBoneIndexToTransformTrackMap => data_interleaved.HkxBoneIndexToTransformTrackMap;
 
         private int[] TransformTrackIndexToHkxBoneMap => data_interleaved.TransformTrackIndexToHkxBoneMap;

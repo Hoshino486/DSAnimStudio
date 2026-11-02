@@ -110,7 +110,7 @@ namespace DSAnimStudio
 
 		public static void Hook(IntPtr hWnd)
         {
-			// To begin catching inputs, first make a window that listens WM_INPUT.
+			// 要开始捕获输入，首先创建一个监听 WM_INPUT 的窗口。
 			receiver = new RawInputReceiverWindow();
 
 			RawInputDevice.RegisterDevice(HidUsageAndPage.Mouse, RawInputDeviceFlags.InputSink, receiver.Handle);

@@ -276,7 +276,7 @@ namespace DSAnimStudio
         public int CurrentGameAnimLowerIDMax =>
             CurrentAnimIDFormatType == AnimIDFormattingType.aXXX_YYYYYY ? 999999 : 9999;
 
-        //DESR TODO
+        //DESR 待办
         public bool GameIsDemonsSoulsRemastered = false;
 
         public bool GameTypeIsHavokTagfile =>
@@ -1725,7 +1725,7 @@ namespace DSAnimStudio
                     IBinder anibnd = null;
                     IBinder extraTexChrbnd = null;
 
-                    //DESR TEST
+                    //DESR 测试
                     if (ParentDocument.GameRoot.GameIsDemonsSoulsRemastered)
                     {
                         anibnd = BND3.Read(ParentDocument.GameData.ReadFile($@"/chr/{anibndID}/{anibndID}.anibnd"));

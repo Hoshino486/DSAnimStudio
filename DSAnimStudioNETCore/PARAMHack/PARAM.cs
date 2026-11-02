@@ -242,7 +242,7 @@ namespace SoulsFormats
 
             for (int i = 0; i < Rows.Count; i++)
                 Rows[i].WriteName(bw, this, i);
-            // DeS and BB sometimes (but not always) include some useless padding here
+            // DeS 和 BB 有时（但并非总是）会在这里包含一些无用的填充数据
         }
 
         /// <summary>

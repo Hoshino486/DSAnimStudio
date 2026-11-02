@@ -125,7 +125,7 @@ namespace DSAnimStudio
                         NumChannels = samp.WaveFormat.Channels
                     };
 
-                    // TEMP HOTFIX
+                    // 临时热修复
                     if (key.NumChannels > 2)
                         return false;
                     

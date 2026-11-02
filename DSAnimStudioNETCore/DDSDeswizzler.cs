@@ -80,7 +80,7 @@ namespace DSAnimStudio
 
         public void DeswizzleDDSBytesPS4(int width, int height)
         {
-            ////[Hork Comment]
+            ////[Hork 注释]
             //if (Format != 22 && width <= 4 && height <= 4)
             //{
             //    for (int i = 0; i < BlockSize; i++)
@@ -90,7 +90,7 @@ namespace DSAnimStudio
             //    return;
             //}
 
-            ////[Hork Comment]
+            ////[Hork 注释]
             //if (Format != 22 && width <= 2 && height == 1)
             //{
             //    for (int i = 0; i < width * 8; i++)
@@ -129,7 +129,7 @@ namespace DSAnimStudio
                 WriteOffset = 0;
                 return;
             }
-            ////[Hork Comment]
+            ////[Hork 注释]
             //else if (Format == 105)
             //{
             //    DeswizzleDDSBytesPS4RGBA8(width, height, 0, 2);
@@ -154,7 +154,7 @@ namespace DSAnimStudio
                         DeswizzleDDSBytesPS4(32, 32, offset, 2);
 
                     h += (swizzleBlockSize / 4) * BlockSize;
-                    ////[Hork Comment]
+                    ////[Hork 注释]
                     // swizzleBlockSize = 32
                 }
 

@@ -195,7 +195,7 @@ namespace DSAnimStudio.DynamicSongSys
             byteArray = reader.ReadBytes(dataSize);
             bytesOverMilliseconds = byteArray.Length / duration;
 
-            // Load metainfo, or specifically, TXXX "LOOP_____" tags
+            // 加载 metainfo，具体来说就是 TXXX "LOOP_____" 标签
 
             char[] sectionHeader = new char[4];
             int sectionSize;

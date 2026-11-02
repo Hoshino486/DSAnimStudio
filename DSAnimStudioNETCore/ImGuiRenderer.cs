@@ -10,7 +10,7 @@ using System.Text;
 namespace DSAnimStudio
 {
     /// <summary>
-    /// ImGui renderer for use with XNA-likes (FNA & MonoGame)
+    /// 用于 XNA 类框架（FNA 与 MonoGame）的 ImGui 渲染器
     /// </summary>
     public class ImGuiRenderer
     {
@@ -116,7 +116,7 @@ namespace DSAnimStudio
         #region ImGuiRenderer
 
         /// <summary>
-        /// Creates a texture and loads the font data from ImGui. Should be called when the <see cref="GraphicsDevice" /> is initialized but before any rendering is done
+        /// 创建纹理并从 ImGui 加载字体数据。应在 <see cref="GraphicsDevice" /> 初始化之后、执行任何渲染之前调用
         /// </summary>
         public virtual unsafe void RebuildFontAtlas()
         {
@@ -144,7 +144,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Creates a pointer to a texture, which can be passed through ImGui calls such as <see cref="ImGui.Image" />. That pointer is then used by ImGui to let us know what texture to draw
+        /// 创建指向纹理的指针，可传入 <see cref="ImGui.Image" /> 这类 ImGui 调用。ImGui 会用这个指针反过来告诉我们要绘制哪张纹理
         /// </summary>
         public virtual IntPtr BindTexture(Texture2D texture)
         {
@@ -218,7 +218,7 @@ namespace DSAnimStudio
             //_keys.Add(io.KeyMap[(int)ImGuiKey.Y] = (int)Keys.Y);
             //_keys.Add(io.KeyMap[(int)ImGuiKey.Z] = (int)Keys.Z);
 
-            // MonoGame-specific //////////////////////
+            // MonoGame 专用 //////////////////////
             _game.Window.TextInput += (s, a) =>
             {
                 if (a.Character == '\t') return;
@@ -227,7 +227,7 @@ namespace DSAnimStudio
             };
             ///////////////////////////////////////////
 
-            // FNA-specific ///////////////////////////
+            // FNA 专用 ///////////////////////////
             //TextInputEXT.TextInput += c =>
             //{
             //    if (c == '\t') return;
@@ -240,7 +240,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Updates the <see cref="Effect" /> to the current matrices and texture
+        /// 将 <see cref="Effect" /> 更新为当前矩阵和纹理
         /// </summary>
         protected virtual Effect UpdateEffect(Texture2D texture, Matrix shiftMatrix)
         {
@@ -248,12 +248,12 @@ namespace DSAnimStudio
 
             var io = ImGui.GetIO();
 
-            // MonoGame-specific //////////////////////
+            // MonoGame 专用 //////////////////////
             //var offset = .5f;
             var offset = 0f;
             ///////////////////////////////////////////
 
-            // FNA-specific ///////////////////////////
+            // FNA 专用 ///////////////////////////
             //var offset = 0f;
             ///////////////////////////////////////////
 

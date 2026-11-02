@@ -146,7 +146,7 @@ namespace DSAnimStudio
         public SoulsAssetPipeline.Animation.SIBCAM.SibcamPlayer.View RumbleCam = SoulsAssetPipeline.Animation.SIBCAM.SibcamPlayer.View.Default;
 
         ///// <summary>
-        ///// TODO: rumblecam simulation lol. Call <see cref="ClearCustomCameraView_Additive"/> first, 
+        ///// TODO: 震动相机模拟 lol。先调用 <see cref="ClearCustomCameraView_Additive"/>， 
         ///// 再把当前正在播放的也加进来，权重记得按 falloff 距离那套算 pog
         ///// </summary>
         //public CameraViewModifier CUSTOM_VIEW_MULTIPLY = CameraViewModifier.Default;

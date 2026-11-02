@@ -545,8 +545,8 @@ namespace DSAnimStudio
 
             /// <summary>
             /// 此事件的可索引参数容器。
-            /// Use .Parameters[name] for basic value get/set
-            /// and use .GetValueType(name) to see how to convert
+            /// 使用 .Parameters[name] 进行基本的取值/设值
+            /// 并使用 .GetValueType(name) 查看该如何转换
             /// 把它与 System.Object 互相转换。
             /// </summary>
             [JsonIgnore]

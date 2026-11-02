@@ -1103,7 +1103,7 @@ namespace DSAnimStudio
         }
 
 
-        // -1 = Show all normally
+        // -1 = 正常显示全部
         // -2 或更低 = 全部不显示
         public int GlobalForceDummyPolyIDVisible = -1;
         //public static bool ShowGlobalIDOffset = true;

@@ -47,7 +47,7 @@ namespace DSAnimStudio.SafeFmod
                 {
                     // 如果 FMOD event 说自己处于 READY 状态，那说明它还没开始播
                     // 所以如果 EventInfo 之前已经让它开始播了，那这说明真正的
-                    // FMOD event finished playing (hence how it's READY again).
+                    // FMOD 事件已播放完毕（因此它又回到 READY 状态）。
                     if (fmodEventState == EVENT_STATE.READY && State != SoundInstanceFmod.States.HasntStartedYet)
                     {
                         State = SoundInstanceFmod.States.Finished;

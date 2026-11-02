@@ -669,11 +669,11 @@ namespace DSAnimStudio
                 soundName = $"v{id:D9}";
 
             // 音频引擎重写之后，地板和护甲 Material 的 ID 现在会在这个函数之前加进去。
-            // 8 = Floor Material Determined
+            // 8 = 地面材质已确定
             else if (category == 8)
                 soundName = $"c{id:D9}";
 
-            // 9 = Armor Material Determined
+            // 9 = 护甲材质已确定
             else if (category == 9)
                 soundName = $"c{id:D9}";
 

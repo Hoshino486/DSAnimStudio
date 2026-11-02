@@ -1,5 +1,5 @@
 //------------------------------------------------
-//--- 010 Editor v13.0.2 Binary Template
+//--- 010 Editor v13.0.2 二进制模板
 //
 //      File: DSAProj.bt
 //   Authors: Meowmaritus
@@ -10,7 +10,7 @@
 
 local int MAX_SUPPORTED_FILE_VERSION = 3;
 
-// 010 doesnt support binary literals lmao
+// 010 不支持二进制字面量，笑死
 enum <int> SoulsGames 
 { 
     SoulsGames_DES = 1,

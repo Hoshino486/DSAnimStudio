@@ -2,7 +2,7 @@
 // 本来是 C++ 写的，Mark Heath 为 NAudio 移植成了 C#
 // 经 Justin Frankel 许可，在 NAudio 中使用
 // 原始 WDL 许可证：
-//     Copyright (C) 2005 and later Cockos Incorporated
+//     版权所有 (C) 2005 及以后 Cockos Incorporated
 //     
 //     部分版权归其他贡献者所有，详情见各源文件
 // 
@@ -104,7 +104,7 @@ namespace NAudio.Dsp
         /// <summary>
         /// 设置 feed 模式
         /// </summary>
-        /// <param name="wantInputDriven">if true, that means the first parameter to ResamplePrepare will specify however much input you have, not how much you want</param>
+        /// <param name="wantInputDriven">若为 true，则 ResamplePrepare 的第一个参数表示你实际拥有的输入采样数，而不是你想要的输出采样数</param>
         public void SetFeedMode(bool wantInputDriven)
         {
             m_feedmode = wantInputDriven;
@@ -145,14 +145,14 @@ namespace NAudio.Dsp
 
         /// <summary>
         /// Prepare
-        /// note that it is safe to call ResamplePrepare without calling ResampleOut (the next call of ResamplePrepare will function as normal)
+        /// 注意，只调用 ResamplePrepare 而不调用 ResampleOut 是安全的（下一次调用 ResamplePrepare 会照常工作）
         /// nb inbuffer was WDL_ResampleSample **, returning a place to put the in buffer, so we return a buffer and offset
         /// </summary>
-        /// <param name="out_samples">req_samples is output samples desired if !wantInputDriven, or if wantInputDriven is input samples that we have</param>
+        /// <param name="out_samples">当 !wantInputDriven 时，req_samples 为所需的输出采样数；当 wantInputDriven 时，则为已有的输入采样数</param>
         /// <param name="nch"></param>
         /// <param name="inbuffer"></param>
         /// <param name="inbufferOffset"></param>
-        /// <returns>returns number of samples desired (put these into *inbuffer)</returns>
+        /// <returns>返回所需的采样数（将这些值写入 *inbuffer）</returns>
         public int ResamplePrepare(int out_samples, int nch, out WDL_ResampleSample[] inbuffer, out int inbufferOffset)
         {
             if (nch > WDL_RESAMPLE_MAX_NCH || nch < 1)
@@ -448,7 +448,7 @@ namespace NAudio.Dsp
 
             if (ret > 0 && rsinbuf_availtemp > m_samples_in_rsinbuf) // we had to pad!!
             {
-                // check for the case where rsinbuf_availtemp>m_samples_in_rsinbuf, decrease ret down to actual valid samples
+                // 处理 rsinbuf_availtemp>m_samples_in_rsinbuf 的情况，将 ret 降低到实际有效的采样数
                 double adj = (srcpos - m_samples_in_rsinbuf + outlatadj) / drspos;
                 if (adj > 0)
                 {

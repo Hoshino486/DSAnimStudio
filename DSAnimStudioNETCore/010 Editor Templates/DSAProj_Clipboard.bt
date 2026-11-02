@@ -1,5 +1,5 @@
 //------------------------------------------------
-//--- 010 Editor v13.0.2 Binary Template
+//--- 010 Editor v13.0.2 二进制模板
 //
 //      File: DSAProj.bt
 //   Authors: Meowmaritus
@@ -32,9 +32,9 @@ typedef struct
 } Event;
 
 char magic[4]; Assert(magic == "DSCB");
-// This is same FILE_VERSION as the main DSAProj format. 
-// If an updated version adds new fields to NullPrefixUTF16 or Event you must 
-// add them to the event structs in this template as well.
+// 这里的 FILE_VERSION 与主 DSAProj 格式一致。
+// 如果新版本给 NullPrefixUTF16 或 Event 加了新字段，
+// 你也必须把它们同步加进本模板里的事件结构体。
 int FILE_VERSION;
 Assert(FILE_VERSION <= MAX_SUPPORTED_FILE_VERSION);
 int eventCount;

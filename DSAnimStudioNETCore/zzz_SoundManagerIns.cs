@@ -780,7 +780,7 @@ namespace DSAnimStudio
                     
 
                 s.Value.Update(this, deltaTime, listener);
-                // If slot is empty (all sound samples have finished playing)
+                // 如果槽位为空（所有声音采样都已播放完毕）
                 // 此时槽位就是“死”的，排进删除队列。
                 if (s.Value.SlotCompletelyEmpty)
                     deadSlots.Add(s.Key);
@@ -849,7 +849,7 @@ namespace DSAnimStudio
                     
 
                 s.Value.Update(this, deltaTime, listener);
-                // If slot is empty (all sound samples have finished playing)
+                // 如果槽位为空（所有声音采样都已播放完毕）
                 // 此时槽位就是“死”的，排进删除队列。
                 if (s.Value.SlotCompletelyEmpty)
                     deadSlots.Add(s.Key);

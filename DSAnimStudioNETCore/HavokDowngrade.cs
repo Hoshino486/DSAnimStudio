@@ -30,7 +30,7 @@ namespace DSAnimStudio
 
         public static bool SimpleCheckIfHkxBytesAre2015(byte[] bytes)
         {
-            //"TAG0", container name in 2015+
+            //"TAG0"，2015+ 中的容器名称
             return bytes[4] == 0x54 && bytes[5] == 0x41 && bytes[6] == 0x47 && bytes[7] == 0x30;
         }
 
@@ -105,7 +105,7 @@ namespace DSAnimStudio
                     var standardOutput = proc.StandardOutput.ReadToEnd();
                     var standardError = proc.StandardError.ReadToEnd();
                     byte[] result = File.ReadAllBytes(pathOut);
-                    //Patch "hk_2012.2.0-r1" to "hk_2010.2.0-r1"
+                    //将 "hk_2012.2.0-r1" 打补丁为 "hk_2010.2.0-r1"
                     if (!isUpgrade)
                         result[0x2E] = 0x30;
                     whatToDoWithResult.Invoke(proc, result, j);

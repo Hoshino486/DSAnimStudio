@@ -858,7 +858,7 @@ namespace DSAnimStudio
                     if (hiddenByAbsorpPos)
                     {
                         wpnMdl.IsHiddenByAbsorpPos = true;
-                        // Undo scale(0) matrix if debug force shown is enabled
+                        // 如果启用了调试强制显示，则撤销 scale(0) 矩阵
                         if (wpnMdl.Debug_ForceShowNoMatterWhat)
                         {
                             absoluteWeaponTransform = Matrix.Identity;

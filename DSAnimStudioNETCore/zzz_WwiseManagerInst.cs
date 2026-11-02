@@ -1998,7 +1998,7 @@ namespace DSAnimStudio
             else if (category == 7)
                 soundName = $"Play_v{id:D9}";
 
-            // 8 = Floor Material Determined
+            // 8 = 地面材质已确定
             else if (category == 8)
             {
                 int defMatID = 0;
@@ -2007,7 +2007,7 @@ namespace DSAnimStudio
                     DefensiveMaterialIndex = DefensiveMaterialIDs_ForPlaySoundByFloor.Length - 1;
                 soundName = $"Play_c{(id + (DefensiveMaterialIDs_ForPlaySoundByFloor[DefensiveMaterialIndex] - 1)):D9}";
             }
-            // 9 = Armor Material Determined
+            // 9 = 护甲材质已确定
             else if (category == 9)
                 soundName = $"Play_c{(id + (int)ArmorMaterial_Top):D9}";
 

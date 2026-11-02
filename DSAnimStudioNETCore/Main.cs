@@ -2024,7 +2024,7 @@ namespace DSAnimStudio
             prevActive = Active;
         }
 
-        /// <summary>Returns true if the current application has focus, false otherwise</summary>
+        /// <summary>当前应用程序若拥有焦点返回 true，否则返回 false</summary>
         public static bool ApplicationIsActivated()
         {
             var activatedHandle = GetForegroundWindow();

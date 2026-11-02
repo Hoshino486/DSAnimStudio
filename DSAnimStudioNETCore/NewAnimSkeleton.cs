@@ -143,7 +143,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Needs use of <see cref="_lock_OtherSkeletonMapping"/>
+        /// 需要使用 <see cref="_lock_OtherSkeletonMapping"/>
         /// </summary>
         public void CopyMatricesDirectlyFromOtherSkeleton(bool writeToShaderMatrices)
         {

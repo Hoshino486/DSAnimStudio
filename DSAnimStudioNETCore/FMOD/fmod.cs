@@ -4129,7 +4129,7 @@ namespace FMOD
         }
 
 
-        // Channelgroup scale values.  (scales the current volume or pitch of all channels and channel groups, DOESN'T overwrite)
+        // Channelgroup 缩放值。（缩放所有 channel 与 channel group 的当前音量或音高，不覆盖原有值）
         public RESULT setVolume              (float volume)
         {
             return FMOD_ChannelGroup_SetVolume(channelgroupraw, volume);
@@ -4186,7 +4186,7 @@ namespace FMOD
         }
 
 
-        // Channelgroup override values.  (recursively overwrites whatever settings the channels had)
+        // Channelgroup 覆盖值。（递归覆盖 channel 原有的全部设置）
         public RESULT stop                   ()
         {
             return FMOD_ChannelGroup_Stop(channelgroupraw);
@@ -4292,7 +4292,7 @@ namespace FMOD
         }
 
 
-        // DSP functionality only for channel groups playing sounds created with FMOD_SOFTWARE.
+        // DSP 功能仅对正在播放由 FMOD_SOFTWARE 创建的声音的 channel group 有效。
         public RESULT getDSPHead             (ref DSP dsp)
         {
             RESULT result = RESULT.OK;

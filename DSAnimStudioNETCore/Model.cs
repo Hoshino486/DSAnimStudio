@@ -537,7 +537,7 @@ namespace DSAnimStudio
                             {
                                 var dmy = flver2.Dummies[i];
 
-                                // Clamp original value (presumably) how the game does.
+                                // 按游戏的做法（推测）钳制原始值。
                                 if (dmy.ParentBoneIndex < 0 || dmy.ParentBoneIndex > flver2.Nodes.Count)
                                     dmy.ParentBoneIndex = 0;
 
@@ -767,7 +767,7 @@ namespace DSAnimStudio
         //        CurrentTransform = new Transform(StartTransform.WorldMatrix * (AnimContainer?.Skeleton?.CurrentTransform.WorldMatrix ?? Matrix.Identity));
 
 
-        //    //DEBUG TEST
+        //    //DEBUG 测试
         //    //if (HavokSkeleton != null)
         //    //{
         //    //    ((INewAnimSkeletonHelper)HavokSkeleton).SetAllBoneOverrideFlags(false);

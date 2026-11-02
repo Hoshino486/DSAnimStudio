@@ -172,7 +172,7 @@ namespace DSAnimStudio.DebugPrimitives
         public abstract DbgPrim<T> Instantiate(Transform newLocation);
 
         /// <summary>
-        /// Set this to choose specific technique(s).
+        /// 设置此项以选择具体的 technique。
         /// 留空则直接使用当前的 technique。
         /// </summary>
         //public virtual string[] ShaderTechniquesSelection => null;

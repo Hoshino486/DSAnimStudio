@@ -1449,7 +1449,7 @@ namespace FMOD
             return FMOD_EventSystem_GetUserData(eventsystemraw, ref userdata);
         }
 
-        // Pre-loading FSB files (from disk or from memory, use FMOD_OPENMEMORY_POINT to point to pre-loaded memory).
+        // 预加载 FSB 文件（可从磁盘或从内存，使用 FMOD_OPENMEMORY_POINT 指向已预加载的内存）。
         public RESULT preloadFSB                (string filename, int streaminstance, Sound sound)
         {
             return FMOD_EventSystem_PreloadFSB(eventsystemraw, filename, streaminstance, sound.getRaw());

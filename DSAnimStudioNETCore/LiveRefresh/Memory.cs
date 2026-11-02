@@ -32,7 +32,7 @@ namespace DSAnimStudio.LiveRefresh
         /// <summary>
         /// 检查地址是否有效。
         /// </summary>
-        /// <param name="address">The address (the pointer points to).</param>
+        /// <param name="address">该地址（指针所指向的地址）。</param>
         /// <returns>True if (pointer points to a) valid address.</returns>
 
 

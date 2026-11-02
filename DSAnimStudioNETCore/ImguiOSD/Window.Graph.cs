@@ -57,7 +57,7 @@ namespace DSAnimStudio.ImguiOSD
                 //ImGui.Text(OSD.FocusedWindow?.NewImguiWindowTitle ?? "");
                 
                 var dsid = ImGui.GetID("DockSpace_NewActionGraph");
-                // ImGuiDockNodeFlags (1 << 12) is ImGuiDockNodeFlags_NoTabBar
+                // ImGuiDockNodeFlags (1 << 12) 就是 ImGuiDockNodeFlags_NoTabBar
                 ImGui.DockSpace(dsid, new Vector2(0, 0), ImGuiDockNodeFlags.PassthruCentralNode | (ImGuiDockNodeFlags)(1 << 12));
 
                 

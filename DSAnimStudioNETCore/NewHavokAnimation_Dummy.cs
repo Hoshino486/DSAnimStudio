@@ -14,7 +14,7 @@ namespace DSAnimStudio
     {
         public List<SplineCompressedAnimation.TransformTrack[]> Tracks => data_compressed.Tracks;
 
-        // Index into array = hkx bone index, result = transform track index.
+        // 数组索引 = hkx 骨骼索引，结果 = 变换轨道索引。
         private int[] HkxBoneIndexToTransformTrackMap => data_compressed.HkxBoneIndexToTransformTrackMap;
 
         private int[] TransformTrackIndexToHkxBoneMap => data_compressed.TransformTrackIndexToHkxBoneMap;

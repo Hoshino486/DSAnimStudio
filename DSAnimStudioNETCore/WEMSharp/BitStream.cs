@@ -37,7 +37,7 @@ namespace WEMSharp
         /// <summary>
         /// 从 stream 里读任意数量的位
         /// </summary>
-        /// <param name="bitCount">Amount of bits to read</param>
+        /// <param name="bitCount">要读取的位数</param>
         internal uint Read(int bitCount)
         {
             uint result = 0;

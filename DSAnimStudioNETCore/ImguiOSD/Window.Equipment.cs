@@ -472,7 +472,7 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     int index = values.IndexOf(equipInfo);
                     int startIndex = index;
-                    // Fake IDs are just the value list index in int form, so [0, 1, 2, 3, 4, 5, ...] etc
+                    // 伪 ID 就是值列表索引的 int 形式，因此是 [0, 1, 2, 3, 4, 5, ...] 之类
                     index = EquipListIndexSelect(slotName, index, names, fakeIDs, ref anyFieldFocused);
                     if (startIndex != index)
                     {

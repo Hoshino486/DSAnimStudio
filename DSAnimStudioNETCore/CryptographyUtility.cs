@@ -101,10 +101,10 @@ namespace DSAnimStudio
         /// <summary>
         ///     使用给定的解密密钥解密文件。
         /// </summary>
-        /// <param name="filePath">An encrypted file</param>
-        /// <param name="key">The RSA key in PEM format</param>
-        /// <exception cref="ArgumentNullException">When the argument filePath is null</exception>
-        /// <exception cref="ArgumentNullException">When the argument keyPath is null</exception>
+        /// <param name="filePath">一个加密的文件</param>
+        /// <param name="key">PEM 格式的 RSA 密钥</param>
+        /// <exception cref="ArgumentNullException">当参数 filePath 为 null 时抛出</exception>
+        /// <exception cref="ArgumentNullException">当参数 keyPath 为 null 时抛出</exception>
         /// <returns>包含解密后文件内容的内存流</returns>
         public static MemoryStream DecryptRsa(string filePath, string key)
         {
@@ -152,10 +152,10 @@ namespace DSAnimStudio
         // <summary>
         ///     使用给定的解密密钥解密文件。
         /// </summary>
-        /// <param name="inputStream">An encrypted file</param>
-        /// <param name="key">The RSA key in PEM format</param>
-        /// <exception cref="ArgumentNullException">When the argument filePath is null</exception>
-        /// <exception cref="ArgumentNullException">When the argument keyPath is null</exception>
+        /// <param name="inputStream">一个加密的文件</param>
+        /// <param name="key">PEM 格式的 RSA 密钥</param>
+        /// <exception cref="ArgumentNullException">当参数 filePath 为 null 时抛出</exception>
+        /// <exception cref="ArgumentNullException">当参数 keyPath 为 null 时抛出</exception>
         /// <returns>包含解密后文件内容的内存流</returns>
         public static MemoryStream DecryptRsa(Stream inputStream, string key)
         {

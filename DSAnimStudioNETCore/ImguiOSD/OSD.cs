@@ -331,7 +331,7 @@ namespace DSAnimStudio.ImguiOSD
             try
             {
 
-                // DOCKING TEST
+                // 停靠测试
                 // ImGuiViewportPtr vp = ImGui.GetMainViewport();
                 // ImGui.SetNextWindowPos(vp.Pos + new System.Numerics.Vector2(0, 24));
                 // ImGui.SetNextWindowSize(vp.Size + new System.Numerics.Vector2(0, -24));

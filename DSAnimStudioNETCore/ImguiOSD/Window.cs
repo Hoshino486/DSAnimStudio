@@ -30,7 +30,7 @@ namespace DSAnimStudio.ImguiOSD
         public string ImguiTag => UniqueImguiInstanceNoSavedSettings ? $"{NewImguiWindowTitle}##{GUID}" : NewImguiWindowTitle;
 
         /// <summary>
-        /// Use this to give an absolute Imgui tag that will be the same every time (and also will be saved in the imgui config file correctly)
+        /// 用它给出一个每次都相同的绝对 Imgui 标记（并且也会被正确地保存进 imgui 配置文件）
         /// 如果这里没重写成返回非 null 的东西，GUID 就会被当成 imgui tag，也就是说这个 tag 会
         /// 每次都变。
         /// </summary>

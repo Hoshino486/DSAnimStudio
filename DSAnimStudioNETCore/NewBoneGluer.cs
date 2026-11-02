@@ -17,7 +17,7 @@ namespace DSAnimStudio
         public bool Enabled = true;
         public Model LeaderModel;
         public Model FollowerModel;
-        // If exposed publicly, ensure _lock_boneGlueEntries is used.
+        // 如果公开暴露，确保使用 _lock_boneGlueEntries。
         public List<BoneGlueEntry> BoneGlueEntries;
 
         public float DebugWeight = 1;

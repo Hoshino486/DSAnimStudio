@@ -975,7 +975,7 @@
 //                                return;
 
 //                            // 不去检查 box 是否处于激活，因为那些效果
-//                            // "accumulate" along the timeline.
+//                            // 沿时间轴“累积”。
 
 //                            // 只模拟到当前时间为止。
 //                            if (evBox.StartTime > time)
@@ -1829,7 +1829,7 @@
 //                                return;
 
 //                            // 不去检查 box 是否处于激活，因为那些效果
-//                            // "accumulate" along the timeline.
+//                            // 沿时间轴“累积”。
 
 //                            // 只模拟到当前时间为止。
 //                            if (evBox.StartTime > time)

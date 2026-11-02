@@ -201,7 +201,7 @@ namespace DSAnimStudio.FancyShaders
         {
             //创建一个巨大的 vertexbuffer，把所有像素的 quad 全塞进去
             //这些 quad 创建时就已经是最终尺寸了
-            //Alternatively one could just pass the center position of the quad to all vertices and expand inside the vertex shader (see: GPU particle sample for xna)
+            //或者也可以只把 quad 的中心位置传给所有 vertex，然后在 vertex shader 内部扩展（参见 xna 的 GPU 粒子示例）
             //这样缩放就变成小事一桩，因为 CPU 上什么都不用重算
             //但每个 quad 的运行开销会稍微涨一点。
 

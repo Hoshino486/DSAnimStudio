@@ -3250,7 +3250,7 @@ namespace DSAnimStudio.TaeEditor
                             else
                             {
 
-                                // BROKEN REFERENCE, GARBEGE
+                                // 引用已损坏，垃圾数据
 
                                 var header = new TAE.Animation.AnimFileHeader.Standard();
                                 header.ImportsHKX = false;
@@ -3901,7 +3901,7 @@ namespace DSAnimStudio.TaeEditor
 
                 if (Main.IsNightfallBuild && Proj != null)
                 {
-                    // MEOW TESTING?
+                    // 喵，测试？
                     if (Input.KeyDownNoMods(Microsoft.Xna.Framework.Input.Keys.OemSemicolon))
                         NIGHTFALL_ToggleImport();
                 }

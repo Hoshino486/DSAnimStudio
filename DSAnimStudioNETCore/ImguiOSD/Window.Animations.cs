@@ -350,7 +350,7 @@ namespace DSAnimStudio.ImguiOSD
                         void RenderTaeBlock(DSAProj proj, DSAProj.AnimCategory category, bool disableTaeCulling,
                             bool disableAnimCulling)
                         {
-                            // Culling is possible if tree node is closed (since it's always the same size)
+                            // 如果树节点已关闭就可以做剔除（因为它的尺寸始终相同）
                             // 或者启用了裁剪且存在有效缓存
                             bool blockHasValidCache =
                                 (TaeBlockCaches.ContainsKey(category) && TaeBlockCaches[category].IsValid);

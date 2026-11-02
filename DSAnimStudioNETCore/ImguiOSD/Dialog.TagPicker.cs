@@ -72,7 +72,7 @@ namespace DSAnimStudio.ImguiOSD
                 
                 string query = InputtedString;
                 string queryLower = InputtedString.ToLower();
-                // Descending because higher numbers are at the top of the list (it all gets reversed later on).
+                // 降序排列是因为编号越大越位于列表顶部（稍后整个列表会被反转）。
                 var keys = AvailableTags.Keys.OrderByDescending(a => a).ToList();
 
                 bool hasExactMatch = false;

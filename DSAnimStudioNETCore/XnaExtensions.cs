@@ -163,7 +163,7 @@ namespace DSAnimStudio
             // 这也许没必要，但浮点数
             // 精度可是个善变的娘们。
             dot = MathHelper.Clamp(dot, -1.0f, 1.0f);
-            // Acos(dot) returns the angle between start and end,
+            // Acos(dot) 返回起点与终点之间的角度，
             // 再把它乘上 percent，就得到
             // 起点和最终结果之间的夹角。
             float theta = (float)(Math.Acos(dot) * percent);

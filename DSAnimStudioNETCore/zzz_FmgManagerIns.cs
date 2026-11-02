@@ -236,7 +236,7 @@ namespace DSAnimStudio
                 //TryToLoadFromMSGBND("engus", "item_dlc2.msgbnd.dcx", 211, 212); //DLC1
                 //TryToLoadFromMSGBND("engus", "item_dlc2.msgbnd.dcx", 251, 252); //DLC2
 
-                // New way of loading (based on Elden Ring):
+                // 新的加载方式（基于 Elden Ring）：
                 if (ParentDocument.GameData.FileExists($@"/msg/engus/item_dlc2.msgbnd.dcx"))
                 {
                     // 反转加载顺序，好让 DLC 的东西被原版东西覆盖

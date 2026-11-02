@@ -56,7 +56,7 @@ namespace DSAnimStudio.DebugPrimitives
                             //}
 
                             // 在顶部，我们必须把每一个点都连到顶部
-                            // Note: this isn't "else if" because with 2 segments, 
+                            // 注意：这里并非 "else if"，因为当分成 2 段时， 
                             // 对于唯一的那一环，这两条都成立
                             if (i == Segments - 1)
                             {
@@ -66,7 +66,7 @@ namespace DSAnimStudio.DebugPrimitives
                             // 画出从这一环向上连的竖线 
                             // 水平环连到上面那一环
                             // 因为我们要做连接 
-                            // (current) -> (the one above current)
+                            // (当前) -> (当前之上的那一个)
                             // 最后一个就不需要这么做了。
                             if (i < Segments - 1)
                             {

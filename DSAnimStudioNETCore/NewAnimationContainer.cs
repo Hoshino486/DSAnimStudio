@@ -1052,7 +1052,7 @@ namespace DSAnimStudio
                         {
                             kvp.Value.Scrub(absolute, time, foreground, background, 
                                 out float slotDelta, out float? syncTime, ignoreRootMotion);
-                            // GLOBAL_SYNC_FORCE_REFRESH overrides the local sync of the active animation layer.
+                            // GLOBAL_SYNC_FORCE_REFRESH 覆盖活动动画层的本地同步。
                             if (syncTime != null && kvp.Key == NewAnimSlot.SlotTypes.Base && !GLOBAL_SYNC_FORCE_REFRESH)
                             {
                                 lock (_lock_syncTime)
