@@ -101,7 +101,7 @@
             <entry value="97" name="97: Disable Magic / Item Use Anim Cancel Flag"
                    name_jp="魔法/アイテム使用アニメキャンセルフラグ無効"/>
         </s32>
-        <!-- THE ARGS BELOW ARE MATCHED TO KEYWORDS IN THE ENUM VALUES ABOVE DO NOT CHANGE LOL -->
+        <!-- 下面的参数会与上面的枚举值关键字做匹配，别乱改啊哈哈 -->
         <f32 name="ArgA"/>
         <s32 name="ArgB"/>
         <u8 name="ArgC"/>

@@ -218,7 +218,7 @@
     <field name="UnkField2" type="s32" offset="0x18"/>
   </event>
 
-  <!-- TODO: Check which games this is used in. -->
+  <!-- TODO：核对一下哪些游戏用到了这个。 -->
   <event id="10130" name="PlaySound_WanderGhost" only_in="BB,DS3,ER,ERNR">
     <field name="SoundType" type="s32" offset="0x0"/>
     <field name="SoundID" type="s32" offset="0x4"/>

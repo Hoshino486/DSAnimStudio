@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <action_template game="DESR">
-    <!-- NOTE: THIS ACTION TEMPLATE HAS HARDCODED EDITOR BEHAVIOR WITH THE ARGS. BE CAREFUL. -->
+    <!-- 注意：本动作模板的参数在编辑器里有硬编码行为，改之前先看清楚。 -->
     <action id="0" name="ChrActionFlag">
         <s32 name="FlagType">
             <entry value="0" name="0: Do Nothing"/>
@@ -89,7 +89,7 @@
             <entry value="95" name="95: Disable Shadow"/>
             <entry value="97" name="97: Non-Attack Input Queue Window - All"/>
         </s32>
-        <!-- THE ARGS BELOW ARE MATCHED TO KEYWORDS IN THE ENUM VALUES ABOVE DO NOT CHANGE LOL -->
+        <!-- 下面的参数会与上面的枚举值关键字做匹配，别乱改啊哈哈 -->
         <f32 name="ArgA"/>
         <s32 name="ArgB"/>
         <u8 name="ArgC"/>
@@ -112,7 +112,7 @@
         <s32/>
         <s32/>
 
-        <!-- Turns out these were the next action data. -->
+        <!-- 结果发现这些其实是下一个动作的数据。 -->
         <!--<s32/>
         <s32/>-->
     </action>
@@ -141,7 +141,7 @@
         <s32 name="Transition Anim ID"/>
         <s32/>
     </action>
-    <!-- For c0000 -->
+    <!-- 用于 c0000 -->
     <action id="32" name="SetWeaponStyle">
         <s32 name="WeaponStyle">
             <entry value="0" name="0: None"/>
@@ -153,11 +153,11 @@
             <entry value="6" name="6: Unknown"/>
         </s32>
     </action>
-    <!-- For c0000 -->
+    <!-- 用于 c0000 -->
     <action id="33" name="SwitchWeapon">
         <s32 name="WeaponSlotID"/>
     </action>
-    <!-- For c0000 -->
+    <!-- 用于 c0000 -->
     <action id="34" name="UnequipCrossbowBolt">
         <s32 name="HandType">
             <entry value="-1" name="-1: Both Hands"/>
@@ -168,7 +168,7 @@
         <s32 assert="0"/>
         <s32 assert="0"/>
     </action>
-    <!-- For c0000 -->
+    <!-- 用于 c0000 -->
     <action id="35" name="EquipCrossbowBolt">
         <s32 name="HandType">
             <entry value="-1" name="-1: Both Hands"/>
@@ -179,7 +179,7 @@
         <s32 assert="0"/>
         <s32 assert="0"/>
     </action>
-    <!-- For c0000 -->
+    <!-- 用于 c0000 -->
     <action id="64" name="CastHighlightedMagic">
         <s32 name="DummyPolyID"/>
         <b name="Is???"/>
@@ -187,7 +187,7 @@
         <u8 assert="0"/>
         <u8 assert="0"/>
     </action>
-    <!-- For c0000 -->
+    <!-- 用于 c0000 -->
     <action id="65" name="ConsumeCurrentGoods">
         <s32 name="DummyPolyID"/>
     </action>
@@ -237,7 +237,7 @@
         <s32 name="FFXID"/>
         <s32 name="DummyPolyID"/>
     </action>
-    <!-- Like 115 but this one can be spawned multiple times during anim -->
+    <!-- 类似 115，但这一条在一条动画里可以多次生成 -->
     <action id="114" name="SpawnFFX_GoodsAndMagic">
         <s32 name="FFXID"/>
         <s16 name="DummyPolySource">
@@ -248,7 +248,7 @@
         <s16 name="DummyPolyID"/>
         <s32 name="SlotID"/>
     </action>
-    <!-- Like 114, but this one can only be spawned once? -->
+    <!-- 类似 114，但这一条只能生成一次？ -->
     <action id="115" name="SpawnFFX_GoodsAndMagic2">
         <s32 name="FFXID"/>
         <s16 name="DummyPolySource">
@@ -422,7 +422,7 @@
         <u8 name="UpwardAngleThreshold"/>
         <u8 name="DownwardAngleThreshold"/>
     </action>
-    <!-- RTTI: ChrPrimDispMask -->
+    <!-- RTTI：ChrPrimDispMask -->
     <action id="233" name="ChangeChrDrawMask">
         <u8 name="Mask1"/>
         <u8 name="Mask2"/>
@@ -433,11 +433,11 @@
         <u8 name="Mask7"/>
         <u8 name="Mask8"/>
     </action>
-    <!-- Havok? -->
+    <!-- Havok？ -->
     <action id="234" name="AddOffsetToNextAnimID">
         <s32 name="Offset"/>
     </action>
-    <!-- RTTI: ChrPrimDispMask -->
+    <!-- RTTI：ChrPrimDispMask -->
     <action id="235">
         <b name="Mask1"/>
         <b name="Mask2"/>
@@ -494,14 +494,14 @@
         <s32 name="PCBehaviorType"/>
         <s32 name="BehaviorJudgeID"/>
     </action>
-    <!-- RTTI : ArrowTurnAnim-->
+    <!-- RTTI：ArrowTurnAnim -->
     <action id="308">
         <f32/>
     </action>
     <action id="401" name="AddSpEffect_Multiplayer_401">
         <s32 name="SpEffectID"/>
     </action>
-    <!-- Different From DS3? -->
+    <!-- 和黑暗之魂 3 不一样？ -->
     <action id="500">
         <u8/>
         <u8 assert="0"/>
