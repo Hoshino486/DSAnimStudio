@@ -360,7 +360,7 @@ namespace DSAnimStudio.TaeEditor
         {
             string oodleSource = Utils.Frankenpath(interroot, "oo2core_6_win64.dll");
 
-            // modengine check
+            // modengine 检查
             if (!File.Exists(oodleSource))
             {
                 oodleSource = Utils.Frankenpath(interroot, @"..\oo2core_6_win64.dll");

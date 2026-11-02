@@ -104,7 +104,7 @@ namespace DSAnimStudio.DynamicSongSys
         private bool firstBuffer = true;
         private void UpdateBuffer(object sender, EventArgs e)
         {
-            //New Version
+            //新版本
             if (enableLoop && loopStartBytes > 0)
             {
                 if (firstBuffer)
@@ -133,7 +133,7 @@ namespace DSAnimStudio.DynamicSongSys
             firstBuffer = false;
             return;
 
-            // Old Version
+            // 旧版本
             int bytesUntilEnd = byteArray.Length - position;
             int bytesUntilLoop = loopEndBytes - position;
 

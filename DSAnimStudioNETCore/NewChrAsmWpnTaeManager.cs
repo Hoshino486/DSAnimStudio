@@ -70,7 +70,7 @@ namespace DSAnimStudio
                 TaeCategory = new DSAProj.AnimCategory(FakeProj);
             }
             
-            // Add dummy TAE entries for any HKXs that exist but aren't in the TAE, ghetto but should hopefully work xd
+            // 给那些存在但不在 TAE 里的 HKX 补上假 TAE 条目，土办法，但希望能用 xd
             var hkxs = Mdl.AnimContainer.GetAllAnimationIDs();
             var animationList = TaeCategory.INNER_GetAnimations();
             foreach (var h in hkxs)
@@ -126,7 +126,7 @@ namespace DSAnimStudio
             {
                 anim = selectAnimation(_taeAnimID);
 
-                // Default to going directly to HKX and only use TAE if it exists
+                // 默认直接走 HKX，只有 TAE 存在时才用 TAE
                 //hkxAnimID = _taeAnimID;
 
                 if (anim != null)

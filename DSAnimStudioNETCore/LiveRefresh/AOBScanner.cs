@@ -50,7 +50,7 @@ namespace DSAnimStudio.LiveRefresh
             return IntPtr.Zero;
         }
 
-        // Using nullable byte for comparisons is very slow
+        // 用 nullable byte 做比较非常慢
         private static int[] Unbox(byte?[] aob)
         {
             var pattern = new int[aob.Length];

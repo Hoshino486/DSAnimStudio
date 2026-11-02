@@ -92,7 +92,7 @@ namespace DSAnimStudio
             {
                 var game = zzz_DocumentManager.CurrentDocument.GameRoot.GameType;
                 var trueStart = br.Position;
-                // Random empty bytes added at start...
+                // 开头加的一堆乱七八糟的空字节...
                 if (game is SoulsAssetPipeline.SoulsGames.ER or SoulsGames.ERNR or SoulsAssetPipeline.SoulsGames.AC6)
                     br.Position += 4;
                 //else if (GameRoot.GameType is SoulsAssetPipeline.SoulsGames.AC6)

@@ -1,40 +1,40 @@
-﻿// This class based on the Resampler that is part of Cockos WDL
-// originally written in C++ and ported to C# for NAudio by Mark Heath
-// Used in NAudio with permission from Justin Frankel
-// Original WDL License:
+﻿// 这个类基于 Cockos WDL 里的 Resampler
+// 本来是 C++ 写的，Mark Heath 为 NAudio 移植成了 C#
+// 经 Justin Frankel 许可，在 NAudio 中使用
+// 原始 WDL 许可证：
 //     Copyright (C) 2005 and later Cockos Incorporated
 //     
-//     Portions copyright other contributors, see each source file for more information
+//     部分版权归其他贡献者所有，详情见各源文件
 // 
-//     This software is provided 'as-is', without any express or implied
-//     warranty.  In no event will the authors be held liable for any damages
-//     arising from the use of this software.
+//     本软件按“原样”提供，不含明示或暗示的
+//     担保。因使用本软件而产生的损害，作者
+//     概不负责。
 // 
-//     Permission is granted to anyone to use this software for any purpose,
-//     including commercial applications, and to alter it and redistribute it
-//     freely, subject to the following restrictions:
+//     特此授予任何人为任何目的使用本软件的许可，
+//     包括商业应用，并允许修改与自由再分发，
+//     但须遵守以下限制：
 // 
 //     1. The origin of this software must not be misrepresented; you must not
-//        claim that you wrote the original software. If you use this software
-//        in a product, an acknowledgment in the product documentation would be
-//        appreciated but is not required.
-//     2. Altered source versions must be plainly marked as such, and must not be
-//        misrepresented as being the original software.
-//     3. This notice may not be removed or altered from any source distribution.
+//        不得声称是你编写了原始软件。如果你在产品中使用了本软件，
+//        在产品文档中致谢将
+//        受到欢迎，但并非必须。
+//     2. 修改过的源码版本必须清楚标注为修改版，且不得
+//        被歪曲成原始软件。
+//     3. 本声明不得从任何源码分发中移除或更改。
 
 
 using System;
 
-// default to floats for audio samples
+// 音频采样默认使用 floats
 using WDL_ResampleSample = System.Single; // n.b. default in WDL is double
 
-// default to floats for sinc filter ceofficients
+// sinc filter 系数默认使用 floats
 using WDL_SincFilterSample = System.Single; // can also be set to double
 
 namespace NAudio.Dsp
 {
     /// <summary>
-    /// Fully managed resampler, based on Cockos WDL Resampler
+    /// 完全托管的 Resampler，基于 Cockos WDL Resampler
     /// </summary>
     internal class WdlResampler_Meme
     {
@@ -43,7 +43,7 @@ namespace NAudio.Dsp
         private const double PI = 3.1415926535897932384626433832795;
 
         /// <summary>
-        /// Creates a new Resampler
+        /// 创建一个新的 Resampler
         /// </summary>
         public WdlResampler_Meme()
         {
@@ -67,8 +67,8 @@ namespace NAudio.Dsp
         }
 
         /// <summary>
-        /// sets the mode
-        /// if sinc set, it overrides interp or filtercnt
+        /// 设置模式
+        /// 如果设了 sinc，它会覆盖 interp 或 filtercnt
         /// </summary>
         public void SetMode(bool interp, int filtercnt, bool sinc, int sinc_size = 64, int sinc_interpsize = 32)
         {
@@ -92,8 +92,8 @@ namespace NAudio.Dsp
         }
 
         /// <summary>
-        /// Sets the filter parameters
-        /// used for filtercnt>0 but not sinc
+        /// 设置 filter 参数
+        /// 用于 filtercnt>0 但非 sinc 模式的情况
         /// </summary>
         public void SetFilterParms(float filterpos = 0.693f, float filterq = 0.707f)
         {
@@ -102,7 +102,7 @@ namespace NAudio.Dsp
         }
 
         /// <summary>
-        /// Set feed mode
+        /// 设置 feed 模式
         /// </summary>
         /// <param name="wantInputDriven">if true, that means the first parameter to ResamplePrepare will specify however much input you have, not how much you want</param>
         public void SetFeedMode(bool wantInputDriven)
@@ -134,7 +134,7 @@ namespace NAudio.Dsp
             }
         }
 
-        // amount of input that has been received but not yet converted to output, in seconds
+        // 已接收但还没转成输出的输入量，单位是秒
         public double GetCurrentLatency()
         {
             double v = ((double)m_samples_in_rsinbuf - m_filtlatency) / m_sratein;
@@ -199,7 +199,7 @@ namespace NAudio.Dsp
                     sreq /= 2;
                     goto again; // try again with half the size
                 }
-                // todo: notify of error?
+                // todo: 要不要报个错？
                 sreq = sz;
             }
 
@@ -212,7 +212,7 @@ namespace NAudio.Dsp
 
         // if numsamples_in < the value return by ResamplePrepare(), then it will be flushed to produce all remaining valid samples
         // do NOT call with nsamples_in greater than the value returned from resamplerprpare()! the extra samples will be ignored.
-        // returns number of samples successfully outputted to out
+        // 返回成功输出到 out 的采样数
         public int ResampleOut(WDL_ResampleSample[] outBuffer, int outBufferIndex, int nsamples_in, int nsamples_out, int nch)
         {
             if (nch > WDL_RESAMPLE_MAX_NCH || nch < 1)
@@ -466,7 +466,7 @@ namespace NAudio.Dsp
             }
             else
             {
-                // TODO: bug here
+                // TODO: 这里有 bug
                 Array.Copy(m_rsinbuf, localin + isrcpos * nch, m_rsinbuf, localin, m_samples_in_rsinbuf * nch);
             }
 
@@ -475,7 +475,7 @@ namespace NAudio.Dsp
             return ret;
         }
 
-        // only called in sinc modes
+        // 只在 sinc 模式下才会调用
         private void BuildLowPass(double filtpos)
         {
             int wantsize = m_sincsize;
@@ -488,7 +488,7 @@ namespace NAudio.Dsp
                 m_lp_oversize = wantinterp;
                 m_filter_ratio = filtpos;
 
-                // build lowpass filter
+                // 构建低通 filter
                 int allocsize = (wantsize + 1) * m_lp_oversize;
                 Array.Resize(ref m_filter_coeffs, allocsize);
                 //int cfout = 0; // this is an index into m_filter_coeffs
@@ -687,12 +687,12 @@ namespace NAudio.Dsp
 
             double denormal_filter(float x)
             {
-                // TODO: implement denormalisation
+                // TODO: 实现 denormalisation
                 return x;
             }
             double denormal_filter(double x)
             {
-                // TODO: implement denormalisation
+                // TODO: 实现 denormalisation
                 return x;
             }
 

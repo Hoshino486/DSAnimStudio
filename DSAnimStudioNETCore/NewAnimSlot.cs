@@ -575,7 +575,7 @@ namespace DSAnimStudio
         public void ClearBackgroundSlots()
         {
             BackgroundSlots.Clear();
-            // Update blending
+            // 更新混合
             Scrub(absolute: false, 0, true, true, out _, out _);
         }
 
@@ -590,7 +590,7 @@ namespace DSAnimStudio
             Scrub(true, 0, true, true, out _, out _);
             
             BackgroundSlots.Clear();
-            // Update blending
+            // 更新混合
             Scrub(absolute: true, 0, true, true, out _, out _);
         }
         

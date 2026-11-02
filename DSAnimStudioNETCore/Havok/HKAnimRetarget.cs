@@ -583,7 +583,7 @@ namespace DSAnimStudio.Havok
         //                        //    BoneToWorldSpace(kvp.Value, Matrix.Identity);
         //                        //}
 
-        //                        // Bones are now in world space
+        //                        // 现在 Bone 已经在世界空间里了
 
         //                        //foreach (var kvp in boneTrackMemes)
         //                        //{
@@ -599,7 +599,7 @@ namespace DSAnimStudio.Havok
         //                        //    kvp.Value.Frames_World[i] = kvp.Value.Frames[i].ComposedMatrix;
         //                        //}
 
-        //                        // Bones are now about to go back to bone space
+        //                        // 现在 Bone 马上要回到骨骼空间
 
         //                        //foreach (var kvp in topLevelBones)
         //                        //{
@@ -741,7 +741,7 @@ namespace DSAnimStudio.Havok
         //                    //    }
         //                    //}
 
-        //                    //Change data to transforms
+        //                    //把 data 改成 transform
         //                    node_data.Attributes["name"].Value = "transforms";
 
         //                    var uncompStrBuild = new StringBuilder();
@@ -777,7 +777,7 @@ namespace DSAnimStudio.Havok
         //                    node_data.InnerText = uncompStrBuild.ToString();
         //                    node_data.Attributes["numelements"].Value = totalTransformCount.ToString();
 
-        //                    //Change floatOffsets to floats
+        //                    //把 floatOffsets 改成 float
         //                    node_floatOffsets.Attributes["name"].Value = "floats";
         //                    node_floatOffsets.Attributes["numelements"].Value = "0";
         //                    node_floatOffsets.InnerText = "";
@@ -895,7 +895,7 @@ namespace DSAnimStudio.Havok
                                 (animData, numTransformTracks, numBlocks, numFrames, numFramesPerBlock);
 
 
-                            //Change data to transforms
+                            //把 data 改成 transform
                             node_data.Attributes["name"].Value = "transforms";
 
                             var uncompStrBuild = new StringBuilder();
@@ -977,7 +977,7 @@ namespace DSAnimStudio.Havok
                             node_data.InnerText = uncompStrBuild.ToString();
                             node_data.Attributes["numelements"].Value = uncompressedTransforms.Count.ToString();
 
-                            //Change floatOffsets to floats
+                            //把 floatOffsets 改成 float
                             node_floatOffsets.Attributes["name"].Value = "floats";
                             node_floatOffsets.Attributes["numelements"].Value = "0";
                             node_floatOffsets.InnerText = "";

@@ -854,7 +854,7 @@
 
 //                    if (obj == null)
 //                    {
-//                        // If it's not in the main bank it's not anywhere lol.
+//                        // 它要是连主 bank 里都没有，那别处更不会有 lol。
 //                        //if (isMainBank)
 //                        //    return false;
 
@@ -972,7 +972,7 @@
 //                            }
 
 //                        }
-//                        // Wwise Silence
+//                        // Wwise 静音
 //                        else if (asSound.PluginID == 0x650002)
 //                        {
 //                            return true;
@@ -1148,7 +1148,7 @@
 //                            }
 //                            else if (node.Target is WwiseObject.CAkDialogueEvent.NodeTargetChildren asParent)
 //                            {
-//                                // Best Match
+//                                // 最佳匹配
 //                                if (asDialogueEvent.Mode == 0)
 //                                {
 //                                    foreach (var child in asParent.Children)
@@ -1160,7 +1160,7 @@
 //                                            return (StepIntoCheck(currentNestLevel + 1, child));
 //                                        }
 //                                    }
-//                                    // If no children pass check, do default
+//                                    // 没子项通过检查就走默认
 //                                    if (asParent.DefaultChild != null)
 //                                    {
 //                                        return (StepIntoCheck(currentNestLevel + 1, asParent.DefaultChild));
@@ -1187,7 +1187,7 @@
 //                                    }
 //                                    if (childrenToChooseFrom.Count == 0)
 //                                    {
-//                                        // If no children pass check, do default
+//                                        // 没子项通过检查就走默认
 //                                        if (asParent.DefaultChild != null)
 //                                        {
 //                                            return (StepIntoCheck(currentNestLevel + 1, asParent.DefaultChild));
@@ -1272,7 +1272,7 @@
 //                tryFindStopEvent(bnk);
 //                int countBeforeCheck = instancesSpawnedByThisSound.Count;
 //                DoObjectInBank(bnk, eventNameHash, bn, new List<string>());
-//                // New sounds found pog
+//                // 发现新声音 pog
 //                if (instancesSpawnedByThisSound.Count > countBeforeCheck)
 //                {
 //                    success = true;
@@ -1353,14 +1353,14 @@
 //            else if (category == 7)
 //                soundName = $"Play_v{id:D9}";
 
-//            // 8 = Floor Material Determined
+//            // 8 = 已确定地面材质
 //            else if (category == 8)
 //            {
 //                if (DefensiveMaterialIndex >= DefensiveMaterialIDs_ForPlaySoundByFloor.Length)
 //                    DefensiveMaterialIndex = DefensiveMaterialIDs_ForPlaySoundByFloor.Length - 1;
 //                soundName = $"Play_c{(id + (DefensiveMaterialIDs_ForPlaySoundByFloor[DefensiveMaterialIndex] - 1)):D9}";
 //            }
-//            // 9 = Armor Material Determined
+//            // 9 = 已确定盔甲材质
 //            else if (category == 9)
 //                soundName = $"Play_c{(id + (int)ArmorMaterial_Top):D9}";
 

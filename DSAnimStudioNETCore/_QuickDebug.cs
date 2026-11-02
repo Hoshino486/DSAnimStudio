@@ -495,7 +495,7 @@ namespace DSAnimStudio
                 Console.WriteLine("fatcat");
             }
 
-                // Dark Souls: Nightfall tests removed for public version lel
+                // Dark Souls: Nightfall 的测试在公开版里删掉了 lel
                 if (DebugTestButton("Copy animation to clipboard"))
             {
                 var currentAnimBytes = zzz_DocumentManager.CurrentDocument.EditorScreen.Graph.AnimRef.SerializeToBytes(zzz_DocumentManager.CurrentDocument.EditorScreen.Proj);

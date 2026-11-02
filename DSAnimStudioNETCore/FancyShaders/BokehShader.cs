@@ -14,11 +14,11 @@ namespace DSAnimStudio.FancyShaders
 
         private QuadRenderer _quadRenderer;
         
-        //Shader Effect
+        //Shader 效果
         public Effect ShaderEffect;
         private Task loadTaskOut;
 
-        //Bokeh QUad
+        //Bokeh 四边形
         private Vector2 v1 = Vector2.One;
         private Vector2 v2 = Vector2.One;
         private Vector2 vcenter = Vector2.One;
@@ -136,7 +136,7 @@ namespace DSAnimStudio.FancyShaders
                 downsize = downsize << amount;
             }
 
-            //Create Quads
+            //创建四边形
             if (Math.Abs(bokehSize - _bokehSize) > 0.01f || downsize!=_downsize)
             {
                 _bokehSize = bokehSize;
@@ -174,7 +174,7 @@ namespace DSAnimStudio.FancyShaders
             _graphicsDevice.Indices = _indexBuffer;
             _graphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, PrimitiveCount);
 
-            //Draw to RT
+            //绘制到 RT
             _graphicsDevice.SetRenderTarget(rt);
             //_graphicsDevice.Clear(Color.Black);
             
@@ -199,11 +199,11 @@ namespace DSAnimStudio.FancyShaders
 
         private void CreateQuads(float size, int downsample)
         {
-            //Create one giant vertexbuffer that holds all the quads for the pixels
-            //The quads are created with the final size already
+            //创建一个巨大的 vertexbuffer，把所有像素的 quad 全塞进去
+            //这些 quad 创建时就已经是最终尺寸了
             //Alternatively one could just pass the center position of the quad to all vertices and expand inside the vertex shader (see: GPU particle sample for xna)
-            //This would make scaling trivial, since nothing has to be recomputed on the CPU
-            //But it would increase the runtime cost per quad slightly.
+            //这样缩放就变成小事一桩，因为 CPU 上什么都不用重算
+            //但每个 quad 的运行开销会稍微涨一点。
 
             int xsize = 1280;
             int ysize = 800;
@@ -248,7 +248,7 @@ namespace DSAnimStudio.FancyShaders
                         CreateQuad((i + 0.5f)*sizex, (j + 0.5f)*sizey, sizex*sizeMultiplier, sizey*sizeMultiplier,
                             vertexIndex, indexIndex);
                     }
-                    //Note: For a quad resize we don't have to create new quads, just modify the old ones
+                    //注意：quad 缩放时不用新建 quad，改旧的就行
                     else
                     {
                         SetQuad((i + 0.5f) * sizex, (j + 0.5f) * sizey, sizex * sizeMultiplier, sizey * sizeMultiplier, vertexIndex, indexIndex);
@@ -357,7 +357,7 @@ namespace DSAnimStudio.FancyShaders
             _defaultPass = ShaderEffect.Techniques["Default"].Passes[0];
             _texPass = ShaderEffect.Techniques["Texture"].Passes[0];
 
-            //Signal we have loaded the effect
+            //标记一下我们已加载好这个 effect 了
             _effectLoaded = true;
 
         }
@@ -366,7 +366,7 @@ namespace DSAnimStudio.FancyShaders
 
     public struct BokehVertex
     {
-        // Stores the starting position of the particle.
+        // 存储粒子的起始位置。
         public Vector3 Position;
         
         public Vector2 TexCoord;

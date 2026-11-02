@@ -34,7 +34,7 @@ namespace DSAnimStudio
             public float NewActionDefaultLength = -1;
 
 
-            // Runtime stuff
+            // 运行时那些东西
             [JsonIgnore]
             public bool PlaybackHighlight = false;
 

@@ -1,4 +1,4 @@
-using DSAnimStudio.DebugPrimitives;
+﻿using DSAnimStudio.DebugPrimitives;
 using DSAnimStudio.ImguiOSD;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
@@ -311,12 +311,12 @@ namespace DSAnimStudio.TaeEditor
         
         public bool LoopEnabled = true;
         /// <summary>
-        /// This is so cursed I'm sorry. It works just fine though with way less refactoring lol.
+        /// 这玩意太邪门了，我服。不过它跑得挺好，而且重构量少得多 lol。
         /// </summary>
         public bool LoopEnabled_BeforeCombo = true;
 
         /// <summary>
-        /// Obviously if you choose not to auto-save you'll have to manually save to save the setting.
+        /// 显然，你要是选择不自动保存，那就得手动保存才能把这个设置存下来。
         /// </summary>
         public bool DisableConfigFileAutoSave = false;
 

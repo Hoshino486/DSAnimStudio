@@ -206,13 +206,13 @@
 //                        loadedSound = new LoadedSoundFile();
 
 
-//                        //TODO obviously
+//                        //TODO 显然
 //                        loadedSound.LoopEnabled = false;
 //                        loadedSound.LoopStart = 0;
 //                        loadedSound.LoopEnd = 0;
 
 //                        //throw new NotImplementedException();
-//                        //TODO: Extract loop etc from VAGp
+//                        //TODO: 从 VAGp 里提取 loop 之类的信息
 
 //                        ////byte[] oggBytes = null;
 //                        byte[] soundBytes = getSoundBytesIfNotLoaded.Invoke();
@@ -253,7 +253,7 @@
 //            0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0xFE, 0xFF
 //        };
 
-//        // Use "VAG" or "AT3" or whatever for extension
+//        // 扩展名用 "VAG" 或 "AT3" 之类的都行
 //        public static byte[] ConvertSoundFiletoWAV(byte[] vag, string extension, string bank, int soundIndex, int vagIndex)
 //        {
 //            var guid = Guid.NewGuid().ToString();
@@ -626,12 +626,12 @@
 
                        
 
-//                        // Found sound event. stop now.
+//                        // 找到 sound event 了，现在停。
 //                        break; 
 //                    }
 //                }
 
-//                // New sounds found pog
+//                // 发现新声音 pog
 //                if (instancesSpawnedByThisSound.Count > countBeforeCheck)
 //                {
 //                    success = true;

@@ -201,7 +201,7 @@ namespace DSAnimStudio.SafeFmod
                 return newHandle;
             }
 
-            // If wasn't found in this group, check child groups
+            // 如果在这个 group 里没找到，就去子 group 里找
             int numInnerGroups = 0;
             fres = group.getNumGroups(ref numInnerGroups);
             if (SafeFmodUtils.AssertResultOK(fres, "Failed to get FMOD Group count from Group."))
@@ -221,7 +221,7 @@ namespace DSAnimStudio.SafeFmod
                 }
             }
 
-            // Didn't find it
+            // 没找到
             return 0;
         }
 
@@ -264,7 +264,7 @@ namespace DSAnimStudio.SafeFmod
 
                     if (foundEventHandle != 0)
                     {
-                        // Found event already, no need to keep iterating through FEVs.
+                        // 已经找到 event 了，没必要继续把 FEV 全遍历一遍。
                         break;
                     }
 
@@ -469,7 +469,7 @@ namespace DSAnimStudio.SafeFmod
 
         public SoundInstanceFmod.States Event_Update(long eventHandle, float deltaTime, float volume, Matrix world, Vector3 soundLocation)
         {
-            // Default to finished, since that would mean deleting the instance in the case of it not having a handle reference anymore.
+            // 默认当作已完成，因为在不再持有 handle 引用的情况下，那就意味着要删掉这个实例。
             SoundInstanceFmod.States state = SoundInstanceFmod.States.Finished;
             Dispatcher.Invoke(() =>
             {

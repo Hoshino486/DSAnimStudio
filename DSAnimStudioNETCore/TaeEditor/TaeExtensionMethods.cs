@@ -65,7 +65,7 @@ namespace DSAnimStudio.TaeEditor
 
         public static int FixAndGetRow(this DSAProj.Action ev, DSAProj.Animation anim)
         {
-            // Move to just after last row if disabled.
+            // 如果被禁用就挪到最后一行之后。
             if (ev.TrackIndex < 0)
             {
                 ev.TrackIndex = anim.SAFE_GetActionTrackCount();
@@ -90,20 +90,20 @@ namespace DSAnimStudio.TaeEditor
             {
                 var tEvent = template.Events[ev.Type];
 
-                // Only in games other than current.
+                // 只在当前游戏之外的游戏里。
                 if (tEvent.OnlyInGames.Count != 0 && !tEvent.OnlyInGames.Contains(zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeForTAE))
                     return false;
-                // Specifically not in current game.
+                // 确切地说，不在当前游戏里。
                 if (tEvent.NotInGames.Count != 0 && tEvent.NotInGames.Contains(zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeForTAE))
                     return false;
 
                 if (tEvent.Fields.ContainsKey(fieldName))
                 {
                     var tField = tEvent.Fields[fieldName];
-                    // Only in games other than current.
+                    // 只在当前游戏之外的游戏里。
                     if (tField.OnlyInGames.Count != 0 && !tField.OnlyInGames.Contains(zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeForTAE))
                         return false;
-                    // Specifically not in current game.
+                    // 确切地说，不在当前游戏里。
                     if (tField.NotInGames.Count != 0 && tField.NotInGames.Contains(zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeForTAE))
                         return false;
 
@@ -116,7 +116,7 @@ namespace DSAnimStudio.TaeEditor
 
         public static object ReadField(this DSAProj.Action ev, TAE.Template.ParamTypes type, int fieldOffset)
         {
-            //TODO: OPTIMIZE
+            //TODO：优化
             var br = ev.GetParamBinReader(zzz_DocumentManager.CurrentDocument.GameRoot.IsBigEndianGame);
             br.Position = fieldOffset;
             switch (type)
@@ -148,10 +148,10 @@ namespace DSAnimStudio.TaeEditor
             {
                 var tEvent = template.Events[ev.Type];
 
-                // Only in games other than current.
+                // 只在当前游戏之外的游戏里。
                 if (tEvent.OnlyInGames.Count != 0 && !tEvent.OnlyInGames.Contains(zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeForTAE))
                     return "";
-                // Specifically not in current game.
+                // 确切地说，不在当前游戏里。
                 if (tEvent.NotInGames.Count != 0 && tEvent.NotInGames.Contains(zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeForTAE))
                     return "";
 
@@ -170,10 +170,10 @@ namespace DSAnimStudio.TaeEditor
                 {
                     var tAct = template.Events[act.Type];
 
-                    // Only in games other than current.
+                    // 只在当前游戏之外的游戏里。
                     if (tAct.OnlyInGames.Count != 0 && !tAct.OnlyInGames.Contains(zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeForTAE))
                         return null;
-                    // Specifically not in current game.
+                    // 确切地说，不在当前游戏里。
                     if (tAct.NotInGames.Count != 0 && tAct.NotInGames.Contains(zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeForTAE))
                         return null;
 
@@ -182,10 +182,10 @@ namespace DSAnimStudio.TaeEditor
                         var tField = tAct.Fields[fieldName];
 
 
-                        // Only in games other than current.
+                        // 只在当前游戏之外的游戏里。
                         if (tField.OnlyInGames.Count != 0 && !tField.OnlyInGames.Contains(zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeForTAE))
                             return null;
-                        // Specifically not in current game.
+                        // 确切地说，不在当前游戏里。
                         if (tField.NotInGames.Count != 0 && tField.NotInGames.Contains(zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeForTAE))
                             return null;
 

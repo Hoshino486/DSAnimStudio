@@ -265,7 +265,7 @@ namespace DSAnimStudio
 
         public static void UpdateRemoTime(float time)
         {
-            // JUST FOR MATH TESTING
+            // 只是用来测数学的
             //BakeSibcam();
 
             SibcamPlayer.SetTime(time);

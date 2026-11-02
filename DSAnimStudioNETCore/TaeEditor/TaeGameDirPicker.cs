@@ -35,7 +35,7 @@ namespace DSAnimStudio.TaeEditor
 
 
         //public TaeProjectJson SaveJsonData { get; set; } = new TaeProjectJson();
-        //TODO: Check for threading issues on these? Might need to use the form to invoke.
+        //TODO：检查一下这些有没有线程问题？估计得用 form 去 invoke。
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SelectedGameDir
         {

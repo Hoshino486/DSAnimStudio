@@ -223,7 +223,7 @@ namespace DSAnimStudio
             else if (suffixType is PartSuffixType.U && zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeSupportsPartsSuffixU)
                 _suffix = "_U";
 
-            // Suffix M cannot be ignored lol
+            // 后缀 M 是忽略不掉的 lol
             if (ignoreSuffix && suffixType != PartSuffixType.M)
                 _suffix = "";
 

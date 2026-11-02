@@ -82,7 +82,7 @@ namespace DSAnimStudio.ImguiOSD
                     var key = keys[i];
                     var keyLower = key.ToLower();
 
-                    // Perfect match
+                    // 完美匹配
                     if (key == query)
                     {
                         hasExactMatch = true;

@@ -31,7 +31,7 @@ namespace DSAnimStudio.TaeEditor
         private NewGraphLayoutManager Layout => Graph.LayoutManager;
         public DragTypes CurrentDragType;
         /// <summary>
-        /// X = seconds, Y = rows
+        /// X = 秒，Y = 行号
         /// </summary>
         public Vector2 CurrentMouseStartPoint;
         public Vector2 CurrentMouseStartPoint_Pixels;
@@ -78,14 +78,14 @@ namespace DSAnimStudio.TaeEditor
                 // {
                 //     using (var g = Main.WinForm.CreateGraphics())
                 //     {
-                //         // Create pen.
+                //         // 创建画笔。
                 //         System.Drawing.Pen blackPen = new System.Drawing.Pen(System.Drawing.Color.Yellow, 1);
                 //
-                //         // Create points that define line.
+                //         // 创建出定义这条线的点。
                 //         System.Drawing.Point point1 = new System.Drawing.Point(x, y);
                 //         System.Drawing.Point point2 = new System.Drawing.Point(x, y + 100);
                 //
-                //         // Draw line to screen.
+                //         // 把线画到屏幕上。
                 //         g.DrawLine(blackPen, point1, point2);
                 //         g.Flush();
                 //     }
@@ -207,7 +207,7 @@ namespace DSAnimStudio.TaeEditor
             int h = (int)(Graph.LayoutManager.RowHeight);
             var eventRect = new Rectangle(x, y, w, h);
 
-            // Mouse on same row as event.
+            // 鼠标跟 event 在同一行。
             if (mouseHoverLocation.Y >= eventRect.Top && mouseHoverLocation.Y <= eventRect.Bottom)
             {
                 if (mouseHoverLocation.X >= eventRect.Left && mouseHoverLocation.X <= eventRect.Right)
@@ -252,7 +252,7 @@ namespace DSAnimStudio.TaeEditor
 
             if (!forceReleaseDrag && input.LeftClickDown)
             {
-                //Check for timeline drag here
+                //在这里检查 timeline 拖拽
                 if (input.LeftClickDownAnchor.X >= Graph.Rect.X + Graph.ActionTrackNamePaneEffectiveWidth
                     && input.LeftClickDownAnchor.X <= Graph.Rect.Right
                     && input.LeftClickDownAnchor.Y >= Graph.Rect.Top
@@ -286,7 +286,7 @@ namespace DSAnimStudio.TaeEditor
 
                 }
 
-                //If drag type still none, Check for move/resize drags here
+                //如果 drag type 还是 none，就在这里检查 move/resize 拖拽
                 if (CurrentDragType == DragTypes.None)
                 {
                     var mouseHoverLocation = CurrentMouseHoverPoint * new Vector2(Graph.LayoutManager.SecondsPixelSize, Graph.LayoutManager.RowHeight);
@@ -304,10 +304,10 @@ namespace DSAnimStudio.TaeEditor
                         int h = (int)(Graph.LayoutManager.RowHeight);
                         var eventRect = new Rectangle(x, y, w, h);
 
-                        // Mouse on same row as action.
+                        // 鼠标跟 action 在同一行。
                         if (mouseHoverLocation.Y >= eventRect.Top && mouseHoverLocation.Y <= eventRect.Bottom)
                         {
-                            // Mouse on left edge of action.
+                            // 鼠标在 action 的左边缘。
                             if (mouseHoverLocation.X >= (eventRect.Left - 4) && mouseHoverLocation.X <= (eventRect.Left + 4))
                             {
                                 currentCursor = MouseCursorType.DragX;
@@ -327,19 +327,19 @@ namespace DSAnimStudio.TaeEditor
                                 IsFirstUpdateCycleOfDrag = true;
                             }
 
-                            // If one of the move/resize action drags was just now selected
+                            // 如果刚刚才选中了某个 move/resize action 拖拽
                             if (CurrentDragType != DragTypes.None)
                             {
-                                // If using old action select behavior then select whatever action is being dragged if it isn't already selected, overriding selection.
+                                // 如果用的是旧的 action 选中行为，那么正在被拖拽的 action 只要还没被选中就直接选中它，覆盖掉当前选择。
                                 if (Main.Config.UseOldActionSelectBehavior && !MainScreen.NewSelectedActions.Contains(act))
                                 {
                                     MainScreen.NewSelectedActions = new List<DSAProj.Action> { act };
                                 }
 
-                                // Take a snapshot of the selected actions and associate them with the drag for sanity
+                                // 给选中的 action 拍个快照并跟这次拖拽绑定起来，图个心安
                                 CurrentDragActions = MainScreen.NewSelectedActions.ToList();
 
-                                // Store mouse start position
+                                // 记录鼠标起始位置
                                 SetDragStartPosToMousePoint(input.LeftClickDownAnchor - Graph.WholeScrollViewerRect.TopLeftCorner());
 
                                 CurrentDragMouseAccumulatedPixels = Vector2.Zero;
@@ -369,7 +369,7 @@ namespace DSAnimStudio.TaeEditor
                         {
                             foreach (var act in actions)
                             {
-                                // If not using the old action selection behavior then ignore dragging on actions that are not selected
+                                // 如果不用旧的 action 选中行为，那就忽略对未选中 action 的拖拽
                                 if (!Main.Config.UseOldActionSelectBehavior && !Graph.MainScreen.NewSelectedActions.Contains(act))
                                     continue;
 
@@ -386,9 +386,9 @@ namespace DSAnimStudio.TaeEditor
                 }
 
 
-                //TODO: Check for row name interact here
+                //TODO：在这里检查 row 名称的交互
 
-                // If drag type still none, check generic drag
+                // 如果 drag type 还是 none，就检查通用拖拽
                 if (CurrentDragType == DragTypes.None)
                 {
                     CurrentDragType = DragTypes.SelectionRect;
@@ -440,7 +440,7 @@ namespace DSAnimStudio.TaeEditor
                     
                 }
 
-                // CurrentDragType will be reset to None before reaching here if isReadOnly is true and a resize or drag is trying to happen, so no code is needed here.
+                // 如果 isReadOnly 为 true 而有人正在尝试 resize 或拖拽，CurrentDragType 在走到这里之前就会被重置成 None，所以这里一行代码都不用写。
 
                 else if (!isReadOnly && CurrentDragType is DragTypes.ResizeLeft or DragTypes.ResizeRight or DragTypes.Move)
                 {
@@ -494,7 +494,7 @@ namespace DSAnimStudio.TaeEditor
                 {
                     if (IsFirstUpdateCycleOfDrag && Main.Config.NewRelativeTimelineScrubSyncMouseToPlaybackCursor)
                     {
-                        // Move time to mouse location
+                        // 把时间移到鼠标所在位置
                         SetDragSustainPosToMousePoint(input.MousePosition - Graph.WholeScrollViewerRect.TopLeftCorner());
                         var time = CurrentMouseSustainPoint.X;
                         if (time < 0)
@@ -529,7 +529,7 @@ namespace DSAnimStudio.TaeEditor
 
                 else if (CurrentDragType == DragTypes.TimelineScrub)
                 {
-                    // Move time to mouse location
+                    // 把时间移到鼠标所在位置
                     SetDragSustainPosToMousePoint(input.MousePosition - Graph.WholeScrollViewerRect.TopLeftCorner());
                     var time = CurrentMouseSustainPoint.X;
                     if (time < 0)
@@ -594,7 +594,7 @@ namespace DSAnimStudio.TaeEditor
             {
                 CurrentDragMouseAccumulatedPixels = Vector2.Zero;
                 
-                // Upon letting go of left click
+                // 松开左键的时候
                 if (input.LeftClickUp || IsFirstFrameWithMouseDragReleased)
                 {
                     IsFirstFrameWithMouseDragReleased = false;
@@ -689,7 +689,7 @@ namespace DSAnimStudio.TaeEditor
                     }, frameDelay: 1);
                 }
 
-                // Mouse not held, hovering over drags
+                // 鼠标没按住，只是悬停在拖拽区域上
 
                 SetMouseHoverPosToMousePoint(input.MousePosition - Graph.WholeScrollViewerRect.TopLeftCorner());
                 //DEBUG_ACTIONS.Clear();
@@ -707,7 +707,7 @@ namespace DSAnimStudio.TaeEditor
                 
                 foreach (var act in selActions)
                 {
-                    // If not using the old event selection behavior then ignore dragging on events that are not selected
+                    // 如果不用旧的 event 选中行为，那就忽略对未选中 event 的拖拽
                     if (!Main.Config.UseOldActionSelectBehavior && !Graph.MainScreen.NewSelectedActions.Contains(act))
                         continue;
                     int x = (int)(act.StartTime * Graph.LayoutManager.SecondsPixelSize);
@@ -718,12 +718,12 @@ namespace DSAnimStudio.TaeEditor
 
                     //DEBUG_ACTIONS.Add(actionRect);
 
-                    // Mouse on same row as action.
+                    // 鼠标跟 action 在同一行。
                     if (!MenuBar.IsAnyMenuOpen && !DialogManager.AnyDialogsShowing && Graph.ScrollViewerContentsRect.Contains(Main.Input.MousePositionPoint) &&
                         virtualViewportRect.Intersects(actionRect) &&
                         mouseHoverLocation.Y >= actionRect.Top && mouseHoverLocation.Y <= actionRect.Bottom)
                     {
-                        // Mouse on left edge of action
+                        // 鼠标在 action 的左边缘
                         if (!isReadOnly && mouseHoverLocation.X >= (actionRect.Left - 4) && mouseHoverLocation.X <= (actionRect.Left + 4))
                         {
                             currentCursor = MouseCursorType.DragX;
@@ -765,12 +765,12 @@ namespace DSAnimStudio.TaeEditor
                     int w = (int)(act.EndTime * Graph.LayoutManager.SecondsPixelSize) - x;
                     int h = (int)(Graph.LayoutManager.RowHeight);
                     var actionRect = new Rectangle(x, y, w, h);
-                    // Mouse on same row as action.
+                    // 鼠标跟 action 在同一行。
                     if (!MenuBar.IsAnyMenuOpen && !DialogManager.AnyDialogsShowing && Graph.ScrollViewerContentsRect.Contains(Main.Input.MousePositionPoint) &&
                         virtualViewportRect.Intersects(actionRect) &&
                         mouseHoverLocation.Y >= actionRect.Top && mouseHoverLocation.Y <= actionRect.Bottom)
                     {
-                        // Mouse in horizontal bounds of action.
+                        // 鼠标在 action 的水平范围之内。
                         if (mouseHoverLocation.X >= actionRect.Left && mouseHoverLocation.X <= actionRect.Right)
                         {
                             if (nextHoverAction_NeedsNoSelection == null)
@@ -783,18 +783,18 @@ namespace DSAnimStudio.TaeEditor
                         }
                     }
 
-                    // If not using the old event selection behavior then ignore dragging on events that are not selected
+                    // 如果不用旧的 event 选中行为，那就忽略对未选中 event 的拖拽
                     if (!Main.Config.UseOldActionSelectBehavior && !Graph.MainScreen.NewSelectedActions.Contains(act))
                         continue;
                     
 
                     //DEBUG_ACTIONS.Add(actionRect);
 
-                    // Mouse on same row as action.
+                    // 鼠标跟 action 在同一行。
                     if (!MenuBar.IsAnyMenuOpen && !DialogManager.AnyDialogsShowing && Graph.ScrollViewerContentsRect.Contains(Main.Input.MousePositionPoint) &&
                         virtualViewportRect.Intersects(actionRect) && mouseHoverLocation.Y >= actionRect.Top && mouseHoverLocation.Y <= actionRect.Bottom)
                     {
-                        // Mouse on left edge of action
+                        // 鼠标在 action 的左边缘
                         if (!isReadOnly && mouseHoverLocation.X >= (actionRect.Left - 4) && mouseHoverLocation.X <= (actionRect.Left + 4))
                         {
                             currentCursor = MouseCursorType.DragX;
@@ -1081,7 +1081,7 @@ namespace DSAnimStudio.TaeEditor
             int mouseRow = (int)CurrentMousePointGeneric.Y;
             float mouseTime = CurrentMousePointGeneric.X;
 
-            // Snap to frame interval
+            // 吸附到帧间隔
             var frameSnap = GetFrameSnap();
             mouseTime = (float)(Math.Round(mouseTime / frameSnap) * frameSnap);
 
@@ -1197,7 +1197,7 @@ namespace DSAnimStudio.TaeEditor
                         int mouseRow = (int)CurrentMousePointGeneric.Y;
                         float mouseTime = CurrentMousePointGeneric.X;
 
-                        // Snap to frame interval
+                        // 吸附到帧间隔
                         var frameSnap = GetFrameSnap();
                         mouseTime = (float)(Math.Round(mouseTime / frameSnap) * frameSnap);
 
@@ -1584,7 +1584,7 @@ namespace DSAnimStudio.TaeEditor
             //ImGuiDebugDrawer.DrawRect(DEBUG_MOUSE, Vector2.One * 4, Color.Red);
         }
 
-        //TODO: Move to layout manager
+        //TODO：挪到 layout manager 里去
         public void UpdateMiddleClickPan()
         {
             if (MainScreen.Input.MiddleClickHeld && (Graph.ScrollViewerContentsRect.Contains(MainScreen.Input.MiddleClickDownAnchor)

@@ -173,7 +173,7 @@ namespace DSAnimStudio.DebugPrimitives
 
         /// <summary>
         /// Set this to choose specific technique(s).
-        /// Null to just use the current technique.
+        /// 留空则直接使用当前的 technique。
         /// </summary>
         //public virtual string[] ShaderTechniquesSelection => null;
 
@@ -184,12 +184,12 @@ namespace DSAnimStudio.DebugPrimitives
 
             if (VertBuffer == null || IndexBuffer == null || VertBuffer.VertexCount == 0 || IndexBuffer.IndexCount == 0)
             {
-                // This is some dummy parent thing with no geometry.
+                // 这是一个没有几何体的占位父级玩意儿。
                 if (Children.Count > 0 || UnparentedChildren.Count > 0)
                     return;
 
-                //If it's NOT a parent thing, then it shouldn't have empty geometry.
-                // Some mistake was made.
+                //如果它并不是父级玩意儿，那它就不该有空几何体。
+                // 哪里出错了。
                 throw new Exception("DbgPrim geometry is empty and it had no children. Something went wrong...");
             }
 
@@ -213,7 +213,7 @@ namespace DSAnimStudio.DebugPrimitives
         {
             PreDraw(forceDraw, parentPrim, world);
 
-            // Always draw unparented children :fatcat:
+            // 永远都绘制没有父级的子级 :fatcat:
             foreach (var c in UnparentedChildren)
                 c.Draw(forceDraw, this, world);
 
@@ -285,7 +285,7 @@ namespace DSAnimStudio.DebugPrimitives
 
         // public void LabelDraw(Matrix world)
         // {
-        //     // Always draw unparented children :fatcat:
+        //     // 永远都绘制没有父级的子级 :fatcat:
         //     foreach (var c in UnparentedChildren)
         //         c.LabelDraw(world);
         //
@@ -304,7 +304,7 @@ namespace DSAnimStudio.DebugPrimitives
 
         // public void LabelDraw_Billboard(Matrix world)
         // {
-        //     // Always draw unparented children :fatcat:
+        //     // 永远都绘制没有父级的子级 :fatcat:
         //     foreach (var c in UnparentedChildren)
         //         c.LabelDraw_Billboard(world);
         //

@@ -93,7 +93,7 @@ namespace DSAnimStudio.TaeEditor
         }
 
         /// <summary>
-        /// Makes it not stop IsPlaying state automatically once it reaches end of anim.
+        /// 让它跑到 anim 末尾时也不自动停掉 IsPlaying 状态。
         /// </summary>
         public bool IsPlayingCombo = false;
 
@@ -241,10 +241,10 @@ namespace DSAnimStudio.TaeEditor
             {
                 var result = OldCurrentTimeMod;
 
-                // Hit end and wrapped back to start
+                // 碰到末尾，循环回到开头
                 if (CurrentTime > OldCurrentTime && CurrentTimeMod < OldCurrentTimeMod)
                     result -= MaxTime;
-                // Hit start and wrapped back to end
+                // 碰到开头，循环回退到末尾
                 else if (CurrentTime < OldCurrentTime && CurrentTimeMod > OldCurrentTimeMod)
                     result += MaxTime;
 
@@ -421,7 +421,7 @@ namespace DSAnimStudio.TaeEditor
         {
             IsStepping = false;
 
-            // Reset to start if end is reached while loop is off.
+            // 如果关着循环还到了末尾，就重置回开头。
             if (isUserInput && !Main.Config.LoopEnabled && !(IsPlaying && !IsTempPausedUntilAnimChange) && CurrentTime >= MaxTime)
             {
                 Graph.MainScreen.HardReset(startPlayback: true);
@@ -494,7 +494,7 @@ namespace DSAnimStudio.TaeEditor
 
                 try
                 {
-                    // Thread locked from outside this function
+                    // 线程锁是在这个函数外面加的
                     foreach (var ev in eventBoxes)
                     {
                         bool CheckHighlight(double playbackCursorPos, DSAProj.Action mouseHoverBox)
@@ -525,7 +525,7 @@ namespace DSAnimStudio.TaeEditor
 
                             if (OldCurrentTime == 0)
                             {
-                                // Prevent an occasional double register?
+                                // 防止偶尔重复注册？
                                 prevHighlight = true;
                             }
 
@@ -647,7 +647,7 @@ namespace DSAnimStudio.TaeEditor
                         //        OnPlaybackLooped();
                         //    }
 
-                        //    // way simpler
+                        //    // 简单多了
                         //    //CurrentTime %= MaxTime;
 
 

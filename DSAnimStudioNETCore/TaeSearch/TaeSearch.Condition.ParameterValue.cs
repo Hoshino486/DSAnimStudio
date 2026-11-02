@@ -18,7 +18,7 @@ namespace DSAnimStudio
                 public TAE.Template.ParamTypes ParameterType { get; protected set; }
 
                 public override ConditionType Type => ConditionType.ParameterValue;
-                // Not the CategoryAnimationTrackActionParameter depth because it checks at the Action level, reading its entire Parameter collection.
+                // 不是 CategoryAnimationTrackActionParameter 层级的深度，因为它是在 Action 层级检查的，会把整个 Parameter 集合都读一遍。
                 public override ConditionDepthType Depth => ConditionDepthType.CategoryAnimationTrackAction;
                 public override bool IsStringOperator => false;
 

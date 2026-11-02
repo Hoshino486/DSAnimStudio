@@ -217,7 +217,7 @@ namespace DSAnimStudio
                             writer.WriteAttributeString("name", $"#{(objID):X4}");
                             
 
-                            // Inner write.
+                            // 内部写入。
                             if (obj is HKX.HKADefaultAnimatedReferenceFrame objHKADefaultAnimatedReferenceFrame)
                             {
                                 writer.WriteAttributeString("class", "hkaDefaultAnimatedReferenceFrame");
@@ -240,11 +240,11 @@ namespace DSAnimStudio
                                 writer.WriteAttributeString("signature", "0x66eac971");
 
                                 WriteHkparamField(writer, "originalSkeletonName", objHKAAnimationBinding.OriginalSkeletonName);
-                                // Awful lazy hack
+                                // 恶心的偷懒 hack
                                 WriteHkparamField(writer, "animation", obj_Animations.Count > 0 ? $"#{(obj_Animations[0]):X4}" : "null");
                                 WriteHkparamArrayToXml(writer, "transformTrackToBoneIndices", objHKAAnimationBinding.TransformTrackToBoneIndices, d => d.data.ToString());
                                 WriteHkparamArrayToXml(writer, "floatTrackToFloatSlotIndices", objHKAAnimationBinding.FloatTrackToFloatSlotIndices, d => d.data.ToString());
-                                // Lazy hack
+                                // 偷懒写法
                                 WriteHkparamField(writer, "blendHint", (uint)objHKAAnimationBinding.BlendHint > 0 ? "ADDITIVE" : "NORMAL");
                             }
                             else if (obj is HKX.HKASkeleton objHKASkeleton)
@@ -393,7 +393,7 @@ namespace DSAnimStudio
 
                                 
 
-                                // Map out IDs first
+                                // 先把 ID 映射出来
                                 foreach (var obj in hkx.DataSection.Objects)
                                 {
                                     uint objID = OBJ_INDEX++;

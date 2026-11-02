@@ -242,7 +242,7 @@ namespace DSAnimStudio
             lock (_lock_ModelLoad_Draw)
             {
                 MainModel?.Dispose();
-                // Prevent calling dispose twice.
+                // 防止 dispose 被调两次。
                 if (Models.Contains(MainModel))
                     Models.Remove(MainModel);
 
@@ -263,7 +263,7 @@ namespace DSAnimStudio
             lock (_lock_ModelLoad_Draw)
             {
                 MainModel?.Dispose();
-                // Prevent calling dispose twice.
+                // 防止 dispose 被调两次。
                 if (Models.Contains(MainModel))
                     Models.Remove(MainModel);
 

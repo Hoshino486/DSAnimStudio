@@ -32,12 +32,12 @@ namespace DSAnimStudio
         public Vector3 Binormal2;
 
         /// <summary>
-        /// Vertex declaration object.
+        /// Vertex 声明对象。
         /// </summary>
         public static readonly VertexDeclaration VertexDeclaration;
 
         /// <summary>
-        /// Vertex declaration.
+        /// Vertex 声明。
         /// </summary>
         VertexDeclaration IVertexType.VertexDeclaration
         {
@@ -50,7 +50,7 @@ namespace DSAnimStudio
 
 
         /// <summary>
-        /// Static constructor to init vertex declaration.
+        /// 用来初始化 Vertex 声明的静态构造函数。
         /// </summary>
         static FlverShaderVertInput()
         {
@@ -112,10 +112,10 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Get if equals another object.
+        /// 判断是否等于另一个对象。
         /// </summary>
         /// <param name="obj">Object to compare to.</param>
-        /// <returns>If objects are equal.</returns>
+        /// <returns>两个对象是否相等。</returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -130,7 +130,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Get the hash code of this vertex.
+        /// 获取这个 Vertex 的哈希码。
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -159,7 +159,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Return if two vertices are equal.
+        /// 返回两个 Vertex 是否相等。
         /// </summary>
         /// <param name="left">Left side to compare.</param>
         /// <param name="right">Right side to compare.</param>
@@ -188,11 +188,11 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Return if two vertices are not equal.
+        /// 返回两个 Vertex 是否不相等。
         /// </summary>
         /// <param name="left">Left side to compare.</param>
         /// <param name="right">Right side to compare.</param>
-        /// <returns>If not equal.</returns>
+        /// <returns>是否不相等。</returns>
         public static bool operator !=(FlverShaderVertInput left, FlverShaderVertInput right)
         {
             return !(left == right);

@@ -157,20 +157,20 @@ namespace DSAnimStudio
 
         public static Vector3 Vector3Slerp(Vector3 start, Vector3 end, float percent)
         {
-            // Dot product - the cosine of the angle between 2 vectors.
+            // 点积——两个 Vector 之间夹角的余弦。
             float dot = Vector3.Dot(start, end);
             // Clamp it to be in the range of Acos()
-            // This may be unnecessary, but floating point
-            // precision can be a fickle mistress.
+            // 这也许没必要，但浮点数
+            // 精度可是个善变的娘们。
             dot = MathHelper.Clamp(dot, -1.0f, 1.0f);
             // Acos(dot) returns the angle between start and end,
-            // And multiplying that by percent returns the angle between
-            // start and the final result.
+            // 再把它乘上 percent，就得到
+            // 起点和最终结果之间的夹角。
             float theta = (float)(Math.Acos(dot) * percent);
             Vector3 RelativeVec = end - start * dot;
             RelativeVec.Normalize();
-            // Orthonormal basis
-            // The final result.
+            // 正交基
+            // 最终结果。
             return ((start * (float)Math.Cos(theta)) + (RelativeVec * (float)Math.Sin(theta)));
         }
 
@@ -342,7 +342,7 @@ namespace DSAnimStudio
         }
 
         // r = Lerp(a, b, s)
-        // This returns 'a' given r, b, and s
+        // 给定 r、b 和 s 时返回 'a'
         public static float GetLerpValARequiredForResult(float b, float r, float s)
         {
             return (r - (b * s)) / (1 - s);

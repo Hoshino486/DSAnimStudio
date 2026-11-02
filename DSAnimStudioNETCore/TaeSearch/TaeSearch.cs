@@ -42,7 +42,7 @@ namespace DSAnimStudio
 
             List<Condition> conditionsToDelete = new List<Condition>();
             
-            //Conditions list
+            //条件列表
             for (int i = 0; i < Conditions.Count; i++)
             {
                 ImGui.PushID($"Window.TaeSearch.Conditions[{i}]");
@@ -53,7 +53,7 @@ namespace DSAnimStudio
 
 
 
-                    // Column 1 - Condition Type
+                    // 第 1 列 - Condition Type
                     ImGui.TableNextColumn();
 
                     var clickedDeleteCondition = Tools.SimpleClickButton(Loc.T("X"));
@@ -82,10 +82,10 @@ namespace DSAnimStudio
                         Conditions[i] = Condition.NewFromEnum(curConditionType);
 
 
-                    // Column 2-4 - Action, Param, Operator
+                    // 第 2-4 列 - Action、Param、Operator
                     ImGui.TableNextColumn();
 
-                    // Special type configuration for parameter value type lol
+                    // 针对 parameter value type 的特殊类型配置 lol
                     bool anyTypeCtrlFieldFocused = false;
                     Conditions[i].ShowImGuiControlForTypeCfg(proj, ref anyTypeCtrlFieldFocused);
                     if (anyTypeCtrlFieldFocused)

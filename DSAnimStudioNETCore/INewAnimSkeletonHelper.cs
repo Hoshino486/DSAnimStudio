@@ -18,7 +18,7 @@ namespace DSAnimStudio
         public void SetBoneTransform(int boneIndex, NewBlendableTransform transform);
         public void SetBoneMatrix(int boneIndex, Matrix matrix);
 
-        // Bone name input functions
+        // Bone 名称输入相关函数
         public int GetBoneParentIndex(string boneName)
         {
             return GetBoneParentIndex(GetBoneIndexByName(boneName));
@@ -77,7 +77,7 @@ namespace DSAnimStudio
             }
             else
             {
-                // Root bone, so FK and local transform are same
+                // root Bone，所以 FK 和局部变换是同一个东西
                 SetBoneTransform(boneIndex, modification(GetBoneTransform(boneIndex)));
             }
             
@@ -98,7 +98,7 @@ namespace DSAnimStudio
             }
             else
             {
-                // Root bone, so FK and local transform are same
+                // root Bone，所以 FK 和局部变换是同一个东西
                 SetBoneMatrix(boneIndex, modification(GetBoneMatrix(boneIndex)));
             }
             
@@ -123,7 +123,7 @@ namespace DSAnimStudio
             int parentIndex = GetBoneParentIndex(boneIndex);
             if (parentIndex >= 0)
             {
-                //Detailed step-by-step for debugging:
+                //调试用的详细分步说明：
 
                 //var inputMatrix = transformFK.GetXnaMatrix();
                 //var inputMatrixScale = transformFK.GetXnaMatrixScale();
@@ -144,7 +144,7 @@ namespace DSAnimStudio
             }
             else
             {
-                // Root bone, so FK is the same as current relative matrix.
+                // root Bone，所以 FK 和当前的相对 Matrix 是一样的。
                 SetBoneTransform(boneIndex, transformFK);
             }
         }
@@ -185,7 +185,7 @@ namespace DSAnimStudio
             }
             else
             {
-                // Root bone, so FK is the same as current relative matrix.
+                // root Bone，所以 FK 和当前的相对 Matrix 是一样的。
                 SetBoneMatrix(boneIndex, matrixFK);
             }
         }

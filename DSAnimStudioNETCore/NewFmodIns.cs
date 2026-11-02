@@ -77,7 +77,7 @@ namespace DSAnimStudio
         {
             if (!HasSetInitLanguageType)
             {
-                // Set this before calling SwitchLanguage since SwitchLanguage will try to set init Language type again
+                // 在调用 SwitchLanguage 之前先设好这个，因为 SwitchLanguage 会再试着设置一次初始 Language 类型
                 HasSetInitLanguageType = true;
                 var newLanguageType = ((ParentDocument.GameRoot.GameType is SoulsGames.SDT) ? FmodLanguageTypes.Japanese : FmodLanguageTypes.English);
                 SwitchLanguage(newLanguageType);
@@ -152,7 +152,7 @@ namespace DSAnimStudio
         //    {
         //        if (_loadedFEVs_FullDirectories.ContainsKey(fevKey) && !File.Exists($@"{LoadedFEVs_FullPaths[fevKey]}\{fevKey}.fev"))
         //        {
-        //            //TODO: Add unloadFev and call here?
+        //            //TODO：在这里加上 unloadFev 并调用？
         //            //_loadedFEVs.Remove(fevKey);
         //            _loadedFEVs_FullDirectories.Remove(fevKey);
         //        }
@@ -375,18 +375,18 @@ namespace DSAnimStudio
         //            //if (UpdatingPosition || IsFirstFrameExisting)
         //            //    CurrentPos = Vector3.Transform(((GetPosFunc?.Invoke() ?? Vector3.Zero) * new Vector3(1, 1, 1)), world);
 
-        //            // I don't feel like fixing up the world positions with the pos wrapping etc to make the above not horrible
+        //            // 懒得去搞位置回绕之类的东西来修正世界坐标，好让上面那段看起来不那么惨
         //            //CurrentPos = Vector3.Transform(((GetPosFunc?.Invoke() ?? Vector3.Zero) * new Vector3(1, 1, 1)), world);
 
         //            var velocity = Vector3.Zero;// (position - oldPos) / deltaTime;
 
-        //            // Flatten position to be on a flat plane
+        //            // 把位置压平到一个平面上
         //            //position.Y = 0;
 
         //            FMOD.VECTOR posVec = new VECTOR(position);
         //            FMOD.VECTOR velVec = new VECTOR(velocity);
 
-        //            // If it fails due to the event being released, it's fine. No weirdness should happen.
+        //            // 如果因为事件已被释放而失败，那没事。不该出什么奇怪状况。
         //            evtRes = Event.set3DAttributes(ref posVec, ref velVec);
         //            evtRes = Event.setVolume(soundMan.FmodBaseSoundVolume * (soundMan.AdjustSoundVolume / 100));
 
@@ -630,7 +630,7 @@ namespace DSAnimStudio
         //        ParentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.DS1R)
         //    {
         //        LoadInterrootFEV("main");
-        //        //dlc main auto loaded for ds1
+        //        //ds1 的 dlc main 自动加载
         //    }
         //    else if (ParentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.DS3)
         //    {
@@ -668,7 +668,7 @@ namespace DSAnimStudio
             else if (category == 7)
                 soundName = $"v{id:D9}";
 
-            // Floor and armor material IDs are now added before this function after sound engine rewrite.
+            // 音频引擎重写之后，地板和护甲 Material 的 ID 现在会在这个函数之前加进去。
             // 8 = Floor Material Determined
             else if (category == 8)
                 soundName = $"c{id:D9}";
@@ -1017,7 +1017,7 @@ namespace DSAnimStudio
         //{
         //    //if (ParentDocument.GameRoot.GameTypeUsesWwise)
         //    //    Wwise.DisposeAll();
-        //    //Even if not initialized the event system is created and must be released.
+        //    //即使没有初始化，事件系统也已经被创建，必须释放。
         //    //if (!initialised)
         //    //    return;
 

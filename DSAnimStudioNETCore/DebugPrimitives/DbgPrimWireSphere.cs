@@ -48,33 +48,33 @@ namespace DSAnimStudio.DebugPrimitives
                 {
                     for (int j = 0; j < numSidesPerSegment; j++)
                     {
-                        // On the bottom, we must connect each to the bottom point
+                        // 在底部，我们必须把每一个都连到底部那个点上
                         if (i == 0)
                         {
                             AddLine(points[i, j], bottomPoint, color);
                         }
-                        // On the top, we must connect each point to the top
+                        // 在顶部，我们必须把每一个点都连到顶部
                         // Note: this isn't "else if" because with 2 segments, 
-                        // these are both true for the only ring
+                        // 对于唯一的那一环，这两条都成立
                         if (i == numVerticalSegments - 1)
                         {
                             AddLine(points[i, j], topPoint, color);
                         }
 
-                        // Make vertical lines that connect from this 
-                        // horizontal ring to the one above
-                        // Since we are connecting 
+                        // 画出从这一环向上连的竖线 
+                        // 水平环连到上面那一环
+                        // 因为我们要做连接 
                         // (current) -> (the one above current)
-                        // we dont need to do this for the very last one.
+                        // 最后一个就不需要这么做了。
                         if (i < numVerticalSegments - 1)
                         {
                             AddLine(points[i, j], points[i + 1, j], color);
                         }
 
 
-                        // Make lines that connect points horizontally
-                        //---- if we reach end, we must wrap around, 
-                        //---- otherwise, simply make line to next one
+                        // 画出把各个点水平连起来的线
+                        //---- 如果到了末尾，就要绕回来， 
+                        //---- 否则就简单连到下一个
                         if (j == numSidesPerSegment - 1)
                         {
                             AddLine(points[i, j], points[i, 0], color);

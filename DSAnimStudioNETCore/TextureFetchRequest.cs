@@ -171,7 +171,7 @@ namespace DSAnimStudio
             //}
             //else if (TPFReference.Platform == TPF.TPFPlatform.Xbone)
             //{
-            //    // Because there are actually xbone textures in the PC version for some dumb reason
+            //    // 因为 PC 版里居然真有 xbone 的 Texture，脑子进水的设定
             //    return null;
             //}
 
@@ -400,7 +400,7 @@ namespace DSAnimStudio
 
                     if (mipmapCount == 0)
                     {
-                        // something Hork came up with :fatcat:
+                        // Hork 想出来的某个玩意 :fatcat:
                         mipmapCount = (int)(1 + Math.Floor(Math.Log(Math.Max(width, height), 2)));
                     }
 
@@ -410,7 +410,7 @@ namespace DSAnimStudio
                 SurfaceFormat surfaceFormat;
                 if (fourCC == FourCCDX10)
                 {
-                    // See if there are DX9 textures
+                    // 看看有没有 DX9 的 Texture
                     int fmt = dxgiFormat;
 
                     surfaceFormat = (SurfaceFormat)(dxgiFormat + Microsoft.Xna.Framework.Graphics.GraphicsExtensions.DXGI_FORMAT_START);
@@ -435,7 +435,7 @@ namespace DSAnimStudio
                     ////    surfaceFormat = SurfaceFormat.BC7;
                     //else
                     //{
-                    //    // No DX10 texture support in monogame yet
+                    //    // MonoGame 目前还不支持 DX10 Texture
                     //    Console.WriteLine($"Unable to load {TexName} because it uses DX10+ exclusive texture type.");
                     //    CachedTexture = Main.DEFAULT_TEXTURE_MISSING_CUBE;
                     //    TPFReference = null;
@@ -449,7 +449,7 @@ namespace DSAnimStudio
 
                 bool mipmaps = mipmapCount > 0;
 
-                // apply memes
+                // 把梗套上去
                 if (texInfo.Platform == TPF.TPFPlatform.PC || texInfo.Platform == TPF.TPFPlatform.PS3)
                 {
                     width = surfaceFormat.IsCompressedFormat() ? ((width + 3) & ~0x3) : width;
@@ -747,7 +747,7 @@ namespace DSAnimStudio
             DDS.DDSCAPS2.CUBEMAP_NEGATIVEZ;
 
         
-        // From MonoGame.Framework/Graphics/Texture2D.cs and MonoGame.Framework/Graphics/TextureCube.cs
+        // 来自 MonoGame.Framework/Graphics/Texture2D.cs 和 MonoGame.Framework/Graphics/TextureCube.cs
         private (int ByteCount, Rectangle Rect) GetMipInfo(SurfaceFormat sf, int width, int height, int mip, bool isCubemap)
         {
             width = Math.Max(width >> mip, 1);
@@ -829,19 +829,19 @@ namespace DSAnimStudio
             CachedTexture = null;
         }
 
-        // Adapted from MonoGame.Framework/Graphics/SurfaceFormat.cs
+        // 改编自 MonoGame.Framework/Graphics/SurfaceFormat.cs
         //public static bool IsCompressedFormat(SurfaceFormat format)
         //{
 
         //}
 
-        // Adapted from MonoGame.Framework/Graphics/SurfaceFormat.cs
+        // 改编自 MonoGame.Framework/Graphics/SurfaceFormat.cs
         //public static void GetBlockSize(SurfaceFormat surfaceFormat, out int width, out int height)
         //{
             
         //}
 
-        // Adapted from MonoGame.Framework/Graphics/SurfaceFormat.cs
+        // 改编自 MonoGame.Framework/Graphics/SurfaceFormat.cs
         //public static int GetTexelSize(SurfaceFormat surfaceFormat)
         //{
         //    return surfaceFormat.GetSize();

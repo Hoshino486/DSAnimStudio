@@ -160,8 +160,8 @@ namespace DSAnimStudio.TaeEditor
             if (MainScreen.Graph == null || PlaybackCursor == null)
                 return;
 
-            //// Count + 1 because for example 4 buttons would have these cages: |B|B|B|B|
-            //// Notice 5 |'s but only 4 B's
+            //// 数量 + 1，因为比如 4 个按钮会有这些格子：|B|B|B|B|
+            //// 注意有 5 个 |，但只有 4 个 B
             //int buttonCageWidth = ((Buttons.Count + 1) * ButtonCageThickness) + (ButtonSize * Buttons.Count);
 
             int buttonCageWidth = ButtonCageThickness;

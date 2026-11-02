@@ -99,7 +99,7 @@ namespace DSAnimStudio
                         {
                             if (LoadedReadObjectFuncs.ContainsKey(kvp.Key))
                             {
-                                // TODO: Warn for duplicate functions
+                                // TODO: 对重复的函数发警告
                             }
 
                             var captureKey = kvp.Key;
@@ -273,7 +273,7 @@ namespace DSAnimStudio
 
 
 
-                // Add any WwiseValueToStringParams that didn't get added manually
+                // 把那些没手动加上去的 WwiseValueToStringParams 补上
 
 
                 const string wwiseSwitchParamPrefix = "WwiseValueToStrParam_Switch_";
@@ -1115,7 +1115,7 @@ namespace DSAnimStudio
                         }
 
                     }
-                    // Wwise Silence
+                    // Wwise 静音
                     else if (asSound.PluginID == 0x650002)
                     {
                         return true;
@@ -1254,7 +1254,7 @@ namespace DSAnimStudio
                             }
                             else if (node.Target is WwiseObject.CAkDialogueEvent.NodeTargetChildren asParent)
                             {
-                                // Best Match
+                                // 最佳匹配
                                 if (asDialogueEvent.Mode == 0)
                                 {
                                     foreach (var child in asParent.Children)
@@ -1266,7 +1266,7 @@ namespace DSAnimStudio
                                             return (StepIntoCheck(currentNestLevel + 1, child));
                                         }
                                     }
-                                    // If no children pass check, do default
+                                    // 没有子项通过检查就走默认
                                     if (asParent.DefaultChild != null)
                                     {
                                         return (StepIntoCheck(currentNestLevel + 1, asParent.DefaultChild));
@@ -1293,7 +1293,7 @@ namespace DSAnimStudio
                                     }
                                     if (childrenToChooseFrom.Count == 0)
                                     {
-                                        // If no children pass check, do default
+                                        // 没有子项通过检查就走默认
                                         if (asParent.DefaultChild != null)
                                         {
                                             return (StepIntoCheck(currentNestLevel + 1, asParent.DefaultChild));
@@ -1388,7 +1388,7 @@ namespace DSAnimStudio
 
                     if (obj == null)
                     {
-                        // If it's not in the main bank it's not anywhere lol.
+                        // 它要是连主 bank 里都没有，那别处更不会有 lol。
                         //if (isMainBank)
                         //    return false;
 
@@ -1505,7 +1505,7 @@ namespace DSAnimStudio
                             }
 
                         }
-                        // Wwise Silence
+                        // Wwise 静音
                         else if (asSound.PluginID == 0x650002)
                         {
                             return true;
@@ -1756,7 +1756,7 @@ namespace DSAnimStudio
                                 }
                                 else if (node.Target is WwiseObject.CAkDialogueEvent.NodeTargetChildren asParent)
                                 {
-                                    // Best Match
+                                    // 最佳匹配
                                     if (asDialogueEvent.Mode == 0)
                                     {
                                         foreach (var child in asParent.Children)
@@ -1768,7 +1768,7 @@ namespace DSAnimStudio
                                                 return (StepIntoCheck(currentNestLevel + 1, child));
                                             }
                                         }
-                                        // If no children pass check, do default
+                                        // 没有子项通过检查就走默认
                                         if (asParent.DefaultChild != null)
                                         {
                                             return (StepIntoCheck(currentNestLevel + 1, asParent.DefaultChild));
@@ -1795,7 +1795,7 @@ namespace DSAnimStudio
                                         }
                                         if (childrenToChooseFrom.Count == 0)
                                         {
-                                            // If no children pass check, do default
+                                            // 没有子项通过检查就走默认
                                             if (asParent.DefaultChild != null)
                                             {
                                                 return (StepIntoCheck(currentNestLevel + 1, asParent.DefaultChild));
@@ -1872,14 +1872,14 @@ namespace DSAnimStudio
 
 
 
-            // New method
+            // 新方法
 
             if (NewTryFindStopEvent())
                 foundStopEvent = true;
             int countBeforeCheck = instancesSpawnedByThisSound.Count;
             NewDoObject(eventNameHash);
 
-            // New sounds found pog
+            // 发现新声音 pog
             if (instancesSpawnedByThisSound.Count > countBeforeCheck)
             {
                 foundPlayEvent = true;
@@ -1907,7 +1907,7 @@ namespace DSAnimStudio
             //        {
 
             //        }
-            //        // New sounds found pog
+            //        // 发现新声音 pog
             //        if (instancesSpawnedByThisSound.Count > countBeforeCheck)
             //        {
             //            foundPlayEvent = true;

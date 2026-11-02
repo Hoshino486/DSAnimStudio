@@ -355,7 +355,7 @@ namespace DSAnimStudio.ImguiOSD
             v = newV;
         }
 
-        // Would be very hard to implement lol
+        // 实现起来会非常难 lol
         //public static bool AskYesNo(string question)
         //{
 

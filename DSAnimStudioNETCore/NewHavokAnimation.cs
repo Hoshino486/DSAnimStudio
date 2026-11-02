@@ -105,8 +105,8 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Used when blending multiple animations.
-        /// The weight ratio used for previous animations when blending to the next one.
+        /// 混合多个 Anim 时用。
+        /// 混合到下一个 Anim 时，之前那些 Anim 用的权重比例。
         /// </summary>
         public float ReferenceWeight = 0;
 

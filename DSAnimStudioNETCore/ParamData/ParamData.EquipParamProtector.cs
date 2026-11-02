@@ -105,7 +105,7 @@ namespace DSAnimStudio
                 else if (suffixType is PartSuffixType.U && zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeSupportsPartsSuffixU)
                     _suffix = "_U";
 
-                // Suffix M cannot be ignored lol
+                // 后缀 M 是忽略不掉的 lol
                 if (ignoreSuffix && suffixType != PartSuffixType.M)
                     _suffix = "";
 
@@ -140,7 +140,7 @@ namespace DSAnimStudio
             public override void Read(BinaryReaderEx br)
             {
                 long trueStart = br.Position;
-                // Empty bytes added at start
+                // 开头加的空字节
                 if (zzz_DocumentManager.CurrentDocument.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.ER or SoulsAssetPipeline.SoulsGames.ERNR or SoulsAssetPipeline.SoulsGames.AC6)
                     br.Position += 4;
 

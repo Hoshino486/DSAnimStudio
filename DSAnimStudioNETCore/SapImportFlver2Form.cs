@@ -88,7 +88,7 @@ namespace DSAnimStudio
                 cfg.ConvertFromZUp = ImportConfig.ConvertFromZUp;
                 cfg.SceneScale = ImportConfig.SceneScale;
 
-                //nightfall testing
+                //nightfall 测试
                 //var fatcat = FLVER2.Read(@"C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS REMASTERED - Nightfall\chr\c2250bakbeforemodel\c2250-chrbnd-dcx\chr\c2250\c2250.flver");
                 //cfg.SkeletonTransformsOverride = fatcat.Bones;
 

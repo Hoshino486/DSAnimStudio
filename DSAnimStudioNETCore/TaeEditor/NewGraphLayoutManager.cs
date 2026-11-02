@@ -177,8 +177,8 @@ namespace DSAnimStudio.TaeEditor
             
             if (Graph.MainScreen.Input.MiddleClickHeld && Graph.WholeScrollViewerRect.Contains(Graph.MainScreen.Input.MiddleClickDownAnchor))
             {
-                //TODO: Disable any tooltips here
-                //Middle click panning
+                //TODO：在这里把所有 tooltip 都关掉
+                //中键平移
 
                 return;
             }
@@ -364,7 +364,7 @@ namespace DSAnimStudio.TaeEditor
             //if (row < 0)
             //    row = Graph.AnimRef.EventGroups.Count;
 
-            ////quick test
+            ////快速测试
             ////if (row == -1)
             ////{
             ////    row = ev.Type;
@@ -376,7 +376,7 @@ namespace DSAnimStudio.TaeEditor
 
         public Point GetVirtualAreaSize()
         {
-            //TODO: Calculate max size of boxes and shit.
+            //TODO：把 box 之类的最大尺寸算出来。
 
             float endTime = 5;
             float maxRow = 1;

@@ -41,12 +41,12 @@
             {
                 if (RepeatState == TaeButtonRepeatState.ButtonNotHeld)
                 {
-                    //First frame of pressing button.
+                    //按下按钮的第一帧。
                     if (!prevHeldState && curHeldState)
                     {
                         State = true;
                         IsInitalButtonTap = true;
-                        //Start counting down the initial wait timer.
+                        //开始给初始等待计时器倒数。
                         RepeatState = TaeButtonRepeatState.ButtonHeldInitialWait;
                         timer = InitialRepeatDelay;
                     }

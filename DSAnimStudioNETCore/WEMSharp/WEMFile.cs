@@ -46,11 +46,11 @@ namespace WEMSharp
         private uint _dataChunkSize = 0xFFFFFFFF;
 
         /// <summary>
-        /// Channel Count
+        /// 通道数
         /// </summary>
         public ushort Channels { get; private set; }
         /// <summary>
-        /// Sample Rate
+        /// 采样率
         /// </summary>
         public uint SamplesPerSec { get; private set; }
         public uint AvgBytesPerSecond { get; private set; }
@@ -200,7 +200,7 @@ namespace WEMSharp
 
 
 
-                //Read CUE Chunk
+                //读取 CUE Chunk
                 if (this._cueChunkOffset != 0xFFFFFFFF)
                 {
                     br.BaseStream.Seek(this._cueChunkOffset, SeekOrigin.Begin);
@@ -208,7 +208,7 @@ namespace WEMSharp
                     this._cueCount = br.ReadUInt32();
                 }
 
-                //Read SMPL Chunk
+                //读取 SMPL Chunk
                 if (this._smplChunkOffset != 0xFFFFFFFF)
                 {
                     br.BaseStream.Seek(this._smplChunkOffset, SeekOrigin.Begin);
@@ -332,7 +332,7 @@ namespace WEMSharp
 
 
 
-            //Read VORB Chunk
+            //读取 VORB Chunk
             switch (this._vorbChunkSize)
             {
                 case 0xFFFFFFFF:
@@ -598,7 +598,7 @@ namespace WEMSharp
         {
             uint offset = this._dataChunkOffset + this._setupPacketOffset;
 
-            //Information Packet
+            //信息包
             {
                 Packet8 informationPacket = new Packet8(this._wemFileStream, offset);
                 uint informationPacketSize = informationPacket.GetSize();
@@ -629,7 +629,7 @@ namespace WEMSharp
                 offset = informationPacket.NextOffset();
             }
 
-            //Comment Packet
+            //注释包
             {
                 Packet8 commentPacket = new Packet8(this._wemFileStream, offset);
                 uint commentPacketSize = commentPacket.GetSize();
@@ -660,7 +660,7 @@ namespace WEMSharp
                 offset = commentPacket.NextOffset();
             }
 
-            //Setup Packet
+            //设置包
             {
                 Packet8 setupPacket = new Packet8(this._wemFileStream, offset);
                 this._wemFileStream.Seek(setupPacket.GetOffset(), SeekOrigin.Begin);
@@ -722,7 +722,7 @@ namespace WEMSharp
             ogg.WriteBit(1);
             ogg.FlushPage();
 
-            //Comment Packet
+            //注释包
             {
                 ogg.WriteVorbisHeader(3);
 
@@ -760,7 +760,7 @@ namespace WEMSharp
                 ogg.FlushPage();
             }
 
-            //Setup Packet
+            //设置包
             {
                 ogg.WriteVorbisHeader(5);
 
@@ -1116,20 +1116,20 @@ namespace WEMSharp
     }
 
     /// <summary>
-    /// Forcing of the OGG Packet Format
+    /// 强制使用 OGG Packet Format
     /// </summary>
     public enum WEMForcePacketFormat
     {
         /// <summary>
-        /// Uses the original Mod Packet Format from the WEM file
+        /// 使用 WEM 文件里原始的 Mod Packet Format
         /// </summary>
         NoForcePacketFormat,
         /// <summary>
-        /// Forces to modify the original packets
+        /// 强制修改原始 packet
         /// </summary>
         ForceModPackets,
         /// <summary>
-        /// Forces to not modify the original packets
+        /// 强制不修改原始 packet
         /// </summary>
         ForceNoModPackets
     }

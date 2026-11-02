@@ -93,7 +93,7 @@ namespace DSAnimStudio
             public short BB_DummyPoly_Model3_LH_FormA = -1;
             public short BB_DummyPoly_Model3_LH_FormB = -1;
 
-            //ac6 todo read this from actual param
+            //ac6 待办：从实际的 param 里读这个
             public bool IsLeftHandEquippable;
             public bool IsRightHandEquippable;
             public bool IsBothHandEquippable;
@@ -158,7 +158,7 @@ namespace DSAnimStudio
                         return $"WP_R_{EquipModelID:D4}";
                     else if (slotType is NewChrAsm.EquipSlotTypes.AC6BackLeftWeaponRail && AC6IsBackLeftSlotEquippable)
                         return $"WP_L_{EquipModelID:D4}";
-                    //ac6 weapons
+                    //AC6 武器
                     //else if (slotType is NewChrAsm.EquipSlot.BackRightWeapon && AC6IsBackRightSlot)
                     //    return $"WP_R_{EquipModelID:D4}";
                     //else if (slotType is NewChrAsm.EquipSlot.BackLeftWeapon && AC6IsBackLeftSlot)
@@ -169,7 +169,7 @@ namespace DSAnimStudio
 
             public override void Read(BinaryReaderEx br)
             {
-                // Empty bytes added at start
+                // 开头加的空字节
                 if (zzz_DocumentManager.CurrentDocument.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.ER or SoulsGames.ERNR or SoulsAssetPipeline.SoulsGames.AC6)
                     br.Position += 4;
 

@@ -60,7 +60,7 @@ namespace DSAnimStudio
 
             var proj = Proj;
 
-            // This stuff will happen only the first frame
+            // 这些只在第一帧发生
             if (RequestInitAfterBeingSwitchedTo_IsFirstFrame)
             {
                 SoundManager.StopAllSounds(immediate: true);
@@ -70,14 +70,14 @@ namespace DSAnimStudio
                 RequestInitAfterBeingSwitchedTo_IsFirstFrame = false;
             }
 
-            // This stuff will happen every frame until the RequestInitAfterBeingSwitchedTo is cleared.
+            // 这些每帧都发生，直到 RequestInitAfterBeingSwitchedTo 被清掉。
 
-            // Nothing...yet
+            // 什么都还没……暂时
 
             if (proj == null)
                 return;
 
-            // This stuff will happen once at the end before clearing RequestInitAfterBeingSwitchedTo
+            // 这些会在结尾、清掉 RequestInitAfterBeingSwitchedTo 之前发生一次
 
 
 
@@ -284,7 +284,7 @@ namespace DSAnimStudio
                     SpWindowAnimations = null;
                 }
 
-                // Hidden is used for placeholder doc, no point in forcing a whole GC collect for that.
+                // Hidden 是给占位 doc 用的，为它硬来一次完整 GC 回收毫无意义。
                 if (!IsUnimportantPlaceholderDoc)
                 {
                     //GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true);

@@ -414,7 +414,7 @@ namespace DSAnimStudio
                 {
                     // Rather than dividing diagonals by sqrt(2) to shorten them to correct length, we are
                     // multiplying the cardinals by sqrt(2) to make them longer, so diagonals are same thickness they were originally
-                    // and the new cardinals are the correct length, or something like that
+                    // 而且新的基本方向向量长度是对的，大概就这个意思
                     //shadowThickness *= sqrt2;
 
                     drawList.AddText(Main.ImGuiFontPointer, fontSize, posCS + (new System.Numerics.Vector2(0, 1) * shadowThickness),

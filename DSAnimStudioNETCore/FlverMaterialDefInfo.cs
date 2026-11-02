@@ -501,7 +501,7 @@ namespace DSAnimStudio
                     br.Position = pathOffset;
                     string pathStr = br.ReadUTF16();
 
-                    // Undefined means default
+                    // 未定义就表示默认值
                     if (uvScaleX == 0)
                         uvScaleX = 1;
 

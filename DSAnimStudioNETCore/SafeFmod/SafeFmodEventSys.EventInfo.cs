@@ -45,8 +45,8 @@ namespace DSAnimStudio.SafeFmod
                 var fres = Event.getState(ref fmodEventState);
                 if (fres == FMOD.RESULT.OK)
                 {
-                    // If the FMOD event says it's in READY state then it means it's not playing yet
-                    // So if the EventInfo already started playing it before, this means the actual
+                    // 如果 FMOD event 说自己处于 READY 状态，那说明它还没开始播
+                    // 所以如果 EventInfo 之前已经让它开始播了，那这说明真正的
                     // FMOD event finished playing (hence how it's READY again).
                     if (fmodEventState == EVENT_STATE.READY && State != SoundInstanceFmod.States.HasntStartedYet)
                     {
@@ -54,11 +54,11 @@ namespace DSAnimStudio.SafeFmod
                         return;
                     }
 
-                    // Event is still playing, update the parameters
+                    // Event 还在播，那就更新参数
                     FMOD.VECTOR posVec = new VECTOR(soundLocation);
                     FMOD.VECTOR velVec = new VECTOR(Vector3.Zero);
 
-                    // If it fails due to the event being released, it's fine. No weirdness should happen.
+                    // 如果因为 event 被释放而失败，那没事。不该出什么怪事。
                     fres = Event.set3DAttributes(ref posVec, ref velVec);
                     if (SafeFmodUtils.AssertResultOK(fres, $"Failed to set 3D attributes of FMOD Event '{EventName}'."))
                     {
@@ -102,7 +102,7 @@ namespace DSAnimStudio.SafeFmod
             {
                 if (State == SoundInstanceFmod.States.HasntStartedYet)
                 {
-                    // Didn't ever start event, so shouldn't call FMOD to try to stop it.
+                    // 根本没启动过 event，所以不该调 FMOD 去试着停它。
                     State = SoundInstanceFmod.States.Finished;
                 }
                 else if (State != SoundInstanceFmod.States.Finished)

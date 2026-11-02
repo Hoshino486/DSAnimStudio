@@ -184,7 +184,7 @@ namespace DSAnimStudio.DynamicSongSys
 
             if (fmtSize == 18)
             {
-                // Read any extra values
+                // 读取任何额外的值
                 fmtExtraSize = reader.ReadInt16();
                 reader.ReadBytes(fmtExtraSize);
             }
@@ -228,7 +228,7 @@ namespace DSAnimStudio.DynamicSongSys
                 {
                     localSectionHeader = reader.ReadChars(4);
                     localSectionSize = 0;
-                    // need to read this as big-endian
+                    // 这个要按 big-endian 读
                     for (int i = 0; i < 4; i++)
                     {
                         localSectionSize = (localSectionSize << 8) + reader.ReadByte();
@@ -264,8 +264,8 @@ namespace DSAnimStudio.DynamicSongSys
                         }
                     }
 
-                    // Process specific tag types we're looking for. If you want to use this for general tag-reading, you'll need to implement that yourself,
-                    // keeping in mind this code has also filtered for TXXX records only.
+                    // 只处理我们想找的那些特定 tag 类型。如果你想拿它做通用 tag 读取，那部分得自己实现，
+                    // 并且记住这段代码还只筛了 TXXX 记录。
 
                     switch (tagTitle)
                     {

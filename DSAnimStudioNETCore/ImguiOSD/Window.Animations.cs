@@ -351,7 +351,7 @@ namespace DSAnimStudio.ImguiOSD
                             bool disableAnimCulling)
                         {
                             // Culling is possible if tree node is closed (since it's always the same size)
-                            // or if culling is enabled and a valid cache exists
+                            // 或者启用了裁剪且存在有效缓存
                             bool blockHasValidCache =
                                 (TaeBlockCaches.ContainsKey(category) && TaeBlockCaches[category].IsValid);
                             bool taeCullingPossible =
@@ -381,7 +381,7 @@ namespace DSAnimStudio.ImguiOSD
                             if (disableTaeCulling)
                                 isBlockInView = true;
 
-                            // If TAE block is offscreen and culling is possible, cull the block.
+                            // 如果 TAE 块在屏幕外且可以裁剪，就把这块裁掉。
                             if (!isBlockInView && taeCullingPossible)
                             {
                                 ImGui.SetCursorPos(new NVector2(treeCursorPos.X, approximateBottomOfTreeAndChildren));
@@ -528,7 +528,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                 ImGui.SetCursorPosX(8);
 
-                                //another test
+                                //再来一个测试
                                 bool anyTagFieldFocused = false;
                                 category.Info.ShowImGui(ref anyTagFieldFocused, proj,
                                     GetRect(true, true).DpiScaled(), 
@@ -1207,7 +1207,7 @@ namespace DSAnimStudio.ImguiOSD
                                             }
 
 
-                                            // Mouse within window.
+                                            // 鼠标在窗口内。
                                             //if (mouseCursorPos.Y >= windowPos.Y && mouseCursorPos.Y <= windowPos.Y + windowSize.Y
                                             //    && mouseCursorPos.X >= windowPos.X && mouseCursorPos.X <= windowPos.X + windowSize.X)
                                             //{
@@ -1345,7 +1345,7 @@ namespace DSAnimStudio.ImguiOSD
                                 cache.Debug_WasRenderedLastFrame = false;
                                 TaeBlockCaches[tae] = cache;
 
-                                // If cache is invalid and tree node is expanded, then do the cache calculation
+                                // 如果缓存无效且树节点是展开的，那就把缓存算出来
                                 if ((!TaeBlockCaches[tae].IsValid && tae.IsTreeNodeOpen) ||
                                     Main.Debug.DisableAnimListCulling)
                                 {
@@ -1382,7 +1382,7 @@ namespace DSAnimStudio.ImguiOSD
 
 
                                 }
-                                // Otherwise, normal render, which will read the cache if applicable
+                                // 否则就正常渲染，适用时会去读缓存
                                 else
                                 {
                                     RenderTaeBlock(fileContainer.Proj, tae, disableTaeCulling: false,
@@ -1393,7 +1393,7 @@ namespace DSAnimStudio.ImguiOSD
 
                             }
 
-                            // Dummy so it can scroll down even when stuff near the end of the list is culled.
+                            // 占位用的，这样即使列表末尾附近的玩意儿被裁掉也能滑下去。
                             ImGui.Text(Loc.T(" "));
 
                             if (jumptoTae != null && jumpToAnimation != null &&

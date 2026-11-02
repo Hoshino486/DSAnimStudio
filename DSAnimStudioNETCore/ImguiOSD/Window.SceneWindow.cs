@@ -612,7 +612,7 @@ namespace DSAnimStudio.ImguiOSD
                                                         GFX.NewDebug_ShowTex_Sampler = s;
                                                         GFX.NewDebug_ShowTex_SamplerConfig = matchingSamplerConfig;
 
-                                                        // On initial enable, shutoff all others
+                                                        // 初次启用时，把其他所有项都关掉
                                                         if (!prevDebugView)
                                                         {
                                                             var memes = m.Samplers.Where(smp => smp != s).ToList();

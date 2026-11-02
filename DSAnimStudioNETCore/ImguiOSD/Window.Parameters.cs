@@ -161,7 +161,7 @@ namespace DSAnimStudio.ImguiOSD
 
                         //var ev = Tae.InspectorEvent;
 
-                        // Debug stuff
+                        // 调试那些东西
 
                         //ImGui.LabelText("Debug Stuff", "");
                         //int evGroupIndex = ev.GroupIndex;
@@ -465,7 +465,7 @@ namespace DSAnimStudio.ImguiOSD
                                                 TemplateRefreshesQueued.Add(act.Template);
                                         }
 
-                                        // Force maintain vertical scroll for 2 frames.
+                                        // 强制保持垂直滚动 2 帧。
                                         //RequestMaintainScrollFrames += 2;
 
                                         //break;
@@ -611,7 +611,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                     if (isEnum)
                                     {
-                                        // For enum entries we have the name on the combo box not the int input
+                                        // Enum 条目在 combo box 上显示的是名字，不是 int 输入
                                         //inputIntName = "";
 
                                         ImGui.PushItemWidth(100);

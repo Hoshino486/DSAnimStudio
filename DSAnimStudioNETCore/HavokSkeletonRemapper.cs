@@ -404,7 +404,7 @@ namespace DSAnimStudio
             target_blendableTransforms_lastFrameIK = new NewBlendableTransform[targetSkeleton.Bones.Count];
             target_blendPartType = new BlendPartType[TargetSkeleton.Bones.Count];
 
-            // Target Anim upper root check
+            // 目标 Anim 上层的 root 检查
             void WalkTree_UpperRootCheck(int i, BlendPartType curBlendPartType)
             {
                 if (TargetSkeleton.Bones[i].Name == "L_UpperArm")
@@ -437,7 +437,7 @@ namespace DSAnimStudio
 
         private void CalculateIdlePoses(NewHavokAnimation baseIdleAnim, NewHavokAnimation blendToIdleAnim, float sourceScale, NewHavokAnimation twoHandIdleAnim)
         {
-            // Source Anim
+            // 源 Anim
             void WalkTree_Idle_Source(int i, Matrix currentMatrix, Vector3 currentScale)
             {
                 currentMatrix = target_blendableTransforms[i].GetMatrix().ToXna() * currentMatrix;
@@ -449,7 +449,7 @@ namespace DSAnimStudio
             foreach (var root in TargetSkeleton.TopLevelBoneIndices)
                 WalkTree_Idle_Source(root, Matrix.Identity, Vector3.One);
 
-            // Target Anim
+            // 目标 Anim
             void WalkTree_Idle_Target(int i, Matrix currentMatrix, Vector3 currentScale)
             {
                 target_blendableTransforms[i] = baseIdleAnim.GetBlendableTransformOnCurrentFrame(i);
@@ -464,7 +464,7 @@ namespace DSAnimStudio
 
             if (blendToIdleAnim != null)
             {
-                // Target Blend Anim
+                // 目标 Blend Anim
                 void WalkTree_IdleBlend_Target(int i, Matrix currentMatrix, Vector3 currentScale)
                 {
                     target_blendableTransforms[i] = blendToIdleAnim.GetBlendableTransformOnCurrentFrame(i);
@@ -487,7 +487,7 @@ namespace DSAnimStudio
 
             if (twoHandIdleAnim != null)
             {
-                // 2H Idle Anim
+                // 2H 待机 Anim
                 void WalkTree_IdleBlend_Target(int i, Matrix currentMatrix, Vector3 currentScale)
                 {
                     target_blendableTransforms[i] = twoHandIdleAnim.GetBlendableTransformOnCurrentFrame(i);
@@ -611,7 +611,7 @@ namespace DSAnimStudio
                 target_blendableTransforms[i] = TargetSkeleton.Bones[i].ReferenceLocalTransform;
             }
 
-            // Source Anim
+            // 源 Anim
             void WalkTree_SourceAnim(int i, Matrix currentMatrix, Vector3 currentScale)
             {
                 source_blendableTransforms[i] = anim.GetBlendableTransformOnCurrentFrame(i).GetTScaled(cfg.SourceSkeletonScale);
@@ -707,7 +707,7 @@ namespace DSAnimStudio
                 }
             }
 
-            // Target Anim
+            // 目标 Anim
             void WalkTree_TargetAnim(int i, Matrix currentMatrix, Vector3 currentScale)
             {
                 if (sourceBonesByTargetBones.ContainsKey(i) && sourceBonesByTargetBones[i] != -1)
@@ -770,7 +770,7 @@ namespace DSAnimStudio
             if (cfg.ArmIK.L_Enabled)
             {
                 ////////////////////////////////////////////////////////////////////////////////
-                // New IK
+                // 新建 IK
                 ////////////////////////////////////////////////////////////////////////////////
 
                 int idx_UpperArm = targetBoneIndicesByName[cfg.ArmIK.L_UpperArm];
@@ -783,7 +783,7 @@ namespace DSAnimStudio
                 {
                     float stepRatio = 0.05f;
 
-                    // Store current for comparison to transform twist bones.
+                    // 保存当前值，用来和 twist Bone 的变换做比较。
                     var upperArmPreIK = target_blendableTransforms[idx_UpperArm];
                     var forearmPreIK = target_blendableTransforms[idx_Forearm];
                     var handPreIK = target_blendableTransforms[idx_Hand];
@@ -791,7 +791,7 @@ namespace DSAnimStudio
                     var offsetFromTarget = source_absoluteBoneMatrices_ForIK[sourceBoneIndicesByName["L_Hand"]]
                         * Matrix.Invert(source_absoluteBoneMatrices_ForIK[sourceBoneIndicesByName["R_Hand"]]);
                     offsetFromTarget.Translation *= cfg.ArmIK.L_OffsetScale;
-                    // Temp Test
+                    // 临时测试
 
 
                     newIKSolver_LeftArm.target = MatToTransform(offsetFromTarget * GetTargetFKTransform(targetBoneIndicesByName["R_Hand"]).GetMatrix().ToXna());
@@ -827,7 +827,7 @@ namespace DSAnimStudio
             if (cfg.ArmIK.L_Enabled)
             {
                 ////////////////////////////////////////////////////////////////////////////////
-                // New IK
+                // 新建 IK
                 ////////////////////////////////////////////////////////////////////////////////
 
                 int idx_UpperArm = targetBoneIndicesByName["R_UpperArm"];
@@ -840,12 +840,12 @@ namespace DSAnimStudio
                 //{
                 //    float stepRatio = 0.05f;
 
-                //    // Store current for comparison to transform twist bones.
+                //    // 保存当前值，用来和 twist Bone 的变换做比较。
                 //    var upperArmPreIK = target_blendableTransforms[idx_UpperArm];
                 //    var forearmPreIK = target_blendableTransforms[idx_Forearm];
                 //    var handPreIK = target_blendableTransforms[idx_Hand];
                 //    var offsetFromTarget = NewBlendableTransform.Identity;
-                //    // Temp Test
+                //    // 临时测试
                 //    MatToTransform(source_absoluteBoneMatrices_ForIK[sourceBoneIndicesByName["R_Hand"]]);
                 //    //newIKSolver_LeftArm.target = MatToTransform(source_absoluteBoneMatrices_ForIK[sourceBoneIndicesByName["R_Hand"]]);
                 //    newIKSolver_LeftArm.target.Translation.Z += 0.15f;
@@ -908,7 +908,7 @@ namespace DSAnimStudio
 
             thing.FrameCount = anim.FrameCount;
 
-            // If source animation is 30 FPS and not 60, then double frame count
+            // 如果源 Anim 是 30 FPS 而不是 60，那就把帧数翻倍
             if (anim.FrameDuration > 0.02f)
             {
                 //thing.Duration = (float)((thing.FrameCount) * (1.0 / 30.0));
@@ -1005,7 +1005,7 @@ namespace DSAnimStudio
                 }
                 thing.Frames.Add(frame);
 
-                //TODO: Read a speed curve here!
+                //TODO：在这里读一条速度曲线！
                 currentTime += thing.FrameDuration * ((currentTime >= (thing.FrameDuration * 52)) ? 1.5f : 1.25f);
             }
 

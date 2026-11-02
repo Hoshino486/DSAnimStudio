@@ -228,7 +228,7 @@ namespace DSAnimStudio
             }
             else if (ParentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.DS3)
             {
-                // Old way of loading:
+                // 旧的加载方式：
                 //TryToLoadFromMSGBND("engus", "item_dlc1.msgbnd.dcx", 11, 12); //vanilla
                 //TryToLoadFromMSGBND("engus", "item_dlc1.msgbnd.dcx", 211, 212); //DLC1
 
@@ -239,14 +239,14 @@ namespace DSAnimStudio
                 // New way of loading (based on Elden Ring):
                 if (ParentDocument.GameData.FileExists($@"/msg/engus/item_dlc2.msgbnd.dcx"))
                 {
-                    // Reverse load order so that DLC stuff is overwritten by vanilla stuff
+                    // 反转加载顺序，好让 DLC 的东西被原版东西覆盖
                     TryToLoadFromMSGBND("engus", "item_dlc2.msgbnd.dcx", 251, 252); // dlc2
                     TryToLoadFromMSGBND("engus", "item_dlc2.msgbnd.dcx", 211, 212); // dlc1
                     TryToLoadFromMSGBND("engus", "item_dlc2.msgbnd.dcx", 11, 12); // vanilla
                 }
                 else if (ParentDocument.GameData.FileExists($@"/msg/engus/item_dlc1.msgbnd.dcx"))
                 {
-                    // Reverse load order so that DLC stuff is overwritten by vanilla stuff
+                    // 反转加载顺序，好让 DLC 的东西被原版东西覆盖
                     TryToLoadFromMSGBND("engus", "item_dlc1.msgbnd.dcx", 211, 212); // dlc1
                     TryToLoadFromMSGBND("engus", "item_dlc1.msgbnd.dcx", 11, 12); // vanilla
                 }
@@ -260,14 +260,14 @@ namespace DSAnimStudio
             {
                 if (ParentDocument.GameData.FileExists($@"/msg/engus/item_dlc02.msgbnd.dcx"))
                 {
-                    // Reverse load order so that DLC stuff is overwritten by vanilla stuff
+                    // 反转加载顺序，好让 DLC 的东西被原版东西覆盖
                     TryToLoadFromMSGBND("engus", "item_dlc02.msgbnd.dcx", 410, 413); // dlc02
                     TryToLoadFromMSGBND("engus", "item_dlc02.msgbnd.dcx", 310, 313); // dlc01
                     TryToLoadFromMSGBND("engus", "item_dlc02.msgbnd.dcx", 11, 12); // vanilla
                 }
                 else if (ParentDocument.GameData.FileExists($@"/msg/engus/item_dlc01.msgbnd.dcx"))
                 {
-                    // Reverse load order so that DLC stuff is overwritten by vanilla stuff
+                    // 反转加载顺序，好让 DLC 的东西被原版东西覆盖
                     TryToLoadFromMSGBND("engus", "item_dlc01.msgbnd.dcx", 310, 313); // dlc01
                     TryToLoadFromMSGBND("engus", "item_dlc01.msgbnd.dcx", 11, 12); // vanilla
                 }
@@ -280,14 +280,14 @@ namespace DSAnimStudio
             {
                 //if (ParentDocument.GameData.FileExists($@"/msg/engus/item_dlc02.msgbnd.dcx"))
                 //{
-                //    // Reverse load order so that DLC stuff is overwritten by vanilla stuff
+                //    // 反转加载顺序，好让 DLC 的东西被原版东西覆盖
                 //    TryToLoadFromMSGBND("engus", "item_dlc02.msgbnd.dcx", 410, 413); // dlc02
                 //    TryToLoadFromMSGBND("engus", "item_dlc02.msgbnd.dcx", 310, 313); // dlc01
                 //    TryToLoadFromMSGBND("engus", "item_dlc02.msgbnd.dcx", 11, 12); // vanilla
                 //}
                 //else if (ParentDocument.GameData.FileExists($@"/msg/engus/item_dlc01.msgbnd.dcx"))
                 //{
-                //    // Reverse load order so that DLC stuff is overwritten by vanilla stuff
+                //    // 反转加载顺序，好让 DLC 的东西被原版东西覆盖
                 //    TryToLoadFromMSGBND("engus", "item_dlc01.msgbnd.dcx", 310, 313); // dlc01
                 //    TryToLoadFromMSGBND("engus", "item_dlc01.msgbnd.dcx", 11, 12); // vanilla
                 //}
@@ -298,7 +298,7 @@ namespace DSAnimStudio
 
                 if (ParentDocument.GameData.FileExists($@"/msg/engus/item_dlc01.msgbnd.dcx"))
                 {
-                    // Reverse load order so that DLC stuff is overwritten by vanilla stuff
+                    // 反转加载顺序，好让 DLC 的东西被原版东西覆盖
                     TryToLoadFromMSGBND("engus", "item_dlc01.msgbnd.dcx", 310, 313); // dlc01
                     TryToLoadFromMSGBND("engus", "item_dlc01.msgbnd.dcx", 11, 12); // vanilla
                 }

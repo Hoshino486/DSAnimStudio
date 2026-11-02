@@ -174,7 +174,7 @@ namespace DSAnimStudio
                     tagColor = tagColor_Hover;
                 }
 
-                // Box background
+                // 方框背景
                 ImGuiDebugDrawer.DrawRect(actualBoxRect, tagColor, cornerRounding: cfg.BoxRoundness, thickness: 0);
 
                 // Text
@@ -205,16 +205,16 @@ namespace DSAnimStudio
                             wasXClicked = true;
                     }
 
-                    //test lol
+                    //测试 哈哈
                     //buttonHovered = true;
 
                     if (buttonHovered)
                         buttonBackgroundColor = tagColor.MultBrightness(0.6666f);
 
-                    // Button background
+                    // 按钮背景
                     ImGuiDebugDrawer.DrawRect(buttonTopLeft, cfg.ButtonSize, buttonBackgroundColor, cornerRounding: cfg.ButtonRoundness, thickness: 0);
 
-                    // Button X Glyph
+                    // 按钮 X 的图标
                     Vector2 xGlyphNW = buttonTopLeft + new Vector2(cfg.XGlyphOffset.X, cfg.XGlyphOffset.Y);
                     Vector2 xGlyphNE = buttonTopLeft + new Vector2(cfg.XGlyphOffset.X + cfg.XGlyphSize.X, cfg.XGlyphOffset.Y);
                     Vector2 xGlyphSW = buttonTopLeft + new Vector2(cfg.XGlyphOffset.X, cfg.XGlyphOffset.Y + cfg.XGlyphSize.Y);
@@ -228,11 +228,11 @@ namespace DSAnimStudio
                     ImGuiDebugDrawer.DrawLine(xGlyphNW, xGlyphSE, cfg.XGlyphColor, thickness: cfg.XGlyphThickness);
                     ImGuiDebugDrawer.DrawLine(xGlyphSW, xGlyphNE, cfg.XGlyphColor, thickness: cfg.XGlyphThickness);
 
-                    // Button outline
+                    // 按钮轮廓
                     //ImGuiDebugDrawer.DrawRect(buttonTopLeft, cfg.ButtonSize, cfg.OutlineColor, cornerRounding: cfg.ButtonRoundness, thickness: cfg.ButtonOutlineThickness);
                 }
 
-                // Box outline
+                // 方框轮廓
                 ImGuiDebugDrawer.DrawRect(actualBoxRect, 
                     cfg.OutlineColor, cornerRounding: cfg.BoxRoundness, thickness: cfg.BoxOutlineThickness);
 
@@ -310,7 +310,7 @@ namespace DSAnimStudio
             }
 
             /// <summary>
-            /// Make sure AlwaysShowVerticalScrollBar flag is set on whatever window this is shown in :fatcat:
+            /// 不管这东西显示在哪个窗口里，都要确保设上了 AlwaysShowVerticalScrollBar 标志 :fatcat:
             /// </summary>
             public void ShowImGui(ref bool anyFieldFocused, DSAProj proj, RectF imguiWindowClipRect, 
                 RectF imguiWindowActualRect, Action<bool> setIsModified, bool showTagsOnly, 
@@ -481,15 +481,15 @@ namespace DSAnimStudio
                             // This tag would cut off on right side of window, go to next line;
                             if (newTagDraw_CurrentPos.X >= imguiWindowClipRect.Right || predictAnchorAfterDraw.X >= imguiWindowClipRect.Right)
                             {
-                                // Test dummy blank thing to make window scroll horizontally
+                                // 用来让窗口能横向滚动的测试占位空白玩意儿
                                 var tempStoreImguiCursorPos_Inner = ImGui.GetCursorPos();
                                 ImGui.SameLine();
                                 ImGui.Text(Loc.T("    "));
                                 ImGui.SetCursorPos(tempStoreImguiCursorPos_Inner);
 
                                 //TODO
-                                //Probably will need 'newLineStartCursorPosX' here.
-                                //Make sure to move the Imgui cursor down as well.
+                                //这里大概需要用到 'newLineStartCursorPosX'。
+                                //记得把 Imgui 光标也往下移。
                                 var curCursorPos = ImGui.GetCursorPos();
 
                                 curCursorPos.X = startCursorPos.X;
@@ -515,7 +515,7 @@ namespace DSAnimStudio
                             newAnchorPos -= imguiWindowActualRect.Location;
                             ImGui.SetCursorPos(newAnchorPos.ToCS());
 
-                            // Test dummy blank thing to make window scroll horizontally
+                            // 用来让窗口能横向滚动的测试占位空白玩意儿
                             var tempStoreImguiCursorPos = ImGui.GetCursorPos();
                             ImGui.SameLine();
                             ImGui.Text(Loc.T("    "));
@@ -546,7 +546,7 @@ namespace DSAnimStudio
                     //}
 
 
-                    // Shift cursor to underneath the last row of tags.
+                    // 把光标挪到最后一排 tag 的下面。
                     //ImGui.SetCursorPos(new System.Numerics.Vector2(startCursorPos.X, 
                     //    ImGui.GetCursorPosY() + DrawCfg.VerticalBoxSize + SpacingBetweenTagsY));
 

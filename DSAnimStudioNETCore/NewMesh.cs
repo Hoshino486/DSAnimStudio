@@ -128,7 +128,7 @@ namespace DSAnimStudio
             int i = 0;
             foreach (var submesh in flver.Meshes)
             {
-                // Blacklist some materials that don't have good shaders and just make the viewer look like a mess
+                // 把一些没有好 Shader、只会让查看器看起来一团糟的 Material 拉黑
                 MTD mtd = null;// InterrootLoader.GetMTD(Path.GetFileName(flver.Materials[submesh.MaterialIndex].MTD));
                 if (mtd != null)
                 {
@@ -178,7 +178,7 @@ namespace DSAnimStudio
             int i = 0;
             foreach (var submesh in flver.Meshes)
             {
-                // Blacklist some materials that don't have good shaders and just make the viewer look like a mess
+                // 把一些没有好 Shader、只会让查看器看起来一团糟的 Material 拉黑
                 MTD mtd = null;// InterrootLoader.GetMTD(Path.GetFileName(flver.Materials[submesh.MaterialIndex].MTD));
                 if (mtd != null)
                 {

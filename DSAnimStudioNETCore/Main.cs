@@ -27,7 +27,7 @@ namespace DSAnimStudio
 {
     public class Main : Game
     {
-        // STOP MOVING THESE FIELDS DOWN LMAO
+        // 别再把这几条字段往下挪了，笑死
         public const string DSAS_VERSION_STRING = "5.0-RC6.1";
         public static bool IsPatreonBuild => false;
 
@@ -60,7 +60,7 @@ namespace DSAnimStudio
 
             if (game is SoulsGames.DS1 or SoulsGames.DS1R or SoulsGames.BB or SoulsGames.DS3 or SoulsGames.DES)
             {
-                // Game has no oodle
+                // 游戏里没有 oodle
                 return true;
             }
             else if (game == null)// && gameFilePath.ToLower().EndsWith(".dcx"))
@@ -138,7 +138,7 @@ namespace DSAnimStudio
             {
                 string oodleSource = Utils.Frankenpath(interroot, oodleName);
 
-                // modengine check
+                // modengine 检查
                 if (!File.Exists(oodleSource))
                 {
                     oodleSource = Utils.Frankenpath(interroot, @$"..\{oodleName}");
@@ -507,7 +507,7 @@ namespace DSAnimStudio
             {
                 
                 asapActionListCopy = LazyDispatchASAPActionList.ToList();
-                // Clear while locked to prevent desync
+                // 在锁定状态下 Clear，防止不同步
                 LazyDispatchASAPActionList.Clear();
 
                 if (!menusOpen)
@@ -1134,13 +1134,13 @@ namespace DSAnimStudio
         //public static float RenderTargetBlurAnisoMin = 0.5f;
         //public static float RenderTargetBlurAnisoMax = 1;
 
-        //// BLUR DIRECTIONS (Default 16.0 - More is better but slower)
+        //// 模糊方向数（默认 16.0 —— 越大越好但更慢）
         //public static float RenderTargetBlurDirections = 16.0f;
 
-        //// BLUR QUALITY (Default 4.0 - More is better but slower)
+        //// 模糊质量（默认 4.0 —— 越大越好但更慢）
         //public static float RenderTargetBlurQuality = 3.0f;
 
-        //// BLUR SIZE (Radius)
+        //// 模糊尺寸（半径）
         //public static float RenderTargetBlurSize = 8.0f;
         //public static bool RenderTargetDebugBlurDisp = false;
         //public static bool RenderTargetDebugBlurMaskDisp = false;
@@ -1245,7 +1245,7 @@ namespace DSAnimStudio
 
             IsFixedTimeStep = true;
             TargetElapsedTime = TimeSpan.FromTicks(166667);
-            // Setting this max higher allows it to skip frames instead of do slow motion.
+            // 把这个上限调高，它就会跳帧而不是放慢动作。
             MaxElapsedTime = TimeSpan.FromSeconds(0.5);
 
             //IsFixedTimeStep = false;
@@ -1662,8 +1662,8 @@ namespace DSAnimStudio
                         isValid = true;
                     }
                 }
-                // If multiple files are dragged they must all be regularly 
-                // loadable rather than the specific case ones above
+                // 如果拖进来多个文件，它们必须都按常规方式可加载 
+                // 而不是上面那种特殊情况的文件
                 else if (files.All(f => IsValidDragDropModelFile(f)))
                     isValid = true;
 
@@ -2292,7 +2292,7 @@ namespace DSAnimStudio
 
                     MaxElapsedTime = TimeSpan.FromSeconds(1.0);
 
-                    // Hotfix for mouse cursor getting locked when window loses focus while dragging editor timeline.
+                    // 修复在拖动编辑器时间轴时窗口失去焦点导致鼠标光标被锁住的问题。
                     if (!ActiveHyst)
                     {
                         var tae = zzz_DocumentManager.CurrentDocument?.EditorScreen;
@@ -2392,7 +2392,7 @@ namespace DSAnimStudio
 
                         //if (DbgMenuItem.MenuOpenState != DbgMenuOpenState.Open)
                         //{
-                        //    // Only update input if debug menu isnt fully open.
+                        //    // 只有在调试菜单没有完全打开时才更新输入。
                         //    GFX.World.UpdateInput(this, gameTime);
                         //}
 
@@ -2408,7 +2408,7 @@ namespace DSAnimStudio
                         }
 
 
-                        // BELOW IS TAE EDITOR STUFF
+                        // 下面是 TAE 编辑器的东西
 
                         if (IsLoadingTaskRunning)
                         {
@@ -2432,7 +2432,7 @@ namespace DSAnimStudio
 
                         //    }));
 
-                        //    // Undo an infinite loading cursor on an aborted file load.
+                        //    // 撤销文件加载中途取消后卡住的无限加载光标。
                         //    if (!IsLoadingTaskRunning)
                         //    {
                         //        Mouse.SetCursor(MouseCursor.Arrow);
@@ -2604,7 +2604,7 @@ namespace DSAnimStudio
 
                         if (DbgMenuItem.MenuOpenState != DbgMenuOpenState.Open)
                         {
-                            // Only update input if debug menu isnt fully open.
+                            // 只有在调试菜单没有完全打开时才更新输入。
                             if (updateInput)
                                 GFX.CurrentWorldView.UpdateInput();
                         }

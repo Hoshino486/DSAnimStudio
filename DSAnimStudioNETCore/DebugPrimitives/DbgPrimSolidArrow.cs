@@ -43,7 +43,7 @@ namespace DSAnimStudio.DebugPrimitives
             }
             GeometryData = null;
 
-            // Create a prim to generate new global geometry data
+            // 创建一个 prim 来生成新的全局几何数据
             var prim = new DbgPrimSolidArrow(Transform.Default, c, extraThickness);
             prim.Dispose();
         }
@@ -116,7 +116,7 @@ namespace DSAnimStudio.DebugPrimitives
 
                     var prevPtBase = GetPoint(i - 1, StemRadius + extraThickness, 0 - extraThickness);
 
-                    //Face: Part of Bottom
+                    //面：底部的一部分
                     AddTri_Backward(Vector3.Zero + (Vector3.Backward * extraThickness), prevPtBase, ptBase, c);
                 }
 
@@ -128,7 +128,7 @@ namespace DSAnimStudio.DebugPrimitives
                     var prevPtBase = GetPoint(i - 1, StemRadius + extraThickness, 0 - extraThickness);
                     var prevPtTipStartInner = GetPoint(i - 1, StemRadius + extraThickness, (1 - TipLength - extraThickness));
 
-                    // Face: Base to Tip Inner
+                    // 面：从基部到尖端内侧
                     AddQuad_Backward(prevPtBase, prevPtTipStartInner, ptTipStartInner, ptBase, c);
                 }
 
@@ -140,7 +140,7 @@ namespace DSAnimStudio.DebugPrimitives
                     var prevPtTipStartInner = GetPoint(i - 1, StemRadius + extraThickness, (1 - TipLength - extraThickness));
                     var prevPtTipStartOuter = GetPoint(i - 1, TipRadius + extraThickness, (1 - TipLength - extraThickness));
 
-                    // Face: Tip Start Inner to Tip Start Outer
+                    // 面：从尖端起点内侧到尖端起点外侧
                     AddQuad_Backward(prevPtTipStartInner, prevPtTipStartOuter, ptTipStartOuter, ptTipStartInner, c);
                 }
 
@@ -149,7 +149,7 @@ namespace DSAnimStudio.DebugPrimitives
                     var ptTipStartOuter = GetPoint(i, TipRadius + extraThickness, (1 - TipLength - extraThickness));
                     var prevPtTipStartOuter = GetPoint(i - 1, TipRadius + extraThickness, (1 - TipLength - extraThickness));
 
-                    // Face: Tip Start to Tip
+                    // 面：从尖端起点到尖端
                     AddTri_Backward(prevPtTipStartOuter, tip, ptTipStartOuter, c);
                 }
 

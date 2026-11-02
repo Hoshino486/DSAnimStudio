@@ -74,15 +74,15 @@ namespace DSAnimStudio
 		{
 			try
 			{
-				// Catch your input here!
+				// 在这儿接住你的输入！
 				var data = e.Data;
 
-				// You can identify the source device using Header.DeviceHandle or just Device.
+				// 用 Header.DeviceHandle 或干脆用 Device 就能认出源设备。
 				var sourceDeviceHandle = data.Header.DeviceHandle;
 				var sourceDevice = data.Device;
 
-				// The data will be an instance of either RawInputMouseData, RawInputKeyboardData, or RawInputHidData.
-				// They contain the raw input data in their properties.
+				// 数据会是 RawInputMouseData、RawInputKeyboardData 或 RawInputHidData 的实例。
+				// 原始输入数据就在它们的属性里。
 				switch (data)
 				{
 					case RawInputMouseData mouse:

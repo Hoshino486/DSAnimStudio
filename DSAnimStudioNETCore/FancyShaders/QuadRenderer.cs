@@ -1,4 +1,4 @@
-
+﻿
 #region Using Statements
 
 using Microsoft.Xna.Framework;
@@ -10,7 +10,7 @@ namespace DSAnimStudio.FancyShaders
 {
     public class QuadRenderer
     {
-        //buffers for rendering the quad
+        //用于渲染这个 quad 的 buffer
         private readonly VertexPositionTexture[] _vertexBuffer;
         private readonly short[] _indexBuffer;
 

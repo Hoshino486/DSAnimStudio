@@ -24,8 +24,8 @@ namespace DSAnimStudio
                 {
                     foreach (var s in Samplers)
                     {
-                        // Only dispose if this texture is somehow not in the texture pool
-                        // because otherwise the texture pool will handle disposal.
+                        // 只有当这个 Texture 由于某种原因不在 Texture 池里时才 dispose
+                        // 因为否则的话 Texture 池会负责释放。
                         if (s.Tex != null && !zzz_DocumentManager.CurrentDocument.TexturePool.AnyTexturesMatch(s.Tex))
                             s.Tex?.Dispose();
                     }
@@ -339,7 +339,7 @@ namespace DSAnimStudio
                     {
                         texType = (index_Albedo == 0) ? TextureTypes.Albedo1 : TextureTypes.Albedo2;
 
-                        // Hotfix for Elden Ring fur materials
+                        // 针对艾尔登法环（Elden Ring）毛发 Material 的热修复
                         if (smp.TexPath.Contains("furblurnoise"))
                         {
                             texType = TextureTypes.None;
@@ -416,12 +416,12 @@ namespace DSAnimStudio
 
                 Samplers.Add(smp);
 
-                // Alternate material params that work as diffuse
+                // 可以当作 diffuse 用的备用 Material 参数
             }
 
             var samplerConfigs = ShaderConfig.SamplerConfigs;
 
-            // Elden Ring Fur Hotfix
+            // Elden Ring 毛发热修复
             var mtdCheck = MtdName.ToLower();
             if ((mtdCheck.Contains("fur") || mtdCheck.Contains("hair")) && zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeUsesMetallicShaders)
             {
@@ -656,7 +656,7 @@ namespace DSAnimStudio
                         {
                             texType = (index_Albedo == 0) ? TextureTypes.Albedo1 : TextureTypes.Albedo2;
 
-                            // Hotfix for Elden Ring fur materials
+                            // 针对艾尔登法环（Elden Ring）毛发 Material 的热修复
                             if (smp.TexPath.Contains("furblurnoise"))
                             {
                                 texType = TextureTypes.None;
@@ -747,12 +747,12 @@ namespace DSAnimStudio
 
                 Samplers.Add(smp);
 
-                // Alternate material params that work as diffuse
+                // 可以当作 diffuse 用的备用 Material 参数
             }
 
             var samplerConfigs = ShaderConfig.SamplerConfigs;
 
-            // Elden Ring Fur Hotfix
+            // Elden Ring 毛发热修复
             var mtdCheck = MtdName.ToLower();
             if ((mtdCheck.Contains("fur") || mtdCheck.Contains("hair")) && zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeUsesMetallicShaders)
             {
@@ -1461,7 +1461,7 @@ namespace DSAnimStudio
             //public int UVIndex = 0;
             public Vector2 UVScale = Vector2.One;
             
-            // Now stored in ShaderConfig
+            // 现在存到 ShaderConfig 里了
             //public TextureTypes TextureType;
             public NewDebug_ShowTex_ChannelConfigs ChannelConfig_ForDebug = NewDebug_ShowTex_ChannelConfigs.RGBA;
 

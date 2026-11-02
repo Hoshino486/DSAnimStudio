@@ -352,7 +352,7 @@ namespace DSAnimStudio
         public Vector3 CurrentTransformPosition_StartOfAnim => Vector3.Transform(Vector3.Zero, CurrentTransform_StartOfAnim.WorldMatrix);
 
         /// <summary>
-        /// This is needed to make weapon hitboxes work.
+        /// 要让武器受击框生效就得靠这个。
         /// </summary>
         public bool IS_PLAYER => Document.GameRoot.IsChrPlayerChr(Name);
 
@@ -544,7 +544,7 @@ namespace DSAnimStudio
                                 if (dmy.AttachBoneIndex < 0 || dmy.AttachBoneIndex > flver2.Nodes.Count)
                                     dmy.AttachBoneIndex = 0;
 
-                                // Remap bone indices.
+                                // 重新映射 Bone 索引。
                                 dmy.ParentBoneIndex = (short)modelToImportDuringLoad.Flver.Nodes.FindIndex(b => b.Name == flver2.Nodes[dmy.ParentBoneIndex].Name);
                                 dmy.AttachBoneIndex = (short)modelToImportDuringLoad.Flver.Nodes.FindIndex(b => b.Name == flver2.Nodes[dmy.AttachBoneIndex].Name);
 
@@ -652,8 +652,8 @@ namespace DSAnimStudio
             else
             {
                 //AnimContainer = null;
-                // This just messes up the model cuz they're already in 
-                // reference pose, whoops
+                // 这只会把模型搞乱，因为它们本来就已经是 
+                // 参考姿势了，哎呀
                 SkeletonFlver.RevertToReferencePose();
             }
 
@@ -1074,7 +1074,7 @@ namespace DSAnimStudio
             measureFromPoint.Y = 0;
             measureFromPointLockedToDir.Y = 0;
 
-            // Dumb shit
+            // 傻逼玩意儿
             if (setup.DirType != AttackDirType.Any)
             {
                 measureFromPointLockedToDir =  Vector3.Transform(Vector3.Transform(Vector3.Forward, Matrix.CreateRotationY(NewDummyPolyManager.AttackDirTypeToAngle(setup.DirType))) * ChrHitCapsuleRadius, mFrom);
@@ -1120,7 +1120,7 @@ namespace DSAnimStudio
             Color freeangleTextColor = setup.MainTextColor;
             float freeangleLineThickness = 6;
 
-            // Quick hotfix - move the "floor" points downward:
+            // 临时快修 —— 把“地面”点往下移：
             measureFromPointLockedToDir.Y += setup.FloorVerticalShift;
             measureToPointLockedToDir_OnGround.Y += setup.FloorVerticalShift;
             measureFromPoint.Y += setup.FloorVerticalShift;
@@ -1369,7 +1369,7 @@ namespace DSAnimStudio
                     //    {
                     //        ImGuiDebugDrawer.DrawLine3D(a, b, Main.Colors.ColorHelperAttackDistanceLine * helpers.AttackDistanceLineOpacity, thickness: 1.5f);
                     //        ImGuiDebugDrawer.DrawLine3D(b, c, Main.Colors.ColorHelperAttackDistanceLine * helpers.AttackDistanceLineOpacity, thickness: 1.5f);
-                    //        // Hypotenuse, dunno if i want it yet
+                    //        // 斜边，还不确定要不要它
                     //        ImGuiDebugDrawer.DrawLine3D(c, a, Main.Colors.ColorHelperAttackDistanceLine * helpers.AttackDistanceLineOpacity, thickness: 1.5f);
                     //    }
 
@@ -1628,7 +1628,7 @@ namespace DSAnimStudio
                                     SkeletonFlver.MapToOtherSkeleton(animSkel);
                             }
 
-                            // Only do if skeleton remapper is null because skeleton remapper incorporates this functionality in it
+                            // 只在 Skeleton 重映射器为 null 时才做，因为 Skeleton 重映射器已经内含这个功能
                             if (SkeletonFlver.OtherSkeletonThisIsMappedTo != null && SkeletonRemapper == null)
                             {
                                 SkeletonFlver.CopyMatricesDirectlyFromOtherSkeleton(writeToShaderMatrices: true);
@@ -1704,7 +1704,7 @@ namespace DSAnimStudio
         //                    SkeletonFlver.MapToOtherSkeleton(animSkel);
         //            }
 
-        //            // Only do if skeleton remapper is null because skeleton remapper incorporates this functionality in it
+        //            // 只在 Skeleton 重映射器为 null 时才做，因为 Skeleton 重映射器已经内含这个功能
         //            if (SkeletonFlver.OtherSkeletonThisIsMappedTo != null && SkeletonRemapper == null)
         //            {
         //                SkeletonFlver.CopyMatricesDirectlyFromOtherSkeleton(writeToShaderMatrices: true);
@@ -1969,8 +1969,8 @@ namespace DSAnimStudio
                     SkeletonRemapper = null;
                 }
 
-                // Do not need to dispose DummyPolyMan because it goes 
-                // stores its primitives in the model's DbgPrimDrawer
+                // 不需要 dispose DummyPolyMan，因为它 
+                // 把自己的图元存在模型的 DbgPrimDrawer 里
                 _isDisposed = true;
             }
         }

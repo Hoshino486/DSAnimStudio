@@ -662,7 +662,7 @@ namespace DSAnimStudio
             //    m.ReinitInstanceData();
             //}
 
-            //16 is platform MaxTextureSlots, not exposed publicly for some reason.
+            //16 是平台的 MaxTextureSlots，不知为何没有公开暴露出来。
             for (int i = 0; i < 16; i++)
             {
                 Device.SamplerStates[i] = SamplerState.AnisotropicWrap;

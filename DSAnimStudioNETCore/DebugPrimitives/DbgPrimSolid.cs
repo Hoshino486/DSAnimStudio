@@ -71,21 +71,21 @@ namespace DSAnimStudio.DebugPrimitives
             int vertIndexB = Array.IndexOf(Vertices, vertB);
             int vertIndexC = Array.IndexOf(Vertices, vertC);
 
-            //If vertex A can't be recycled from an old one, make a new one.
+            //如果 vertex A 没法从旧的里面回收，就新建一个。
             if (vertIndexA == -1)
             {
                 AddVertex(vertA);
                 vertIndexA = Vertices.Length - 1;
             }
 
-            //If vertex B can't be recycled from an old one, make a new one.
+            //如果 vertex B 没法从旧的里面回收，就新建一个。
             if (vertIndexB == -1)
             {
                 AddVertex(vertB);
                 vertIndexB = Vertices.Length - 1;
             }
 
-            //If vertex C can't be recycled from an old one, make a new one.
+            //如果 vertex C 没法从旧的里面回收，就新建一个。
             if (vertIndexC == -1)
             {
                 AddVertex(vertC);

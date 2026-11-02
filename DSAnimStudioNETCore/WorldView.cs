@@ -147,7 +147,7 @@ namespace DSAnimStudio
 
         ///// <summary>
         ///// TODO: rumblecam simulation lol. Call <see cref="ClearCustomCameraView_Additive"/> first, 
-        ///// then add any currently playing ones, taking into account the falloff distance thing for the weight pog
+        ///// 再把当前正在播放的也加进来，权重记得按 falloff 距离那套算 pog
         ///// </summary>
         //public CameraViewModifier CUSTOM_VIEW_MULTIPLY = CameraViewModifier.Default;
 
@@ -347,13 +347,13 @@ namespace DSAnimStudio
             if (dragType == ViewportDragType.LeftClick)
             {
                 //GFX.SpriteBatchBegin(transformMatrix: Main.DPIMatrix);
-                //Draw something at Main.Input.LeftClickDownAnchor
+                //在 Main.Input.LeftClickDownAnchor 处画点东西
                 //GFX.SpriteBatchEnd();
             }
             else if (dragType == ViewportDragType.RightClick)
             {
                 //GFX.SpriteBatchBegin(transformMatrix: Main.DPIMatrix);
-                //Draw something at Main.Input.RightClickDownAnchor
+                //在 Main.Input.RightClickDownAnchor 处画点东西
                 //GFX.SpriteBatchEnd();
             }
         }
@@ -634,7 +634,7 @@ namespace DSAnimStudio
 
             bool isDragging = (dragType == ViewportDragType.LeftClick || dragType == ViewportDragType.RightClick);
 
-            // Handle mouse wheel zoom.
+            // 处理鼠标滚轮缩放。
             if ((zzz_DocumentManager.CurrentDocument.EditorScreen.ModelViewerBounds.Contains(Main.Input.LeftClickDownAnchor) &&
                 zzz_DocumentManager.CurrentDocument.EditorScreen.ModelViewerBounds.Contains(Main.Input.MousePosition)) || isDragging)
             {

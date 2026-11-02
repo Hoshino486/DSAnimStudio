@@ -43,10 +43,10 @@ namespace DSAnimStudio.DbgMenus
             float prevValue = GetValue.Invoke();
             float newValue = prevValue + incrementAmount * BaseChangeAmount;
 
-            //If upper bound reached
+            //如果到上界了
             if (newValue >= MaxValue)
             {
-                //If already at end and just tapped button
+                //如果已经到末尾了，还又点了一下按钮
                 if (prevValue == MaxValue && !isRepeat)
                     newValue = MinValue; //Wrap Around
                 else
@@ -63,10 +63,10 @@ namespace DSAnimStudio.DbgMenus
             float prevValue = GetValue.Invoke();
             float newValue = prevValue - incrementAmount * BaseChangeAmount;
 
-            //If lower bound reached
+            //如果已到达下界
             if (newValue <= MinValue)
             {
-                //If already at start and just tapped button
+                //如果已经在起点且只是轻点了一下按钮
                 if (prevValue == MinValue && !isRepeat)
                     newValue = MaxValue; //Wrap Around
                 else

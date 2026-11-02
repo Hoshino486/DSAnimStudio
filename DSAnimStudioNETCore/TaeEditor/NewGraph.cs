@@ -299,12 +299,12 @@ namespace DSAnimStudio.TaeEditor
             //{
             //    if (SelectedChildGraph != null)
             //    {
-            //        // Update with mouse outside of graph rect
+            //        // 在 graph rect 之外用鼠标更新
             //        SelectedChildGraph.InputMan.UpdateOutsideRect(elapsedSeconds, allowMouseUpdate);
             //    }
             //    else
             //    {
-            //        // Update with mouse outside of graph rect
+            //        // 在 graph rect 之外用鼠标更新
             //        InputMan.UpdateOutsideRect(elapsedSeconds, allowMouseUpdate);
             //    }
             //}

@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
@@ -35,7 +35,7 @@ namespace DSAnimStudio
         public static int SplashTextFitMarginBottom = 100;
         public static SpriteFont SplashFont;
         
-        // Splash Bar - Deprecated
+        // Splash Bar —— 已弃用
         public static bool SplashBarEnabled = false;
         public static float SplashBarMarginX = 200;
         public static float SplashBarMarginY = 12;

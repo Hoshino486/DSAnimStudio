@@ -974,10 +974,10 @@
 //                            if (evBox.Type != 32)
 //                                return;
 
-//                            // Not checking if the box is active because the effects
+//                            // 不去检查 box 是否处于激活，因为那些效果
 //                            // "accumulate" along the timeline.
 
-//                            // Only simulate until the current time.
+//                            // 只模拟到当前时间为止。
 //                            if (evBox.StartTime > time)
 //                                return;
 
@@ -1012,7 +1012,7 @@
 //                                {
 //                                    if (evBox.Type == 0 && Convert.ToInt32(evBox.Parameters["JumpTableID"]) == 7)
 //                                    {
-//                                        // No matter what, if any disable rotation event is active the character can NOT rotate.
+//                                        // 无论如何，只要有 disable rotation event 处于激活，角色就绝不能旋转。
 //                                        activeTrackingSpeedThisFrame = 0;
 //                                        break;
 //                                    }
@@ -1617,8 +1617,8 @@
 //                            if (evBox.Parameters.Template.ContainsKey("FFXID") &&
 //                                evBox.Parameters.Template.ContainsKey("DummyPolyID"))
 //                            {
-//                                // Using convert here since they might be various numeric
-//                                // value types.
+//                                // 这里用 convert，因为它们会是各种不同的 numeric 类型
+//                                // 值类型。
 //                                int ffxid = Convert.ToInt32(evBox.Parameters["FFXID"]);
 //                                int dummyPolyID = Convert.ToInt32(evBox.Parameters["DummyPolyID"]);
 
@@ -1828,10 +1828,10 @@
 //                            if (!evBox.IsStateInfoEnabled)
 //                                return;
 
-//                            // Not checking if the box is active because the effects
+//                            // 不去检查 box 是否处于激活，因为那些效果
 //                            // "accumulate" along the timeline.
 
-//                            // Only simulate until the current time.
+//                            // 只模拟到当前时间为止。
 //                            if (evBox.StartTime > time)
 //                                return;
 
@@ -1850,8 +1850,8 @@
 //                                {
 //                                    var maskByte = (byte)evBox.Parameters[$"Mask{(i + 1)}"];
                                     
-//                                    // Before you get out the torch, be aware that the game 
-//                                    // uses some value other than 0 to SKIP
+//                                    // 先别急着举火把，注意这个游戏 
+//                                    // 用来 SKIP 的是某个非 0 的值
 //                                    if (maskByte == 0)
 //                                        MODEL.DrawMask[i] = false;
 //                                    else if (maskByte == 1)
@@ -1917,8 +1917,8 @@
 //                            //        {
 //                            //            var maskByte = (byte)evBox.Parameters[$"Mask{(i + 1)}"];
 
-//                            //            // Before you get out the torch, be aware that the game 
-//                            //            // uses some value other than 0 to SKIP
+//                            //            // 先别急着举火把，注意这个游戏 
+//                            //            // 用来 SKIP 的是某个非 0 的值
 //                            //            if (maskByte == 0)
 //                            //                MODEL.DrawMask[i] = false;
 //                            //            else if (maskByte == 1)
@@ -1964,7 +1964,7 @@
 //                    }
 //                },
 
-//                // DEFAULT EVENT TEMPLATE FOR PASTING
+//                // 用于粘贴的默认事件模板
 //                /*
 //                {
 //                    new[] { "EVENT_TYPE_NAME", },

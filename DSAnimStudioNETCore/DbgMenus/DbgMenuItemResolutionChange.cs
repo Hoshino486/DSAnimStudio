@@ -30,10 +30,10 @@ namespace DSAnimStudio.DbgMenus
             int prevIndex = modeIndex;
             modeIndex += incrementAmount;
 
-            //If upper bound reached
+            //如果到上界了
             if (modeIndex >= supportedModes.Count)
             {
-                //If already at end and just tapped button
+                //如果已经到末尾了，还又点了一下按钮
                 if (prevIndex == supportedModes.Count - 1 && !isRepeat)
                     modeIndex = 0; //Wrap Around
                 else
@@ -50,10 +50,10 @@ namespace DSAnimStudio.DbgMenus
             int prevIndex = modeIndex;
             modeIndex -= incrementAmount;
 
-            //If upper bound reached
+            //如果到上界了
             if (modeIndex < 0)
             {
-                //If already at end and just tapped button
+                //如果已经到末尾了，还又点了一下按钮
                 if (prevIndex == 0 && !isRepeat)
                     modeIndex = supportedModes.Count - 1; //Wrap Around
                 else

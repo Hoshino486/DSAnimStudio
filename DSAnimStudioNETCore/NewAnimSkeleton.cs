@@ -280,11 +280,11 @@ namespace DSAnimStudio
 
 
 
-                    //Debug sanity check
+                    //调试用的一致性检查
                     //Bones[i].FKMatrix *= Matrix.CreateTranslation(Main.RandFloat(), Main.RandFloat(), Main.RandFloat());
 
 
-                    // Not tested:
+                    // 未测试：
                     scaleMatrix = Matrix.Identity;
                     currentMatrix = otherBone.FKMatrix;
                 }
@@ -292,7 +292,7 @@ namespace DSAnimStudio
                 {
                     Bones[i].FKMatrix = finalMat;
                     
-                    //Debug sanity check
+                    //调试用的一致性检查
                     //Bones[i].FKMatrix *= Matrix.CreateTranslation(Main.RandFloat(), Main.RandFloat(), Main.RandFloat());
                 }
                 
@@ -318,7 +318,7 @@ namespace DSAnimStudio
 
         public void OnBoneTransformSet(int index)
         {
-            // debug shit
+            // 调试的破玩意儿
             //SetAllBoneOverrideFlags(false);
 
             //(this as INewAnimSkeletonHelper).ModifyBoneTransformFK(index, fk =>
@@ -392,7 +392,7 @@ namespace DSAnimStudio
         public List<NewBone> Bones = new List<NewBone>();
         public Dictionary<string, int> BoneIndices_ByName = new Dictionary<string, int>();
 
-        // bone index input stuff
+        // Bone 索引输入相关的东西
 
         public List<int> TopLevelBoneIndices = new List<int>();
 
@@ -416,7 +416,7 @@ namespace DSAnimStudio
                     result.Add(ancestorCheck.Name);
                 parent = ancestorCheck.ParentIndex;
 
-                // If result is same length as filter, all ancestors were found
+                // 如果结果长度和 filter 一样，说明所有祖先都找到了
                 if (result.Count == ancestorFilter.Length)
                     return result;
             }

@@ -519,19 +519,19 @@ namespace DSAnimStudio
             if (wpn == null)
                 return null;
 
-            // Format: 10VVVVJJJ
-            // V = BehaviorVariationID
-            // J = BehaviorJudgeID
+            // 格式：10VVVVJJJ
+            // V = 行为变体 ID（BehaviorVariationID）
+            // J = 行为判定 ID（BehaviorJudgeID）
             long behaviorParamID = 10_0000_000 + (wpn.BehaviorVariationID * 1_000) + behaviorJudgeID;
 
-            // If behavior 10VVVVJJJ doesn't exist, check for fallback behavior 10VV00JJJ.
+            // 如果 behavior 10VVVVJJJ 不存在，就去找回退的 behavior 10VV00JJJ。
             if (!BehaviorParam_PC.ContainsKey(behaviorParamID))
             {
                 long baseBehaviorVariationID = (wpn.BehaviorVariationID / 100) * 100;
 
                 if (baseBehaviorVariationID == wpn.BehaviorVariationID)
                 {
-                    // Fallback is just the same thing, which we already know doesn't exist.
+                    // 回退那个就是同一个东西，我们早就知道它不存在。
                     return null;
                 }
 
@@ -549,11 +549,11 @@ namespace DSAnimStudio
 
             ParamData.BehaviorParam behaviorParamEntry = BehaviorParam_PC[behaviorParamID];
 
-            // Make sure behavior is an attack behavior.
+            // 确认这个 behavior 是攻击 behavior。
             if (behaviorParamEntry.RefType != 0)
                 return null;
 
-            // Make sure referenced attack exists.
+            // 确认引用的攻击确实存在。
             if (!AtkParam_Pc.ContainsKey(behaviorParamEntry.RefID))
                 return null;
 
@@ -565,9 +565,9 @@ namespace DSAnimStudio
             if (npcParam == null)
                 return null;
 
-            // Format: 2VVVVVJJJ
-            // V = BehaviorVariationID
-            // J = BehaviorJudgeID
+            // 格式：2VVVVVJJJ
+            // V = 行为变体 ID（BehaviorVariationID）
+            // J = 行为判定 ID（BehaviorJudgeID）
             long behaviorParamID = 2_00000_000 + (npcParam.BehaviorVariationID * 1_000) + behaviorJudgeID;
 
             if (!BehaviorParam.ContainsKey(behaviorParamID))
@@ -575,11 +575,11 @@ namespace DSAnimStudio
 
             ParamData.BehaviorParam behaviorParamEntry = BehaviorParam[behaviorParamID];
 
-            // Make sure behavior is an attack behavior.
+            // 确认这个 behavior 是攻击 behavior。
             if (behaviorParamEntry.RefType != 0)
                 return null;
 
-            // Make sure referenced attack exists.
+            // 确认引用的攻击确实存在。
             if (!AtkParam_Npc.ContainsKey(behaviorParamEntry.RefID))
                 return null;
 

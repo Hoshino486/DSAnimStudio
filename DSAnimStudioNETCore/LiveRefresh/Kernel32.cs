@@ -5,7 +5,7 @@ using System.Text;
 namespace DSAnimStudio.LiveRefresh
 {
     /// <summary>
-    /// Provides wrappers for process manipulation via kernel32.dll.
+    /// 通过 kernel32.dll 提供进程操作的包装器。
     /// </summary>
     public static class Kernel32
     {
@@ -141,7 +141,7 @@ namespace DSAnimStudio.LiveRefresh
 
         public static bool WriteSByte(IntPtr handle, IntPtr address, sbyte value)
         {
-            // Note: do not BitConverter.GetBytes this, stupid
+            // 注意：别对这个用 BitConverter.GetBytes，笨蛋
             return WriteBytes(handle, address, new byte[] { (byte)value });
         }
 
@@ -154,7 +154,7 @@ namespace DSAnimStudio.LiveRefresh
 
         public static bool WriteByte(IntPtr handle, IntPtr address, byte value)
         {
-            // Note: do not BitConverter.GetBytes this, stupid
+            // 注意：别对这个用 BitConverter.GetBytes，笨蛋
             return WriteBytes(handle, address, new byte[] { value });
         }
 

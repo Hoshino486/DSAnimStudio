@@ -12,12 +12,12 @@ using System.Text.RegularExpressions;
 namespace DSAnimStudio
 {
     /// <summary>
-    /// Miscellaneous utility functions for SoulsFormats, mostly for internal use.
+    /// SoulsFormats 的各种杂项工具函数，主要供内部使用。
     /// </summary>
     public static class ParamCryptoUtil
     {
         /// <summary>
-        /// Converts a hex string in format "AA BB CC DD" to a byte array.
+        /// 把 "AA BB CC DD" 这种格式的十六进制字符串转成字节数组。
         /// </summary>
         public static byte[] ParseHexString(string str)
         {
@@ -87,7 +87,7 @@ namespace DSAnimStudio
         //private static byte[] ernrRegulationKey = ParseHexString("9a 8e e9 0c 4c 01 a4 31 68 a1 7d 9d 75 e4 a7 d0 21 07 eb cf 43 d5 ac b0 55 4f 94 16 01 b5 79 18");
 
         /// <summary>
-        /// Decrypts and unpacks DS3's regulation BND4 from the specified path.
+        /// 解密并解包指定路径下 DS3 的 regulation BND4。
         /// </summary>
         public static BND4 DecryptRegulation(string path, SoulsGames game)
         {
@@ -98,7 +98,7 @@ namespace DSAnimStudio
        
 
         /// <summary>
-        /// Decrypts regulation only and returns file bytes.
+        /// 只解密 regulation 并返回文件字节。
         /// </summary>
         public static byte[] DecryptRegulationRaw(string path, SoulsGames game)
         {
@@ -108,7 +108,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Repacks and encrypts regulation BND4 to the specified path.
+        /// 重新打包并加密 regulation BND4 到指定路径。
         /// </summary>
         public static void EncryptRegulation(string path, BND4 bnd, SoulsGames game)
         {
@@ -119,7 +119,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Decrypts and unpacks regulation BND4 from the specified path.
+        /// 解密并解包指定路径下的 regulation BND4。
         /// </summary>
         public static BND4 DecryptRegulation(byte[] bytes, SoulsGames game)
         {

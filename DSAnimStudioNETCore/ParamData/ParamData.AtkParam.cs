@@ -30,7 +30,7 @@ namespace DSAnimStudio
                 Weapon = 0,
                 Body = 1,
                 Parts0 = 2,
-                // etc lol
+                // 其他的 哈哈
                 Parts31 = 33,
             }
 
@@ -309,15 +309,15 @@ namespace DSAnimStudio
 
             public HitSourceTypes HitSourceType;
 
-            // DS3 Only
+            // 仅限 DS3
             public short AtkDarkCorrection;
             public short AtkDark;
 
-            //AC6 only
+            //仅限 AC6
             public float AC6_Hit0Extend_LengthStart;
             public float AC6_Hit0Extend_LengthEnd;
             public float AC6_Hit0Extend_LengthSpreadTime;
-            //Note: normal hit0 radius is start radius
+            //注意：普通 hit0 半径就是起始半径
             public float AC6_Hit0Extend_RadiusEnd;
             public float AC6_Hit0Extend_RadiusSpreadTime;
             public float AC6_Hit0Extend_SpreadDelay;
@@ -541,7 +541,7 @@ namespace DSAnimStudio
                 br.Position += 14;
                 HitSourceType = (HitSourceTypes)br.ReadByte();
 
-                //TODO: Read DS3 hit 4-15
+                //TODO：读取 DS3 的 hit 4-15
                 if (zzz_DocumentManager.CurrentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.DS3 
                     || zzz_DocumentManager.CurrentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.SDT 
                     || zzz_DocumentManager.CurrentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.ER

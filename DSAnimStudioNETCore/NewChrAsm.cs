@@ -156,7 +156,7 @@ namespace DSAnimStudio
                         if (model.SkeletonRemapper != null)
                         {
                             any = true;
-                            // This writes the FK of all bones to .FKMatrix, grabbing the remapped values as needed.
+                            // 这个把所有 Bone 的 FK 写进 .FKMatrix，按需取用重映射后的值。
                             model.SkeletonRemapper.Update();
                         }
                     });
@@ -170,7 +170,7 @@ namespace DSAnimStudio
                         if (model.BoneGluer != null)
                         {
                             any = true;
-                            // This modifies .FKMatrix of some bones.
+                            // 这会修改部分 Bone 的 .FKMatrix。
                             model.BoneGluer.Update();
                         }
                     });
@@ -259,7 +259,7 @@ namespace DSAnimStudio
             UpdateWeaponTransforms(timeDelta);
             UpdateArmorTransforms(timeDelta);
 
-            // This is called last and ends up applying all the needed sync updates to the equipment models.
+            // 这个最后调用，最终把需要的同步更新全部应用到装备模型上。
             UpdateEquipmentAnimation(timeDelta, forceSyncUpdate);
 
             //ForAllWeaponModels(model =>
@@ -435,7 +435,7 @@ namespace DSAnimStudio
         public List<NewEquipSlot_Armor> ArmorSlots = new List<NewEquipSlot_Armor>();
         public Dictionary<EquipSlotTypes, NewEquipSlot_Armor> ArmorSlots_ByEquipSlot = new Dictionary<EquipSlotTypes, NewEquipSlot_Armor>();
 
-        //TODO:BoosterModel
+        //待办：BoosterModel
 
         //public Model AC6BackRightWeaponRailModel = null;
         //public Model AC6BackLeftWeaponRailModel = null;
@@ -499,7 +499,7 @@ namespace DSAnimStudio
                 WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.SekiroMortalBlade, Loc.T("Mortal Blade"), "MB"));
                 WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.SekiroGrapplingHook, Loc.T("Grappling Hook"), "GH"));
             }
-            //ac6 additional weapons
+            //ac6 的额外武器
             //if (GameRoot.GameType is SoulsAssetPipeline.SoulsGames.AC6)
             //{
             //    WeaponSlots.Add(new NewChrAsmWpnSlot(this, EquipSlot.RightBackWeapon, "Right Back Weapon", "R Back WPN"));
@@ -613,7 +613,7 @@ namespace DSAnimStudio
 
 
 
-            //todo: test new backwards/sideways memes
+            //todo：测一下新的向后/侧向那些玩意
 
 
 
@@ -688,7 +688,7 @@ namespace DSAnimStudio
                     //     else
                     //     {
                     //         //absoluteWeaponTransform = Matrix.CreateScale(0);
-                    //         //TEST REMOVE LATER:
+                    //         //测试用，之后删掉：
                     //         absoluteWeaponTransform =
                     //                 Skeleton.Bones[defaultBoneIndex].ReferenceMatrix
                     //                 * Skeleton[defaultBoneIndex];
@@ -703,12 +703,12 @@ namespace DSAnimStudio
 
                         Matrix hotfix_OffsetMatrix_ForWeaponFollowWeapon = Matrix.Identity;
 
-                        //TODO: Test ER
+                        //TODO：测试艾尔登法环（Elden Ring）
                         if (dummyPolyID >= 1000 && Document.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.AC6 or SoulsAssetPipeline.SoulsGames.ER or SoulsGames.ERNR)
                         {
                             dummyPolyMan = GetDummyPolySpawnPlace(ParamData.AtkParam.DummyPolySource.BaseModel, dummyPolyID, MODEL.DummyPolyMan);
 
-                            //Fix for weapon dummypoly being relative to weapon's current transform
+                            //修复武器的 DummyPoly 相对武器当前变换的问题
                             if (dummyPolyMan?.MODEL != null && dummyPolyMan.MODEL.IS_PLAYER_WEAPON)
                                 hotfix_OffsetMatrix_ForWeaponFollowWeapon = dummyPolyMan.MODEL.CurrentTransform.WorldMatrix 
                                     * Matrix.Invert(MODEL.CurrentTransform.WorldMatrix);
@@ -784,14 +784,14 @@ namespace DSAnimStudio
                         {
                             if (wpnSlot.IsLeftHandSlotType)
                             {
-                                //TODO: Get sheath pos of left weapon here
+                                //TODO：在这里取左手武器的鞘位置
                             }
                             else
                             {
-                                //TODO: Get sheath pos of right weapon here
+                                //TODO：在这里取右手武器的鞘位置
                             }
 
-                            // TEMP: Just make sheaths invisible PepeHands
+                            // 临时：干脆把鞘做成不可见的 PepeHands
                             absoluteWeaponTransform = Matrix.CreateScale(0);
                             hiddenByAbsorpPos = true;
                         }
@@ -799,7 +799,7 @@ namespace DSAnimStudio
                     }
                     else
                     {
-                        // Make me forgetting to do this in DS3/SDT obvious by having all weapons at origin lol
+                        // 让所有武器都待在原点，这样我在 DS3/SDT 里忘了做这事时一眼就能看出来 lol
                         absoluteWeaponTransform = Matrix.Identity;
                     }
 
@@ -920,7 +920,7 @@ namespace DSAnimStudio
             }
 
 
-            // For AC6, update weapon rails before everything else.
+            // 对 AC6，先更新武器的 rail，再做别的。
             if (Document.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.AC6)
             {
                 foreach (var slot in WeaponSlots)
@@ -1016,7 +1016,7 @@ namespace DSAnimStudio
                             if (MODEL.AnimContainer.CurrentAnimDuration.HasValue && model.AnimContainer.CurrentAnimDuration.HasValue)
                             {
                                 float curModTime = MODEL.AnimContainer.CurrentAnimTime % MODEL.AnimContainer.CurrentAnimDuration.Value;
-                                // Limit time
+                                // 限制时间
                                 if (curModTime > model.AnimContainer.CurrentAnimDuration.Value)
                                     curModTime = model.AnimContainer.CurrentAnimDuration.Value;
 
@@ -1267,7 +1267,7 @@ namespace DSAnimStudio
                 //            ProstheticOverrideModelType.LeftWeapon : ProstheticOverrideModelType.RightWeapon, modelIdx) ?? dummyPolyID;
                 //    }
 
-                //    // Temp workaround
+                //    // 临时绕过
                 //    if (GameRoot.GameType == SoulsAssetPipeline.SoulsGames.ER && dummyPolyID > 0)
                 //    {
                 //        dummyPolyID %= 1000;
@@ -1420,7 +1420,7 @@ namespace DSAnimStudio
                     MODEL.DefaultDrawMask = slot.EquipParam.ApplyInvisFlagsToMask(MODEL.DrawMask);
             });
 
-            //TODO:Booster
+            //待办：Booster
 
             MODEL.ResetDrawMaskToDefault();
         }

@@ -21,7 +21,7 @@ namespace DSAnimStudio.LiveRefresh
             Bit7 = 7
         }
 
-        //Memory Stuff
+        //内存那些东西
         public static bool Is64Bit => IntPtr.Size == 8;
 
         public static IntPtr ProcessHandle { get; set; }
@@ -30,7 +30,7 @@ namespace DSAnimStudio.LiveRefresh
         //
 
         /// <summary>
-        /// Checks if an address is valid.
+        /// 检查地址是否有效。
         /// </summary>
         /// <param name="address">The address (the pointer points to).</param>
         /// <returns>True if (pointer points to a) valid address.</returns>
@@ -275,7 +275,7 @@ namespace DSAnimStudio.LiveRefresh
             ER_WorldChrManPtr = IntPtr.Zero;
         }
 
-        // read address
+        // 读取地址
 
         public static bool ReadBoolean(IntPtr address)
         {
@@ -365,7 +365,7 @@ namespace DSAnimStudio.LiveRefresh
             return value;
         }
 
-        //write to address
+        //写入地址
         public static bool WriteFlags8(IntPtr address, bool value, Startbit startbit)
         {
             var WriteBit = Convert.ToByte(value) * Convert.ToByte(Math.Pow((double)2, (double)startbit));

@@ -353,7 +353,7 @@ namespace DSAnimStudio
             {
                 if (animID.IsValid)
                 {
-                    // If anim is in anibnd, then return it
+                    // 如果 Anim 在 anibnd 里，就直接返回它
                     if (animHKXsToLoad.ContainsKey(animID))
                     {
                         if (animHKXsCompendiumAssign.ContainsKey(animID))
@@ -401,7 +401,7 @@ namespace DSAnimStudio
             {
                 if (animID.IsValid)
                 {
-                    // If anim isn't loaded but is in anibnd, then load it.
+                    // 如果 Anim 还没加载但在 anibnd 里，那就加载它。
                     if (animHKXsToLoad.ContainsKey(animID) && !AnimationCache.ContainsKey(animID))
                     {
                         byte[] compendium = null;
@@ -417,7 +417,7 @@ namespace DSAnimStudio
                         }
                     }
 
-                    // If anim is loaded, select it
+                    // 如果 Anim 已加载，就选中它
                     if (returnNewInstance)
                     {
                         if (AnimationCache.ContainsKey(animID))
@@ -478,7 +478,7 @@ namespace DSAnimStudio
 
 
 
-            // Clear this anim from loaded anims cache so it will be reloaded upon request.
+            // 把这个 Anim 从已加载 Anim 缓存里清掉，这样它会在被请求时重新加载。
 
             // lock (_lock_NewAnimSlots)
             // {
@@ -1101,8 +1101,8 @@ namespace DSAnimStudio
 
         public void Update()
         {
-            //V2.0 TODO: If this is ever gonna be used, actually implement this, using .Scrub
-            //           to simulate the old behavior of .Play
+            //V2.0 TODO：如果这东西真会被用到，就真的实现它，用 .Scrub
+            //           来模拟 .Play 以前的行为
             if (CurrentAnimation != null)
             {
                 if (ForcePlayAnim)
@@ -1400,7 +1400,7 @@ namespace DSAnimStudio
                 
                 int skeletonBindID = ver_0001 ? 4000000 : 1000000;
 
-                //lol, lmao, 
+                //哈哈，笑死， 
                 if (animBindIDMin < skeletonBindID && animBindIDMax >= skeletonBindID)
                 {
                     animBindIDMax = skeletonBindID - 1;

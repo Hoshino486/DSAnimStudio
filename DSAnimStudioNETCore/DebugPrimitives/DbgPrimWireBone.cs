@@ -27,19 +27,19 @@ namespace DSAnimStudio.DebugPrimitives
             Vector3 pt_cardinal4 = Vector3.Backward * thickness + Vector3.Right * thickness;
             Vector3 pt_tip = Vector3.Right * length;
 
-            //Start to cardinals
+            //起点到方位点
             AddLine(pt_start, pt_cardinal1);
             AddLine(pt_start, pt_cardinal2);
             AddLine(pt_start, pt_cardinal3);
             AddLine(pt_start, pt_cardinal4);
 
-            //Cardinals to end
+            //方位点到终点
             AddLine(pt_cardinal1, pt_tip);
             AddLine(pt_cardinal2, pt_tip);
             AddLine(pt_cardinal3, pt_tip);
             AddLine(pt_cardinal4, pt_tip);
 
-            //Connecting the cardinals
+            //连接各方位点
             AddLine(pt_cardinal1, pt_cardinal2);
             AddLine(pt_cardinal2, pt_cardinal3);
             AddLine(pt_cardinal3, pt_cardinal4);
@@ -68,19 +68,19 @@ namespace DSAnimStudio.DebugPrimitives
                 //Vector3 pt_cardinal4 = Vector3.Backward * ThicknessRatio + Vector3.Right * ThicknessRatio;
                 Vector3 pt_tip = Vector3.Right;
 
-                ////Start to cardinals
+                ////起点到方位点
                 //AddLine(pt_start, pt_cardinal1);
                 //AddLine(pt_start, pt_cardinal2);
                 //AddLine(pt_start, pt_cardinal3);
                 //AddLine(pt_start, pt_cardinal4);
 
-                ////Cardinals to end
+                ////方位点到终点
                 //AddLine(pt_cardinal1, pt_tip);
                 //AddLine(pt_cardinal2, pt_tip);
                 //AddLine(pt_cardinal3, pt_tip);
                 //AddLine(pt_cardinal4, pt_tip);
 
-                ////Connecting the cardinals
+                ////连接各方位点
                 //AddLine(pt_cardinal1, pt_cardinal2);
                 //AddLine(pt_cardinal2, pt_cardinal3);
                 //AddLine(pt_cardinal3, pt_cardinal4);

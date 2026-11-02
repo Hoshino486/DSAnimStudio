@@ -1,4 +1,4 @@
-using SoulsAssetPipeline.Animation;
+﻿using SoulsAssetPipeline.Animation;
 using System.Collections.Generic;
 
 namespace DSAnimStudio.TaeEditor
@@ -22,8 +22,8 @@ namespace DSAnimStudio.TaeEditor
             
         public override void InnerRestoreState()
         {
-            // File version latest because serializing to bytes always serializes as the latest version.
-            // Only loading has backward compatibility with old versions.
+            // 文件版本写最新的，因为序列化成 bytes 时永远按最新版本序列化。
+            // 只有加载才对旧版本保持向后兼容。
             Anim.DeserializeFromBytes(SerializedBytes, TaeTemplate, Proj, Category);
             Anim.SafeAccessActions(actions =>
             {

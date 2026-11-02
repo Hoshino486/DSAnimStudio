@@ -162,9 +162,9 @@ namespace DSAnimStudio.ImguiOSD
                                 {
                                     var cate = Tae.SelectedAnimCategory;
 
-                                    // go to next category
+                                    // 跳到下一个分类
                                     Tae.NextAnim(shiftPressed: false, ctrlPressed: true); 
-                                    // Delete category
+                                    // 删除分类
                                     proj.SAFE_RemoveAnimCategory(cate);
                                 }, actionDescription: Loc.TF("Delete animation category {0}", category.CategoryID));
 

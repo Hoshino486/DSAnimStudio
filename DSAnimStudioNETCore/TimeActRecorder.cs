@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using DSAnimStudio.ImguiOSD;
@@ -87,23 +87,23 @@ namespace DSAnimStudio
 
                             newActionList.Add(actClone);
 
-                            //Slide action over so it's relative to time 0
+                            //把动作整体平移，让它相对时间 0
                             actClone.StartTime -= entry.StartTime;
                             actClone.EndTime -= entry.StartTime;
-                            // Trim actions that start before this clip
+                            // 裁掉在这个片段之前开始的动作
                             if (actClone.StartTime < 0)
                             {
                                 actClone.StartTime = 0;
                                 newActionList_BeforeStart.Add(actClone);
                             }
-                            //Trim actions that end after this clip
+                            //裁掉在这个片段之后结束的动作
                             if (actClone.EndTime > comboClipLength)
                             {
                                 actClone.EndTime = comboClipLength;
                                 newActionList_AfterEnd.Add(actClone);
                             }
 
-                            // Shift action to final clip position in output anim
+                            // 把动作移到输出 Anim 里的最终片段位置
                             actClone.StartTime += currentOutputAnimTime;
                             actClone.EndTime += currentOutputAnimTime;
                         }

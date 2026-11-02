@@ -28,7 +28,7 @@ namespace WindowsHookExample
     {
         IntPtr hHook;
         IntPtr hWnd;
-        // Stored here to stop it from getting garbage collected
+        // 放在这里，免得被垃圾回收掉
         Win32.WndProcDelegate wndProcDelegate;
 
         public WindowsHook(IntPtr hWnd)
@@ -68,8 +68,8 @@ namespace WindowsHookExample
         protected abstract void WndProc(ref Win32.Message message);
 
         #region Interop Stuff
-        // I say thankya to P/Invoke.net.
-        // Contains all the Win32 functions I need to deal with
+        // 多谢 P/Invoke.net。
+        // 装着我需要处理的所有 Win32 函数
         protected static class Win32
         {
             public enum HookType : int
@@ -100,7 +100,7 @@ namespace WindowsHookExample
             }
 
             /// <summary>
-            ///  Defines the windows proc delegate to pass into the windows hook
+            ///  定义要传给 windows hook 的 windows proc 委托
             /// </summary>                  
             public delegate int WndProcDelegate(int nCode, IntPtr wParam, ref Message m);
 
@@ -136,9 +136,9 @@ namespace WindowsHookExample
         {
             if (disposing)
             {
-                // Free managed resources here
+                // 在这儿释放托管资源
             }
-            // Free unmanaged resources here
+            // 在这儿释放非托管资源
             if (hHook != IntPtr.Zero)
             {
                 Win32.UnhookWindowsHookEx(hHook);

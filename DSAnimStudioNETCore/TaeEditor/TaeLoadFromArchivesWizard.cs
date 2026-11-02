@@ -409,7 +409,7 @@ namespace DSAnimStudio.TaeEditor
                             step = Steps.FileTypeSet;
                             ControlCategories[ControlCategoryTypes.MainBinderSelect].IsGrayedOut = false;
 
-                            // Show stuff for current FileType
+                            // 显示当前 FileType 对应的东西
                             if (FileType == FileTypes.Chr)
                             {
                                 labelStep3A.Text = DSAnimStudio.Localization.Loc.T("3a. Choose ANIBND");
@@ -498,7 +498,7 @@ namespace DSAnimStudio.TaeEditor
 
 
 
-                            // Step out here and check if step got deep enough to avoid nesting a bunch of duplicate ugly shit in the above 2 branching paths
+                            // 在这里先跳出去，看看 step 有没有深到能避免在上面那两条分支路径里嵌套一堆重复的丑东西
                             if (step == Steps.SecondaryBinderSet)
                             {
                                 ControlCategories[ControlCategoryTypes.OutputDirSelect].IsGrayedOut = false;
@@ -907,7 +907,7 @@ namespace DSAnimStudio.TaeEditor
                     Close();
 
                     //zzz_DocumentManager.CurrentDocument.EditorScreen.FileContainerName_Model = !string.IsNullOrWhiteSpace(textBoxPathChrbnd.Text) ? textBoxPathChrbnd.Text : textBoxPathAnibnd.Text;
-                    //// This is really pepega
+                    //// 这也太 pepega 了
                     //zzz_DocumentManager.CurrentDocument.EditorScreen.SuppressNextModelOverridePrompt = true;
                     //GameRoot.SuppressNextInterrootBrowsePrompt = true;
                     //zzz_DocumentManager.CurrentDocument.EditorScreen.NewLoadFile();

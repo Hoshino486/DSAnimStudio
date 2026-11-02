@@ -320,16 +320,16 @@ namespace DSAnimStudio
 
             foreach (var k in keysToKeepTrackOf)
             {
-                // Push current to old
+                // 把 current 压到 old
                 //oldKeysHeld[k] = keysHeld[k];
 
                 ////////////////////////////////////////////////////////////////////////////////
-                // Get the current state.
+                // 获取当前状态。
                 ////////////////////////////////////////////////////////////////////////////////
                 keysHeld[k] = Keyboard.IsKeyDown(k);
 
                 ////////////////////////////////////////////////////////////////////////////////
-                // Cancel delta state when you alt+tab or click back into window.
+                // 在 alt+tab 或点回窗口时取消 delta 状态。
                 ////////////////////////////////////////////////////////////////////////////////
                 if (Main.IsFirstFrameActive)
                 {
@@ -338,7 +338,7 @@ namespace DSAnimStudio
                 }
 
                 ////////////////////////////////////////////////////////////////////////////////
-                // Get the delta state.
+                // 获取 delta 状态。
                 ////////////////////////////////////////////////////////////////////////////////
                 keysDown[k] |= keysHeld[k] && !oldKeysHeld[k];
                 keysUp[k] |= !keysHeld[k] && oldKeysHeld[k];
@@ -359,7 +359,7 @@ namespace DSAnimStudio
 
 
             ////////////////////////////////////////////////////////////////////////////////
-            // Get the current state.
+            // 获取当前状态。
             ////////////////////////////////////////////////////////////////////////////////
 
             LeftClickHeld = Mouse.LeftButton == ButtonState.Pressed;
@@ -445,14 +445,14 @@ namespace DSAnimStudio
             }
 
             ////////////////////////////////////////////////////////////////////////////////
-            // Cancel delta state when you alt+tab or click back into window.
+            // 在 alt+tab 或点回窗口时取消 delta 状态。
             ////////////////////////////////////////////////////////////////////////////////
 
             if (Main.IsFirstFrameActive)
             {
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Arrow;
 
-                // Cancel out delta states
+                // 把 delta 状态抵消掉
                 oldLeftClickHeld = LeftClickHeld;
                 oldMiddleClickHeld = MiddleClickHeld;
                 oldRightClickHeld = RightClickHeld;
@@ -465,7 +465,7 @@ namespace DSAnimStudio
             }
 
             ////////////////////////////////////////////////////////////////////////////////
-            // Get the delta state.
+            // 获取 delta 状态。
             ////////////////////////////////////////////////////////////////////////////////
 
             LeftClickDown |= LeftClickHeld && !oldLeftClickHeld;
@@ -589,7 +589,7 @@ namespace DSAnimStudio
             //}
 
             ////////////////////////////////////////////////////////////////////////////////
-            // Store current state for getting the next delta state.
+            // 保存当前状态，供获取下一个 delta 状态使用。
             ////////////////////////////////////////////////////////////////////////////////
 
             //oldLeftClickHeld = LeftClickHeld;
@@ -641,7 +641,7 @@ namespace DSAnimStudio
             oldAccumulatedScroll = AccumulatedScroll;
             oldMousePosition = MousePosition;
 
-            // Clear down and up
+            // 清空 down 和 up
             LeftClickUp = LeftClickDown = false;
             MiddleClickUp = MiddleClickDown = false;
             RightClickUp = RightClickDown = false;
@@ -651,10 +651,10 @@ namespace DSAnimStudio
 
             foreach (var k in keysToKeepTrackOf)
             {
-                // Push current to old
+                // 把 current 压到 old
                 oldKeysHeld[k] = keysHeld[k];
 
-                //Clear down and up 
+                //清空 down 和 up 
                 keysDown[k] = keysUp[k] = false;
             }
 

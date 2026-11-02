@@ -149,7 +149,7 @@ namespace DSAnimStudio.ImguiOSD
                 ImGui.Separator();
                 bool clickedExit = ClickItem(Loc.T("Exit"));
 
-                // Only do the interaction layer with the main window if the recent files list isn't covering it...
+                // 只有当最近文件列表没有盖住主窗口时，才跟主窗口做交互层...
                 if (!isRecentFilesExpanded)
                 {
 

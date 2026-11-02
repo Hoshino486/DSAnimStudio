@@ -275,8 +275,8 @@ namespace DSAnimStudio.ImguiOSD
                             MainTaeScreen.RequestHighlightTrack(res.Track);
                             MainTaeScreen.RequestHighlightAction(res.Act);
                             MainTaeScreen.SelectNewAnimRef(res.Category, res.Anim);
-                            //Highlight selected track here
-                            //Highlight selected action here
+                            //在这里高亮选中的 track
+                            //在这里高亮选中的 action
                             MainTaeScreen.NewSelectedActions = new() { res.Act };
                             MainTaeScreen.Graph.LayoutManager.ScrollToAction(res.Act);
                         }

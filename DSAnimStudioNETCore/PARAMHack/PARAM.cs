@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace SoulsFormats
 {
     /// <summary>
-    /// A general-purpose configuration file used throughout the series.
+    /// 整个系列里到处都在用的通用配置文件。
     /// </summary>
     public partial class PARAM_Hack : SoulsFile<PARAM_Hack>
     {
@@ -14,17 +14,17 @@ namespace SoulsFormats
         public bool BigEndian { get; set; }
 
         /// <summary>
-        /// Flags indicating format of the file.
+        /// 表示文件格式的 flag。
         /// </summary>
         public FormatFlags1 Format2D { get; set; }
 
         /// <summary>
-        /// More flags indicating format of the file.
+        /// 更多表示文件格式的 flag。
         /// </summary>
         public FormatFlags2 Format2E { get; set; }
 
         /// <summary>
-        /// Originally matched the paramdef for version 101, but since is always 0 or 0xFF.
+        /// 原本是与版本 101 的 paramdef 对得上的，但后来一直是 0 或 0xFF。
         /// </summary>
         public byte ParamdefFormatVersion { get; set; }
 
@@ -34,12 +34,12 @@ namespace SoulsFormats
         public short Unk06 { get; set; }
 
         /// <summary>
-        /// Indicates a revision of the row data structure.
+        /// 表示行数据结构的修订版本。
         /// </summary>
         public short ParamdefDataVersion { get; set; }
 
         /// <summary>
-        /// Identifies corresponding params and paramdefs.
+        /// 用来对应 param 和 paramdef。
         /// </summary>
         public string ParamType { get; set; }
 
@@ -54,12 +54,12 @@ namespace SoulsFormats
         public List<Row> Rows { get; set; }
 
         /// <summary>
-        /// The current applied PARAMDEF.
+        /// 当前应用的 PARAMDEF。
         /// </summary>
         public PARAMDEF AppliedParamdef { get; private set; }
 
         /// <summary>
-        /// Returns a reader for the row passed for custom row reading logic
+        /// 为传入的行返回一个 reader，用于自定义的行读取逻辑
         /// </summary>
         public BinaryReaderEx GetRowReader(Row row)
         {
@@ -80,7 +80,7 @@ namespace SoulsFormats
         }
 
         /// <summary>
-        /// Deserializes file data from a stream.
+        /// 从 stream 反序列化文件数据。
         /// </summary>
         protected override void Read(BinaryReaderEx br)
         {
@@ -91,7 +91,7 @@ namespace SoulsFormats
             ParamdefFormatVersion = br.ReadByte();
             br.Position = 0;
 
-            // Make a private copy of the file to read row data from later
+            // 把文件另存一份私有的，之后好从里面读行数据
             byte[] copy = br.GetBytes(0, (int)br.Stream.Length);
             RowReader = new BinaryReaderEx(BigEndian, copy);
 
@@ -160,7 +160,7 @@ namespace SoulsFormats
         }
 
         /// <summary>
-        /// Serializes file data to a stream.
+        /// 把文件数据序列化到 stream。
         /// </summary>
         protected override void Write(BinaryWriterEx bw)
         {
@@ -189,7 +189,7 @@ namespace SoulsFormats
             }
             else
             {
-                // This padding heuristic isn't completely accurate, not that it matters
+                // 这个 padding 的启发式判断并不完全准确，不过反正也无所谓
                 bw.WriteFixStr(ParamType, 0x20, (byte)(Format2D.HasFlag(FormatFlags1.Flag01) ? 0x20 : 0x00));
             }
             bw.WriteByte((byte)(BigEndian ? 0xFF : 0x00));
@@ -212,7 +212,7 @@ namespace SoulsFormats
             for (int i = 0; i < Rows.Count; i++)
                 Rows[i].WriteHeader(bw, this, i);
 
-            // This is probably pretty stupid
+            // 这大概挺蠢的
             if (Format2D == FormatFlags1.Flag01)
                 bw.WritePattern(0x20, 0x00);
 
@@ -246,7 +246,7 @@ namespace SoulsFormats
         }
 
         /// <summary>
-        /// Returns the first row with the given ID, or null if not found.
+        /// 返回给定 ID 的第一行，找不到就返回 null。
         /// </summary>
         public Row this[int id] => Rows.Find(row => row.ID == id);
 
@@ -257,7 +257,7 @@ namespace SoulsFormats
         public enum FormatFlags1 : byte
         {
             /// <summary>
-            /// No flags set.
+            /// 没有设置任何 flag。
             /// </summary>
             None = 0,
 
@@ -267,12 +267,12 @@ namespace SoulsFormats
             Flag01 = 0b0000_0001,
 
             /// <summary>
-            /// Expanded header with 32-bit data offset.
+            /// 带 32 位数据偏移的扩展 header。
             /// </summary>
             IntDataOffset = 0b0000_0010,
 
             /// <summary>
-            /// Expanded header with 64-bit data offset.
+            /// 带 64 位数据偏移的扩展 header。
             /// </summary>
             LongDataOffset = 0b0000_0100,
 
@@ -297,7 +297,7 @@ namespace SoulsFormats
             Flag40 = 0b0100_0000,
 
             /// <summary>
-            /// Param type string is written separately instead of fixed-width in the header.
+            /// Param 类型字符串是单独写的，而不是在 header 里占固定宽度。
             /// </summary>
             OffsetParamType = 0b1000_0000,
         }
@@ -309,12 +309,12 @@ namespace SoulsFormats
         public enum FormatFlags2 : byte
         {
             /// <summary>
-            /// No flags set.
+            /// 没有设置任何 flag。
             /// </summary>
             None = 0,
 
             /// <summary>
-            /// Row names are written as UTF-16.
+            /// 行名字按 UTF-16 写入。
             /// </summary>
             UnicodeRowNames = 0b0000_0001,
 

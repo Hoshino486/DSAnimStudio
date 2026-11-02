@@ -10,7 +10,7 @@ namespace DSAnimStudio
 {
     public class CFG
     {
-        // Set to false currently for TAE editor stuff.
+        // 目前为 TAE 编辑器相关功能而设为 false。
         public static bool IsEnabled = false;
 
         private static object _lock_SaveLoadCFG = new object();

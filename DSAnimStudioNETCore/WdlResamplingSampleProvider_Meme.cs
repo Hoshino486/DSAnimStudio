@@ -1,6 +1,6 @@
 ﻿#region Assembly NAudio.Core, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41
 // C:\Users\Green\.nuget\packages\naudio.core\2.1.0\lib\netstandard2.0\NAudio.Core.dll
-// Decompiled with ICSharpCode.Decompiler 7.1.0.6543
+// 用 ICSharpCode.Decompiler 7.1.0.6543 反编译
 #endregion
 
 using NAudio.Dsp;

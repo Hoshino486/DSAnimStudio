@@ -99,13 +99,13 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        ///     Decrypts a file with a provided decryption key.
+        ///     使用给定的解密密钥解密文件。
         /// </summary>
         /// <param name="filePath">An encrypted file</param>
         /// <param name="key">The RSA key in PEM format</param>
         /// <exception cref="ArgumentNullException">When the argument filePath is null</exception>
         /// <exception cref="ArgumentNullException">When the argument keyPath is null</exception>
-        /// <returns>A memory stream with the decrypted file</returns>
+        /// <returns>包含解密后文件内容的内存流</returns>
         public static MemoryStream DecryptRsa(string filePath, string key)
         {
             if (filePath == null)
@@ -150,13 +150,13 @@ namespace DSAnimStudio
         }
 
         // <summary>
-        ///     Decrypts a file with a provided decryption key.
+        ///     使用给定的解密密钥解密文件。
         /// </summary>
         /// <param name="inputStream">An encrypted file</param>
         /// <param name="key">The RSA key in PEM format</param>
         /// <exception cref="ArgumentNullException">When the argument filePath is null</exception>
         /// <exception cref="ArgumentNullException">When the argument keyPath is null</exception>
-        /// <returns>A memory stream with the decrypted file</returns>
+        /// <returns>包含解密后文件内容的内存流</returns>
         public static MemoryStream DecryptRsa(Stream inputStream, string key)
         {
             if (inputStream == null)

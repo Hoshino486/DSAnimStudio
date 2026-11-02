@@ -127,7 +127,7 @@ namespace DSAnimStudio
 
                 var start = br.Position;
 
-                // Empty bytes added at start
+                // 开头加的空字节
                 if (zzz_DocumentManager.CurrentDocument.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.ER or SoulsAssetPipeline.SoulsGames.ERNR or SoulsAssetPipeline.SoulsGames.AC6)
                     br.Position += 4;
 

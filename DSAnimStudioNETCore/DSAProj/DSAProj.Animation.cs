@@ -307,7 +307,7 @@ namespace DSAnimStudio
                 //    }
                 //}
 
-                // Performance meme
+                // 性能梗
                 if (Actions.Count > 0 && Actions[0].Type == 16)
                 {
                     var blendAction = Actions[0];
@@ -593,12 +593,12 @@ namespace DSAnimStudio
             //            {
             //                if (value)
             //                {
-            //                    // If just marked as modified then this is not good data to save[?]
+            //                    // 若只是被标记为已修改，那这份数据就不适合保存[?]
             //                    SerializedCache = null;
             //                }
             //                //else
             //                //{
-            //                //    // If just marked as not modified then this is good data to save[?]
+            //                //    // 若只是被标记为未修改，那这份数据就是可以保存的好数据[?]
             //                //    SerializedCache = SerializeToBytes(ParentProj);
             //                //}
             //            }
@@ -638,7 +638,7 @@ namespace DSAnimStudio
                     }
                     //else
                     //{
-                    //    // If just marked as not modified then this is good data to save[?]
+                    //    // 若只是被标记为未修改，那这份数据就是可以保存的好数据[?]
                     //    SerializedCache = SerializeToBytes(ParentProj);
                     //}
 
@@ -755,9 +755,9 @@ namespace DSAnimStudio
 
                 foreach (var act in Actions)
                 {
-                    // If track index was outside this range then resort should just leave it.
-                    // Since no tracks are being added or removed, out of range indices don't need
-                    // to be shifted or anything.
+                    // 如果 track 索引本来就落在这个范围外，那 resort 直接留着它就行。
+                    // 因为并没有添加或删除 track，所以越界的索引不需要
+                    // 被平移什么的。
                     if (act.TrackIndex >= 0 && act.TrackIndex < prevTracks.Count)
                     {
                         var matchingTrack = prevTracks[act.TrackIndex];
@@ -777,7 +777,7 @@ namespace DSAnimStudio
 
                 for (int i = 0; i < ActionTracks.Count; i++)
                 {
-                    // Skip if value already exists, unless overwriteExisting is true.
+                    // 如果值已经存在就跳过，除非 overwriteExisting 为 true。
                     if (!(overwriteExisting || string.IsNullOrWhiteSpace(ActionTracks[i].Info.DisplayName)))
                         continue;
 

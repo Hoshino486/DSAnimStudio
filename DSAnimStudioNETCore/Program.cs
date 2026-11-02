@@ -6,20 +6,20 @@ namespace DSAnimStudio
 {
 
     /// <summary>
-    /// The main class.
+    /// 主类。
     /// </summary>
     public static class Program
     {
         public static string[] ARGS;
         public static Main MainInstance;
         /// <summary>
-        /// The main entry point for the application.
+        /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
 
-            //SoulsFormatsNEXT TODO
+            //SoulsFormatsNEXT 待办
             //SoulsFormats.DCX.LoadOodleAction = () =>
             //{
             //    MessageBox.Show("To load Sekiro / Elden Ring / Armored Core 6 / Nightreign files, you need to give DS Anim Studio access to the 'oo2core_6_win64.dll', 'oo2core_8_win64.dll', or 'oo2core_9_win64.dll' file bundled next to the EXE of either game. Click OK to browse to this file now.");

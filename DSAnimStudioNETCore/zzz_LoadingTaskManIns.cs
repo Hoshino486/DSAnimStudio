@@ -106,11 +106,11 @@ namespace DSAnimStudio
                     }
 
 
-                    // We don't check ProgressRatio to see if it's done, since
-                    // the thread is INSTANTLY KILLED when complete, which would
-                    // cause slight progress rounding errors to destroy the
-                    // entire universe. Instead, it's only considered done 
-                    // after the entire doLoad is complete.
+                    // 我们不看 ProgressRatio 来判断做完没，因为
+                    // 线程一完成就被 INSTANTLY KILLED，那样
+                    // 进度取整的一丁点误差就能把
+                    // 整个宇宙给毁了。所以，只有在整个 doLoad 
+                    // 跑完之后才算它做完。
                     IsComplete = true;
 
                     loadingTaskMan.CheckOnTask(TaskKey);
@@ -179,41 +179,41 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        ///     Starts a loading task if that task wasn't already running.
+        ///     那个任务还没在跑的话，就启一个加载任务。
         /// </summary>
         /// <param name="taskKey">
-        ///     String key to reference task by. 
-        ///     This is what determines if it's running already.
+        ///     用来引用任务的字符串 key。 
+        ///     就是靠这个判断它是不是已经在跑了。
         /// </param>
         /// <param name="displayString">
-        ///     String to actually show onscreen next to 
-        ///     the progress bar.
+        ///     实际显示在屏幕上、贴在进度条旁边 
+        ///     用的那个字符串。
         /// </param>
         /// <param name="taskDelegate">
         ///     The actual task to perform. An IProgress&lt;double&gt; is given
-        ///     for you to control the loading bar
+        ///     给你自己控制加载条用的
         ///     (0.0 = bar empty, 1.0 = bar full, -1.0 = continuous bar).
-        ///     Be sure to make bar full when done.
+        ///     做完记得把进度条填满。
         /// </param>
         /// <param name="addFluffMilliseconds">
-        ///     Amount of milliseconds to wait at the end of the task 
-        ///     so the bar stays onscreen long enough to see.
+        ///     任务结尾等待的毫秒数， 
+        ///     好让进度条在屏幕上停够，能看清。
         /// </param>
         /// <param name="waitForTaskToComplete">
-        ///     Whether to wait for task to complete 
-        ///     instead of starting in another thread and immediately returning.
+        ///     是否等任务跑完， 
+        ///     而不是丢另一个线程里启动完立刻返回。
         /// </param>
         /// <param name="synchronousWaitThreadSpinMilliseconds">
-        ///     The amount of milliseconds to wait for each thread spin loop 
-        ///     while waiting for task to complete.
+        ///     每个线程自旋循环等待的毫秒数， 
+        ///     在等任务跑完的这段时间里。
         /// </param>
         /// <param name="disableProgressBarByDefault">
-        ///     Whether to start with the progress bar disabled. If this is false, 
-        ///     you can still disable the progress bar during a task by reporting
-        ///     a progress of -1.0
+        ///     是否以禁用进度条的状态启动。这项为 false 时， 
+        ///     你仍然能在任务进行中把进度条关掉，做法是上报
+        ///     一个 -1.0 的进度值
         /// </param>
         /// <returns>
-        ///     True if the task was just started. False if it was already running.
+        ///     任务刚被启动就返回 true，已经在跑则返回 false。
         /// </returns>
         public bool DoLoadingTask(string taskKey,
             string displayString,
@@ -230,7 +230,7 @@ namespace DSAnimStudio
             {
                 if (TaskDict.ContainsKey(taskKey))
                     return false;
-                // As soon as the LoadingTask is created it starts.
+                // LoadingTask 一被创建就开始跑。
                 TaskDict.Add(taskKey, new LoadingTask(this, taskKey, displayString, progress =>
                 {
                     taskDelegate.Invoke(progress);
@@ -249,8 +249,8 @@ namespace DSAnimStudio
                 bool isTaskDone = false;
                 while (!isTaskDone)
                 {
-                    // Lock here when checking to prevent it from freaking out trying to enumerate
-                    // a dictionary which is being modified :fatcat:
+                    // 检查时在这儿加锁，免得它去枚举的时候
+                    // 字典正在被改，直接当场发疯 :fatcat:
                     lock (_lock_TaskDictEdit)
                     {
                         if (TaskDict.ContainsKey(taskKey))
@@ -273,32 +273,32 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        ///     Starts a loading task if that task wasn't already running and then
-        ///     waits for the task to complete before returning.
+        ///     那个任务还没在跑的话就启一个加载任务，然后
+        ///     等它跑完再返回。
         /// </summary>
         /// <param name="taskKey">
-        ///     String key to reference task by. 
-        ///     This is what determines if it's running already.
+        ///     用来引用任务的字符串 key。 
+        ///     就是靠这个判断它是不是已经在跑了。
         /// </param>
         /// <param name="displayString">
-        ///     String to actually show onscreen next to 
-        ///     the progress bar.
+        ///     实际显示在屏幕上、贴在进度条旁边 
+        ///     用的那个字符串。
         /// </param>
         /// <param name="taskDelegate">
         ///     The actual task to perform. An IProgress&lt;double&gt; is given
         ///     for you to report the loading bar percentage (1.0 = bar full).
-        ///     Be sure to make bar full when done.
+        ///     做完记得把进度条填满。
         /// </param>
         /// <param name="addFluffMilliseconds">
-        ///     Amount of milliseconds to wait at the end of the task 
-        ///     so the bar stays onscreen long enough to see.
+        ///     任务结尾等待的毫秒数， 
+        ///     好让进度条在屏幕上停够，能看清。
         /// </param>
         /// <param name="synchronousWaitThreadSpinMilliseconds">
-        ///     The amount of milliseconds to wait for each thread spin loop 
-        ///     while waiting for task to complete.
+        ///     每个线程自旋循环等待的毫秒数， 
+        ///     在等任务跑完的这段时间里。
         /// </param>
         /// <returns>
-        ///     True if the task was just started. False if it was already running.
+        ///     任务刚被启动就返回 true，已经在跑则返回 false。
         /// </returns>
         public bool DoLoadingTaskSynchronous(
             string taskKey,
@@ -344,7 +344,7 @@ namespace DSAnimStudio
             {
                 if (TaskDict.ContainsKey(taskKey))
                 {
-                    // While we're here, might as well double check if that task is done.
+                    // 既然都到这儿了，顺手再确认一下那任务是不是做完了。
                     if (TaskDict[taskKey].IsComplete)
                     {
                         //TaskDict[taskKey].Kill();
@@ -367,7 +367,7 @@ namespace DSAnimStudio
         {
             lock (_lock_TaskDictEdit)
             {
-                // Cleanup finished tasks
+                // 清理做完的任务
                 var keyList = TaskDict.Keys;
                 var keysOfTasksThatAreFinished = new List<string>();
                 foreach (var key in keyList)
@@ -431,7 +431,7 @@ namespace DSAnimStudio
                             taskRectHeight = GuiTaskRectHeightNoBar;
                         }
 
-                        // Draw Task Rect
+                        // 绘制任务矩形
                         Rectangle thisTaskRect = new Rectangle(
                             (int)Math.Round((GFX.Device.Viewport.Width / Main.DPI) - GuiTaskRectWidth - GuiDistFromEdgesOfScreenX),
                             GuiDistFromEdgesOfScreenY + currentVerticalOffset,
@@ -441,7 +441,7 @@ namespace DSAnimStudio
 
                         if (kvp.Value.ProgressRatio >= 0)
                         {
-                            // Draw Progress Background Rect
+                            // 绘制进度背景矩形
 
                             Rectangle progBackgroundRect = new Rectangle(thisTaskRect.X + GuiProgBarDistFromRectEdge,
                                 thisTaskRect.Y + taskRectHeight - GuiProgBarDistFromRectEdge - GuiProgBarHeight,
@@ -449,7 +449,7 @@ namespace DSAnimStudio
 
                             GFX.SpriteBatch.Draw(Main.WHITE_TEXTURE, progBackgroundRect, new Color(0.25f, 0.25f, 0.25f) * 0.95f);
 
-                            // Draw Progress Foreground Rect
+                            // 绘制进度前景矩形
 
                             Rectangle progForegroundRect = new Rectangle(
                                 progBackgroundRect.X + GuiProgBarEdgeThickness,
@@ -462,7 +462,7 @@ namespace DSAnimStudio
                             GFX.SpriteBatch.Draw(Main.WHITE_TEXTURE, progForegroundRect, Color.White);
                         }
 
-                        // Draw Task Name
+                        // 绘制任务名
 
                         Vector2 taskNamePos = new Vector2(thisTaskRect.X + GuiProgNameDistFromEdge, thisTaskRect.Y + GuiProgNameDistFromEdge);
 

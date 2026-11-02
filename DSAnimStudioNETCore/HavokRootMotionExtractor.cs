@@ -200,7 +200,7 @@ namespace DSAnimStudio
 
             thing.FrameCount = anim.FrameCount;
 
-            //// If source animation is 30 FPS and not 60, then double frame count
+            //// 如果源 Anim 是 30 FPS 而不是 60，那就把帧数翻倍
             //if (anim.FrameDuration > 0.02f)
             //{
             //    //thing.Duration = (float)((thing.FrameCount) * (1.0 / 30.0));
@@ -367,7 +367,7 @@ namespace DSAnimStudio
                     //    var masterTransform = thing.Frames[f].BoneTransforms[targetBoneIndicesByName[cfg.MasterBone]];
                     //    float masterDistAboveFoot = masterTransform.Translation.Y - footPos.Y;
 
-                    //    // 0 is new desired foot height
+                    //    // 0 是新的期望脚部高度
                     //    masterTransform.Translation.Y = 0 + masterDistAboveFoot;
                     //    thing.Frames[f].BoneTransforms[targetBoneIndicesByName[cfg.MasterBone]] = masterTransform;
                     //}

@@ -226,7 +226,7 @@ namespace DSAnimStudio
                     Documents.Remove(CurrentDocument);
 
                 CurrentDocument?.Dispose();
-                // Placeholder so stuff doesnt explode
+                // 占个位，免得东西炸了
                 CurrentDocument = new zzz_DocumentIns();
 
                 GoToLastGoodDocument_NoLock(curDoc);
@@ -355,7 +355,7 @@ namespace DSAnimStudio
             {
                 RequestOpenFromPackedGameDataArchives = false;
 
-                // Commented out because it actually calls RequestFileOpenRecent from within this.
+                // 注释掉了，因为它在这内部真的会调 RequestFileOpenRecent。
                 zzz_DocumentManager.AddDocument("New Document", immediateSwitch: true);
 
                 var thing = new TaeLoadFromArchivesWizard();
@@ -387,7 +387,7 @@ namespace DSAnimStudio
             {
                 RequestFileOpenBrowse = false;
 
-                // Commented out because it actually calls RequestFileOpenRecent from within this.
+                // 注释掉了，因为它在这内部真的会调 RequestFileOpenRecent。
                 //zzz_DocumentManager.AddDocument("New Document", hidden: true, immediateSwitch: true);
 
                 zzz_DocumentManager.AddDocument("New Document", immediateSwitch: true);
@@ -405,7 +405,7 @@ namespace DSAnimStudio
                         thisDoc.RequestClose_ForceDelete = true;
                     Main.HandleError("Failed to load file.", ex);
                 }
-                // Document deleting on cancel handled by the messy load file funcs.
+                // 取消时删文档这活儿交给那堆乱糟糟的加载文件函数。
 
                 return;
             }
@@ -561,8 +561,8 @@ namespace DSAnimStudio
                 lock (_lock_DocumentSwitcher)
                 {
                     zzz_DocumentIns newImguiSelectedDocument = null;
-                    // Iterate through documents, create tabs to click on
-                    // When clicking on tab, call RequestSwitchDocument
+                    // 遍历文档，建出能点的标签页
+                    // 点标签页的时候，调 RequestSwitchDocument
 
                     if (ImGui.BeginTabBar("TabBar_DocumentManager", ImGuiTabBarFlags.Reorderable))
                     {

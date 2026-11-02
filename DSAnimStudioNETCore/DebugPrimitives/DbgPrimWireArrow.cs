@@ -79,7 +79,7 @@ namespace DSAnimStudio.DebugPrimitives
                     AddLine(ptTipStartInner, ptTipStartOuter, color);
                     AddLine(ptTipStartOuter, tip, color);
 
-                    // Connect this vertical spline to the previous one with horizontal lines.
+                    // 用横线把这根竖直 spline 连到上一根上。
                     if (i > 0)
                     {
                         var prevPtBase = GetPoint(i - 1, StemRadius, 0);

@@ -138,7 +138,7 @@ namespace DSAnimStudio.TaeEditor
         {
             public DSAProj.AnimCategory Tae;
             public DSAProj.Animation Anim;
-            // Maybe something else :fatcat:
+            // 也许是别的东西 :fatcat:
         }
 
         private Stack<AnimViewHistoryEntry> AnimViewBackwardStack = new Stack<AnimViewHistoryEntry>();
@@ -196,7 +196,7 @@ namespace DSAnimStudio.TaeEditor
             //throw new NotImplementedException();
             act.UpdateGraphDisplayText();
             return act.GraphDisplayText;
-            //TODO: Read this shit from new project system.
+            //TODO：从新的 project system 里把这堆玩意读出来。
         }
 
 
@@ -323,7 +323,7 @@ namespace DSAnimStudio.TaeEditor
             ImporterWindow_FLVER2.ImportConfig = Config.LastUsedImportConfig_FLVER2;
             ImporterWindow_FLVER2.MainScreen = this;
             ImporterWindow_FLVER2.Show();
-            // The CenterParent stuff just doesn't work for some reason, heck it.
+            // CenterParent 那套不知道为啥就是不生效，随它去吧。
 
             Main.CenterForm(ImporterWindow_FLVER2);
 
@@ -341,7 +341,7 @@ namespace DSAnimStudio.TaeEditor
             ImporterWindow_FBXAnim.ImportConfig = Config.LastUsedImportConfig_AnimFBX;
             ImporterWindow_FBXAnim.MainScreen = this;
             ImporterWindow_FBXAnim.Show();
-            // The CenterParent stuff just doesn't work for some reason, heck it.
+            // CenterParent 那套不知道为啥就是不生效，随它去吧。
 
             Main.CenterForm(ImporterWindow_FBXAnim);
 
@@ -657,7 +657,7 @@ namespace DSAnimStudio.TaeEditor
 
         private const int RECENT_FILES_MAX = 32;
 
-        //TODO: CHECK THIS
+        //TODO：核对这里
         public static int TopMenuBarMargin => (int)Math.Ceiling(18 * Main.DPI);
 
         private int TopOfGraphAnimInfoMargin = 20;
@@ -1042,7 +1042,7 @@ namespace DSAnimStudio.TaeEditor
             ParentDocument.Scene.DisableModelDrawing();
             ParentDocument.Scene.DisableModelDrawing2();
 
-            // Even if it fails to load, just always push it to the recent files list
+            // 就算加载失败，也照样把它推进 recent files 列表
             PushNewRecentFile(containerInfo);
 
             //string templateName = BrowseForXMLTemplate();
@@ -1552,7 +1552,7 @@ namespace DSAnimStudio.TaeEditor
             //        foreach (var act in sortDict[k])
             //        {
             //            remainingActions.Remove(act);
-            //            // Set index to the track we are about to add.
+            //            // 把我们即将添加的 track 的 index 设好。
             //            act.TrackIndex = anim.ActionTracks.Count;
             //        }
 
@@ -1601,7 +1601,7 @@ namespace DSAnimStudio.TaeEditor
             //        {
             //            foreach (var ev in actList)
             //            {
-            //                // Set track index to the track we are about to add
+            //                // 把 track index 设成我们即将添加的那个 track
             //                ev.TrackIndex = anim.ActionTracks.Count;
             //            }
 
@@ -1877,7 +1877,7 @@ namespace DSAnimStudio.TaeEditor
             //{
             //    var chrName = Utils.GetFileNameWithoutDirectoryOrExtension(FileContainerName);
 
-            //    //In case of .anibnd.dcx
+            //    //如果是 .anibnd.dcx 的情况
             //    chrName = Utils.GetFileNameWithoutDirectoryOrExtension(chrName);
 
             //    if (chrName.ToLower().StartsWith("c") && chrName.Length == 5)
@@ -2036,7 +2036,7 @@ namespace DSAnimStudio.TaeEditor
             var baseShort = Utils.GetShortIngameFileName(possibleFallbackPath);
             var basePathJustFile = Path.GetFileName(possibleFallbackPath);
 
-            // TODO: Check EBLs for base anibnd and ask "would you like to unpack the found base ANIBND and open it for editing?"
+            // TODO：检查基础 anibnd 的 EBL，然后询问“是否要解包找到的基础 ANIBND 并打开编辑？”
 
             if (anibndShort.StartsWith("c0000_") && File.Exists($"{anibndDirectory}\\c0000.anibnd.dcx")
                 && TaeFileContainer.AnibndContainsTae($"{anibndDirectory}\\c0000.anibnd.dcx"))
@@ -2192,7 +2192,7 @@ namespace DSAnimStudio.TaeEditor
             //    {
             //        return;
             //    }
-            //    //If they chose no, continue as normal.
+            //    //如果它们选了 no，就照常继续。
             //}
 
             var browseDlg = new System.Windows.Forms.OpenFileDialog()
@@ -2288,7 +2288,7 @@ namespace DSAnimStudio.TaeEditor
                 bool isCancel = false;
 
 
-                // kill this placeholder document since a new one is being requested
+                // 既然要请求新的了，就把这个占位 document 干掉
                 ParentDocument.RequestClose_ForceDelete = true;
                 zzz_DocumentManager.RequestFileOpenRecent = true;
                 zzz_DocumentManager.RequestFileOpenRecent_SelectedFile = container;
@@ -2326,7 +2326,7 @@ namespace DSAnimStudio.TaeEditor
             }
             else
             {
-                // When you decide to cancel opening something
+                // 当你决定取消打开某个东西的时候
                 ParentDocument.RequestClose_ForceDelete = true;
             }
         }
@@ -2714,7 +2714,7 @@ namespace DSAnimStudio.TaeEditor
 
                 //if (index < fromTae.Animations.Count)
                 //    fromTae.Animations.Insert(index, newAnimRef);
-                //else // at very end.
+                //else // 在最末尾。
                 //    fromTae.Animations.Add(newAnimRef);
 
                 fromTae.SAFE_AddAnimation(newAnimRef, index);
@@ -2956,7 +2956,7 @@ namespace DSAnimStudio.TaeEditor
                                     if (asStandard.ImportsHKX && asStandard.ImportHKXSourceAnimID >= 0)
                                     {
 
-                                        // Reroute HKX references of original section to new section, if user has reference HKX of original turned off
+                                        // 如果用户关掉了「引用原始 HKX」，就把原 section 的 HKX 引用改接到新 section 上
                                         if (!result.ReferenceHkxOfOriginalCategory)
                                         {
                                             var impSection = asStandard.ImportHKXSourceAnimID / ParentDocument.GameRoot.GameTypeUpperAnimIDModBy;
@@ -2973,7 +2973,7 @@ namespace DSAnimStudio.TaeEditor
                                     else
                                     {
 
-                                        // Turn regular HKX entries into references of original HKX
+                                        // 把普通 HKX 条目变成对原始 HKX 的引用
                                         if (result.ReferenceHkxOfOriginalCategory)
                                         {
                                             var upperID = (int)(category.CategoryID * ParentDocument.GameRoot.GameTypeUpperAnimIDModBy);
@@ -3719,13 +3719,13 @@ namespace DSAnimStudio.TaeEditor
                 ParentDocument.SoundManager.StopAllSounds();
             }
 #endif
-            //TODO: CHECK THIS
+            //TODO：核对这里
             PauseUpdate = OSD.AnyFieldFocused;
             
-            // Always update playback regardless of GUI memes.
-            // Still only allow hitting spacebar to play/pause
-            // if the window is in focus.
-            // Also for Interactor
+            // 不管 GUI 那些花活，永远更新 playback。
+            // 依然只允许按空格键来播放/暂停
+            // 前提是窗口处于焦点状态。
+            // Interactor 也一样
             if (Graph != null)
             {
                 Graph.UpdatePlaybackCursor(allowPlayPauseInput: Main.Active);
@@ -4456,7 +4456,7 @@ namespace DSAnimStudio.TaeEditor
             }
             else
             {
-                // Draws a very, very blank graph is none is loaded:
+                // 在什么都没加载的时候画出来的是一个空得不能再空的 graph：
 
                 //var graphRect = new Rectangle(
                 //        (int)MiddleSectionStartX,

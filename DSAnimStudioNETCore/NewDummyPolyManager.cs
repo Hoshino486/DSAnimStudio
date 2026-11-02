@@ -1104,7 +1104,7 @@ namespace DSAnimStudio
 
 
         // -1 = Show all normally
-        // -2 or lower = show none
+        // -2 或更低 = 全部不显示
         public int GlobalForceDummyPolyIDVisible = -1;
         //public static bool ShowGlobalIDOffset = true;
 
@@ -1198,12 +1198,12 @@ namespace DSAnimStudio
 
                 //        if (m.DummyPolyMan.NewCheckDummyPolyExists(id))
                 //        {
-                //            // Always get this as absolute world pos so we don't have to deal with pos relative to the individual parts model
+                //            // 一律取绝对世界坐标，这样就不用去处理相对各个部件模型的位置
                 //            ac6PartsResult = m.DummyPolyMan.GetDummyMatricesByID(id, getAbsoluteWorldPos: true);
 
                 //            if (ac6PartsResult != null)
                 //            {
-                //                // If absolute world pos is not requested, then make it relative to the character model after the fact
+                //                // 如果没要求绝对世界坐标，那事后再把它转成相对角色模型的坐标
                 //                if (!getAbsoluteWorldPos)
                 //                {
                 //                    for (int i = 0; i < ac6PartsResult.Count; i++)

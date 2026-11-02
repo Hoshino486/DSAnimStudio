@@ -191,7 +191,7 @@ namespace DSAnimStudio
             }
 
 
-            // Runtime memes
+            // 运行时那些梗
             [JsonIgnore]
             public bool NewSimulationEnter;
             [JsonIgnore]
@@ -265,19 +265,19 @@ namespace DSAnimStudio
 
 
             /// <summary>
-            /// A parameter in an event.
+            /// 事件里的一个参数。
             /// </summary>
             public class ParameterContainer
             {
                 private List<object> parameterValues;
 
                 /// <summary>
-                /// The template of the event for which these are the parameters.
+                /// 这些参数所属事件的模板。
                 /// </summary>
                 public Template.ActionTemplate Template { get; private set; }
 
                 /// <summary>
-                /// Returns all parameters.
+                /// 返回所有参数。
                 /// </summary>
                 public IReadOnlyList<object> Values
                     => parameterValues;
@@ -305,7 +305,7 @@ namespace DSAnimStudio
                 }
 
                 /// <summary>
-                /// Value of the specified parameter.
+                /// 指定参数的值。
                 /// </summary>
                 public object this[int paramName]
                 {
@@ -314,7 +314,7 @@ namespace DSAnimStudio
                 }
 
                 ///// <summary>
-                ///// Gets the value of a parameter.
+                ///// 获取某个参数的值。
                 ///// </summary>
                 //public object GetParamValue(string paramName)
                 //{
@@ -322,7 +322,7 @@ namespace DSAnimStudio
                 //}
 
                 ///// <summary>
-                ///// Gets the value type of a parameter.
+                ///// 获取某个参数的值类型。
                 ///// </summary>
                 //public Template.ParamType GetParamValueType(string paramName)
                 //{
@@ -330,7 +330,7 @@ namespace DSAnimStudio
                 //}
 
                 ///// <summary>
-                ///// Gets the whole template of a parameter.
+                ///// 获取某个参数的整个模板。
                 ///// </summary>
                 //public Template.ParameterTemplate GetParamTemplate(string paramName)
                 //{
@@ -369,7 +369,7 @@ namespace DSAnimStudio
                                 }
                                 else
                                 {
-                                    // lol I'm sorry TK
+                                    // lol 对不起啊 TK
                                     parameterValues.Add(p.ReadValue(br));
                                 }
 
@@ -544,28 +544,28 @@ namespace DSAnimStudio
             }
 
             /// <summary>
-            /// Indexable parameter container of this event.
+            /// 此事件的可索引参数容器。
             /// Use .Parameters[name] for basic value get/set
             /// and use .GetValueType(name) to see how to convert
-            /// it to/from System.Object.
+            /// 把它与 System.Object 互相转换。
             /// </summary>
             [JsonIgnore]
             public ParameterContainer Parameters { get; private set; }
 
             /// <summary>
-            /// The GUID of the ActionTemplate last used on this action. Check for inequality to know that this action needs to be refreshed.
+            /// 此 action 上次用到的 ActionTemplate 的 GUID。判断是否不相等，就知道这个 action 需要刷新了。
             /// </summary>
             public string LastTemplateGUID;
 
             /// <summary>
-            /// The EventTemplate applied to this event, if any.
+            /// 应用到此事件上的 EventTemplate（如果有的话）。
             /// </summary>
             [JsonIgnore] 
             public Template.ActionTemplate Template;
 
             /// <summary>
-            /// Gets the name of this event's type if a template has been loaded.
-            /// Otherwise returns null.
+            /// 如果已经加载了模板，就获取此事件类型的名字。
+            /// 否则返回 null。
             /// </summary>
             [JsonIgnore]
             public string TypeName
@@ -585,7 +585,7 @@ namespace DSAnimStudio
             }
 
             /// <summary>
-            /// Applies a template to allow editing of the parameters.
+            /// 应用一个模板，好让参数可以编辑。
             /// </summary>
             internal void ApplyTemplate(AnimCategory containingCategory, Template template,
                 long animID, int eventIndex, int eventType)
@@ -606,7 +606,7 @@ namespace DSAnimStudio
             }
 
             /// <summary>
-            /// Applies a template to allow editing of the parameters.
+            /// 应用一个模板，好让参数可以编辑。
             /// </summary>
             public void ApplyTemplate(Template.ActionTemplate template)
             {
@@ -620,8 +620,8 @@ namespace DSAnimStudio
             }
 
             /// <summary>
-            /// Applies a template to this TAE for editing and also wipes all
-            /// values and replaces them with default values.
+            /// 给这个 TAE 应用一个模板以便编辑，同时把所有
+            /// 值都清空并替换成默认值。
             /// </summary>
             public void ApplyTemplateWithDefaultValues(Template.ActionTemplate template)
             {

@@ -64,7 +64,7 @@ namespace DSAnimStudio
         public abstract void Config_SetAutoEnabled(bool value);
 
         /// <summary>
-        /// Returns true if ImGui interface was built, so OSD system can add separator etc.
+        /// 如果 ImGui 界面构建了就连 true，这样 OSD 系统好加分隔符之类的。
         /// </summary>
         /// <returns></returns>
         protected abstract void InnerBuildImguiIfApplicable(zzz_WwiseManagerInst ww, ref bool anyItemFocused);
@@ -492,8 +492,8 @@ namespace DSAnimStudio
                             entryValueHashes.Add(zzz_SoundManagerIns.GetFnvHashOfString(x.WwiseString));
                             entryParamRowIDs.Add(row.ID);
 
-                            // Only add if hasn't been added to simulate game's duplicate ID handling of 
-                            // picking the first occurrence or something.
+                            // 只在还没加过的时候才加，用来模拟游戏对重复 ID 的处理方式—— 
+                            // 大概是取第一次出现的那个吧。
                             if (!ParamRowIDToListIndexMap.ContainsKey(row.ID))
                                 ParamRowIDToListIndexMap[row.ID] = i;
 

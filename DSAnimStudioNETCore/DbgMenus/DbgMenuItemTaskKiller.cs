@@ -68,7 +68,7 @@ namespace DSAnimStudio.DbgMenus
         {
             if (CurrentMenu == this)
             {
-                // If the amount of models changes, just rebuild the whole thing. 
+                // 如果模型数量发生变化，那就整个重建一遍。 
                 if (Items.Count != (zzz_DocumentManager.CurrentDocument.LoadingTaskMan.TaskDict.Count + baseMenuItems.Count))
                 {
                     BuildSceneItems();

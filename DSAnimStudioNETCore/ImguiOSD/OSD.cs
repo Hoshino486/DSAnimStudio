@@ -1,4 +1,4 @@
-using DSAnimStudio.TaeEditor;
+﻿using DSAnimStudio.TaeEditor;
 using ImGuiNET;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -424,7 +424,7 @@ namespace DSAnimStudio.ImguiOSD
                 }
 
                 ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(0.15f, 0.15f, 0.15f, Focused ? 1 : 0.65f));
-                // Test - completely transparent windows
+                // 测试——完全透明的窗口
                 //ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(0f,0, 0f, 1));
 
                 ForAllTooltipManagers(t => t.PreUpdate(elapsedTime, offsetX, offsetY));

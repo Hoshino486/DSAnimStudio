@@ -184,7 +184,7 @@ namespace DSAnimStudio.ImguiOSD
                 var facegenEquip_Names = FacegenEquip_Values.Select(e => GetStringForEquipInfo(e)).ToList();
 
 
-                // Insert the None values/names
+                // 插入 None 的值／名字
                 FaceEquip_Values.Insert(0, new NewEquipSlot_Armor.DirectEquipInfo());
                 HairEquip_Values.Insert(0, new NewEquipSlot_Armor.DirectEquipInfo());
                 FacegenEquip_Values.Insert(0, new NewEquipSlot_Armor.DirectEquipInfo());

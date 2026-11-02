@@ -54,7 +54,7 @@ namespace DSAnimStudio
         private static Process GetDowngradeHkxProcess(string debug_hkxName, byte[] hkx, 
             bool useCompendium, int i, Action<Process, byte[], int> whatToDoWithResult, bool isUpgrade = false)
         {
-            // Change from 20150100 to 20160000 fatcat
+            // 从 20150100 改成 20160000 fatcat
             //hkx[0x13] = 0x36;
             //hkx[0x15] = 0x30;
 

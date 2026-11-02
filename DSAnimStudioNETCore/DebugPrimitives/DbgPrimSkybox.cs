@@ -27,7 +27,7 @@ namespace DSAnimStudio.DebugPrimitives
             Vector3 min = -Vector3.One * Radius;
             Vector3 max = Vector3.One * Radius;
 
-            // 3 Letters of below names: 
+            // 下面这些名字的 3 个字母： 
             // [T]op/[B]ottom, [F]ront/[B]ack, [L]eft/[R]ight
             var tfl = new Vector3(min.X, max.Y, max.Z);
             var tfr = new Vector3(max.X, max.Y, max.Z);
@@ -38,27 +38,27 @@ namespace DSAnimStudio.DebugPrimitives
             var bbr = new Vector3(max.X, min.Y, min.Z);
             var bbl = new Vector3(min.X, min.Y, min.Z);
 
-            //front face
+            //前面
             AddTri(bfl, tfl, tfr);
             AddTri(bfl, tfr, bfr);
 
-            // top face
+            // 顶面
             AddTri(tfl, tbl, tbr);
             AddTri(tfl, tbr, tfr);
 
-            // back face
+            // 后面
             AddTri(bbl, tbl, tbr);
             AddTri(bbl, tbr, bbr);
 
-            // bottom face
+            // 底面
             AddTri(bfl, bbl, bbr);
             AddTri(bfl, bbr, bfr);
 
-            // left face
+            // 左面
             AddTri(bbl, tbl, tfl);
             AddTri(bbl, tfl, bfl);
 
-            // right face
+            // 右面
             AddTri(bbr, tbr, tfr);
             AddTri(bbr, tfr, bfr);
         }
@@ -76,21 +76,21 @@ namespace DSAnimStudio.DebugPrimitives
             int vertIndexB = Array.IndexOf(Vertices, vertB);
             int vertIndexC = Array.IndexOf(Vertices, vertC);
 
-            //If vertex A can't be recycled from an old one, make a new one.
+            //如果 vertex A 没法从旧的里面回收，就新建一个。
             if (vertIndexA == -1)
             {
                 AddVertex(vertA);
                 vertIndexA = Vertices.Length - 1;
             }
 
-            //If vertex B can't be recycled from an old one, make a new one.
+            //如果 vertex B 没法从旧的里面回收，就新建一个。
             if (vertIndexB == -1)
             {
                 AddVertex(vertB);
                 vertIndexB = Vertices.Length - 1;
             }
 
-            //If vertex C can't be recycled from an old one, make a new one.
+            //如果 vertex C 没法从旧的里面回收，就新建一个。
             if (vertIndexC == -1)
             {
                 AddVertex(vertC);

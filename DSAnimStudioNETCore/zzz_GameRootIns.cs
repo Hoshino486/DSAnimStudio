@@ -66,7 +66,7 @@ namespace DSAnimStudio
                 }
             }
 
-            // ERNR TODO - If DLC is ever added lol
+            // ERNR TODO——要是哪天真的加了 DLC 再说 lol
             if (ParentDocument.GameRoot.GameType is SoulsGames.ER && chrID == "c0000")
             {
                 result.Add("/chr/c0000_dlc01.anibnd.dcx");
@@ -143,8 +143,8 @@ namespace DSAnimStudio
                 return true;
             else if (a == SoulsGames.DS1R && b == SoulsGames.DS1)
                 return true;
-            // TODO: Check if these DS2 ones would be a good idea with 
-            // Forlorn set only being in sotfs etc.
+            // TODO: 查一下这些 DS2 的东西跟下面搭不搭 
+            // 比如 Forlorn 套装只在 sotfs 里有之类的。
             //if (a == GameTypes.DS2 && b == GameTypes.DS2SOTFS)
             //    return true;
             //if (a == GameTypes.DS2SOTFS && b == GameTypes.DS2)
@@ -168,7 +168,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// This just makes DS1 and DS1R both show up as DS1 for TAE stuff since they have same TAE files exactly
+        /// 这么做只是让 DS1 和 DS1R 在 TAE 那一块都显示成 DS1，因为它们 TAE 文件完全一样
         /// </summary>
         public SoulsGames GameTypeForTAE
         {
@@ -391,7 +391,7 @@ namespace DSAnimStudio
             }
             else if (GameType is SoulsGames.ERNR)
             {
-                // ERNR TODO - IF DLC IS EVER ADDED
+                // ERNR TODO —— 哪天真加了 DLC 再说
                 FlverMaterialDefInfo.LoadMaterialBinders($@"/material/allmaterial.matbinbnd.dcx", $@"/material/allmaterial_dlc01.matbinbnd.dcx", null);
             }
             else if (GameType is SoulsGames.AC6)
@@ -714,8 +714,8 @@ namespace DSAnimStudio
                 }
                 else if (GameType == SoulsGames.BB)
                 {
-                    // TODO: completely confirm these because I just
-                    // copied them from a BB network test file list.
+                    // TODO: 这些得彻底确认一遍，因为我只是
+                    // 从一份 BB 网络测试文件清单里抄过来的。
                     ParentDocument.TexturePool.AddTpfsFromFiles(new List<byte[]>
                     {
                         ParentDocument.GameData.ReadFile($@"/other/SYSTEX.tpf.dcx"),
@@ -1246,7 +1246,7 @@ namespace DSAnimStudio
 
                             if (modelToImportDuringLoad != null)
                             {
-                                //We don't wanna mess with other vanilla files that are sharing with this cXXX9
+                                //跟这个 cXXX9 共用的其他原版文件，别去动
                                 //texbnd.Files.Clear();
                                 foreach (var t in modelToImportDuringLoad.Textures)
                                 {
@@ -1259,12 +1259,12 @@ namespace DSAnimStudio
 
                                     if (matchingInnerTpf != null)
                                     {
-                                        // Update existing TPF in chrtpfbdt
+                                        // 更新 chrtpfbdt 里已有的 TPF
                                         matchingInnerTpf.Bytes = tpf.Write();
                                     }
                                     else
                                     {
-                                        // Add new TPF to chrtpfbdt
+                                        // 往 chrtpfbdt 里加新 TPF
                                         texbxf.Files.Add(new BinderFile(Binder.FileFlags.Flag1, texbxf.Files.Count, innerTpfName, tpf.Write()));
                                     }
 
@@ -1472,7 +1472,7 @@ namespace DSAnimStudio
 
                             if (modelToImportDuringLoad != null && extraTexbxf != null)
                             {
-                                //We don't wanna mess with other vanilla files that are sharing with this cXXX9
+                                //跟这个 cXXX9 共用的其他原版文件，别去动
                                 //texbnd.Files.Clear();
                                 foreach (var t in modelToImportDuringLoad.Textures)
                                 {
@@ -1485,12 +1485,12 @@ namespace DSAnimStudio
 
                                     if (matchingInnerTpf != null)
                                     {
-                                        // Update existing TPF in chrtpfbdt
+                                        // 更新 chrtpfbdt 里已有的 TPF
                                         matchingInnerTpf.Bytes = tpf.Write();
                                     }
                                     else
                                     {
-                                        // Add new TPF to chrtpfbdt
+                                        // 往 chrtpfbdt 里加新 TPF
                                         texbxf.Files.Add(new BinderFile(Binder.FileFlags.Flag1, texbxf.Files.Count, innerTpfName, tpf.Write()));
                                     }
 
@@ -1879,7 +1879,7 @@ namespace DSAnimStudio
 
                             if (GameType == SoulsGames.DES && !GameIsDemonsSoulsRemastered)
                             {
-                                // Since DeS is unpacked we can just use legacy loose file only shit here
+                                // DeS 是解包状态的，所以这里直接用老式散文件那套破烂就行
                                 addAnibnd = TaeEditor.TaeFileContainer.GenerateDemonsSoulsConvertedAnibnd($"{InterrootPath}\\{additionalPlayerAnibnds[i].Replace("/", "\\")}");
                             }
                             else
@@ -1934,7 +1934,7 @@ namespace DSAnimStudio
 
                             if (GameType == SoulsGames.DES && !GameIsDemonsSoulsRemastered)
                             {
-                                // Since DeS is unpacked we can just use legacy loose file only shit here
+                                // DeS 是解包状态的，所以这里直接用老式散文件那套破烂就行
                                 anibnd = TaeEditor.TaeFileContainer.GenerateDemonsSoulsConvertedAnibnd($"{InterrootPath}\\{additionalAnibnds[i].Replace("/", "\\")}");
                             }
                             else

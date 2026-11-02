@@ -443,7 +443,7 @@ namespace DSAnimStudio
             }
             catch (SoulsFormats.Exceptions.NoOodleFoundException)
             {
-                //SoulsFormatsNEXT TODO
+                //SoulsFormatsNEXT 待办
                 return null;
             }
         }
@@ -691,7 +691,7 @@ namespace DSAnimStudio
                     DataArchives.Add("data2", new EblArchive(this, "data2", "data2.bhd", "data2.bdt", GameType));
                     DataArchives.Add("data3", new EblArchive(this, "data3", "data3.bhd", "data3.bdt", GameType));
 
-                    // ERNR TODO - If DLC is ever added lol
+                    // ERNR TODO——要是哪天真的加了 DLC 再说 lol
                     if (GameType is SoulsGames.ER)
                     {
                         DataArchives.Add("dlc", new EblArchive(this, "dlc", "dlc.bhd", "dlc.bdt", GameType));
@@ -779,7 +779,7 @@ namespace DSAnimStudio
                         {
                             byte[] fileBytes = RetrieveFileFromBDT(f.FileOffset, f.PaddedFileSize);
                             byte[] decryptedFileBytes = fileBytes.ToArray();
-                            // File in bdt is encrypted
+                            // bdt 里的文件是加密的
                             if (f.AESKey != null)
                             {
                                 using (var test = System.Security.Cryptography.Aes.Create())
@@ -952,7 +952,7 @@ namespace DSAnimStudio
             {
                 lock (_lock_DataArchives)
                 {
-                    // Check in case it was cleared before getting this lock.
+                    // 检查一下，万一在拿到这把锁之前它已经被清掉了。
                     if (DataArchives.ContainsKey(predictedEbl))
                     {
                         var predictedEbl_FullPath = $"{InterrootPath}\\{predictedEbl}.bdt";
@@ -994,13 +994,13 @@ namespace DSAnimStudio
 
             if (EnableFileCaching && !disableCache)
             {
-                // If a file has been cached it's safe to assume it exists.
+                // 文件只要进过缓存，就可以当它存在。
                 if (IsFileInCache(relativePath))
                     return true;
             }
 
-            // Unoptimized but effective: Just read it and see if there's a result lmao
-            // Disable warning on fail.
+            // 没优化，但管用：直接读一遍，看有没有结果 lmao
+            // 失败时把警告关掉。
             var file = ReadFile(relativePath, alwaysLoose, warningOnFail: false, disableCache: disableCache);
             return file != null;
         }
@@ -1119,7 +1119,7 @@ namespace DSAnimStudio
                 }
                 else
                 {
-                    // Should allow it to fallback to EBL if the file is not present in UXM files.
+                    // 文件不在 UXM 文件里时，应该让它回退到 EBL。
                     var result = ReadFileFromEBLs_NoCache(relativePath);
                     if (result != null && EnableFileCaching && !disableCache)
                         AddFileToCache(relativePath, result);
@@ -1141,8 +1141,8 @@ namespace DSAnimStudio
         {
             if (string.IsNullOrWhiteSpace(relativePath))
                 return false;
-            // Unoptimized but effective: Just read it and see if there's a result lmao
-            // Disable warning on fail.
+            // 没优化，但管用：直接读一遍，看有没有结果 lmao
+            // 失败时把警告关掉。
             var file = ReadWwiseSoundFile(relativePath);
             return file != null;
         }
@@ -1260,7 +1260,7 @@ namespace DSAnimStudio
                 relativePath = relativePath.Substring(0, relativePath.Length - 4);
             var looseFilePath = GetLooseFilePathDirect(relativePath);
 
-            //ac6 test
+            //AC6 测试
             //if (file == null && !IsLoadingUnpackedFiles)
             //{
             //    file = ReadFileDirect(relativePath, true);
@@ -1283,7 +1283,7 @@ namespace DSAnimStudio
                 relativePath = relativePath.Substring(0, relativePath.Length - 4);
             var lastAccess = GetFileLastModifiedDirect(relativePath);
 
-            //ac6 test
+            //AC6 测试
             //if (file == null && !IsLoadingUnpackedFiles)
             //{
             //    file = ReadFileDirect(relativePath, true);
@@ -1314,7 +1314,7 @@ namespace DSAnimStudio
                 relativePath = relativePath.Substring(0, relativePath.Length - 4);
             var file = ReadFileDirect(relativePath, alwaysLoose, disableCache);
 
-            //ac6 test
+            //AC6 测试
             //if (file == null && !IsLoadingUnpackedFiles)
             //{
             //    file = ReadFileDirect(relativePath, true);

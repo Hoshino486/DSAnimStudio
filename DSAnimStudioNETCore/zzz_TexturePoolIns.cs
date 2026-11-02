@@ -25,7 +25,7 @@ namespace DSAnimStudio
 
         private object _lock_IO = new object();
         private object _lock_pool = new object();
-        //This might be weird because it doesn't follow convention :fatcat:
+        //这可能会有点怪，因为它不按惯例来 :fatcat:
         public delegate void TextureLoadErrorDelegate(string texName, string error);
         public event TextureLoadErrorDelegate OnLoadError;
         private void RaiseLoadError(string texName, string error)

@@ -41,7 +41,7 @@ namespace DSAnimStudio.TaeEditor
 
                 foreach (var animID in registeredAnims)
                 {
-                    // Anim will be included with category regist.
+                    // Anim 会跟着 category 注册一起被带上。
                     if (registeredAnimCategories.Contains(animID.CategoryID))
                         continue;
 

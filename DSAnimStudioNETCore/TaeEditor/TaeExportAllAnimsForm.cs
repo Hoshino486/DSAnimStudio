@@ -187,7 +187,7 @@ namespace DSAnimStudio.TaeEditor
                     IS_CANCEL_CLOSE = false;
                 }
 
-                // If just stopped being busy & user requested a cancellation from the X to close form then close.
+                // 如果刚结束忙碌状态且用户点了 X 请求取消以关闭窗体，那就直接关闭。
                 if ((wasBusyBefore && !IS_BUSY) && wasCancelClose)
                 {
                     Close();

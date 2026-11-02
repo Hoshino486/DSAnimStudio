@@ -129,7 +129,7 @@ namespace DSAnimStudio.TaeEditor
                 finalRect.Y += oldViewport.Y;
                 if (restrictToParentViewport)
                 {
-                    // Get sub-viewport inside this one.
+                    // 取这个 viewport 里面的 sub-viewport。
                     int finalRectLeft = MathHelper.Max(oldViewport.Bounds.Left, oldViewport.Bounds.Left + rect.Left);
                     int finalRectTop = MathHelper.Max(oldViewport.Bounds.Top, oldViewport.Bounds.Top + rect.Top);
                     int finalRectRight = MathHelper.Min(oldViewport.Bounds.Right, oldViewport.Bounds.Left + rect.Right);
@@ -204,7 +204,7 @@ namespace DSAnimStudio.TaeEditor
             //    sb.End();
 
             //    var oldViewport = gd.Viewport;
-            //    // Get sub-viewport inside this one.
+            //    // 取这个 viewport 里面的 sub-viewport。
             //    int finalRectLeft = MathHelper.Max(oldViewport.Bounds.Left, oldViewport.Bounds.Left + rect.Left);
             //    int finalRectTop = MathHelper.Max(oldViewport.Bounds.Top, oldViewport.Bounds.Top + rect.Top);
             //    int finalRectRight = MathHelper.Min(oldViewport.Bounds.Right, oldViewport.Bounds.Left + rect.Right);

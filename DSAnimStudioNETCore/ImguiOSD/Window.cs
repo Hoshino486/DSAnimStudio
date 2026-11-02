@@ -31,8 +31,8 @@ namespace DSAnimStudio.ImguiOSD
 
         /// <summary>
         /// Use this to give an absolute Imgui tag that will be the same every time (and also will be saved in the imgui config file correctly)
-        /// If this is not overrided to return something other than null, the GUID will be used as an imgui tag, which means the tag will
-        /// change every time.
+        /// 如果这里没重写成返回非 null 的东西，GUID 就会被当成 imgui tag，也就是说这个 tag 会
+        /// 每次都变。
         /// </summary>
         //protected virtual string OverrideSingletonImguiTag => null;
 
@@ -126,7 +126,7 @@ namespace DSAnimStudio.ImguiOSD
 
         public void Update(ref Window actualFocusedWindow, ref bool anyFieldFocused)
         {
-            // im crying and shitting irl
+            // 我在现实里哭得又拉又崩
             bool anyFieldFocused_Inner = false;
             Update(ref anyFieldFocused_Inner);
 
@@ -186,7 +186,7 @@ namespace DSAnimStudio.ImguiOSD
                 var customBackgroundColorCopy = CustomBackgroundColor;
                 var customTextColorCopy = CustomTextColor;
                 
-                //quick hotfix
+                //快速热修复
                 //customBackgroundColorCopy = new System.Numerics.Vector4(0, 0, 0, 0);
                 
                 if (customBackgroundColorCopy != null)
@@ -285,7 +285,7 @@ namespace DSAnimStudio.ImguiOSD
                         
                         if (RequestMaintainScrollFrames > 0)
                         {
-                            // set this only when on first frame
+                            // 只在第一帧设置这个
                             if (prevRequestMaintainScrollFrames == 0 || RequestMaintainScrollFrames_DesiredScroll == null)
                                 RequestMaintainScrollFrames_DesiredScroll = startScrollY;
                             

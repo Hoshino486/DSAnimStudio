@@ -3,7 +3,7 @@
 namespace WEMSharp
 {
     /// <summary>
-    /// Wrapper around a Stream that supports reading bits
+    /// 包在 Stream 外面、支持按位读取的 wrapper
     /// </summary>
     internal class BitStream
     {
@@ -18,7 +18,7 @@ namespace WEMSharp
         }
 
         /// <summary>
-        /// Reads a bit from the Stream
+        /// 从 Stream 里读一位
         /// </summary>
         internal byte GetBit()
         {
@@ -35,7 +35,7 @@ namespace WEMSharp
         }
 
         /// <summary>
-        /// Read an arbitary amount of bits from the stream
+        /// 从 stream 里读任意数量的位
         /// </summary>
         /// <param name="bitCount">Amount of bits to read</param>
         internal uint Read(int bitCount)

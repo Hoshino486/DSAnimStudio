@@ -187,7 +187,7 @@ namespace DSAnimStudio.TaeEditor
             var scrollMatrix = Graph.ScrollViewer.GetScrollMatrix();
 
             var actionTracksCopy = Graph.GetActionTracksCopy_UsesLock(useGhostIfAvailable: true);
-            // Track names on left, fixed pane thing.
+            // 左侧的 track 名称，那个固定 pane 的玩意。
             var scrolLMatrix_YOnly = Graph.ScrollViewer.GetScrollMatrixYOnly();
 
             var oldViewport = gd.Viewport;
@@ -224,7 +224,7 @@ namespace DSAnimStudio.TaeEditor
                         if (numDigits < 1.25f)
                             numDigits = 1.25f;
                         
-                        // Basically a really stupid way to say skip the frames that align with seconds so like 0, 30, 60, 90, etc.
+                        // 基本上就是用一种特别蠢的方式说：跳过那些跟整秒对齐的帧，比如 0、30、60、90 这种。
                         float howCloseThisIsToASecond = (kvp.Value / Graph.LayoutManager.SecondsPixelSize) % 1;
                         if (howCloseThisIsToASecond < (currentFrameDuration / 2) || howCloseThisIsToASecond > (1 - (currentFrameDuration / 2)))
                             continue;
@@ -259,7 +259,7 @@ namespace DSAnimStudio.TaeEditor
                 {
                     var dragActions = Graph.InputMan.GetCurrentDragActions();
                     
-                    // Action tracks alternating colors
+                    // Action track 交替配色
                     for (int i = 0; i < actionTracksCopy.Count; i++)
                     {
                         
@@ -293,7 +293,7 @@ namespace DSAnimStudio.TaeEditor
                     {
                         int row = Layout.GetRowOfAction(act);
 
-                        //TODO: Make proper color variables.
+                        //TODO：搞点正经的 color 变量出来。
                         var color_fill = Main.Colors.GuiColorActionBox_Normal_Fill;
                         var color_line = Main.Colors.GuiColorActionBox_Normal_Outline;
                         var color_text = Main.Colors.GuiColorActionBox_Normal_Text;
@@ -396,7 +396,7 @@ namespace DSAnimStudio.TaeEditor
                             };
                         }
 
-                        // Adjust for row dividers getting in the way
+                        // 为了避开挡路的行分隔线做点调整
                         actTopLeft.Y += 1;
                         actTopRight.Y += 1;
                         actBottomLeft.Y -= 1;
@@ -516,7 +516,7 @@ namespace DSAnimStudio.TaeEditor
 
                         Vector2 mousePos = Graph.MainScreen.Input.MousePosition - gd.Viewport.Bounds.TopLeftCorner();
 
-                        //TODO: Maybe move hover into input update
+                        //TODO：也许该把 hover 挪进 input update 里
                         //if (mousePos.X >= eventTopLeft.X && mousePos.X <= eventTopRight.X && mousePos.Y >= eventTopLeft.Y && mousePos.Y <= eventBottomLeft.Y)
                         //{
                         //    Graph.MainScreen.NewHoverEvent = ev;
@@ -640,7 +640,7 @@ namespace DSAnimStudio.TaeEditor
                 {
                     //ImGuiDebugDrawer.DrawText("TRACK NAMES\nTEST 1\nTEST 2", Vector2.Zero, Color.Lime, Color.Black);
 
-                    // Event groups alternating colors
+                    // Event group 交替配色
                     for (int i = 0; i < actionTracksCopy.Count; i++)
                     {
                         
@@ -670,7 +670,7 @@ namespace DSAnimStudio.TaeEditor
 
                     }
 
-                    // Thicc black line on right
+                    // 右边那条粗黑线
                     //ImGuiDebugDrawer.DrawRect(new Vector2(gd.Viewport.Width - 4, 0), new Vector2(4, gd.Viewport.Height), Color.White);
 
                     ImGuiDebugDrawer.DrawRect(new Vector2(0, Graph.AnimRef.SAFE_GetActionTrackCount() * Layout.RowHeight - Graph.ScrollViewer.RoundedScroll.Y),
@@ -707,7 +707,7 @@ namespace DSAnimStudio.TaeEditor
                 {
                     //ImGuiDebugDrawer.DrawText("TRACK NAMES\nTEST 1\nTEST 2", Vector2.Zero, Color.Lime, Color.Black);
 
-                    // Event groups alternating colors
+                    // Event group 交替配色
                     for (int i = 0; i < actionTracksCopy.Count; i++)
                     {
                         //test
@@ -765,15 +765,15 @@ namespace DSAnimStudio.TaeEditor
                 sb.Begin(transformMatrix: scrolLMatrix_YOnly * Main.DPIMatrix);
                 try
                 {
-                    //Playback cursor playback start time
+                    //Playback cursor 的 playback 起始时间
                     float playbackCursorStartX = (float)((Graph.PlaybackCursor.GUIStartTime * Layout.SecondsPixelSize) - Graph.ScrollViewer.RoundedScroll.X);
                     playbackCursorStartX = (float)Math.Round(playbackCursorStartX);
                     
-                    // Playback cursor
+                    // 播放游标
                     float playbackCursorModX = (float)((Graph.PlaybackCursor.GUICurrentTimeMod * Layout.SecondsPixelSize) - Graph.ScrollViewer.RoundedScroll.X);
                     playbackCursorModX = (float)Math.Round(playbackCursorModX);
                     
-                    // transparent non-wrapped playback cursor
+                    // 透明的、不做循环包裹的 playback cursor
                     float playbackCursorX = (float)((Graph.PlaybackCursor.GUICurrentTime * Layout.SecondsPixelSize) - Graph.ScrollViewer.RoundedScroll.X);
                     playbackCursorX = (float)Math.Round(playbackCursorX);
                     
@@ -786,7 +786,7 @@ namespace DSAnimStudio.TaeEditor
                         ImGuiDebugDrawer.DrawLine(new Vector2(playbackCursorX, 0), new Vector2(playbackCursorX, Graph.Rect.Height), Main.Config.Colors.GuiColorActionGraphPlaybackCursor_V3 * 0.5f);
                     }
 
-                    // darkening after end of anim
+                    // anim 结束后压暗
                     float darkenStartX = (float)((Graph.PlaybackCursor.MaxTime * Layout.SecondsPixelSize) -
                                                  Graph.ScrollViewer.RoundedScroll.X);
                     ImGuiDebugDrawer.DrawRect(new Vector2(Math.Max(darkenStartX, 0), 0),
@@ -806,7 +806,7 @@ namespace DSAnimStudio.TaeEditor
 
 
 
-            // White line divider lol
+            // 白色分隔线 lol
             int spacingMeme = 0;
 
             viewportRect = new Rectangle(Graph.Rect.X - spacingMeme, Graph.Rect.Y - spacingMeme, (int)Graph.Rect.Width + (spacingMeme * 2), Graph.Rect.Height + (spacingMeme * 2));
@@ -817,22 +817,22 @@ namespace DSAnimStudio.TaeEditor
                 {
                    
 
-                    // Horizontal white line on top of whole graph
+                    // 整个 graph 顶部的横向白线
                     ImGuiDebugDrawer.DrawRect(new Vector2(0, 0), new Vector2(viewportRect.Width, 1), Color.White);
 
-                    // Horizontal white line on bottom of whole graph
+                    // 整个 graph 底部的横向白线
                     ImGuiDebugDrawer.DrawRect(new Vector2(0, viewportRect.Height - 1), new Vector2(viewportRect.Width, 1), Color.White);
 
-                    // Vertical white line on left of whole graph
+                    // 整个 graph 左侧的纵向白线
                     ImGuiDebugDrawer.DrawRect(new Vector2(0, 0), new Vector2(1, viewportRect.Height), Color.White);
 
-                    // Vertical white line on right of whole graph
+                    // 整个 graph 右侧的纵向白线
                     ImGuiDebugDrawer.DrawRect(new Vector2(viewportRect.Width - 1, 0), new Vector2(1, viewportRect.Height), Color.White);
 
-                    // Vertical white line splitting left/right panes
+                    // 把左右 pane 分开的纵向白线
                     //ImGuiDebugDrawer.DrawRect(new Vector2(Graph.ActionTrackHeaderRect.Width - 1 + spacingMeme, 0), new Vector2(1, viewportRect.Height), Color.White);
 
-                    // Horizontal white line on bottom of timeline
+                    // timeline 底部的横向白线
                     ImGuiDebugDrawer.DrawRect(new Vector2(0, Graph.TimeLineHeight - 2 + spacingMeme), new Vector2(viewportRect.Width, 1), Color.White);
                 }
                 finally

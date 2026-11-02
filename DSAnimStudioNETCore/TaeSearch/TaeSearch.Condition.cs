@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
 using ImGuiNET;
@@ -35,7 +35,7 @@ namespace DSAnimStudio
 
             protected virtual void InnerShowImGuiControlForTypeCfg(DSAProj proj, ref bool anyFieldFocused)
             {
-                // Default behavior: skip Action and Param columns
+                // 默认行为：跳过 Action 和 Param 两列
                 ImGui.TableNextColumn();
                 ImGui.TableNextColumn();
             }

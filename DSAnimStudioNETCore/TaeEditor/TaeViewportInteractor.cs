@@ -64,7 +64,7 @@ namespace DSAnimStudio.TaeEditor
         public float ModPlaybackSpeed_NightfallEvent7032 = 1.0f;
         public float ModPlaybackSpeed_AC6Event9700 = 1.0f;
 
-        //TODO, obviously
+        //TODO，显然
         public bool NewIsComboActive => Combo?.PlaybackState == NewCombo.PlaybackStates.Playing;
         public NewCombo Combo = null;
 
@@ -523,7 +523,7 @@ namespace DSAnimStudio.TaeEditor
             
             if (DbgPrim_RootMotionStartPoint_Matrix != curTransform)
             {
-                // Force update last frame.
+                // 强制更新最后一帧。
                 UpdateAndDrawRootMotionPoints(CurrentModel?.AnimContainer?.RootMotionTransform ?? NewBlendableTransform.Identity, false, 0);
             }
 
@@ -574,7 +574,7 @@ namespace DSAnimStudio.TaeEditor
             //    //CurrentModel.CurrentTransform = CurrentModel.StartTransform = new Transform(Matrix.Identity);
             //}
 
-            // Force update first frame.
+            // 强制更新第一帧。
             UpdateAndDrawRootMotionPoints(CurrentModel.AnimContainer.RootMotionTransform, false, 0);
         }
 
@@ -1106,7 +1106,7 @@ namespace DSAnimStudio.TaeEditor
 
             Graph.MainScreen.SelectNewAnimRef(Graph.MainScreen.SelectedAnimCategory, Graph.MainScreen.SelectedAnim);
 
-            //V2.0: Scrub weapon anims to the current frame.
+            //V2.0：把 weapon anim 刷到当前帧。
 
             if (CurrentModel.ChrAsm != null)
             {
@@ -1115,7 +1115,7 @@ namespace DSAnimStudio.TaeEditor
             }
 
 
-            //V2.0: Update stuff probably
+            //V2.0：估计要更新点东西
             CurrentModel.NewForceSyncUpdate();
         }
 
@@ -1159,7 +1159,7 @@ namespace DSAnimStudio.TaeEditor
         //     //CurrentModel.AnimContainer.IsPlaying = false;
         //     CurrentModel.AnimContainer.EnableLooping = Main.Config.LoopEnabled;
         //     CurrentModel.ScrubAnim(absolute: true, (float)(Graph.PlaybackCursor.GUICurrentTime), true, true);
-        //     // Update root motion before world for camera follow root motion mode
+        //     // camera follow root motion 模式下先更新 root motion 再更新 world
         //     UpdateAndDrawRootMotionPoints(CurrentModel.AnimContainer.RootMotionTransform, false, timeDelta);
         //     GFX.CurrentWorldView.Update(0);
         //     CurrentModel.AfterAnimUpdate(timeDelta);
@@ -1234,7 +1234,7 @@ namespace DSAnimStudio.TaeEditor
 
             //var timeDelta = forceCustomTimeDelta ?? (float)(Graph.PlaybackCursor.GUICurrentTime - Graph.PlaybackCursor.OldGUICurrentTime);
 
-            //TODO: Check if this is going to deadlock
+            //TODO：检查一下这会不会死锁
           
             try
             {
@@ -1255,7 +1255,7 @@ namespace DSAnimStudio.TaeEditor
                 if (!ParentDocument.LoadingTaskMan.AnyInteractionBlockingTasks() || forceRefreshTimeact)
                 {
                     
-                    // Uses "GUI" times in playback cursor specifically since it's for scrubbing, which might have snap to frames enabled.
+                    // 播放光标这里特意使用“GUI”时间，因为它用于拖拽定位，而拖拽定位可能开着按帧吸附。
                     ActionSim.OnSimulationFrameChange(Graph, Graph.MainScreen.Proj.SAFE_GetFirstAnimationFromFullID, Graph.MainScreen.SelectedAnim.SplitID, pb.JustStartedPlaying);
                     //var childGraphs = Graph.GetChildGraphs();
                     //foreach (var graph in childGraphs)
@@ -1376,7 +1376,7 @@ namespace DSAnimStudio.TaeEditor
         //{
         //    if (weaponModel != null && weaponModel.AnimContainer.Animations.Count > 0)
         //    {
-        //        // If weapon has TAE
+        //        // 如果 weapon 带 TAE
         //        if (weaponTae != null)
         //        {
         //            var compositeAnimID = solver.GetCompositeAnimIDOfAnimInTAE(Graph.MainScreen.SelectedTae, Graph.MainScreen.SelectedTaeAnim);
@@ -1414,7 +1414,7 @@ namespace DSAnimStudio.TaeEditor
         //        }
         //        else
         //        {
-        //            // If weapon has no TAE, it's usually just the player's TAE anim entry ID as an anim name.
+        //            // 如果 weapon 没有 TAE，那通常就是把玩家的 TAE anim entry ID 当成 anim 名字用。
         //            var simpleAnimID = solver.GetHKXNameIgnoreReferences(Graph.MainScreen.SelectedTae, Graph.MainScreen.SelectedTaeAnim);
         //            weaponModel.AnimContainer.CurrentAnimationName = simpleAnimID;
         //        }
@@ -1488,7 +1488,7 @@ namespace DSAnimStudio.TaeEditor
                 //}
 
 
-                //V2.0: See if this needs something similar in the new system.
+                //V2.0：看看新系统里是不是也需要类似的东西。
                 //CurrentModel.AnimContainer.StoreRootMotionRotation();
 
                 //CurrentModel.AnimContainer.CurrentAnimation.RotMatrixAtStartOfAnim
@@ -1568,7 +1568,7 @@ namespace DSAnimStudio.TaeEditor
                 }
 
 
-                //V2.0: Check
+                //V2.0: 检查
                 //CurrentModel.AnimContainer.CurrentAnimation.Reset(CurrentModel.AnimContainer.RootMotionTransform.GetRootMotionVector4());
 
                 //CurrentModel.AnimContainer.CurrentAnimation.SyncRootMotion(CurrentModel.AnimContainer.RootMotionTransform.GetRootMotionVector4());
@@ -1596,7 +1596,7 @@ namespace DSAnimStudio.TaeEditor
 
                 //if (CurrentModel.AnimContainer.CurrentAnimation != null)
                 //{
-                //    //V2.0: Check
+                //    //V2.0: 检查
                 //    //CurrentModel.AnimContainer.CurrentAnimation.Reset(CurrentModel.AnimContainer.RootMotionTransform.GetRootMotionVector4());
 
                 //    //CurrentModel.AnimContainer.CurrentAnimation.SyncRootMotion(CurrentModel.AnimContainer.RootMotionTransform.GetRootMotionVector4());

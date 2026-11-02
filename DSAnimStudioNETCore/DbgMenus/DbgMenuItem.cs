@@ -336,10 +336,10 @@ namespace DSAnimStudio.DbgMenus
             int prevIndex = SelectedIndex;
             SelectedIndex += incrementAmount;
 
-            //If upper bound reached
+            //如果到上界了
             if (SelectedIndex >= Items.Count)
             {
-                //If already at end and just tapped button
+                //如果已经到末尾了，还又点了一下按钮
                 if (prevIndex == Items.Count - 1 && !isRepeat)
                     SelectedIndex = 0; //Wrap Around
                 else
@@ -352,10 +352,10 @@ namespace DSAnimStudio.DbgMenus
             int prevIndex = SelectedIndex;
             SelectedIndex -= incrementAmount;
 
-            //If upper bound reached
+            //如果到上界了
             if (SelectedIndex < 0)
             {
-                //If already at end and just tapped button
+                //如果已经到末尾了，还又点了一下按钮
                 if (prevIndex == 0 && !isRepeat)
                     SelectedIndex = Items.Count - 1; //Wrap Around
                 else
@@ -534,8 +534,8 @@ namespace DSAnimStudio.DbgMenus
             else
             {
                 UICursorBlinkTimer = UICursorBlinkTimerMax;
-                // If menu is closed, have the cursor visible, ready for when its reopened
-                // If menu is visible but not closed, make cursor not visible
+                // 菜单关掉的时候让光标可见，等它重新打开时随时能用
+                // 菜单可见但没关掉的时候，把光标设成不可见
                 UICursorBlinkState = MenuOpenState == DbgMenuOpenState.Closed;
             }
         }
@@ -563,11 +563,11 @@ namespace DSAnimStudio.DbgMenus
 
             float menuBackgroundOpacityMult = MenuOpenState == DbgMenuOpenState.Open ? 1.0f : 0f;
 
-            // Draw menu background rect
+            // 绘制菜单背景矩形
 
-            //---- Full Background
+            //---- 完整背景
             GFX.SpriteBatch.Draw(Main.WHITE_TEXTURE, SubMenuRect, Color.Black * 0.5f * menuBackgroundOpacityMult);
-            //---- Slightly Darker Part On Top
+            //---- 顶上稍微深一点的那块
             GFX.SpriteBatch.Draw(Main.WHITE_TEXTURE, darkTitleRect,
                 Color.Black * 0.75f * menuBackgroundOpacityMult);
 
@@ -584,9 +584,9 @@ namespace DSAnimStudio.DbgMenus
                     startAndEndSpriteBatchForMe: false);
             }
                 
-            // Draw name on top
+            // 把名字画在最上层
             var sb = new StringBuilder();
-            //---- If in submenu, append the stack of menues preceding this one
+            //---- 如果在子菜单里，把前面压栈的那些菜单依次拼上
             if (DbgMenuStack.Count > 0)
             {
                 bool first = true;
@@ -600,10 +600,10 @@ namespace DSAnimStudio.DbgMenus
                 }
                 sb.Append(" > ");
             }
-            //---- Append the current menu name.
+            //---- 接上当前菜单名。
             sb.Append($"{Text}{(Items.Count > 0 ? $" ({Items.Count})" : "")}");
 
-            //---- Draw full menu name
+            //---- 绘制完整的菜单名
             DBG.DrawOutlinedText(sb.ToString(), darkTitleRect.TopLeftCorner() + new Vector2(8, 4), 
                 CustomColorFunction?.Invoke() ?? Color.White, DBG.DEBUG_FONT, startAndEndSpriteBatchForMe: false);
 
@@ -619,18 +619,18 @@ namespace DSAnimStudio.DbgMenus
                 if (Items.Count != prevFrameItemCount)
                     menuHeight = GetEntireMenuHeight();
 
-                // Only need to calculate scroll stuff if there's text that reaches past the bottom.
+                // 只有文字超出底部时，才需要算滚动那点东西。
                 if (menuHeight > SubMenuRect.Height)
                 {
-                    // Scroll selected into view.
+                    // 把选中项滚进视野。
 
-                    //---- If item is ABOVE view
+                    //---- 如果该项在视野上方
                     if (selectedItemRect.Top < SubMenuRect.Top)
                     {
                         int distanceNeededToScroll = SubMenuRect.Top - selectedItemRect.Top;
                         Scroll -= distanceNeededToScroll;
                     }
-                    //---- If item is BELOW view
+                    //---- 如果该项在视野下方
                     if (selectedItemRect.Bottom > SubMenuRect.Bottom)
                     {
                         int distanceNeededToScroll = selectedItemRect.Bottom - SubMenuRect.Bottom;
@@ -638,7 +638,7 @@ namespace DSAnimStudio.DbgMenus
                     }
                 }
 
-                // Clamp scroll
+                // 限制滚动范围
 
                 MaxScroll = Math.Max(GetEntireMenuHeight() - SubMenuRect.Height, 0);
                 if (Scroll > MaxScroll)
@@ -646,7 +646,7 @@ namespace DSAnimStudio.DbgMenus
                 else if (Scroll < 0)
                     Scroll = 0;
 
-                // Debug display of menu item rectangles:
+                // 菜单项矩形的调试显示：
                 //for (int i = 0; i < Items.Count; i++)
                 //{
                 //    var TEST_DebugDrawItemRect = GetItemDisplayRect(i, SubMenuRect);
@@ -656,7 +656,7 @@ namespace DSAnimStudio.DbgMenus
                 //    GFX.SpriteBatch.End();
                 //}
 
-                // ONLY draw the menu items that are in-frame
+                // 只画落在画面内的菜单项
 
                 int roughStartDrawIndex = (int)((Scroll / menuHeight) * (Items.Count - 1)) - 1;
                 int roughEndDrawIndex = (int)(((Scroll + MenuRect.Height) / menuHeight) * (Items.Count - 1)) + 1;
@@ -673,7 +673,7 @@ namespace DSAnimStudio.DbgMenus
 
                 GFX.SpriteBatchEnd();
 
-                // Store current viewport, then switch viewport to JUST the menu rect
+                // 存下当前 viewport，然后把 viewport 切成只有菜单矩形那块
                 var oldViewport = GFX.Device.Viewport;
                 GFX.Device.Viewport = new Viewport(
                     oldViewport.X + SubMenuRect.X,
@@ -682,10 +682,10 @@ namespace DSAnimStudio.DbgMenus
                     SubMenuRect.Height);
                 
                 GFX.SpriteBatchBegin();
-                // ---- These braces manually force a smaller scope so we 
-                //      don't forget to return to the old viewport immediately afterward.
+                // ---- 这对大括号手动圈出个更小的作用域，好让我们 
+                //      紧接着别忘了切回原来的 viewport。
                 {
-                    // Draw Items
+                    // 绘制条目
 
                     var selectionPrefixTextSize = Vector2.Zero;// FONT.MeasureString($"  {UICursorBlinkString} ");
 
@@ -696,7 +696,7 @@ namespace DSAnimStudio.DbgMenus
 
                         var itemRect = GetItemDisplayRect(i, SubMenuRect);
 
-                        // Check if this item is inside the actual menu rectangle.
+                        // 检查这一项在不在真正的菜单矩形里。
                         if (SubMenuRect.Intersects(itemRect))
                         {
                             var itemTextColor = Items[i].CustomColorFunction?.Invoke() ?? ((SelectedIndex == i
@@ -722,8 +722,8 @@ namespace DSAnimStudio.DbgMenus
                             }
 
                                 
-                            // We have to SUBTRACT the menu top/left coord because the string 
-                            // drawing is relative to the VIEWPORT, which takes up just the actual menu rect
+                            // 必须减去菜单的 top/left 坐标，因为字符串 
+                            // 绘制是相对 VIEWPORT 的，而 VIEWPORT 只占真正的菜单矩形那块
                             DBG.DrawOutlinedText(entryText,
                                 new Vector2(itemRect.X - SubMenuRect.X, itemRect.Y - SubMenuRect.Y),
                                 itemTextColor, FONT, startAndEndSpriteBatchForMe: false);
@@ -731,24 +731,24 @@ namespace DSAnimStudio.DbgMenus
 
                     }
 
-                    // Draw Scrollbar
-                    // Only if there's stuff that passes the bottom of the menu.
+                    // 绘制滚动条
+                    // 只有当有内容越过菜单底部时才做。
                     if (menuHeight > SubMenuRect.Height)
                     {
-                        //---- Draw Scrollbar Background
+                        //---- 绘制滚动条背景
                         GFX.SpriteBatch.Draw(Main.WHITE_TEXTURE,
                             new Rectangle(0, 0, 8, SubMenuRect.Height), Color.White * 0.5f * menuBackgroundOpacityMult);
 
                         float curScrollRectTop = (Scroll / menuHeight) * SubMenuRect.Height;
                         float curScrollRectHeight = (SubMenuRect.Height / menuHeight) * SubMenuRect.Height;
 
-                        //---- Scroll Scrollbar current scroll
+                        //---- 滚动滚动条当前的位置
                         GFX.SpriteBatch.Draw(Main.WHITE_TEXTURE,
                             new Rectangle(0, (int)curScrollRectTop, 8, (int)curScrollRectHeight),
                             Color.White * 0.75f * menuBackgroundOpacityMult);
                     }
                 }
-                //---- Return to old viewport
+                //---- 切回原来的 viewport
                 GFX.SpriteBatchEnd();
                 GFX.Device.Viewport = oldViewport;
                 

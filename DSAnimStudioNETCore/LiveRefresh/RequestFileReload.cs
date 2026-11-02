@@ -13,7 +13,7 @@ namespace DSAnimStudio.LiveRefresh
             if (entityName == null)
                 return false;
             entityName = entityName.ToLower();
-            // Character reload
+            // 角色重载
             if (entityName.StartsWith("c"))
             {
                 switch (zzz_DocumentManager.CurrentDocument.GameRoot.GameType)
@@ -27,7 +27,7 @@ namespace DSAnimStudio.LiveRefresh
                         return true;
                 }
             }
-            // Object reload
+            // 对象重载
             else if (entityName.StartsWith("o"))
             {
                 switch (zzz_DocumentManager.CurrentDocument.GameRoot.GameType)
@@ -287,7 +287,7 @@ namespace DSAnimStudio.LiveRefresh
                                 Memory.WriteInt8(chrReload_DataSetup + 0x70, 0x1F); // String length
                                 Memory.WriteBytes(chrReload_DataSetup + 0x100, chrNameBytes);
 
-                                // Crash fix offset, last updated for 1.05
+                                // 崩溃修复偏移，最后更新到 1.05
                                 var writeBytes = new byte[3];
                                 if (zzz_DocumentManager.CurrentDocument.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.ER or SoulsAssetPipeline.SoulsGames.ERNR)
                                     writeBytes = Memory.GetIngameReloadIniOptionByteArrayHex("ER_CrashPatchOffset_WriteBytes") ?? new byte[] { 0x48, 0x31, 0xD2 };

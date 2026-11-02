@@ -145,7 +145,7 @@ namespace DSAnimStudio
             //var x = new FlverShaderConfig();
             //foreach (var f in _fields)
             //    f.SetValue(x, f.GetValue(this));
-            //// Dereference lists
+            //// 解引用列表
             //x.SamplerConfigs = SamplerConfigs.Select(x => x.GetClone()).ToList();
             //return x;
             var jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(this);

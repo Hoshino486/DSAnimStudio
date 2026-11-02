@@ -1,4 +1,4 @@
-#define WIN64
+﻿#define WIN64
 
 /* ========================================================================================== */
 /*                                                                                            */
@@ -1784,7 +1784,7 @@ namespace FMOD
         }
 
 
-        // Pre-init functions.
+        // 预初始化函数。
         public RESULT setOutput              (OUTPUTTYPE output)
         {
             return FMOD_System_SetOutput(systemraw, output);
@@ -1799,7 +1799,7 @@ namespace FMOD
         }
         public RESULT getDriverInfo          (int id, [MarshalAs(UnmanagedType.LPWStr)]StringBuilder name, int namelen, ref GUID guid)
         {
-            //use multibyte version
+            //使用多字节版本
             return FMOD_System_GetDriverInfoW(systemraw, id, name, namelen, ref guid);
         }
         public RESULT getDriverCaps          (int id, ref CAPS caps, ref int controlpaneloutputrate, ref SPEAKERMODE controlpanelspeakermode)
@@ -1871,7 +1871,7 @@ namespace FMOD
             return FMOD_System_SetCallback(systemraw, callback);
         }
                          
-        // Plug-in support
+        // 插件支持
         public RESULT setPluginPath          (string path)
         {
             return FMOD_System_SetPluginPath(systemraw, path);
@@ -1915,7 +1915,7 @@ namespace FMOD
         }
 
 
-        // Init/Close 
+        // 初始化/关闭 
         public RESULT init                   (int maxchannels, INITFLAGS flags, IntPtr extradriverdata)
         {
             return FMOD_System_Init(systemraw, maxchannels, flags, extradriverdata);
@@ -1926,7 +1926,7 @@ namespace FMOD
         }
 
 
-        // General post-init system functions
+        // 通用的初始化后系统函数
         public RESULT update                 ()
         {
             return FMOD_System_Update(systemraw);
@@ -1988,7 +1988,7 @@ namespace FMOD
         }
 
 
-        // System information functions.
+        // 系统信息函数。
         public RESULT getVersion             (ref uint version)
         {
             return FMOD_System_GetVersion(systemraw, ref version);
@@ -2031,7 +2031,7 @@ namespace FMOD
         }
 
 
-        // Sound/DSP/Channel creation and retrieval. 
+        // 声音／DSP／Channel 的创建与获取。 
         public RESULT createSound            (string name_or_data, MODE mode, ref CREATESOUNDEXINFO exinfo, ref Sound sound)
         {
             RESULT result           = RESULT.OK;
@@ -2573,7 +2573,7 @@ namespace FMOD
             return result; 
         }
 
-        // Reverb api
+        // 混响 API
         public RESULT setReverbProperties    (ref REVERB_PROPERTIES prop)
         {
             return FMOD_System_SetReverbProperties(systemraw, ref prop);
@@ -2592,7 +2592,7 @@ namespace FMOD
             return FMOD_System_GetReverbAmbientProperties(systemraw, ref prop);
         }
 
-        // System level DSP access.
+        // 系统级 DSP 访问。
         public RESULT getDSPHead             (ref DSP dsp)
         {
             RESULT result   = RESULT.OK;
@@ -2671,14 +2671,14 @@ namespace FMOD
         }
                                             
         
-        // Recording api
+        // 录制 API
         public RESULT getRecordNumDrivers    (ref int numdrivers)
         {
             return FMOD_System_GetRecordNumDrivers(systemraw, ref numdrivers);
         }
         public RESULT getRecordDriverInfo    (int id, [MarshalAs(UnmanagedType.LPWStr)]StringBuilder name, int namelen, ref GUID guid)
         {
-            //use multibyte version
+            //使用多字节版本
             return FMOD_System_GetRecordDriverInfoW(systemraw, id, name, namelen, ref guid);
         }
         public RESULT getRecordDriverCaps    (int id, ref CAPS caps, ref int minfrequency, ref int maxfrequency)
@@ -2711,7 +2711,7 @@ namespace FMOD
         }
          
       
-        // Geometry api 
+        // 几何 API 
         public RESULT createGeometry         (int maxpolygons, int maxvertices, ref Geometry geometry)
         {
             RESULT result           = RESULT.OK;
@@ -2789,7 +2789,7 @@ namespace FMOD
             return FMOD_System_GetGeometryOcclusion(systemraw, ref listener, ref source, ref direct, ref reverb);
         }
   
-        // Network functions
+        // 网络函数
         public RESULT setNetworkProxy               (string proxy)
         {
             return FMOD_System_SetNetworkProxy(systemraw, proxy);
@@ -2807,7 +2807,7 @@ namespace FMOD
             return FMOD_System_GetNetworkTimeout(systemraw, ref timeout);
         }
                                      
-        // Userdata set/get                         
+        // Userdata 设置／获取                         
         public RESULT setUserData            (IntPtr userdata)
         {
             return FMOD_System_SetUserData(systemraw, userdata);
@@ -4217,7 +4217,7 @@ namespace FMOD
         }
 
 
-        // Nested channel groups.
+        // 嵌套的 channel group。
         public RESULT addGroup               (ChannelGroup group)
         {
             return FMOD_ChannelGroup_AddGroup(channelgroupraw, group.getRaw());
@@ -4360,7 +4360,7 @@ namespace FMOD
         }
 
 
-        // Information only functions.
+        // 仅提供信息的函数。
         public RESULT getName                (StringBuilder name, int namelen)
         {
             return FMOD_ChannelGroup_GetName(channelgroupraw, name, namelen);
@@ -4411,7 +4411,7 @@ namespace FMOD
         }
 
 
-        // Userdata set/get.
+        // Userdata 设置／获取。
         public RESULT setUserData            (IntPtr userdata)
         {
             return FMOD_ChannelGroup_SetUserData(channelgroupraw, userdata);
@@ -4564,7 +4564,7 @@ namespace FMOD
             return result; 
         }
 
-        // SoundGroup control functions.
+        // SoundGroup 控制函数。
         public RESULT setMaxAudible          (int maxaudible)
         {
             return FMOD_SoundGroup_SetMaxAudible(soundgroupraw, maxaudible);
@@ -4605,7 +4605,7 @@ namespace FMOD
             return FMOD_SoundGroup_Stop(soundgroupraw);
         }
 
-        // Information only functions.
+        // 仅提供信息的函数。
         public RESULT getName                (StringBuilder name, int namelen)
         {
             return FMOD_SoundGroup_GetName(soundgroupraw, name, namelen);
@@ -4651,7 +4651,7 @@ namespace FMOD
             return FMOD_SoundGroup_GetNumPlaying(soundgroupraw, ref numplaying);
         }
 
-        // Userdata set/get.
+        // Userdata 设置／获取。
         public RESULT setUserData            (IntPtr userdata)
         {
             return FMOD_SoundGroup_SetUserData(soundgroupraw, userdata);
@@ -5428,7 +5428,7 @@ namespace FMOD
             return FMOD_Reverb_Release(reverbraw);
         }
 
-        // Reverb manipulation.
+        // 混响操控。
         public RESULT set3DAttributes(ref VECTOR position, float mindistance, float maxdistance)
         {
             return FMOD_Reverb_Set3DAttributes(reverbraw, ref position, mindistance, maxdistance);
@@ -5461,7 +5461,7 @@ namespace FMOD
             return result;
         }
 
-        // Userdata set/get.
+        // Userdata 设置／获取。
         public RESULT setUserData(IntPtr userdata)
         {
             return FMOD_Reverb_SetUserData(reverbraw, userdata);

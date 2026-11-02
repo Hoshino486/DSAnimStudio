@@ -258,7 +258,7 @@ namespace DSAnimStudio
                 }
             }
 
-            //// For DS1 FLVER, just mess with the mesh bones beforehand, way simpler.
+            //// 对 DS1 的 FLVER，干脆提前去动 Mesh 的 Bone，简单太多了。
             //if (finalBoneRemapper != null && flvr.Header.Version <= 0x2000D)
             //{
             //    foreach (var m in flvr.Meshes)
@@ -281,7 +281,7 @@ namespace DSAnimStudio
             
 
 
-            // TEMP DEBUG TEST DELETE ME
+            // 临时调试测试，删了我
 
             //if (flvr.Materials[mesh.MaterialIndex].MTD.ToUpper().Contains("AX"))
             //{
@@ -293,7 +293,7 @@ namespace DSAnimStudio
 
 
 
-            // MTD lookup
+            // MTD 查找
             //MTD mtd = null; //InterrootLoader.GetMTD(flvr.Materials[mesh.MaterialIndex].MTD);
 
             //var debug_LowestBoneWeight = float.MaxValue;
@@ -368,7 +368,7 @@ namespace DSAnimStudio
                     //vert.BoneWeights[3] = 0;
                 }
 
-                // Apply bind pose of bone to actual vert if !mesh.Dynamic
+                // 若 !mesh.Dynamic，就把 Bone 的绑定姿势应用到实际 Vertex 上
                 if (mesh.Dynamic == 0)
                 {
                     //ApplySkin(vert, flvr.Bones.Select(b => GetBoneMatrix(b)).ToList(), mesh.BoneIndices, (flvr.Header.Version <= 0x2000D));
@@ -664,7 +664,7 @@ namespace DSAnimStudio
                     //{
                     //    if (mtd == null)
                     //    {
-                    //        // Really stupid heuristic to determine light map UVs without reading mtd files or something
+                    //        // 一个非常蠢的启发式，用来在不读 mtd 文件之类的前提下判断 light map 的 UV
                     //        if (vert.UVs.Count > 2 && flvr.Materials[mesh.MaterialIndex].Textures.Count > 11)
                     //        {
                     //            MeshVertices[i].TextureCoordinate2 = new Vector2(vert.UVs[2].X, vert.UVs[2].Y);
@@ -676,7 +676,7 @@ namespace DSAnimStudio
                     //    }
                     //    else
                     //    {
-                    //        // Better heuristic with MTDs
+                    //        // 有 MTD 时用更好的启发式
                     //        int uvindex = mtd.Textures.Find(tex => tex.Type.ToUpper() == "G_LIGHTMAP" || tex.Type.ToUpper() == "G_DOLTEXTURE1").UVNumber;
                     //        int uvoffset = 1;
                     //        for (int j = 1; j < uvindex; j++)
@@ -741,7 +741,7 @@ namespace DSAnimStudio
                 if (faceset.Indices.Count == 0)
                     continue;
 
-                //At this point they use 32-bit faceset vertex indices
+                //到这一步它们用的是 32 位 faceset Vertex 索引
                 bool is32bit = flvr.Header.Version > 0x20005;
 
                 var newFaceSet = new FlverSubmeshRendererFaceSet()
@@ -872,7 +872,7 @@ namespace DSAnimStudio
                 }
             }
 
-            // MTD lookup
+            // MTD 查找
             //MTD mtd = null; //InterrootLoader.GetMTD(flvr.Materials[mesh.MaterialIndex].MTD);
 
             //var debug_LowestBoneWeight = float.MaxValue;
@@ -945,7 +945,7 @@ namespace DSAnimStudio
                         //vert.BoneWeights[3] = 0;
                     }
 
-                    // Apply bind pose of bone to actual vert if !mesh.Dynamic
+                    // 若 !mesh.Dynamic，就把 Bone 的绑定姿势应用到实际 Vertex 上
                     if (mesh.Dynamic == 0)
                     {
                         //ApplySkin(vert, flvr.Bones.Select(b => GetBoneMatrix(b)).ToList(), mesh.BoneIndices, (flvr.Header.Version <= 0x2000D));
@@ -981,7 +981,7 @@ namespace DSAnimStudio
 
                     
                     
-                    // File always has per-mesh bone indices in FLVER0
+                    // FLVER0 里文件总是带着按 Mesh 区分的 Bone 索引
                     for (int v = 0; v < 4; v++)
                     {
                         int perMeshIndex = vert.BoneIndices[v];
@@ -1179,7 +1179,7 @@ namespace DSAnimStudio
                         //{
                         //    if (mtd == null)
                         //    {
-                        //        // Really stupid heuristic to determine light map UVs without reading mtd files or something
+                        //        // 一个非常蠢的启发式，用来在不读 mtd 文件之类的前提下判断 light map 的 UV
                         //        if (vert.UVs.Count > 2 && flvr.Materials[mesh.MaterialIndex].Textures.Count > 11)
                         //        {
                         //            MeshVertices[i].TextureCoordinate2 = new Vector2(vert.UVs[2].X, vert.UVs[2].Y);
@@ -1191,7 +1191,7 @@ namespace DSAnimStudio
                         //    }
                         //    else
                         //    {
-                        //        // Better heuristic with MTDs
+                        //        // 有 MTD 时用更好的启发式
                         //        int uvindex = mtd.Textures.Find(tex => tex.Type.ToUpper() == "G_LIGHTMAP" || tex.Type.ToUpper() == "G_DOLTEXTURE1").UVNumber;
                         //        int uvoffset = 1;
                         //        for (int j = 1; j < uvindex; j++)
@@ -1278,7 +1278,7 @@ namespace DSAnimStudio
             if (VertBuffer == null)
                 return;
 
-            // TODO add material-specific memes here.
+            // TODO：在这里加上 Material 专属的那些梗。
             bool enableWireframeOverlay = GFX.FlverWireframeOverlay_Enabled;
             bool wireframeOverlayObeysAlpha = GFX.FlverWireframeOverlay_ObeysTextureAlphas;
             Vector4 wireframeOverlayColor = GFX.FlverWireframeOverlay_Color;
@@ -1485,8 +1485,8 @@ namespace DSAnimStudio
             this.BoneMatrices_RefPose = null;
             this.Parent = null;
 
-            // Just leave the texture data as-is, since 
-            // TexturePool handles memory cleanup
+            // Texture 数据就原样放着，因为 
+            // TexturePool 会负责内存清理
         }
     }
 }

@@ -109,7 +109,7 @@ namespace DSAnimStudio
                         {
                             float curModTime = MODEL.AnimContainer.CurrentAnimTime % MODEL.AnimContainer.CurrentAnimDuration.Value;
                             
-                            // Limit time
+                            // 限制时间
                             if (curModTime > wpnMdl.AnimContainer.CurrentAnimDuration.Value)
                                 curModTime = wpnMdl.AnimContainer.CurrentAnimDuration.Value;
                             

@@ -36,14 +36,14 @@ namespace DSAnimStudio.DebugPrimitives
             int startIndex = Array.IndexOf(Vertices, startVert);
             int endIndex = Array.IndexOf(Vertices, endVert);
 
-            //If start vertex can't be recycled from an old one, make a new one.
+            //如果起始 vertex 没法从旧的里面回收，就新建一个。
             if (startIndex == -1)
             {
                 AddVertex(startVert);
                 startIndex = Vertices.Length - 1;
             }
 
-            //If end vertex can't be recycled from an old one, make a new one.
+            //如果结束 vertex 没法从旧的里面回收，就新建一个。
             if (endIndex == -1)
             {
                 AddVertex(endVert);
@@ -59,7 +59,7 @@ namespace DSAnimStudio.DebugPrimitives
 
                     if (lineStart == startIndex && lineEnd == endIndex)
                     {
-                        // Line literally already exists lmao
+                        // 这条线明明就已经存在了 lmao
                         return;
                     }
                 }

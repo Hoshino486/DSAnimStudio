@@ -21,12 +21,12 @@ namespace DSAnimStudio.DebugPrimitives
                 float angle = (1.0f * i / numSegments) * MathHelper.TwoPi;
                 float x = (float)Math.Cos(angle) * range;
                 float z = (float)Math.Sin(angle) * range;
-                //Very last one wraps around to the first one
+                //最后一个要绕回到第一个
                 if (i == numSegments - 1)
                 {
                     float x_next = (float)Math.Cos(0);
                     float z_next = (float)Math.Sin(0);
-                    // Create line to wrap around to first point
+                    // 创建一条绕回第一个点的线
                     //---- Top
                     AddLine(new Vector3(x, top, z), new Vector3(x_next, top, z_next), color);
                     //---- Bottom
@@ -38,14 +38,14 @@ namespace DSAnimStudio.DebugPrimitives
                     float x_next = (float)Math.Cos(angle_next);
                     float z_next = (float)Math.Sin(angle_next);
 
-                    // Create line to next point in ring
+                    // 创建一条连到环中下一个点的线
                     //---- Top
                     AddLine(new Vector3(x, top, z), new Vector3(x_next, top, z_next), color);
                     //---- Bottom
                     AddLine(new Vector3(x, bottom, z), new Vector3(x_next, bottom, z_next), color);
                 }
 
-                // Make pillar from top to bottom
+                // 从上到下建一根柱子
                 AddLine(new Vector3(x, bottom, z), new Vector3(x, top, z), color);
             }
         }

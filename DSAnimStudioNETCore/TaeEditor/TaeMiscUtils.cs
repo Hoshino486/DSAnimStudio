@@ -7,7 +7,7 @@ namespace DSAnimStudio.TaeEditor
     {
         private static Random RAND = new Random();
         /// <summary>
-        /// Returns a random pastel color
+        /// 返回一个随机的柔和色
         /// </summary>
         /// <returns></returns>
         public static Color GetRandomPastelColor()

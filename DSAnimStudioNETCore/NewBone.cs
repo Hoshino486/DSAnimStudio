@@ -1,4 +1,4 @@
-using DSAnimStudio.DebugPrimitives;
+﻿using DSAnimStudio.DebugPrimitives;
 using Microsoft.Xna.Framework;
 using SoulsFormats;
 using SoulsAssetPipeline.Animation;
@@ -108,7 +108,7 @@ namespace DSAnimStudio
         public bool IsDebugDrawText;
         
         
-        // FLVER stuff
+        // FLVER 相关的玩意儿
         public Matrix? NubReferenceFKMatrix = null;
         public bool IsNub = false;
         public bool StartedAsNub = false;
@@ -130,7 +130,7 @@ namespace DSAnimStudio
             IsNub = false;
             //ParentIndex = -1;
             
-            // Remove from old parent if needed.
+            // 需要的话从旧父节点上移除。
             if (ParentIndex >= 0)
             {
                 var ogParent = thisBoneList[ParentIndex];
@@ -266,7 +266,7 @@ namespace DSAnimStudio
 
             }
 
-            //ac6 test fix?
+            //ac6 的测试修复？
             StartedAsNub = IsNub = ((bone.Flags & FLVER.Node.NodeFlags.Disabled) != 0);
 
             BoundingBoxPrim = new DbgPrimWireBox(Transform.Default,

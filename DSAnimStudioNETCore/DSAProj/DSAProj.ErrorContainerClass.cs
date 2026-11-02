@@ -202,7 +202,7 @@ namespace DSAnimStudio
                     else
                     {
                         RightClickMenuOpen = false;
-                        // close popup?
+                        // 关闭弹窗？
                     }
                     
                     if (ImGui.BeginPopup(Loc.TF("Popup{0}", GUID)))

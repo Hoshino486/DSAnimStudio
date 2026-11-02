@@ -71,7 +71,7 @@ namespace DSAnimStudio
                 for (int i = 0; i < hk_skeleton.Transforms.Size; i++)
                 {
                     var t = hk_skeleton.Transforms[i];
-                    //TODO: Finish?
+                    //TODO：要不要做完？
                 }
             }
 
@@ -138,7 +138,7 @@ namespace DSAnimStudio
 
             
 
-            //TODO: IMPLEMENT ANNOTATION TRACK READ IN LEGACY HKX TO TRANSFER IT TO HKX2
+            //TODO：在旧版 HKX 里实现 Annotation 轨道读取，好转到 HKX2 去
 
             //anim.m_annotationTracks = new List<HKX2.hkaAnnotationTrack>();
             //for (int i = 0; i < hk_anim.TransformTrackCount; i++)

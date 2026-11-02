@@ -212,7 +212,7 @@ namespace DSAnimStudio.TaeEditor
             if (MODEL.ChrAsm != null)
             {
                 
-                // When viewing combos, retain weapon style from before.
+                // 看 combo 的时候，保留之前的 weapon style。
                 if (Graph?.ViewportInteractor?.NewIsComboActive ?? false)
                 {
                     desiredWeaponStyle = MODEL.ChrAsm.WeaponStyle;
@@ -389,7 +389,7 @@ namespace DSAnimStudio.TaeEditor
                             // }
 
 
-                            // Meme events that have special active logic
+                            // 那些带有特殊激活逻辑的 meme event
                             if (cfg.SimEnabled_WeaponStyle && act.Type == 32 && MODEL.ChrAsm != null)
                             {
                                 if (slotTime >= act.StartTime)
@@ -412,7 +412,7 @@ namespace DSAnimStudio.TaeEditor
                                         MODEL.DrawMask[i] = false;
                                     else if (mask[i] == 1)
                                         MODEL.DrawMask[i] = true;
-                                    // FF is skip
+                                    // FF 就是 skip
                                 }
                             }
 
@@ -427,7 +427,7 @@ namespace DSAnimStudio.TaeEditor
 
 
 
-                            //Defaults to true.
+                            //默认是 true。
                             act.IsActive_BasedOnStateInfo = true;
 
                             var stateInfoCheck = act.HasInternalSimField("StateInfo");
@@ -502,7 +502,7 @@ namespace DSAnimStudio.TaeEditor
                                 if (act.Type == 1)
                                 {
                                     spawnType = NewDummyPolyManager.HitboxSpawnTypes.AttackBehavior;
-                                    //SDT and onward have a field for this finally, so use it
+                                    //SDT 及之后的版本总算有这个字段了，那就用它
                                     if (act.HasInternalSimField("Source"))
                                     {
                                         byte sourceType = Convert.ToByte(act.ReadInternalSimField("Source"));
@@ -758,7 +758,7 @@ namespace DSAnimStudio.TaeEditor
                                     TaeAnimRequest_SekiroFace.TaeAnimID = SplitAnimID.FromFullID(Document.GameRoot, animID);
                                     TaeAnimRequest_SekiroFace.EnableLoop = true;
 
-                                    // Replicate a bug in Sekiro
+                                    // 复刻 Sekiro 里的一个 bug
                                     if (weight > 0)
                                         TaeAnimRequest_SekiroFace.DesiredWeight = 1;
                                     else
@@ -794,7 +794,7 @@ namespace DSAnimStudio.TaeEditor
 
 
 
-                            // Rumble Cam
+                            // 震动镜头
                             else if (cfg.SimEnabled_RumbleCam && NewSimulation_EvCheck_RumbleCam(act))
                             {
                                 if (act.NewSimulationEnter && playbackCursorMoving)
@@ -875,7 +875,7 @@ namespace DSAnimStudio.TaeEditor
                                 MODEL.Opacity = MathHelper.Lerp(fadeStartOpacity, fadeEndOpacity, timeSinceFadeStart / fadeDuration);
                             }
 
-                            // DS1 Remo SetOpacity
+                            // DS1 的 Remo SetOpacity
                             else if (cfg.SimEnabled_SetOpacity && act.Type == 160
                                 && (Document.GameRoot.GameType is SoulsGames.DS1 or SoulsGames.DS1R)
                                 && Graph?.ViewportInteractor?.EntityType == TaeViewportInteractor.TaeEntityType.REMO)
@@ -969,7 +969,7 @@ namespace DSAnimStudio.TaeEditor
 
                                     if (TestChrTargetPos == null && cancelIfNoTarget)
                                     {
-                                        //Test if this is right way to skip? Probably is.
+                                        //试试看这是不是正确的 skip 姿势？估计是吧。
                                         continue;
                                     }
 
@@ -1282,8 +1282,8 @@ namespace DSAnimStudio.TaeEditor
         {
             if (ev.HasInternalSimField("FFXID") && ev.HasInternalSimField("DummyPolyID"))
             {
-                // Using convert here since they might be various numeric
-                // value types.
+                // 这里用 convert，因为它们会是各种不同的 numeric 类型
+                // 值类型。
                 int ffxid = Convert.ToInt32(ev.ReadInternalSimField("FFXID"));
                 int dummyPolyID = Convert.ToInt32(ev.ReadInternalSimField("DummyPolyID"));
 
@@ -2002,7 +2002,7 @@ namespace DSAnimStudio.TaeEditor
                     falloffEnd = (float)ev.ReadInternalSimField("FalloffEnd");
                 }
 
-                // Note: type 146 and 147 in sekiro have 'bool UnkFlag', figure out what it does
+                // 注意：sekiro 里的 type 146 和 147 有个 'bool UnkFlag'，搞清楚它是干什么的
 
                 //RumbleCamManager.ClearActive();
                 Document.RumbleCamManager.AddRumbleCam(Document, rumbleCamID, location, falloffStart, falloffEnd);
@@ -2239,7 +2239,7 @@ namespace DSAnimStudio.TaeEditor
 
             if (actBox.Type == 7052 && Document.GameRoot.GameType is SoulsGames.DS1R && Main.IsNightfallBuild)
             {
-                // Already done in GetSoundPlayInfoOfBox
+                // 在 GetSoundPlayInfoOfBox 里已经做过了
                 //float lifetimeMin = Convert.ToSingle(actBox.ReadInternalSimField("LifetimeMin"));
                 //float lifetimeMax = Convert.ToSingle(actBox.ReadInternalSimField("LifetimeMax"));
                 //soundInfo.NightfallLifetime = (float)(lifetimeMin + (Main.Rand.NextDouble() * (lifetimeMax - lifetimeMin)));

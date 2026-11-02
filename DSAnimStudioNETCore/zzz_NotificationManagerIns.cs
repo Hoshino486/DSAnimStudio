@@ -211,7 +211,7 @@ namespace DSAnimStudio
                         (int)Math.Round(notification.TextSize.X + (PaddingAroundStrings.X * 2)),
                         (int)Math.Round(notification.TextSize.Y + (PaddingAroundStrings.Y * 2)));
 
-                    // Only draw if onscreen.
+                    // 只在屏幕上可见时才画。
                     if (bgRect.Bottom >= 0)
                     {
                         Rectangle innerRect = new Rectangle(bgRect.X + PaddingAroundInnerRect, bgRect.Y + PaddingAroundInnerRect,

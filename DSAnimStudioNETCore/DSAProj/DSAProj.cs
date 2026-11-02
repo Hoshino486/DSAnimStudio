@@ -461,7 +461,7 @@ namespace DSAnimStudio
                     anim.ParentCategory = INNER_RegistCategory(newID.CategoryID);
                 }
                 anim.ParentCategory.SAFE_AddAnimation(anim);
-                //TODO: See if this lags lol
+                //TODO：看看这玩意儿会不会卡 lol
                 anim.ParentCategory.SAFE_ResortAnimIDs();
             }
         }
@@ -552,7 +552,7 @@ namespace DSAnimStudio
             if (AnimCategories.Contains(category))
                 AnimCategories.Remove(category);
 
-            // Actually, removing something from a sorted list shouldn't really cause any issues.
+            // 其实从已排序列表里删东西，本来也不该出什么问题。
             //_animCategoryListsNeedResorting = true;
         }
 
@@ -943,7 +943,7 @@ namespace DSAnimStudio
 
             //ErrorContainer.ClearErrors();
 
-            //// FIRST PASS
+            //// 第一遍
 
             //List<Animation> animationsInWrongCategory = new List<Animation>();
 
@@ -1021,7 +1021,7 @@ namespace DSAnimStudio
             //    });
             //}
 
-            //// SECOND PASS
+            //// 第二遍
             //foreach (var tae in allCategories)
             //{
             //    if (!tae.IsModified && !tae.ErrorContainer.AnyErrors())
@@ -1391,7 +1391,7 @@ namespace DSAnimStudio
 
                     if (isPlayerAnibnd)
                     {
-                        // Do not do this for non-player ones since those will be generating based on the anim entry IDs.
+                        // 非玩家的那些不要这么做，因为它们会按 anim 条目 ID 来生成。
                         var category = INNER_RegistCategory(taeBindIndex);
 
                         category.ActionSetVersion_ForMultiTaeOutput = (int)tae.ActionSetVersion;
@@ -1748,14 +1748,14 @@ namespace DSAnimStudio
                     if (!SoundBanksToLoad.Contains(s))
                         SoundBanksToLoad.Add(s);
                 }
-                // Preserve order of strings since it's the audio load order.
+                // 保持字符串顺序不变，因为这就是音频加载顺序。
             }
 
             INNER_FixupAfterLoading();
 
 
 
-            // Convert to latest file version upon loading.
+            // 加载时转换成最新的文件版本。
             if (FILE_VERSION != LATEST_FILE_VERSION)
             {
                 foreach (var tae in AnimCategories)

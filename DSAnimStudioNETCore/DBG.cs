@@ -232,7 +232,7 @@ namespace DSAnimStudio
 
         public static void CreateDebugPrimitives()
         {
-            // This is the green grid, which is just hardcoded lel
+            // 这就是那个绿色网格，纯粹是硬编码的 lel
             DbgPrim_OldGrid_XZ = new DbgPrimWireGrid(new Color(127, 127, 127), new Color(127, 127, 127), 100, 1);
             DbgPrim_OldGrid_XZ.OverrideColor = new Color(32, 112, 39);
             DbgPrim_OldGrid_XZ.Transform = Transform.Default;
@@ -255,14 +255,14 @@ namespace DSAnimStudio
             DbgPrim_Skybox.Transform = new Transform(Matrix.CreateScale(100));
 
 
-            // If you want to disable the grid on launch uncomment the next line.
+            // 如果想让网格在启动时禁用，就把下一行取消注释。
             //ShowGrid = false;
 
-            // If you want the menu to be CLOSED on launch uncomment the next line.
+            // 如果想让菜单在启动时处于关闭状态，就把下一行取消注释。
             DbgMenus.DbgMenuItem.MenuOpenState = DbgMenus.DbgMenuOpenState.Closed;
 
 
-            // Put stuff below for testing:
+            // 在下面放东西用来测试：
 
            
 
@@ -776,7 +776,7 @@ namespace DSAnimStudio
         private static void DrawTextOn3DLocation_Fast__OLD(Matrix m, Vector3 location, string text, 
             Color color, float physicalHeight, bool startAndEndSpriteBatchForMe = false)
         {
-            // Project the 3d position first
+            // 先把 3d 坐标投影出来
             Vector3 screenPos3D_Top = GFX.Device.Viewport.Project(location + new Vector3(0, physicalHeight / 2, 0),
                 GFX.CurrentWorldView.Matrix_Projection,
                 GFX.CurrentWorldView.Matrix_View, m * GFX.CurrentWorldView.Matrix_World);
@@ -795,7 +795,7 @@ namespace DSAnimStudio
             if (screenPos3D_Top.Z >= 1 || screenPos3D_Bottom.Z >= 1)
                 return;
 
-            // Just to make it easier to use we create a Vector2 from screenPos3D
+            // 只是为了用起来更方便，我们用 screenPos3D 造一个 Vector2
             Vector2 screenPos2D_Top = new Vector2(screenPos3D_Top.X, screenPos3D_Top.Y);
             Vector2 screenPos2D_Bottom = new Vector2(screenPos3D_Bottom.X, screenPos3D_Bottom.Y);
 
@@ -857,7 +857,7 @@ namespace DSAnimStudio
         //{
             
 
-        //    // Project the 3d position first
+        //    // 先把 3d 坐标投影出来
         //    Vector3 screenPos3D_Top = GFX.Device.Viewport.Project(location + new Vector3(0, physicalHeight / 2, 0),
         //        GFX.World.MatrixProjection, GFX.World.CameraTransform.CameraViewMatrix * Matrix.Invert(GFX.World.MatrixWorld), m);
 
@@ -876,7 +876,7 @@ namespace DSAnimStudio
 
             
 
-        //    // Just to make it easier to use we create a Vector2 from screenPos3D
+        //    // 只是为了用起来更方便，我们用 screenPos3D 造一个 Vector2
         //    Vector2 screenPos2D_Top = screenPixelOffset + new Vector2(screenPos3D_Top.X, screenPos3D_Top.Y);
 
         //    Vector2 screenPos2D_Bottom = screenPixelOffset + new Vector2(screenPos3D_Bottom.X, screenPos3D_Bottom.Y);
@@ -944,7 +944,7 @@ namespace DSAnimStudio
             //if (startAndEndSpriteBatchForMe)
             //    GFX.SpriteBatchBeginForText();
 
-            //// Top, Bottom, Left, Right
+            //// 上、下、左、右
             //if (font != DEBUG_FONT_SMALL)
             //{
             //    GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(1, 0), Color.Black, 0, scaleOrigin, Vector2.One * scale, SpriteEffects.None, depth + 0.000001f);
@@ -952,7 +952,7 @@ namespace DSAnimStudio
             //    GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(0, 1), Color.Black, 0, scaleOrigin, Vector2.One * scale, SpriteEffects.None, depth + 0.000001f);
             //    GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(0, -1), Color.Black, 0, scaleOrigin, Vector2.One * scale, SpriteEffects.None, depth + 0.000001f);
             //}
-            //// Top-Left, Top-Right, Bottom-Left, Bottom-Right
+            //// 左上、右上、左下、右下
             ////GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(-1, 1), Color.Black, 0, scaleOrigin, Vector2.One * scale, SpriteEffects.None, depth + 0.000001f);
             ////GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(-1, -1), Color.Black, 0, scaleOrigin, Vector2.One * scale, SpriteEffects.None, depth + 0.000001f);
             ////GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(1, 1), Color.Black, 0, scaleOrigin, Vector2.One * scale, SpriteEffects.None, depth + 0.000001f);
@@ -973,13 +973,13 @@ namespace DSAnimStudio
             if (startAndEndSpriteBatchForMe)
                 GFX.SpriteBatchBeginForText();
 
-            // Top, Bottom, Left, Right
+            // 上、下、左、右
             GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(1, 0), Color.Black, 0, scaleOrigin, scale, SpriteEffects.None, depth + 0.000001f);
             GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(-1, 0), Color.Black, 0, scaleOrigin, scale, SpriteEffects.None, depth + 0.000001f);
             GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(0, 1), Color.Black, 0, scaleOrigin, scale, SpriteEffects.None, depth + 0.000001f);
             GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(0, -1), Color.Black, 0, scaleOrigin, scale, SpriteEffects.None, depth + 0.000001f);
 
-            // Top-Left, Top-Right, Bottom-Left, Bottom-Right
+            // 左上、右上、左下、右下
             //GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(-1, 1), Color.Black, 0, scaleOrigin, Vector2.One * scale, SpriteEffects.None, depth + 0.000001f);
             //GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(-1, -1), Color.Black, 0, scaleOrigin, Vector2.One * scale, SpriteEffects.None, depth + 0.000001f);
             //GFX.SpriteBatch.DrawString(font ?? DEBUG_FONT, text, pos + new Vector2(1, 1), Color.Black, 0, scaleOrigin, Vector2.One * scale, SpriteEffects.None, depth + 0.000001f);

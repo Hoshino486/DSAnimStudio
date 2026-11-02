@@ -143,7 +143,7 @@
 //        //    {
 //        //        selectionColorPulseRadians += (elapsedTime * SelectionColorPulseRadiansPerSec);
 
-//        //        // Loop circle
+//        //        // 循环圆圈
 //        //        selectionColorPulseRadians = selectionColorPulseRadians % MathHelper.Pi;
 
 //        //        selectionColorPulseLerpRatio = (float)((Math.Cos(selectionColorPulseRadians > MathHelper.PiOver2 ? (selectionColorPulseRadians + MathHelper.Pi) : selectionColorPulseRadians) / 2.0) + 0.5);
@@ -226,7 +226,7 @@
 
 //                if (OwnerPane.PlaybackCursor.OldCurrentTime == 0)
 //                {
-//                    // Prevent an occasional double register?
+//                    // 防止偶尔重复注册？
 //                    prevHighlight = true;
 //                }
 

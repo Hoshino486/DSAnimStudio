@@ -122,9 +122,24 @@ dotnet build DSAnimStudioNETCore.sln -c Release -p:Platform=x64
 | `DSAnimStudioNETCore/EmbRes/Credits.zh-Hans.txt` | 启动画面滚动的中文版权信息 |
 | `DSAnimStudioNETCore/EmbRes/imgui_default_V5.ini` / `imgui_default_Legacy.ini` | 中文默认停靠布局（窗口标题使用 `<中文>###<英文原名>`） |
 | `DSAnimStudioNETCore/ImguiOSD/MenuBar.075.Language.cs` | 顶部「语言」菜单 |
+| `DSAnimStudioNETCore/Localization/WinformsLoc.cs` | WinForms 控件树递归本地化（窗体标题、菜单、下拉框、表头、树节点） |
 | `DSAnimStudio_Config.json` | 新增 `UILanguage` 字段（0 = 简体中文，1 = English），下次启动沿用 |
 
 自定义词条：在程序目录下新建 `Lang\zh-Hans.json`（与内嵌资源同格式），即可覆盖任意条目，无需重新编译。
+
+### 汉化范围
+
+| 部分 | 处理方式 |
+| --- | --- |
+| ImGui 全部窗口 / 菜单 / 对话框 / 提示 / HUD | 全部经 `Loc.T` / `Loc.TF` 取词 |
+| WinForms 12 个窗体、全部 `MessageBox` 标题与正文 | `WinformsLoc.Apply(this)` 递归处理 + `Loc.T` 包裹 |
+| 内嵌 `Help.txt` / `Credits.txt` | 提供 `*.zh-Hans.txt` 中文版并按语言选择 |
+| 默认停靠布局 `imgui_default_*.ini` | 用 `###` 锚点重生成，窗口标题中文化且切换语言不乱序 |
+| 字体图集 | 启动时预烤 NotoSansMonoCJK + 全部译文用字 |
+| 源码注释 | 全仓 C# 注释已翻译为简体中文 |
+| 构建产物 | Release 编译即为中文界面，无额外步骤 |
+
+英文模式的保持：`Language` 菜单自身保留 `English` 一项；`##`/`###` 内部 ID、`nameof()`、`DCX_*`、着色器 / 材质键名、`Ctrl+Z` 等快捷键提示、`%.2fpx` 等 ImGui 格式串、`Microsoft Sans Serif` 字体名、FMOD 官方错误码文本按原样保留。
 
 ## 特别感谢
 

@@ -8,12 +8,12 @@ namespace SoulsFormats
     public partial class PARAM_Hack
     {
         /// <summary>
-        /// One row in a param file.
+        /// param 文件里的一行。
         /// </summary>
         public class Row
         {
             /// <summary>
-            /// The ID number of this row.
+            /// 这一行的 ID 号。
             /// </summary>
             public int ID { get; set; }
 
@@ -91,7 +91,7 @@ namespace SoulsFormats
             }
 
             /// <summary>
-            /// Returns a string representation of the row.
+            /// 返回这一行的字符串表示。
             /// </summary>
             public override string ToString()
             {

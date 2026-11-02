@@ -47,7 +47,7 @@
 //            {
 //                if (IsSimpleRemoGroupMode)
 //                {
-//                    // REMOVE REDUNDANT EVENT GROUPS
+//                    // 移除多余的事件组
 //                    MainScreen.SelectedTaeAnim.EventGroups.Clear();
 
 //                    //var cutsceneEntitySpecifyEventGroupIndexMap = new Dictionary<TAE.EventGroup.EventGroupDataStruct, int>();
@@ -74,11 +74,11 @@
 //                }
 //                else
 //                {
-//                    // Always clear for anything not a REMO, which is the only example of event groups actually having meanings.
+//                    // 只要不是 REMO 就一律清空；REMO 是 event group 真的有意义存在的唯一例子。
 //                    MainScreen.SelectedTaeAnim.EventGroups.Clear();
 //                    GroupRegions.Clear();
 
-//                    // Only generate if supported or if user has option enabled to force use these in games where they usually aren't.
+//                    // 只有在支持的情况下，或者用户开了选项、强制在那些平时用不到的游戏里也用的时候才生成。
 //                    if (EventBoxes.Count > 0 && GameRoot.GameTypeUsesBoilerplateEventGroups)
 //                    {
 //                        int maxRow = EventBoxes.Max(evBox => evBox.Row);
@@ -128,12 +128,12 @@
 //        public List<TaeEventGroupRegion> GroupRegions = new List<TaeEventGroupRegion>();
 
 //        /// <summary>
-//        /// Temporarily disabled for 3.0
+//        /// 3.0 里临时禁用
 //        /// </summary>
 //        public bool IsFancyCollapsingRemoGroupMode => false;// ViewportInteractor?.EntityType == TaeViewportInteractor.TaeEntityType.REMO;
 
 //        /// <summary>
-//        /// Temporarily enabled for 3.0 lol
+//        /// 3.0 里临时启用 lol
 //        /// </summary>
 //        public bool IsSimpleRemoGroupMode => ViewportInteractor?.EntityType == TaeViewportInteractor.TaeEntityType.REMO; //false;
 
@@ -200,7 +200,7 @@
 //        //        sb.Begin(transformMatrix: Main.DPIMatrix);
 //        //        try
 //        //        {
-//        //            // full bg
+//        //            // 整块背景
 //        //            sb.Draw(texture: boxTex,
 //        //                position: new Vector2(0, 0),
 //        //                sourceRectangle: null,
@@ -330,8 +330,8 @@
 
 //        public int TinyTextBoxWidth = 96;
 
-//        // Setting to 1 to remove smoothing, but lower values will add smoothing
-//        // later if I want it.
+//        // 设成 1 就去掉平滑，但更小的值会加上平滑
+//        // 以后我想要的话再说。
 //        public float AutoScrollLerpDistMult = 1;
 
 //        private Dictionary<int, TAE.EventGroup> EventGroupsByRow = new Dictionary<int, TAE.EventGroup>();
@@ -1411,9 +1411,9 @@
 
 //                float desiredTime = Math.Max(((MainScreen.Input.MousePosition.X - ScrollViewerRect.X) + ScrollViewer.Scroll.X) / SecondsPixelSize, 0);
 
-//                // If you just started clicking, immediately jump instead of smoothly going there.
-//                // The reason is: auto scroll going to the semi-lerped position
-//                // while zoomed in is incredibly annoying and bad design.
+//                // 如果刚开始点下去，就直接瞬移过去，别平滑地滑过去。
+//                // 原因是：auto scroll 会跑到那个半 lerp 的位置
+//                // 在放大状态下简直烦死人，而且设计很烂。
 //                if (MainScreen.Input.LeftClickDown || currentUnselectedMouseDragType != previousUnselectedMouseDragType)
 //                {
 //                    PlaybackCursor.CurrentTime = desiredTime;
@@ -1443,8 +1443,8 @@
 //                if (!MainScreen.Input.LeftClickHeld)
 //                    currentUnselectedMouseDragType = UnselectedMouseDragType.None;
 
-//                // Prevent any updates to anything on the graph except scrolling when your current drag
-//                // began on a scrollbar, so return here
+//                // 当你当前的这次拖拽
+//                // 是从滚动条上开始时，除了滚动之外就阻止 graph 上的一切更新，所以在这里 return
 //                return;
 //            }
 //            else if (currentUnselectedMouseDragType == UnselectedMouseDragType.EventSelect)
@@ -1458,7 +1458,7 @@
 //            MouseVisualRow = (int)(relMouse.Y / RowHeight);
 //            MouseLogicalRow = GetLogicalRowFromVisualRow(MouseVisualRow);
 
-//            // Fix for stuff being highlighted while mouse is over timeline
+//            // 修鼠标在 timeline 上时东西还会被高亮的问题
 //            if ((MainScreen.Input.MousePosition.Y - ScrollViewerRect.Y) < TimeLineHeight)
 //            {
 //                MouseLogicalRow = -1;
@@ -1482,7 +1482,7 @@
 //                        if (MainScreen.Input.LeftClickDown)
 //                            currentUnselectedMouseDragType = UnselectedMouseDragType.HorizontalScroll;
 
-//                        // Return so our initial click down doesn't select events.
+//                        // 直接 return，这样最初那次按下就不会选中 event。
 //                        return;
 //                    }
 //                    else if (MainScreen.Input.MousePosition.X > ScrollViewerRect.Right - ScrollViewer.ScrollBarThickness && !ScrollViewer.DisableVerticalScroll)
@@ -1490,7 +1490,7 @@
 //                        if (MainScreen.Input.LeftClickDown)
 //                            currentUnselectedMouseDragType = UnselectedMouseDragType.VerticalScroll;
 
-//                        // Return so our initial click down doesn't select events.
+//                        // 直接 return，这样最初那次按下就不会选中 event。
 //                        return;
 //                    }
 //                    else
@@ -1977,7 +1977,7 @@
 //                    }
 //                    else
 //                    {
-//                        // This happens while playing and autoscrolling :fatcat:
+//                        // 这在播放并 autoscroll 的时候会发生 :fatcat:
 //                        if (currentDrag.DragType == BoxDragType.MiddleOfEventBox && currentDrag.Box != null)
 //                        {
 //                            MainScreen.Input.CursorType = MouseCursorType.Arrow;
@@ -2039,7 +2039,7 @@
 
 //                    }
 //                }
-//                else // Releasing click after a drag
+//                else // 拖拽结束之后释放点击
 //                {
 //                    ReleaseCurrentDrag();
 //                }
@@ -2096,8 +2096,8 @@
 //                                copyOfBox.MyEvent.EndTime = copyOfOldBoxEnd;
 //                                copyOfBox.Row = copyOfOldBoxRow;
 
-//                                        // Check if user saved, to flag as modified from the value changing
-//                                        // Otherwise, if it was still modified afterwards we can un-modified it
+//                                        // 检查用户有没有保存，好把值变化造成的 modified 标记打上
+//                                        // 否则如果之后它还是 modified 状态，我们就能把它改回未修改
 //                                        if (!MainScreen.SelectedTaeAnim.GetIsModified())
 //                                {
 //                                    MainScreen.SelectedTaeAnim.SetIsModified(
@@ -2176,8 +2176,8 @@
 //                                        copiesOfBox[i].MyEvent.EndTime = copiesOfOldBoxEnd[i];
 //                                        copiesOfBox[i].Row = copiesOfOldBoxRow[i];
 
-//                                                // Check if user saved, to flag as modified from the value changing
-//                                                // Otherwise, if it was still modified afterwards we can un-modified it
+//                                                // 检查用户有没有保存，好把值变化造成的 modified 标记打上
+//                                                // 否则如果之后它还是 modified 状态，我们就能把它改回未修改
 //                                                if (!MainScreen.SelectedTaeAnim.GetIsModified())
 //                                        {
 //                                            MainScreen.SelectedTaeAnim.SetIsModified(
@@ -2308,7 +2308,7 @@
 //                }
 //                else
 //                {
-//                    // this happens after releasing drag while playing anim with autoscroll
+//                    // 这会在播放 anim 且开着 autoscroll 时松开拖拽之后发生
 //                    if (currentDrag.DragType == BoxDragType.MiddleOfEventBox)
 //                    {
 //                        currentDrag.DragType = BoxDragType.None;
@@ -2657,13 +2657,13 @@
 
 //                //var fontToUse = IsSmallEventsMode ? smallFont : font;
 
-//                // The weird offset of 1 here is so there's an extra pixel space for the shadow to render
+//                // 这里那个奇怪的 1 偏移是为了多留一个像素的空间给阴影渲染
 //                var fancyTextRect = new Rectangle(boxRect.X - 1, boxRect.Y - 1, boxRect.Width + 1, boxRect.Height + 1);
 
-//                // This fixes the text not being lined up right with the above offset.
+//                // 这修好了上面那个偏移导致文字没对齐的问题。
 //                fontOffsetToUse.X += 1; // I'm so sorry.
 
-//                // Wasn't lined up for some reason. Works with this here.
+//                // 不知道为啥就是没对齐。加上这个就好了。
 //                fontOffsetToUse.Y += 1;
 
 //                //if (IsNewGraphVisiMode)
@@ -2755,7 +2755,7 @@
 //                var thicknessOffset = new Vector2(2/*boxOutlineThickness*/ * 2, 0);
 
 
-//                // Draw dimming rect behind active event's text to make it readable.
+//                // 在激活 event 的文字后面画一个压暗矩形，让它看得清。
 //                if (boxHighlightedAndVisiActive || isHover)
 //                {
 //                    ImGuiDebugDrawer.DrawRect(namePos - ScrollViewer.RoundedScroll - new Vector2(2, 6), nameSize + new Vector2(6, 10), Color.Black * 0.6f * opacity, 6);
@@ -3065,7 +3065,7 @@
 //                        currentLogicalRow++;
 //                    }
 
-//                    // Group start - invalid logical row
+//                    // Group 起点 - 非法的逻辑行
 //                    registerRow(currentVisualRow, -1);
 //                    currentVisualRow++;
 //                    currentLogicalRow++;
@@ -3117,7 +3117,7 @@
 
 //                List<TaeEditAnimEventBox> highlightedBoxes = new List<TaeEditAnimEventBox>();
 
-//                // Placeholder colors lol
+//                // 占位颜色 lol
 //                var groupHeaderColorBG = oddRowAlternateFlag ? Color.Red : Color.Green;
 //                var groupRegionColorBG = (oddRowAlternateFlag ? Color.Red : Color.Green) * 0.5f;
 //                var groupHeaderColorFG = oddRowAlternateFlag ? Color.Black : Color.Black;
@@ -3207,7 +3207,7 @@
 
 //            if (selectedBoxes.Count > 0 || isHoverBoxAlsoSelected)
 //            {
-//                // full bg
+//                // 完整背景
 //                //sb.Draw(texture: boxTex,
 //                //    position: ScrollViewer.Scroll - (Vector2.One * 2),
 //                //    sourceRectangle: null,
@@ -3223,7 +3223,7 @@
 
 //                selectedBoxes = selectedBoxes.OrderBy(b => b.PlaybackHighlight).ToList();
 
-//                // Draw the extra outer outline on the selected event(s)
+//                // 给选中的事件画额外的一圈外描边
 //                //foreach (var box in selectedBoxes)
 //                //{
 //                //    box.UpdateSelectionColorPulse(elapsedSeconds, true);
@@ -3360,7 +3360,7 @@
 //                try
 //                {
 
-//                    // full bg
+//                    // 完整背景
 //                    sb.Draw(texture: boxTex,
 //                        position: ScrollViewer.Scroll - (Vector2.One * 2),
 //                        sourceRectangle: null,
@@ -3385,7 +3385,7 @@
 
 //                    ImGuiDebugDrawer.DrawRect((Vector2.One * -4), new Vector2(ScrollViewer.Viewport.Width, TimeLineHeight) + new Vector2(8, 4), Main.Colors.GuiColorEventGraphTimelineFill);
 
-//                    //// timeline - anim duration
+//                    //// timeline - anim 时长
 //                    //sb.Draw(texture: boxTex,
 //                    //    position: ScrollViewer.Scroll - (Vector2.One * 2),
 //                    //    sourceRectangle: null,
@@ -3443,10 +3443,10 @@
 //                    float rightOfScreenX = ScrollViewer.Viewport.Width + ScrollViewer.Scroll.X;
 
 
-//                    // This would draw a little +/- by the mouse cursor to signify that
-//                    // you're adding/subtracting selection
-//                    // HOWEVER it was super delayed because of the vsync 
-//                    // and didn't follow the cursor well and looked weird
+//                    // 这会在鼠标光标旁边画个小 +/-，表示
+//                    // 你正在加选/减选
+//                    // 但是它因为 vsync 延迟得离谱 
+//                    // 跟光标跟得也不好，看着很怪
 
 //                    //if (MainScreen.Input.CtrlHeld && !MainScreen.Input.ShiftHeld && !MainScreen.Input.AltHeld)
 //                    //{
@@ -3465,7 +3465,7 @@
 
 //                    if (darkenedPortionWidth > 0)
 //                    {
-//                        // full bg - anim duration
+//                        // 整条 bg - anim 时长
 
 //                        float cooldownRatio = 1;// 1 - Math.Max(0, Math.Min(1, MathHelper.Lerp(0, 1, MainScreen.AnimSwitchRenderCooldown / MainScreen.AnimSwitchRenderCooldownFadeLength)));
 
@@ -3495,7 +3495,7 @@
 
 //                        }
 
-//                        // Draw semitransparent overlay.
+//                        // 画半透明遮罩。
 //                        //sb.Draw(texture: boxTex,
 //                        //position: ScrollViewer.Scroll - (Vector2.One * 2),
 //                        //sourceRectangle: null,
@@ -3539,7 +3539,7 @@
 //                        );
 //                    }
 
-//                    // When you change which box (if any) is hovered, update the simulation and stuff.
+//                    // 当悬停的方块（或没有悬停）发生变化时，更新模拟等状态。
 //                    if (MainScreen.PrevHoveringOverEventBox != MainScreen.HoveringOverEventBox)
 //                    {
 //                        ViewportInteractor.OnScrubFrameChange();
@@ -3567,7 +3567,7 @@
 //                    //            );
 //                    //}
 
-//                    // full timeline
+//                    // 完整时间轴
 //                    //sb.Draw(texture: boxTex,
 //                    //    position: ScrollViewer.Scroll - (Vector2.One * 4),
 //                    //    sourceRectangle: null,
@@ -3630,7 +3630,7 @@
 //                        //    }
 //                        //    catch
 //                        //    {
-//                        //        // todo: see why this was needed lol?
+//                        //        // todo：看看这玩意当初为啥需要 lol？
 //                        //    }
 
 //                        //}
@@ -3656,7 +3656,7 @@
 //                            }
 //                            catch
 //                            {
-//                                // todo: see why this was needed lol?
+//                                // todo：看看这玩意当初为啥需要 lol？
 //                            }
 
 //                        }
@@ -3681,7 +3681,7 @@
 
 //                        multiSelectRect.Y += (int)TimeLineHeight;
 
-//                        // FILL RECT:
+//                        // 填充矩形：
 //                        //sb.Draw(texture: boxTex,
 //                        //    position: new Vector2(multiSelectRect.Left, multiSelectRect.Top + TimeLineHeight),
 //                        //    sourceRectangle: null,
@@ -3729,7 +3729,7 @@
 //                            Main.Colors.GuiColorEventGraphSliceToolLine);
 //                    }
 
-//                    // Draw PlaybackCursor StartTime vertical line
+//                    // 画 PlaybackCursor StartTime 的竖线
 //                    //sb.Draw(texture: boxTex,
 //                    //    position: new Vector2((float)Math.Round(((float)(SecondsPixelSize * PlaybackCursor.GUIStartTime))), ScrollViewer.Scroll.Y),
 //                    //    sourceRectangle: null,
@@ -3752,7 +3752,7 @@
 //                    //var hitWindowStartX = (float)(SecondsPixelSize * PlaybackCursor.HitWindowStart);
 //                    //var hitWindowEndX = (float)(SecondsPixelSize * PlaybackCursor.HitWindowEnd);
 
-//                    //// Draw Hit Window Rect Under Cursor
+//                    //// 在光标下面画 Hit Window Rect
 //                    //sb.Draw(texture: boxTex,
 //                    //    position: new Vector2((float)Math.Round(hitWindowStartX), ScrollViewer.Scroll.Y),
 //                    //    sourceRectangle: null,
@@ -3764,7 +3764,7 @@
 //                    //    layerDepth: 0
 //                    //    );
 
-//                    //// Draw Hit Window Line
+//                    //// 画 Hit Window Line
 //                    //sb.Draw(texture: boxTex,
 //                    //    position: new Vector2((hitWindowStartX + hitWindowEndX) / 2, ScrollViewer.Scroll.Y),
 //                    //    sourceRectangle: null,
@@ -3777,7 +3777,7 @@
 //                    //    );
 
 
-//                    //// Draw Hit Register Playback Cursor
+//                    //// 画 Hit Register Playback Cursor
 //                    //sb.Draw(texture: boxTex,
 //                    //    position: new Vector2((float)Math.Round(SecondsPixelSize * PlaybackCursor.CurrentTime), ScrollViewer.Scroll.Y),
 //                    //    sourceRectangle: null,
@@ -3792,7 +3792,7 @@
 
 //                    var playbackCursorPixelX = (float)Math.Round(SecondsPixelSize * PlaybackCursor.GUICurrentTime);
 
-//                    // Draw PlaybackCursor CurrentTime vertical line
+//                    // 画 PlaybackCursor CurrentTime 的竖线
 //                    //sb.Draw(texture: boxTex,
 //                    //    position: new Vector2(playbackCursorPixelX - (PlaybackCursorThickness / 2), ScrollViewer.Scroll.Y),
 //                    //    sourceRectangle: null,
@@ -3811,7 +3811,7 @@
 //                    var playbackCursorPixelXMod = (float)Math.Round((SecondsPixelSize * (float)(PlaybackCursor.IsPlaying
 //                        ? PlaybackCursor.CurrentTimeMod : PlaybackCursor.GUICurrentTimeMod)));
 
-//                    // Draw PlaybackCursor CurrentTimeMod vertical line
+//                    // 画 PlaybackCursor CurrentTimeMod 的竖线
 //                    //sb.Draw(texture: boxTex,
 //                    //    position: new Vector2(playbackCursorPixelXMod - (PlaybackCursorThickness / 2), ScrollViewer.Scroll.Y),
 //                    //    sourceRectangle: null,
@@ -3835,7 +3835,7 @@
 
 //                    //playbackCursorTextSize = new Vector2(playbackCursorTextSize.X, TimeLineHeight - 1);
 
-//                    // Draw PlaybackCursor CurrentTime BG Rect
+//                    // 画 PlaybackCursor CurrentTime 的 BG Rect
 
 //                    //sb.Draw(texture: boxTex,
 //                    //   position: new Vector2(playbackCursorSmoothPixelX + (PlaybackCursorThickness / 2) + 1, 
@@ -3865,7 +3865,7 @@
 //                    //    playbackCursorSmoothPixelX + (PlaybackCursorThickness / 2) + 6, 
 //                    //    (float)Math.Round(ScrollViewer.Scroll.Y + 2));
 
-//                    //// Draw PlaybackCursor CurrentTime string
+//                    //// 画 PlaybackCursor CurrentTime 字符串
 //                    //sb.DrawString(font, playbackCursorText,
 //                    //    position: playbackCursorTextPos + Vector2.One + Main.GlobalTaeEditorFontOffset,
 //                    //    color: Color.Black
@@ -3878,7 +3878,7 @@
 
 //                    if (darkenedPortionWidth > 0)
 //                    {
-//                        // full bg - anim duration
+//                        // 整条 bg - anim 时长
 
 //                        float cooldownRatio = 1;// 1 - Math.Max(0, Math.Min(1, MathHelper.Lerp(0, 1, MainScreen.AnimSwitchRenderCooldown / MainScreen.AnimSwitchRenderCooldownFadeLength)));
 

@@ -93,12 +93,12 @@ namespace DSAnimStudio
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-                // TODO: set large fields to null
+                // TODO：把大字段置为 null
                 disposedValue = true;
             }
         }
 
-        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // // TODO：只有当 'Dispose(bool disposing)' 里有释放非托管资源的代码时，才需要重写终结器
         // ~DX11Shader()
         // {
         //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

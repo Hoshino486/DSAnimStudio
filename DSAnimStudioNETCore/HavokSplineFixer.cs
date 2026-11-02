@@ -457,7 +457,7 @@ namespace DSAnimStudio
 
             thing.FrameCount = anim.FrameCount;
 
-            //// If source animation is 30 FPS and not 60, then double frame count
+            //// 如果源 Anim 是 30 FPS 而不是 60，那就把帧数翻倍
             //if (anim.FrameDuration > 0.02f)
             //{
             //    //thing.Duration = (float)((thing.FrameCount) * (1.0 / 30.0));

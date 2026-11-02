@@ -45,17 +45,17 @@ namespace EventInput
 
     {
         /// <summary>
-        /// Event raised when a character has been entered.
+        /// 输入字符时触发的事件。
         /// </summary>
         public static event CharEnteredHandler CharEntered;
 
         /// <summary>
-        /// Event raised when a key has been pressed down. May fire multiple times due to keyboard repeat.
+        /// 按键按下时触发的事件。键盘重复会导致它触发好几次。
         /// </summary>
         public static event KeyEventHandler KeyDown;
 
         /// <summary>
-        /// Event raised when a key has been released.
+        /// 按键松开时触发的事件。
         /// </summary>
         public static event KeyEventHandler KeyUp;
 
@@ -66,7 +66,7 @@ namespace EventInput
         private static WndProc hookProcDelegate; 
         private static IntPtr hIMC;		
         
-        //various Win32 constants that we need
+        //我们需要的各种 Win32 常量
         private const int GWL_WNDPROC = -4; 
         private const int WM_KEYDOWN = 0x100; 
         private const int WM_KEYUP = 0x101; 
@@ -77,7 +77,7 @@ namespace EventInput
         private const int WM_IME_COMPOSITION = 0x10f; 
         private const int DLGC_WANTALLKEYS = 4;
 
-        //Win32 functions that we're using
+        //我们用到的 Win32 函数
         [DllImport("Imm32.dll")] 
         private static extern IntPtr ImmGetContext(IntPtr hWnd);
         
@@ -91,7 +91,7 @@ namespace EventInput
         private static extern int SetWindowLongPtrA(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
 
         /// <summary>
-        /// Initialize the TextInput with the given GameWindow.
+        /// 用给定的 GameWindow 初始化 TextInput。
         /// </summary>
         /// <param name="window">The XNA window to which text input should be linked.</param>
         public static void Initialize(GameWindow window) 

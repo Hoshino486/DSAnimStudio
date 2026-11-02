@@ -63,10 +63,10 @@ namespace DSAnimStudio.DbgMenus
             int prevIndex = currentValueIndex;
             currentValueIndex += incrementAmount;
 
-            //If upper bound reached
+            //如果到上界了
             if (currentValueIndex >= EnumValues.Length)
             {
-                //If already at end and just tapped button
+                //如果已经到末尾了，还又点了一下按钮
                 if (prevIndex == EnumValues.Length - 1 && !isRepeat)
                     currentValueIndex = 0; //Wrap Around
                 else
@@ -84,10 +84,10 @@ namespace DSAnimStudio.DbgMenus
             int prevIndex = currentValueIndex;
             currentValueIndex -= incrementAmount;
 
-            //If upper bound reached
+            //如果到上界了
             if (currentValueIndex < 0)
             {
-                //If already at end and just tapped button
+                //如果已经到末尾了，还又点了一下按钮
                 if (prevIndex == 0 && !isRepeat)
                     currentValueIndex = EnumValues.Length - 1; //Wrap Around
                 else

@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 namespace SoulsFormats
 {
     /// <summary>
-    /// Some ragdoll-related container found in Dark Souls 1, Dark Souls III, and Bloodborne
+    /// 在黑暗之魂1（Dark Souls）、黑暗之魂3（Dark Souls III）和血源诅咒（Bloodborne）里发现的某种 ragdoll 相关容器
     /// </summary>
     public class HKXPWV : SoulsFile<HKXPWV>
     {
         /// <summary>
-        /// The game this HKXPWV is for.
+        /// 这个 HKXPWV 对应的游戏。
         /// </summary>
         public enum GameType
         {
             /// <summary>
-            /// Dark Souls
+            /// 黑暗之魂（Dark Souls）
             /// </summary>
             DS1,
             /// <summary>
@@ -25,42 +25,42 @@ namespace SoulsFormats
             /// </summary>
             BB,
             /// <summary>
-            /// Dark Souls III
+            /// 黑暗之魂3（Dark Souls III）
             /// </summary>
             DS3
         }
         /// <summary>
-        /// Whether the file is big endian.
+        /// 文件是否为大端序。
         /// </summary>
         public bool BigEndian { get; set; }
 
         /// <summary>
-        /// Which game this file is for.
+        /// 这个文件对应哪一款游戏。
         /// </summary>
         public GameType Game { get; set; }
 
         /// <summary>
-        /// Unknown in header. Can be 0, 1, 2, or 5. Is 0 typically.
+        /// 头部里含义未知。可以是 0、1、2 或 5。一般是 0。
         /// </summary>
         public uint UnkC { get; set; }
 
         /// <summary>
-        /// List of items which affect bone map entries in the HKX.
+        /// 影响 HKX 中 Bone map 条目的项列表。
         /// </summary>
         public List<BoneMapEntry> BoneMapEntries { get; set; }
 
         /// <summary>
-        /// List of items which affect bones in the animation skeleton.
+        /// 影响 Anim Skeleton 中 Bone 的项列表。
         /// </summary>
         public List<AnimBoneEntry> AnimBoneEntries { get; set; }
 
         /// <summary>
-        /// List of items which affect ragdoll bones.
+        /// 影响 ragdoll Bone 的项列表。
         /// </summary>
         public List<RagdollBoneEntry> RagdollBoneEntries { get; set; }
 
         /// <summary>
-        /// Creates a new empty HKXPWV.
+        /// 创建一个新的空 HKXPWV。
         /// </summary>
         public HKXPWV()
         {
@@ -76,7 +76,7 @@ namespace SoulsFormats
 
         protected override void Read(BinaryReaderEx br)
         {
-            // Value should be 1 in either endianness
+            // 在两种端序下这个值都应该是 1
             int versionCheck = br.AssertInt32(1, 0x1000000);
             if (versionCheck == 0x1000000)
             {
@@ -151,7 +151,7 @@ namespace SoulsFormats
         }
 
         /// <summary>
-        /// Includes parameters for a bone map entry in the HKX.
+        /// 包含 HKX 中 Bone map 条目的参数。
         /// </summary>
         public class BoneMapEntry
         {
@@ -166,7 +166,7 @@ namespace SoulsFormats
             public int UnknownValueB { get; set; } = 0;
 
             /// <summary>
-            /// Creates a default BoneMapEntry with default values.
+            /// 用默认值创建一个默认的 BoneMapEntry。
             /// </summary>
             public BoneMapEntry()
             {
@@ -203,12 +203,12 @@ namespace SoulsFormats
         }
 
         /// <summary>
-        /// Includes parameters for an animation bone entry in the HKX.
+        /// 包含 HKX 中 Anim Bone 条目的参数。
         /// </summary>
         public class AnimBoneEntry
         {
             /// <summary>
-            /// ID of the SkeletonParam entry referenced by this animation bone.
+            /// 这条 Anim Bone 所引用的 SkeletonParam 条目的 ID。
             /// </summary>
             public short SkeletonParamID { get; set; }
 
@@ -220,7 +220,7 @@ namespace SoulsFormats
             public byte Unk2 { get; set; }
 
             /// <summary>
-            /// Creates a default AnimBoneEntry with the most commonly found
+            /// 用最常见的取值创建一个默认的 AnimBoneEntry
             /// field values: SkeletonParamRowID = -1, Unk2 = 0.
             /// </summary>
             public AnimBoneEntry()
@@ -253,25 +253,25 @@ namespace SoulsFormats
         }
 
         /// <summary>
-        /// Includes parameters for a ragdoll bone entry in the HKX.
+        /// 包含 HKX 中 ragdoll Bone 条目的参数。
         /// </summary>
         public class RagdollBoneEntry
         {
             /// <summary>
-            /// ID of the RagdollParam entry referenced by this ragdoll bone.
-            /// -1 to not reference an entry.
+            /// 这根 ragdoll Bone 所引用的 RagdollParam 条目的 ID。
+            /// -1 表示不引用任何条目。
             /// </summary>
             public int RagdollParamID { get; set; } = -1;
 
             /// <summary>
-            /// The animation ID to play when this ragdoll bone is damaged.
+            /// 这根 ragdoll Bone 被破坏时要播放的 Anim ID。
             /// Plays animation a99_XXXX in the TAE.
             /// </summary>
             public short DamageAnimID { get; set; } = -1;
 
             /// <summary>
             /// Defines which NPC part group (if any) this ragdoll bone's collider is assigned.
-            /// Used for NPC part events in EMEVD or enemy weak points.
+            /// 用于 EMEVD 里的 NPC 部位事件，或者敌人的弱点。
             /// </summary>
             public byte NPCPartGroupIndex { get; set; } = 0;
 
@@ -281,12 +281,12 @@ namespace SoulsFormats
             public byte Unknown { get; set; } = 0;
 
             /// <summary>
-            /// Unknown value unique to Bloodborne HKXPWV files.
+            /// Bloodborne 的 HKXPWV 文件独有的未知值。
             /// </summary>
             public sbyte UnknownBB { get; set; } = -1;
 
             /// <summary>
-            /// Creates a default RagdollBoneEntry
+            /// 创建一个默认的 RagdollBoneEntry
             /// </summary>
             public RagdollBoneEntry()
             {

@@ -84,7 +84,7 @@ namespace DSAnimStudio
 
             string iniFileName = $"{Main.Directory}\\imgui.ini";
             byte[] iniFileNameBytes = Encoding.UTF8.GetBytes(iniFileName);
-            //Add null terminator
+            //加上 null 终止符
             Array.Resize(ref iniFileNameBytes, iniFileNameBytes.Length + 1);
             PTR_IniFileName = ImGui.MemAlloc((uint)iniFileNameBytes.Length);
             Marshal.Copy(iniFileNameBytes, 0, PTR_IniFileName, iniFileNameBytes.Length);
@@ -120,25 +120,25 @@ namespace DSAnimStudio
         /// </summary>
         public virtual unsafe void RebuildFontAtlas()
         {
-            // Get font texture from ImGui
+            // 从 ImGui 取字体 Texture
             var io = ImGui.GetIO();
             io.Fonts.GetTexDataAsRGBA32(out byte* pixelData, out int width, out int height, out int bytesPerPixel);
 
-            // Copy the data to a managed array
+            // 把数据拷贝到托管数组
             var pixels = new byte[width * height * bytesPerPixel];
             unsafe { Marshal.Copy(new IntPtr(pixelData), pixels, 0, pixels.Length); }
 
-            // Create and register the texture as an XNA texture
+            // 创建这个 Texture 并作为 XNA Texture 注册
             var tex2d = new Texture2D(_graphicsDevice, width, height, false, SurfaceFormat.Color);
             tex2d.SetData(pixels);
 
-            // Should a texture already have been build previously, unbind it first so it can be deallocated
+            // 如果之前已经构建过 Texture，就先解绑，好让它能被释放
             if (_fontTextureId.HasValue) UnbindTexture(_fontTextureId.Value);
 
-            // Bind the new texture to an ImGui-friendly id
+            // 把新 Texture 绑定到一个对 ImGui 友好的 ID 上
             _fontTextureId = BindTexture(tex2d);
 
-            // Let ImGui know where to find the texture
+            // 让 ImGui 知道去哪里找这个 Texture
             io.Fonts.SetTexID(_fontTextureId.Value);
             io.Fonts.ClearTexData(); // Clears CPU side texture data
         }
@@ -156,7 +156,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Removes a previously created texture pointer, releasing its reference and allowing it to be deallocated
+        /// 移除之前创建的 Texture 指针，释放对它的引用并让它能被释放
         /// </summary>
         public virtual void UnbindTexture(IntPtr textureId)
         {
@@ -166,7 +166,7 @@ namespace DSAnimStudio
         
 
         /// <summary>
-        /// Sets up ImGui for a new frame, should be called at frame start
+        /// 为新的一帧设置 ImGui，应该在帧开始时调用
         /// </summary>
         public virtual void BeforeLayout(GameTime gameTime, int x, int y, int w, int h, int mouseYOff)
         {
@@ -178,7 +178,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Asks ImGui for the generated geometry data and sends it to the graphics pipeline, should be called after the UI is drawn using ImGui.** calls
+        /// 向 ImGui 索取生成的几何数据并送进图形管线，应该在用 ImGui 画完 UI 之后调用。** 调用
         /// </summary>
         public virtual void AfterLayout(int x, int y, int w, int h, int memeY)
         {
@@ -192,7 +192,7 @@ namespace DSAnimStudio
         #region Setup & Update
 
         /// <summary>
-        /// Maps ImGui keys to XNA keys. We use this later on to tell ImGui what keys were pressed
+        /// 把 ImGui 的按键映射到 XNA 按键。后面我们用这个告诉 ImGui 按了哪些键
         /// </summary>
         protected virtual void SetupInput()
         {
@@ -268,7 +268,7 @@ namespace DSAnimStudio
         }
 
         /// <summary>
-        /// Sends XNA input state to ImGui
+        /// 把 XNA 输入状态发给 ImGui
         /// </summary>
         protected virtual void UpdateInput(int x, int y, int w, int h, int mouseYOff)
         {
@@ -366,11 +366,11 @@ namespace DSAnimStudio
         #region Internals
 
         /// <summary>
-        /// Gets the geometry as set up by ImGui and sends it to the graphics device
+        /// 取到 ImGui 布置好的几何数据并发送给图形设备
         /// </summary>
         private void RenderDrawData(ImDrawDataPtr drawData, int x, int y, int w, int h, int memeY)
         {
-            // Setup render state: alpha-blending enabled, no face culling, no depth testing, scissor enabled, vertex/texcoord/color pointers
+            // 设置 Render 状态：开启 alpha 混合、不做面剔除、不做深度测试、开启 scissor、Vertex/texcoord/color 指针
             var lastViewport = _graphicsDevice.Viewport;
             var lastScissorBox = _graphicsDevice.ScissorRectangle;
 
@@ -384,14 +384,14 @@ namespace DSAnimStudio
 
             drawData.DisplayPos = new System.Numerics.Vector2(x, y);
 
-            // Setup projection
+            // 设置投影
             _graphicsDevice.Viewport = new Viewport(x, y, w, h);
 
             UpdateBuffers(drawData);
 
             RenderCommandLists(drawData, x, y, w, h, memeY);
 
-            // Restore modified state
+            // 恢复被修改的状态
             _graphicsDevice.Viewport = lastViewport;
             _graphicsDevice.ScissorRectangle = lastScissorBox;
         }
@@ -403,7 +403,7 @@ namespace DSAnimStudio
                 return;
             }
 
-            // Expand buffers if we need more room
+            // 需要更大空间时扩容 Buffer
             if (drawData.TotalVtxCount > _vertexBufferSize)
             {
                 _vertexBuffer?.Dispose();
@@ -422,7 +422,7 @@ namespace DSAnimStudio
                 _indexData = new byte[_indexBufferSize * sizeof(uint)];
             }
 
-            // Copy ImGui's vertices and indices to a set of managed byte arrays
+            // 把 ImGui 的 Vertex 和索引拷贝到一组托管 byte 数组
             int vtxOffset = 0;
             int idxOffset = 0;
 
@@ -441,7 +441,7 @@ namespace DSAnimStudio
                 idxOffset += cmdList.IdxBuffer.Size;
             }
 
-            // Copy the managed byte arrays to the gpu vertex- and index buffers
+            // 把托管 byte 数组拷贝到 GPU 的 Vertex Buffer 和索引 Buffer
             _vertexBuffer.SetData(_vertexData, 0, drawData.TotalVtxCount * DrawVertDeclaration.Size);
             _indexBuffer.SetData(_indexData, 0, drawData.TotalIdxCount * sizeof(uint));
         }

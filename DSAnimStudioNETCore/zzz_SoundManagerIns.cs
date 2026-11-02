@@ -732,7 +732,7 @@ namespace DSAnimStudio
                 ParentDocument.Fmod.StopAllSounds();
             else if (EngineType is EngineTypes.MagicOrchestra)
             {
-                // leaving this here to remind me to check later
+                // 先放这儿，提醒我以后回来看
             }
 
             lock (_LOCK)
@@ -766,10 +766,10 @@ namespace DSAnimStudio
                     s.Value.Update(this, deltaTime, listener);
                     continue;
                 }
-                // if the slot is no longer being played
-                // or if the slot has the wrong ID vs the one requested
-                // AND KillSoundOnEventEnd is true
-                // THEN, request sound to stop.
+                // 如果这个 slot 已经不再播放了
+                // 或者这个 slot 的 ID 跟请求的那个对不上
+                // 并且 KillSoundOnEventEnd 为 true
+                // 那么，就请求把声音停掉。
                 if ((!requestedSoundSlots.ContainsKey(s.Key) || !requestedSoundSlots[s.Key].Matches(s.Value.PlayInfo)))
                 {
                     if (s.Value.PlayInfo.KillSoundOnActionEnd)
@@ -781,7 +781,7 @@ namespace DSAnimStudio
 
                 s.Value.Update(this, deltaTime, listener);
                 // If slot is empty (all sound samples have finished playing)
-                // Then slot is "dead", queue for deletion.
+                // 此时槽位就是“死”的，排进删除队列。
                 if (s.Value.SlotCompletelyEmpty)
                     deadSlots.Add(s.Key);
             }
@@ -836,9 +836,9 @@ namespace DSAnimStudio
                     continue;
                 }
 
-                // if the slot is no longer being played
-                // or if the slot has the wrong ID vs the one requested
-                // Since these are event box slots, we know KillSoundOnEventEnd is true, but whatever
+                // 如果这个 slot 已经不再播放了
+                // 或者这个 slot 的 ID 跟请求的那个对不上
+                // 这些是 event box 的 slot，所以 KillSoundOnEventEnd 必然是 true，不过随它去吧
                 if ((!requestedSoundSlots.ContainsKey(s.Key) || !requestedSoundSlots[s.Key].Matches(s.Value.PlayInfo)))
                 {
                     if (s.Value.PlayInfo.KillSoundOnActionEnd)
@@ -850,7 +850,7 @@ namespace DSAnimStudio
 
                 s.Value.Update(this, deltaTime, listener);
                 // If slot is empty (all sound samples have finished playing)
-                // Then slot is "dead", queue for deletion.
+                // 此时槽位就是“死”的，排进删除队列。
                 if (s.Value.SlotCompletelyEmpty)
                     deadSlots.Add(s.Key);
             }
@@ -919,7 +919,7 @@ namespace DSAnimStudio
                 ParentDocument.Fmod.Update();
             else if (EngineType is EngineTypes.MagicOrchestra)
             {
-                // leaving this here as a note
+                // 先放这儿当个备注
             }
             else if (EngineType is EngineTypes.Wwise)
             {

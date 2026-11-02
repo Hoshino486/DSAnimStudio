@@ -175,7 +175,7 @@ namespace DSAnimStudio
                             }
                            
                             
-                            // Alternate FK glue:
+                            // 另一种 FK 拼接方式：
                             // var startPos = Vector3.Transform(Vector3.Forward, followerBone.FKMatrix);
                             // var endPos = Vector3.Transform(Vector3.Forward, leaderBone.FKMatrix);
                             // var fkShift = Matrix.CreateTranslation(endPos - startPos);

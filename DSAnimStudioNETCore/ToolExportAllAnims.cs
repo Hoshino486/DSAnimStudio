@@ -410,7 +410,7 @@ namespace DSAnimStudio
         //            }
         //            else
         //            {
-        //                //TODO: Test
+        //                //TODO：测试
         //                hkx.Variation = HKX.HKXVariation.HKXDS1;
         //                result = hkx.Write();
         //            }
@@ -425,7 +425,7 @@ namespace DSAnimStudio
         //            }
         //            else
         //            {
-        //                //TODO: Test
+        //                //TODO：测试
         //                hkx.Variation = HKX.HKXVariation.HKXDS1;
         //                hkx2010Bytes = hkx.Write();
         //            }

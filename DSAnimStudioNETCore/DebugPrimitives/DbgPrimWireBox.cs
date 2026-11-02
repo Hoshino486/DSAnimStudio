@@ -43,7 +43,7 @@ namespace DSAnimStudio.DebugPrimitives
                 var min = -Vector3.One;
                 var max = Vector3.One;
 
-                // 3 Letters of below names: 
+                // 下面这些名字的 3 个字母： 
                 // [T]op/[B]ottom, [F]ront/[B]ack, [L]eft/[R]ight
                 var tfl = new Vector3(min.X, max.Y, max.Z);
                 var tfr = new Vector3(max.X, max.Y, max.Z);
@@ -54,19 +54,19 @@ namespace DSAnimStudio.DebugPrimitives
                 var bbr = new Vector3(max.X, min.Y, min.Z);
                 var bbl = new Vector3(min.X, min.Y, min.Z);
 
-                // Top Face
+                // 顶面
                 AddLine(tfl, tfr);
                 AddLine(tfr, tbr);
                 AddLine(tbr, tbl);
                 AddLine(tbl, tfl);
 
-                // Bottom Face
+                // 底面
                 AddLine(bfl, bfr);
                 AddLine(bfr, bbr);
                 AddLine(bbr, bbl);
                 AddLine(bbl, bfl);
 
-                // Four Vertical Pillars
+                // 四根竖直柱子
                 AddLine(bfl, tfl);
                 AddLine(bfr, tfr);
                 AddLine(bbl, tbl);

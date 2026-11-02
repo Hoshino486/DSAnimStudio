@@ -1,4 +1,4 @@
-#define WIN64
+﻿#define WIN64
 /* ========================================================================================== */
 /* FMOD Event - C# Wrapper . Copyright (c), Firelight Technologies Pty, Ltd. 2004-2016.       */
 /*                                                                                            */
@@ -790,7 +790,7 @@ namespace FMOD
     public class EventSystem
     {
         public bool Created = false;
-        // Initialization / system functions.
+        // 初始化／系统函数。
         public RESULT init                      (int maxchannels, INITFLAGS flags, IntPtr extradriverdata)
         {
             RESULT result = FMOD_EventSystem_Init(eventsystemraw, maxchannels, flags, extradriverdata, EVENT_INITFLAGS.NORMAL);
@@ -916,7 +916,7 @@ namespace FMOD
         }
 
 
-        // FEV load/unload.                                 
+        // FEV 加载／卸载。                                 
         public RESULT load                      (string name_or_data, ref EVENT_LOADINFO loadinfo, ref EventProject project)
         {
             RESULT result                  = RESULT.OK;
@@ -959,7 +959,7 @@ namespace FMOD
             return FMOD_EventSystem_Unload(eventsystemraw);
         }
                                                             
-        // Event,EventGroup,EventCategory Retrieval.        
+        // Event、EventGroup、EventCategory 获取。        
         public RESULT getProject                (string name, ref EventProject project)
         {
             RESULT result                  = RESULT.OK;
@@ -1293,7 +1293,7 @@ namespace FMOD
             return FMOD_EventSystem_GetNumEvents(eventsystemraw, ref numevents);
         }
 
-        // Reverb interfaces.
+        // 混响接口。
         public RESULT setReverbProperties       (ref REVERB_PROPERTIES props)
         {
             return FMOD_EventSystem_SetReverbProperties(eventsystemraw, ref props);
@@ -1357,7 +1357,7 @@ namespace FMOD
             return FMOD_EventSystem_GetReverbAmbientProperties(eventsystemraw, ref props);
         }
 
-        // Event queue interface.
+        // Event 队列接口。
         public RESULT createEventQueue(ref EventQueue queue)
         {
             RESULT result = RESULT.OK;
@@ -1421,7 +1421,7 @@ namespace FMOD
             return result;
         }
 
-        // 3D Listener interface.
+        // 3D Listener 接口。
         public RESULT set3DNumListeners         (int numlisteners)
         {
             return FMOD_EventSystem_Set3DNumListeners(eventsystemraw, numlisteners);
@@ -1439,7 +1439,7 @@ namespace FMOD
             return FMOD_EventSystem_Get3DListenerAttributes(eventsystemraw, listener, ref pos, ref vel, ref forward, ref up);
         }
 
-        // Get/set user data
+        // 获取／设置 user data
         public RESULT setUserData               (IntPtr userdata)
         {
             return FMOD_EventSystem_SetUserData(eventsystemraw, userdata);
