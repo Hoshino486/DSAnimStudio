@@ -654,7 +654,7 @@ namespace DSAnimStudio
                     double currentProgAtCategoryStart = (progPerCategory * categoryIndex);
                     var tae = NewTae();
 
-                    // This overrides the default global one from RootTaeProperties, which is applied in NewTae()
+                    // 这会覆盖 RootTaeProperties 里的全局默认值，后者在 NewTae() 中应用
                     tae.ActionSetVersion = category.ActionSetVersion_ForMultiTaeOutput;
 
                     tae.ID = 2000 + category.CategoryID;

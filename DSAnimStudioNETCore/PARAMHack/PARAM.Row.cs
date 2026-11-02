@@ -18,7 +18,7 @@ namespace SoulsFormats
             public int ID { get; set; }
 
             /// <summary>
-            /// A name given to this row; no functional significance, may be null.
+            /// 给这一行起的名字；没有实际功能含义，可以为 null。
             /// </summary>
             public string Name { get; set; }
 

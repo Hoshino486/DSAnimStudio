@@ -89,7 +89,7 @@ namespace DSAnimStudio.TaeEditor
             if (Text == null)
                 return;
 
-            // If string is literally not visible then return;
+            // 如果字符串确实完全不可见，就直接返回；
             if ((rect.Right - rect.Left) <= 0)
                 return;
 

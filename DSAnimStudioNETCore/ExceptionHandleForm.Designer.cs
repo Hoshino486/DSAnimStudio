@@ -11,7 +11,7 @@ namespace DSAnimStudio
         /// <summary>
         /// 清理所有正在使用的资源。
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">若应释放托管资源则为 true，否则为 false。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))

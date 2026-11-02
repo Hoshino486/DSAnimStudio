@@ -438,7 +438,7 @@ namespace DSAnimStudio.TaeEditor
         //     sibcamInBND.Clear();
         //     if (binder != null)
         //     {
-        //         // "data\Model\chr\blf\ver_0001.txt" which signals that its "ver_0001"
+        //         // "data\Model\chr\blf\ver_0001.txt"，用它来标示 "ver_0001"
         //         bool ver_0001 = binder.Files.Any(f => f.ID == 9999999);
         //         int taeFileIDRangeMin = ver_0001 ? 5000000 : 3000000;
         //         int taeFileIDRangeMax = ver_0001 ? 5999999 : 3999999;

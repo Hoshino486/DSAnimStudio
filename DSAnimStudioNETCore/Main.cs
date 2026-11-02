@@ -898,7 +898,7 @@ namespace DSAnimStudio
             {
                 if (TAE_EDITOR?.Graph != null)
                 {
-                    // I'm sorry; this is pecularily placed.
+                    // 抱歉，这块代码放的位置确实很别扭。
                     TAE_EDITOR.Graph?.ViewportInteractor?.SaveChrAsm();
                 }
 

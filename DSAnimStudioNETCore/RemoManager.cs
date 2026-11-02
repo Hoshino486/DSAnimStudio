@@ -443,7 +443,7 @@ namespace DSAnimStudio
                     else if (name.StartsWith("d"))
                     {
                         // TODO
-                        // Dummy entity e.g. 'd0000_0000'. Apparently just acts as a single DummyPoly?
+                        // Dummy 实体，例如 'd0000_0000'。看起来它就相当于一个单独的 DummyPoly？
                         mdl = zzz_DocumentManager.CurrentDocument.GameRoot.LoadCharacter("c1000", "c1000")[0];
                         mdl.RemoDummyTransformPrim =
                             new DebugPrimitives.DbgPrimWireArrow(new Transform(

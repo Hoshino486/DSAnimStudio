@@ -731,7 +731,7 @@ namespace DSAnimStudio
             //    get => _isModified;
             //    set
             //    {
-            //        // Going from true --> false, wipe the modified states of the animations
+            //        // 从 true 变成 false 时，清掉各动画的已修改标记
             //        if (_isModified && !value)
             //        {
             //            lock (ParentProj._lock_DSAProj)
@@ -772,7 +772,7 @@ namespace DSAnimStudio
 
             public void INNER_SetIsModified(bool value)
             {
-                // Going from true --> false, wipe the modified states of the animations
+                // 从 true 变成 false 时，清掉各动画的已修改标记
                 if (_isModified && !value)
                 {
                     lock (ParentProj._lock_DSAProj)

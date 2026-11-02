@@ -159,7 +159,7 @@ namespace DSAnimStudio
         {
             // 点积——两个 Vector 之间夹角的余弦。
             float dot = Vector3.Dot(start, end);
-            // Clamp it to be in the range of Acos()
+            // 把它夹到 Acos() 的定义域范围内
             // 这也许没必要，但浮点数
             // 精度可是个善变的娘们。
             dot = MathHelper.Clamp(dot, -1.0f, 1.0f);

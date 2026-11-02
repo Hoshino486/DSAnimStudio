@@ -508,7 +508,7 @@ namespace DSAnimStudio
         //}
 
         /// <summary>
-        /// Example "main" will return the full path ending like "Game/sound/fdp_main.fev" in DS3.
+        /// 例如传 "main"，在黑暗之魂 3 里会返回以 "Game/sound/fdp_main.fev" 结尾的完整路径。
         /// </summary>
         /// <param name="fevNameAfterPrefix"></param>
         /// <returns></returns>

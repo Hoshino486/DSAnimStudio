@@ -218,7 +218,7 @@
 //                if (OwnerPane == null || OwnerPane.PlaybackCursor == null || !IsActive)
 //                    return false;
 
-//                // Can't get .PlaybackHighlight because it gets .WasJustEnteredDuringPlayback; stack overflow
+//                // 不能取 .PlaybackHighlight，因为那会连带取 .WasJustEnteredDuringPlayback，进而栈溢出
 //                var curHighlight = OwnerPane?.PlaybackCursor == null ? false :
 //                    CheckHighlight(OwnerPane.PlaybackCursor.CurrentTimeMod, OwnerPane.MainScreen.HoveringOverEventBox);
 //                var prevHighlight = !OwnerPane.PlaybackCursor.JustStartedPlaying &&

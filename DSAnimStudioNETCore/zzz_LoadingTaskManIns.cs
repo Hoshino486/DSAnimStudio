@@ -190,7 +190,7 @@ namespace DSAnimStudio
         ///     用的那个字符串。
         /// </param>
         /// <param name="taskDelegate">
-        ///     The actual task to perform. An IProgress&lt;double&gt; is given
+        ///     真正要执行的任务。会传入一个 IProgress&lt;double&gt;
         ///     给你自己控制加载条用的
         ///     (0.0 = 进度条为空, 1.0 = 进度条已满, -1.0 = 连续进度条)。
         ///     做完记得把进度条填满。
@@ -285,7 +285,7 @@ namespace DSAnimStudio
         ///     用的那个字符串。
         /// </param>
         /// <param name="taskDelegate">
-        ///     The actual task to perform. An IProgress&lt;double&gt; is given
+        ///     真正要执行的任务。会传入一个 IProgress&lt;double&gt;
         ///     用于让你上报加载进度条的百分比（1.0 = 进度条已满）。
         ///     做完记得把进度条填满。
         /// </param>

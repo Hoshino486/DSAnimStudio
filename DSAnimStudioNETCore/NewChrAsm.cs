@@ -1081,7 +1081,7 @@ namespace DSAnimStudio
 
         public Model LoadArmorMesh(IBinder partsbnd, bool ignoreBindIDs)
         {
-            // doesn't need _lock_doingAnythingWithModels because the thing it's called from has that and it's private.
+            // 不需要 _lock_doingAnythingWithModels，因为调用它的地方已经持有那把锁，而且它是私有的。
             List<TPF> tpfs = new List<TPF>();
             FLVER2 flver2 = null;
             FLVER0 flver0 = null;

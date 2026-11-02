@@ -33,7 +33,7 @@ namespace DSAnimStudio.LiveRefresh
         /// 检查地址是否有效。
         /// </summary>
         /// <param name="address">该地址（指针所指向的地址）。</param>
-        /// <returns>True if (pointer points to a) valid address.</returns>
+        /// <returns>（指针指向的）地址是否有效。</returns>
 
 
         public static System.Diagnostics.Process AttachedProcess = null;

@@ -9,7 +9,7 @@ namespace SoulsFormats
     public partial class PARAM_Hack : SoulsFile<PARAM_Hack>
     {
         /// <summary>
-        /// Whether the file is big-endian; true for PS3/360 files, false otherwise.
+        /// 文件是否为大端序；PS3 / Xbox 360 文件为 true，其余为 false。
         /// </summary>
         public bool BigEndian { get; set; }
 
@@ -44,12 +44,12 @@ namespace SoulsFormats
         public string ParamType { get; set; }
 
         /// <summary>
-        /// Automatically determined based on spacing of row offsets; -1 if param had no rows.
+        /// 根据各行偏移量的间距自动推导；若该 param 没有任何行，则为 -1。
         /// </summary>
         public long DetectedSize { get; private set; }
 
         /// <summary>
-        /// The rows of this param; must be loaded with PARAM_Hack.ApplyParamdef() before cells can be used.
+        /// 该 param 的所有行；必须先调用 PARAM_Hack.ApplyParamdef() 载入，才能访问单元格。
         /// </summary>
         public List<Row> Rows { get; set; }
 
@@ -95,7 +95,7 @@ namespace SoulsFormats
             byte[] copy = br.GetBytes(0, (int)br.Stream.Length);
             RowReader = new BinaryReaderEx(BigEndian, copy);
 
-            // The strings offset in the header is highly unreliable; only use it as a last resort
+            // 头部里的字符串偏移量非常不可靠，只当作最后手段使用
             long actualStringsOffset = 0;
             long stringsOffset = br.ReadUInt32();
             if (Format2D.HasFlag(FormatFlags1.Flag01) && Format2D.HasFlag(FormatFlags1.IntDataOffset) || Format2D.HasFlag(FormatFlags1.LongDataOffset))

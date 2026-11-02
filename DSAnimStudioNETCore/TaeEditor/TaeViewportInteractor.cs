@@ -1249,7 +1249,7 @@ namespace DSAnimStudio.TaeEditor
 
                 var pb = Graph.PlaybackCursor;
 
-                //TODO: Check if putting this inside the lock() fixes.
+                //TODO：看看把这东西放进 lock() 里能不能修好。
                 CheckSimEnvironment();
 
                 if (!ParentDocument.LoadingTaskMan.AnyInteractionBlockingTasks() || forceRefreshTimeact)

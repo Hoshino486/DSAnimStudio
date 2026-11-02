@@ -379,7 +379,7 @@ namespace DSAnimStudio
             _graphicsDevice.RasterizerState = _rasterizerState;
             _graphicsDevice.DepthStencilState = DepthStencilState.DepthRead;
 
-            // Handle cases of screen coordinates != from framebuffer coordinates (e.g. retina displays)
+            // 处理屏幕坐标与帧缓冲坐标不一致的情况（例如 Retina 屏）
             drawData.ScaleClipRects(ImGui.GetIO().DisplayFramebufferScale);
 
             drawData.DisplayPos = new System.Numerics.Vector2(x, y);

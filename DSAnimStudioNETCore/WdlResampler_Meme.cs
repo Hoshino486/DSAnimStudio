@@ -14,7 +14,7 @@
 //     包括商业应用，并允许修改与自由再分发，
 //     但须遵守以下限制：
 // 
-//     1. The origin of this software must not be misrepresented; you must not
+//     1. 不得歪曲本软件的来源；你不得
 //        不得声称是你编写了原始软件。如果你在产品中使用了本软件，
 //        在产品文档中致谢将
 //        受到欢迎，但并非必须。
@@ -146,7 +146,7 @@ namespace NAudio.Dsp
         /// <summary>
         /// Prepare
         /// 注意，只调用 ResamplePrepare 而不调用 ResampleOut 是安全的（下一次调用 ResamplePrepare 会照常工作）
-        /// nb inbuffer was WDL_ResampleSample **, returning a place to put the in buffer, so we return a buffer and offset
+        /// 注意：inbuffer 原本是 WDL_ResampleSample **，用于返回存放输入缓冲的位置，所以我们返回一个缓冲区加偏移量
         /// </summary>
         /// <param name="out_samples">当 !wantInputDriven 时，req_samples 为所需的输出采样数；当 wantInputDriven 时，则为已有的输入采样数</param>
         /// <param name="nch"></param>
@@ -210,8 +210,8 @@ namespace NAudio.Dsp
             return sreq;
         }
 
-        // if numsamples_in < the value return by ResamplePrepare(), then it will be flushed to produce all remaining valid samples
-        // do NOT call with nsamples_in greater than the value returned from resamplerprpare()! the extra samples will be ignored.
+        // 如果 numsamples_in 小于 ResamplePrepare() 返回的值，就会做一次冲刷，把剩余所有有效采样都输出
+        // 不要用大于 resamplerprepare() 返回值的 nsamples_in 来调用！多出来的采样会被忽略。
         // 返回成功输出到 out 的采样数
         public int ResampleOut(WDL_ResampleSample[] outBuffer, int outBufferIndex, int nsamples_in, int nsamples_out, int nch)
         {
@@ -491,7 +491,7 @@ namespace NAudio.Dsp
                 // 构建低通 filter
                 int allocsize = (wantsize + 1) * m_lp_oversize;
                 Array.Resize(ref m_filter_coeffs, allocsize);
-                //int cfout = 0; // this is an index into m_filter_coeffs
+                //int cfout = 0; // 这是 m_filter_coeffs 的下标
                 if (m_filter_coeffs.Length == allocsize)
                 {
                     m_filter_coeffs_size = wantsize;
