@@ -400,6 +400,9 @@
     <None Update="LICENSE\DS ANIM STUDIO LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="LICENSE\DS ANIM STUDIO LICENSE.zh-Hans.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="LICENSE\Havoc License.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
