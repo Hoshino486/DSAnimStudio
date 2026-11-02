@@ -8,13 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public static partial class MenuBar
     {
         public static void BuildMenuBar_060_Window(ref bool anyItemFocused, ref bool isAnyMenuExpanded)
         {
-            if (ImGui.BeginMenu("Window"))
+            if (ImGui.BeginMenu(Loc.T("Window")))
             {
                 isAnyMenuExpanded = true;
                 

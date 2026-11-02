@@ -1,4 +1,4 @@
-﻿using DSAnimStudio.DebugPrimitives;
+using DSAnimStudio.DebugPrimitives;
 using DSAnimStudio.ImguiOSD;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
@@ -11,6 +11,13 @@ namespace DSAnimStudio.TaeEditor
 {
     public class TaeConfigFile
     {
+        /// <summary>
+        /// 界面语言。存在配置文件里，下次启动沿用。
+        /// 简体中文 = 0（默认），English = 1。
+        /// 老配置文件没有这个字段，反序列化后保持字段初始化值，即中文。
+        /// </summary>
+        public DSAnimStudio.Localization.LocLanguage UILanguage = DSAnimStudio.Localization.LocLanguage.ChineseSimplified;
+
         public bool WelcomeMessageDisabled = false;
 
         public OSD.DefaultLayoutTypes DesiredUILayoutType = OSD.DefaultLayoutTypes.V5;
@@ -324,6 +331,8 @@ namespace DSAnimStudio.TaeEditor
 
         public void BeforeSaving(TaeEditorScreen editor)
         {
+            UILanguage = DSAnimStudio.Localization.Loc.Language;
+
             WindowOpenStateEntries = OSD.GetWindowOpenStateEntries();
 
             lock (DBG._lock_DebugDrawEnablers)
@@ -435,6 +444,9 @@ namespace DSAnimStudio.TaeEditor
 
         public void AfterLoading(TaeEditorScreen editor)
         {
+            // 先应用语言，后面所有的界面文本都会按此语言查表。
+            DSAnimStudio.Localization.Loc.Language = UILanguage;
+
             if (DesiredUILayoutType == OSD.DefaultLayoutTypes.None)
                 DesiredUILayoutType = OSD.DefaultLayoutTypes.V5;
 

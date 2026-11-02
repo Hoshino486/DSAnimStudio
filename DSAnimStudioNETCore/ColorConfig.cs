@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public class ColorConfig
@@ -154,7 +155,7 @@ namespace DSAnimStudio
                 }
                 else if (node is ColorEditNode.Group asGroup)
                 {
-                    if (ImGui.TreeNode($"{nodeKey}##ColorEditNode_{asGroup.GUID}"))
+                    if (ImGui.TreeNode(Loc.TF("{0}##ColorEditNode_{1}", nodeKey, asGroup.GUID)))
                     {
                         try
                         {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Dialog
@@ -20,7 +21,7 @@ namespace DSAnimStudio.ImguiOSD
 
             
             public SetupWorkspace()
-                : base("Setup Workspace")
+                : base(Loc.T("Setup Workspace"))
             {
                 zzz_DocumentManager.CurrentDocument.GameData.LoadProjectJson();
                 
@@ -51,11 +52,11 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     var browseDlg = new SaveFileDialog()
                     {
-                        FileName = "GO TO DIRECTORY AND CLICK SAVE",
+                        FileName = Loc.T("GO TO DIRECTORY AND CLICK SAVE"),
                         CheckFileExists = false,
                         CheckPathExists = true,
                         OverwritePrompt = false,
-                        Title = "Select Game Directory",
+                        Title = Loc.T("Select Game Directory"),
                     };
                     if (!string.IsNullOrWhiteSpace(GameDirectory) && System.IO.Directory.Exists(GameDirectory))
                     {
@@ -73,11 +74,11 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     var browseDlg = new SaveFileDialog()
                     {
-                        FileName = "GO TO DIRECTORY AND CLICK SAVE",
+                        FileName = Loc.T("GO TO DIRECTORY AND CLICK SAVE"),
                         CheckFileExists = false,
                         CheckPathExists = true,
                         OverwritePrompt = false,
-                        Title = "Select ModEngine Directory",
+                        Title = Loc.T("Select ModEngine Directory"),
                     };
                     if (!string.IsNullOrWhiteSpace(ModEngineDirectory) && System.IO.Directory.Exists(ModEngineDirectory))
                     {
@@ -91,27 +92,27 @@ namespace DSAnimStudio.ImguiOSD
                     RequestBrowseModEngineDir = false;
                 }
                 
-                ImGui.InputText("Game Data Directory##Dialog.SetupWorkspace.GameDirectory", ref GameDirectory, 256);
+                ImGui.InputText(Loc.T("Game Data Directory##Dialog.SetupWorkspace.GameDirectory"), ref GameDirectory, 256);
                 bool editingGameDirectory = ImGui.IsItemActive();
-                if (Tools.SimpleClickButton("Browse..."))
+                if (Tools.SimpleClickButton(Loc.T("Browse...")))
                 {
                     RequestBrowseGameDir = true;
                 }
-                ImGui.InputText("ModEngine '/mod/' Directory (Optional)##Dialog.SetupWorkspace.ModEngineDirectory", ref ModEngineDirectory, 256);
+                ImGui.InputText(Loc.T("ModEngine '/mod/' Directory (Optional)##Dialog.SetupWorkspace.ModEngineDirectory"), ref ModEngineDirectory, 256);
                 bool editingModEngineDirectory = ImGui.IsItemActive();
                 ImGui.SameLine();
-                if (Tools.SimpleClickButton("Browse..."))
+                if (Tools.SimpleClickButton(Loc.T("Browse...")))
                 {
                     RequestBrowseModEngineDir = true;
                 }
 
-                ImGui.Checkbox("Load Loose GameParam Instead of Regulation", ref LoadLooseParams);
-                ImGui.Checkbox("Load UXM Unpacked Game Files", ref LoadUnpackedGameFiles);
-                ImGui.Checkbox("Disable Interroot DCX", ref DisableInterrootDCX);
+                ImGui.Checkbox(Loc.T("Load Loose GameParam Instead of Regulation"), ref LoadLooseParams);
+                ImGui.Checkbox(Loc.T("Load UXM Unpacked Game Files"), ref LoadUnpackedGameFiles);
+                ImGui.Checkbox(Loc.T("Disable Interroot DCX"), ref DisableInterrootDCX);
                 
-                bool clickedCancel = Tools.SimpleClickButton("Cancel") || IsTitleBarXRequested;
+                bool clickedCancel = Tools.SimpleClickButton(Loc.T("Cancel")) || IsTitleBarXRequested;
                 ImGui.SameLine();
-                bool clickedAccept = Tools.SimpleClickButton("Accept");
+                bool clickedAccept = Tools.SimpleClickButton(Loc.T("Accept"));
                 bool pressedEscape = IsEscapeKeyRequested;
                 bool pressedEnter = IsEnterKeyRequested && !editingGameDirectory && !editingModEngineDirectory;
 

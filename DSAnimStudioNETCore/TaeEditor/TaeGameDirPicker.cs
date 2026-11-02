@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.TaeEditor
 {
@@ -15,6 +16,8 @@ namespace DSAnimStudio.TaeEditor
         public TaeGameDirPicker()
         {
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
         }
 
         public bool ClickedApply = false;
@@ -160,26 +163,20 @@ namespace DSAnimStudio.TaeEditor
 
         private void buttonHelpLoadLooseParams_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("If checked, DS Anim Studio will load parameters from loose GameParam file " +
-                "rather than from encrypted regulation. Works exactly like the ModEngine setting \"loadLooseParams\".",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("If checked, DS Anim Studio will load parameters from loose GameParam file rather than from encrypted regulation. Works exactly like the ModEngine setting \"loadLooseParams\"."),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonHelpLoadUxmFiles_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("If checked, DS Anim Studio will load loose files unpacked with UXM instead of the ones in the data archives. " +
-                "\nWorks exactly like the ModEngine setting \"loadUXMFiles\"." +
-                "\nHas no effect on games that do not have archive files (DeS, DS1:PTDE, BB)",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("If checked, DS Anim Studio will load loose files unpacked with UXM instead of the ones in the data archives. \nWorks exactly like the ModEngine setting \"loadUXMFiles\".\nHas no effect on games that do not have archive files (DeS, DS1:PTDE, BB)"),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void noPaddingButtonHelpModEngindDir_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("If a path is entered here, it will function exactly like the mod " +
-                "override directory in ModEngine, making DS Anim Studio load files from there with first priority, " +
-                "only falling back to loading from the regular game directory if the file isn't found in the " +
-                "ModEngine directory.",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("If a path is entered here, it will function exactly like the mod override directory in ModEngine, making DS Anim Studio load files from there with first priority, only falling back to loading from the regular game directory if the file isn't found in the ModEngine directory."),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonABORT_Click(object sender, EventArgs e)
@@ -195,9 +192,8 @@ namespace DSAnimStudio.TaeEditor
 
         private void buttonHelpDisableInterrootDCX_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Removes .dcx extension from all paths in the game data directory. For use with DS1 PTDE unpacked via UDSFM." +
-                "\n\nYou definitely want to enable Load Unpacked Game Files with this option.",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("Removes .dcx extension from all paths in the game data directory. For use with DS1 PTDE unpacked via UDSFM.\n\nYou definitely want to enable Load Unpacked Game Files with this option."),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.ImguiOSD
 {
@@ -15,7 +16,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.NoSave;
 
-            public override string NewImguiWindowTitle => "Viewport";
+            public override string NewImguiWindowTitle => Loc.Win("Viewport");
             protected override void Init()
             {
                 

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -22,6 +23,8 @@ namespace DSAnimStudio
         public SapImportFlver2Form()
         {
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
         }
 
 
@@ -222,7 +225,7 @@ namespace DSAnimStudio
         {
             if (DoSaveImport == null)
             {
-                System.Windows.Forms.MessageBox.Show("Nothing to save.");
+                System.Windows.Forms.MessageBox.Show(Loc.T("Nothing to save."));
             }
             else
             {
@@ -237,7 +240,7 @@ namespace DSAnimStudio
                         prog?.Report(1.0 * (i + 1) / DoSaveImport.Count);
                     }
 
-                    System.Windows.Forms.MessageBox.Show("Saved file.");
+                    System.Windows.Forms.MessageBox.Show(Loc.T("Saved file."));
                 }, flags: zzz_LoadingTaskManIns.TaskFlags.AllowsInteraction);
 
                 

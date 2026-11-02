@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Dialog
@@ -17,7 +18,7 @@ namespace DSAnimStudio.ImguiOSD
             public Vector2 TextDialogSize = new Vector2(450, 280);
 
             public GenericText(string text, float sizeX, float sizeY)
-                : base("Welcome###NewWelcomeDialog")
+                : base(Loc.Win("Welcome"))
             {
                 Text = text;
                 TextDialogSize = new Vector2(sizeX, sizeY);
@@ -50,7 +51,7 @@ namespace DSAnimStudio.ImguiOSD
                 //ImGui.Checkbox("Don't show me this again.", ref iUnderstand);
                 //Main.Config.WelcomeMessageDisabled = iUnderstand;
                 ImGui.Separator();
-                if (Tools.SimpleClickButton("OK"))
+                if (Tools.SimpleClickButton(Loc.T("OK")))
                 {
                     ResultType = ResultTypes.Accept;
                     //Main.SaveConfig();

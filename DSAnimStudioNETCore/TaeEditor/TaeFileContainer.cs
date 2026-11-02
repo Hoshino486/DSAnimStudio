@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Text;
 using TAE = SoulsAssetPipeline.Animation.TAE;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.TaeEditor
 {
     public class TaeFileContainer
@@ -367,9 +368,9 @@ namespace DSAnimStudio.TaeEditor
 
             //if (!File.Exists(oodleSource))
             //{
-            //    System.Windows.Forms.MessageBox.Show("Was unable to automatically find the " +
+            //    System.Windows.Forms.MessageBox.Show(Loc.T("Was unable to automatically find the ") +
             //    "`oo2core_6_win64.dll` file in the Sekiro folder. Please copy that file to the " +
-            //    "'lib' folder next to DS Anim Studio.exe in order to load Sekiro files.", "Unable to find compression DLL",
+            //    "'lib' folder next to DS Anim Studio.exe in order to load Sekiro files.", Loc.T("Unable to find compression DLL"),
             //    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
 
             //    return false;
@@ -381,8 +382,8 @@ namespace DSAnimStudio.TaeEditor
             {
                 System.IO.File.Copy(oodleSource, oodleTarget, true);
 
-                zzz_NotificationManagerIns.PushNotification("Oodle compression library was automatically copied from game directory " +
-                                    "to editor's '/lib' directory and Sekiro / Elden Ring files will load now.");
+                zzz_NotificationManagerIns.PushNotification(Loc.T("Oodle compression library was automatically copied from game directory " +
+                                    "to editor's '/lib' directory and Sekiro / Elden Ring files will load now."));
             }
 
         }
@@ -542,17 +543,14 @@ namespace DSAnimStudio.TaeEditor
                         }
                         catch (DSAProjTooNewException)
                         {
-                            var choice = MessageBox.Show($"Associated *{DSAProj.EXT} file was saved with a newer version of DS Anim Studio. Cannot open.\n\n" +
-                                "Resetting everything to default.\nWARNING: >>>If you save, it will overwrite the incompatible file.<<<",
+                            var choice = MessageBox.Show(Loc.TF("Associated *{0} file was saved with a newer version of DS Anim Studio. Cannot open.\n\nResetting everything to default.\nWARNING: >>>If you save, it will overwrite the incompatible file.<<<", DSAProj.EXT),
                                 $"Invalid Metadata (*{DSAProj.EXT}) File", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                             Proj = DSAProj.CreateFromContainer(Info, template, parentDocument, checkValidity: false);
                         }
                         catch (Exception ex)
                         {
-                            var choice = MessageBox.Show($"Associated *{DSAProj.EXT} file is invalid/corrupted. Cannot open.\n\n" +
-                                "Resetting everything to default.\nWARNING: >>>If you save, it will overwrite the corrupted file.<<<" +
-                                $"\n\nError shown below:\n{ex}",
+                            var choice = MessageBox.Show(Loc.TF("Associated *{0} file is invalid/corrupted. Cannot open.\n\nResetting everything to default.\nWARNING: >>>If you save, it will overwrite the corrupted file.<<<\n\nError shown below:\n{1}", DSAProj.EXT, ex),
                                 $"Invalid Metadata (*{DSAProj.EXT}) File", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                             Proj = DSAProj.CreateFromContainer(Info, template, parentDocument, checkValidity: false);
@@ -650,7 +648,7 @@ namespace DSAnimStudio.TaeEditor
                     }
                     catch (Exception ex)
                     {
-                        ImguiOSD.DialogManager.DialogOK("Error", $"Failed to save project file.\n\n{ex}");
+                        ImguiOSD.DialogManager.DialogOK(Loc.T("Error"), Loc.TF("Failed to save project file.\n\n{0}", ex));
 
                         failed = true;
                     }
@@ -660,7 +658,7 @@ namespace DSAnimStudio.TaeEditor
                         Proj.SAFE_ClearAllModified();
                         Proj.SAFE_ClearRuntimeFlagsOnAll(DSAProj.EditorFlags.Combo_AllNeedsResaveFlags);
 
-                        ImguiOSD.DialogManager.DialogOK("Error", $"Cannot output to game files due to errors (shown in the red 'ERRORS' window). " +
+                        ImguiOSD.DialogManager.DialogOK(Loc.T("Error"), $"Cannot output to game files due to errors (shown in the red 'ERRORS' window). " +
                                                                  $"\nThe *{DSAProj.EXT} file has been saved so your work is safe and will not be lost upon closing." +
                                                                  $"\nOnce you fix the errors, you may output to the game files by saving again.");
                         savedDsaproj = true;
@@ -697,7 +695,7 @@ namespace DSAnimStudio.TaeEditor
                 }
                 catch (Exception ex)
                 {
-                    ImguiOSD.DialogManager.DialogOK("Error", $"Failed to save project file.\n\n{ex}");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("Error"), Loc.TF("Failed to save project file.\n\n{0}", ex));
 
                     failed = true;
                 }

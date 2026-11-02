@@ -25,6 +25,7 @@ using System.Runtime.InteropServices;
 using static SoulsAssetPipeline.Audio.Wwise.WwiseBlock;
 using TAE = SoulsAssetPipeline.Animation.TAE;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public static class _QuickDebug
@@ -550,7 +551,7 @@ namespace DSAnimStudio
                 dict.Add(key, defaultValue);
 
             var curVal = dict[key];
-            ImGui.InputInt($"{dispName}##{key}", ref curVal);
+            ImGui.InputInt(Loc.TF("{0}##{1}", dispName, key), ref curVal);
             dict[key] = curVal;
 
             return curVal;
@@ -564,7 +565,7 @@ namespace DSAnimStudio
                 dict.Add(key, defaultValue);
 
             var curVal = dict[key];
-            ImGui.InputFloat($"{dispName}##{key}", ref curVal);
+            ImGui.InputFloat(Loc.TF("{0}##{1}", dispName, key), ref curVal);
             dict[key] = curVal;
 
             return curVal;
@@ -578,7 +579,7 @@ namespace DSAnimStudio
                 dict.Add(key, defaultValue);
 
             var curVal = dict[key];
-            ImGui.Checkbox($"{dispName}##{key}", ref curVal);
+            ImGui.Checkbox(Loc.TF("{0}##{1}", dispName, key), ref curVal);
             dict[key] = curVal;
 
             return curVal;
@@ -592,7 +593,7 @@ namespace DSAnimStudio
                 dict.Add(key, defaultValue);
 
             var curVal = dict[key];
-            ImGui.InputText($"{dispName}##{key}", ref curVal, maxStrLength);
+            ImGui.InputText(Loc.TF("{0}##{1}", dispName, key), ref curVal, maxStrLength);
             dict[key] = curVal;
 
             return curVal;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -58,8 +59,8 @@ namespace DSAnimStudio
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    $"Error occurred before DS Anim Studio had a chance to initialize (please report):\n\n{ex.ToString()}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Loc.TF("Error occurred before DS Anim Studio had a chance to initialize (please report):\n\n{0}", ex.ToString()),
+                    Loc.T("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 #endif
 

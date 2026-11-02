@@ -1,4 +1,5 @@
-﻿namespace DSAnimStudio
+﻿using DSAnimStudio.Localization;
+namespace DSAnimStudio
 {
     partial class RenameForm
     {
@@ -61,7 +62,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 2;
-            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.Text = Loc.T("Cancel");
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // buttonOK
@@ -72,7 +73,7 @@
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 3;
-            this.buttonOK.Text = "OK";
+            this.buttonOK.Text = Loc.T("OK");
             this.buttonOK.UseVisualStyleBackColor = true;
             // 
             // RenameForm
@@ -89,7 +90,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 125);
             this.MinimumSize = new System.Drawing.Size(300, 125);
             this.Name = "RenameForm";
-            this.Text = "RenameForm";
+            this.Text = Loc.T("RenameForm");
             this.Load += new System.EventHandler(this.RenameForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

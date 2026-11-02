@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Vector2 = System.Numerics.Vector2;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -18,7 +19,7 @@ namespace DSAnimStudio.ImguiOSD
 
             private object _lock_NotificationCount = new object();
 
-            public override string NewImguiWindowTitle => "Log";
+            public override string NewImguiWindowTitle => Loc.Win("Log");
 
            
 
@@ -49,10 +50,10 @@ namespace DSAnimStudio.ImguiOSD
 
             protected override void BuildContents(ref bool anyFieldFocused)
             {
-                ImGui.Checkbox("Hide Popup Notifications", ref zzz_NotificationManagerIns.HideNotificationPopups);
+                ImGui.Checkbox(Loc.T("Hide Popup Notifications"), ref zzz_NotificationManagerIns.HideNotificationPopups);
                 lock (zzz_NotificationManagerIns._lock_notifications)
                 {
-                    if (Tools.SimpleClickButton("Clear Notification History"))
+                    if (Tools.SimpleClickButton(Loc.T("Clear Notification History")))
                     {
                         zzz_NotificationManagerIns.NotificationHistory.Clear();
                     }
@@ -61,7 +62,7 @@ namespace DSAnimStudio.ImguiOSD
                     //     NotificationManager.PushNotification($"TEST{Guid.NewGuid().ToString()}", 2.5f, 0.35f, Color.Red);
                     // }
                     var cursorYAtListStart = ImGui.GetCursorPosY();
-                    ImGui.BeginChild("NotificationManager_Child", new Vector2(LastSize.X - 16, LastSize.Y - cursorYAtListStart - 8), true, ImGuiWindowFlags.AlwaysVerticalScrollbar);
+                    ImGui.BeginChild(Loc.T("NotificationManager_Child"), new Vector2(LastSize.X - 16, LastSize.Y - cursorYAtListStart - 8), true, ImGuiWindowFlags.AlwaysVerticalScrollbar);
                     int i = 0;
                     foreach (var notif in zzz_NotificationManagerIns.NotificationHistory)
                     {

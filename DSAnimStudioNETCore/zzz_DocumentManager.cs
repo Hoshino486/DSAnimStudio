@@ -10,6 +10,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -261,9 +262,7 @@ namespace DSAnimStudio
         private static DialogResult AskUserAboutClosingDocument(zzz_DocumentIns doc)
         {
             var confirmDlg = System.Windows.Forms.MessageBox.Show(
-                                $"The file '{doc.ImguiTabDisplayName}' has " +
-                                $"unsaved changes. Would you like to save these changes before " +
-                                $"closing the file?", "Save Unsaved Changes?",
+                                Loc.TF("The file '{0}' has unsaved changes. Would you like to save these changes before closing the file?", doc.ImguiTabDisplayName), Loc.T("Save Unsaved Changes?"),
                                 System.Windows.Forms.MessageBoxButtons.YesNoCancel,
                                 System.Windows.Forms.MessageBoxIcon.None);
 

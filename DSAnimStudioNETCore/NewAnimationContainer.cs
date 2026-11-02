@@ -14,6 +14,7 @@ using NVector4 = System.Numerics.Vector4;
 using NQuaternion = System.Numerics.Quaternion;
 using System.Windows.Forms;
 using TAE = SoulsAssetPipeline.Animation.TAE;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -594,7 +595,7 @@ namespace DSAnimStudio
                     allAnimIDs.Add(kvp.Key);
             }
 
-            Document.LoadingTaskMan.DoLoadingTaskSynchronous("ScanningAllAnimations", "Loading animations...", prog =>
+            Document.LoadingTaskMan.DoLoadingTaskSynchronous("ScanningAllAnimations", Loc.T("Loading animations..."), prog =>
             {
                 for (int i = 0; i < allAnimIDs.Count; i++)
                 {

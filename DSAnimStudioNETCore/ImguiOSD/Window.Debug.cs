@@ -11,6 +11,7 @@ using System.Reflection;
 using SoulsFormats;
 using System.Windows.Forms;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -19,7 +20,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.SaveOnlyInDebug;
 
-            public override string NewImguiWindowTitle => "Debug";
+            public override string NewImguiWindowTitle => Loc.Win("Debug");
             
             protected override void Init()
             {
@@ -44,7 +45,7 @@ namespace DSAnimStudio.ImguiOSD
             {
                 if (OSD.EnableDebug_QuickDebug)
                 {
-                    if (ImGui.TreeNodeEx("[QUICK DEBUG]", ImGuiTreeNodeFlags.DefaultOpen))
+                    if (ImGui.TreeNodeEx(Loc.T("[QUICK DEBUG]"), ImGuiTreeNodeFlags.DefaultOpen))
                     {
                         _QuickDebug.BuildDebugMenu(MainTaeScreen);
                         ImGui.TreePop();
@@ -58,18 +59,18 @@ namespace DSAnimStudio.ImguiOSD
                 ImGui.Separator();
 
                 bool forcedSSSEnabled = GFX.FlverShader.Effect.ForcedSSS_Enable;
-                ImGui.Checkbox("Forced SSS - Enabled", ref forcedSSSEnabled);
+                ImGui.Checkbox(Loc.T("Forced SSS - Enabled"), ref forcedSSSEnabled);
                 GFX.FlverShader.Effect.ForcedSSS_Enable = forcedSSSEnabled;
 
                 float forcedSSSIntensity = GFX.FlverShader.Effect.ForcedSSS_Intensity;
-                ImGui.SliderFloat("Force SSS - Intensity", ref forcedSSSIntensity, 0, 1);
+                ImGui.SliderFloat(Loc.T("Force SSS - Intensity"), ref forcedSSSIntensity, 0, 1);
                 GFX.FlverShader.Effect.ForcedSSS_Intensity = forcedSSSIntensity;
 
                 ImGui.Separator();
 
                 if (MainTaeScreen != null)
                 {
-                    if (ImGui.TreeNode("Anim View History BACKWARD"))
+                    if (ImGui.TreeNode(Loc.T("Anim View History BACKWARD")))
                     {
                         MainTaeScreen.ImguiDebugAddAnimViewBackwardStackItems();
                         ImGui.TreePop();
@@ -78,7 +79,7 @@ namespace DSAnimStudio.ImguiOSD
 
                 ImGui.Separator();
 
-                if (ImGui.TreeNode("Shaders"))
+                if (ImGui.TreeNode(Loc.T("Shaders")))
                 {
                     doShader($"{nameof(GFX.FlverShader)}", GFX.FlverShader.Effect);
                     doShader($"{nameof(GFX.DbgPrimSolidShader)}", GFX.DbgPrimSolidShader.Effect);
@@ -107,8 +108,8 @@ namespace DSAnimStudio.ImguiOSD
 
                 ImGui.Separator();
 
-                ImGui.Checkbox("Global Bone Glue Enable", ref NewBoneGluer.GlobalEnable);
-                ImGui.Checkbox("Global Skeleton Mapper Enable", ref NewSkeletonMapper.GlobalEnable);
+                ImGui.Checkbox(Loc.T("Global Bone Glue Enable"), ref NewBoneGluer.GlobalEnable);
+                ImGui.Checkbox(Loc.T("Global Skeleton Mapper Enable"), ref NewSkeletonMapper.GlobalEnable);
 
                 var mainModel = MainTaeScreen?.Graph?.ViewportInteractor?.CurrentModel;
                 if (mainModel != null)
@@ -121,7 +122,7 @@ namespace DSAnimStudio.ImguiOSD
 
                 ImGui.Separator();
 
-                if (ImGui.TreeNode("[Scene Debug]"))
+                if (ImGui.TreeNode(Loc.T("[Scene Debug]")))
                 {
 
 
@@ -131,9 +132,9 @@ namespace DSAnimStudio.ImguiOSD
 
                 ImGui.Separator();
 
-                ImGui.InputInt("highlightCategory", ref highlightCategory, 0, 0);
-                ImGui.InputInt("highlightAnim", ref highlightAnim, 0, 0);
-                ImGui.InputInt("highlightTrackIndex", ref highlightTrackIndex, 0, 0);
+                ImGui.InputInt(Loc.T("highlightCategory"), ref highlightCategory, 0, 0);
+                ImGui.InputInt(Loc.T("highlightAnim"), ref highlightAnim, 0, 0);
+                ImGui.InputInt(Loc.T("highlightTrackIndex"), ref highlightTrackIndex, 0, 0);
 
                 //if (Tools.SimpleClickButton("Debug Test - Highlight"))
                 //{
@@ -182,12 +183,12 @@ namespace DSAnimStudio.ImguiOSD
                 }
 
 
-                ImGui.Text($"AnyFieldFocused: {OSD.AnyFieldFocused}");
+                ImGui.Text(Loc.TF("AnyFieldFocused: {0}", OSD.AnyFieldFocused));
                 ImGui.Text($"Focused window: {(OSD.FocusedWindow?.ImguiTag ?? "None")}");
 
                 //DBG.DbgPrim_Grid.OverrideColor = HandleColor("Grid Color", DBG.DbgPrim_Grid.OverrideColor.Value);
 
-                if (Tools.SimpleClickButton("Set All StaticWindows to 300x300"))
+                if (Tools.SimpleClickButton(Loc.T("Set All StaticWindows to 300x300")))
                 {
                     OSD.ForAllStaticWindows(window =>
                     {
@@ -202,7 +203,7 @@ namespace DSAnimStudio.ImguiOSD
                 if (OSD.RequestExpandAllTreeNodes || OSD.IsInit)
                     ImGui.SetNextItemOpen(true);
 
-                if (ImGui.TreeNode("[Texture Pool]"))
+                if (ImGui.TreeNode(Loc.T("[Texture Pool]")))
                 {
                     var texDbg = zzz_DocumentManager.CurrentDocument.TexturePool.GetAllFetchesDbgInfos();
                     int index = 0;
@@ -210,46 +211,46 @@ namespace DSAnimStudio.ImguiOSD
                     {
                         if (ImGui.TreeNode($"{(tex.Value.IsTextureLoaded ? "■ " : "□ ")}{tex.Key}###TexDbg_{index}_{tex.Key}"))
                         {
-                            ImGui.Text($"TexName: {tex.Value.TexName}");
-                            ImGui.Text($"RequestType: {tex.Value.RequestType}");
-                            ImGui.Text($"IsTextureLoaded: {tex.Value.IsTextureLoaded}");
+                            ImGui.Text(Loc.TF("TexName: {0}", tex.Value.TexName));
+                            ImGui.Text(Loc.TF("RequestType: {0}", tex.Value.RequestType));
+                            ImGui.Text(Loc.TF("IsTextureLoaded: {0}", tex.Value.IsTextureLoaded));
                             if (tex.Value.Extra != null)
                             {
-                                if (ImGui.TreeNode("[TexInfo]"))
+                                if (ImGui.TreeNode(Loc.T("[TexInfo]")))
                                 {
-                                    ImGui.Text($"Platform: {tex.Value.Extra.Platform}");
-                                    if (ImGui.TreeNode("[TPF.Texture]"))
+                                    ImGui.Text(Loc.TF("Platform: {0}", tex.Value.Extra.Platform));
+                                    if (ImGui.TreeNode(Loc.T("[TPF.Texture]")))
                                     {
-                                        ImGui.Text($"Name: {tex.Value.Extra.TpfEntryStub.Name}");
-                                        ImGui.Text($"Format: {tex.Value.Extra.TpfEntryStub.Format}");
-                                        ImGui.Text($"Type: {tex.Value.Extra.TpfEntryStub.Type}");
-                                        ImGui.Text($"Mipmaps: {tex.Value.Extra.TpfEntryStub.Mipmaps}");
-                                        ImGui.Text($"Flags1: {tex.Value.Extra.TpfEntryStub.Flags1}");
+                                        ImGui.Text(Loc.TF("Name: {0}", tex.Value.Extra.TpfEntryStub.Name));
+                                        ImGui.Text(Loc.TF("Format: {0}", tex.Value.Extra.TpfEntryStub.Format));
+                                        ImGui.Text(Loc.TF("Type: {0}", tex.Value.Extra.TpfEntryStub.Type));
+                                        ImGui.Text(Loc.TF("Mipmaps: {0}", tex.Value.Extra.TpfEntryStub.Mipmaps));
+                                        ImGui.Text(Loc.TF("Flags1: {0}", tex.Value.Extra.TpfEntryStub.Flags1));
 
 
                                         if (tex.Value.Extra.TpfEntryStub.Header != null)
                                         {
-                                            if (ImGui.TreeNode("[Header]"))
+                                            if (ImGui.TreeNode(Loc.T("[Header]")))
                                             {
-                                                ImGui.Text($"Width: {tex.Value.Extra.TpfEntryStub.Header.Width}");
-                                                ImGui.Text($"Height: {tex.Value.Extra.TpfEntryStub.Header.Height}");
-                                                ImGui.Text($"TextureCount: {tex.Value.Extra.TpfEntryStub.Header.TextureCount}");
-                                                ImGui.Text($"Unk1: {tex.Value.Extra.TpfEntryStub.Header.Unk1}");
-                                                ImGui.Text($"Unk2: {tex.Value.Extra.TpfEntryStub.Header.Unk2}");
-                                                ImGui.Text($"DXGIFormat: {tex.Value.Extra.TpfEntryStub.Header.DXGIFormat}");
+                                                ImGui.Text(Loc.TF("Width: {0}", tex.Value.Extra.TpfEntryStub.Header.Width));
+                                                ImGui.Text(Loc.TF("Height: {0}", tex.Value.Extra.TpfEntryStub.Header.Height));
+                                                ImGui.Text(Loc.TF("TextureCount: {0}", tex.Value.Extra.TpfEntryStub.Header.TextureCount));
+                                                ImGui.Text(Loc.TF("Unk1: {0}", tex.Value.Extra.TpfEntryStub.Header.Unk1));
+                                                ImGui.Text(Loc.TF("Unk2: {0}", tex.Value.Extra.TpfEntryStub.Header.Unk2));
+                                                ImGui.Text(Loc.TF("DXGIFormat: {0}", tex.Value.Extra.TpfEntryStub.Header.DXGIFormat));
                                                 ImGui.TreePop();
                                             }
                                         }
 
                                         if (tex.Value.Extra.TpfEntryStub.FloatStruct != null)
                                         {
-                                            if (ImGui.TreeNode("[FloatStruct]"))
+                                            if (ImGui.TreeNode(Loc.T("[FloatStruct]")))
                                             {
-                                                ImGui.Text($"Unk00: {tex.Value.Extra.TpfEntryStub.FloatStruct.Unk00}");
+                                                ImGui.Text(Loc.TF("Unk00: {0}", tex.Value.Extra.TpfEntryStub.FloatStruct.Unk00));
 
                                                 if (tex.Value.Extra.TpfEntryStub.FloatStruct.Values != null)
                                                 {
-                                                    if (ImGui.TreeNode("[Values]"))
+                                                    if (ImGui.TreeNode(Loc.T("[Values]")))
                                                     {
                                                         foreach (var v in tex.Value.Extra.TpfEntryStub.FloatStruct.Values)
                                                             ImGui.Text($"{v:0.000000}");
@@ -276,19 +277,19 @@ namespace DSAnimStudio.ImguiOSD
                 }
 
 
-                ImGui.Button("Hot Reload FlverShader.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder");
+                ImGui.Button(Loc.T("Hot Reload FlverShader.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder"));
                 if (ImGui.IsItemClicked())
                     GFX.ReloadFlverShader();
 
-                ImGui.Button("Hot Reload FlverTonemapShader.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder");
+                ImGui.Button(Loc.T("Hot Reload FlverTonemapShader.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder"));
                 if (ImGui.IsItemClicked())
                     GFX.ReloadTonemapShader();
 
-                ImGui.Button("Hot Reload CubemapSkyboxShader.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder");
+                ImGui.Button(Loc.T("Hot Reload CubemapSkyboxShader.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder"));
                 if (ImGui.IsItemClicked())
                     GFX.ReloadCubemapSkyboxShader();
 
-                ImGui.Button("Hot Reload NewGrid3D.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder");
+                ImGui.Button(Loc.T("Hot Reload NewGrid3D.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder"));
                 if (ImGui.IsItemClicked())
                     GFX.ReloadNewGrid3DShader();
 
@@ -345,40 +346,40 @@ namespace DSAnimStudio.ImguiOSD
                     ImGui.PushID($"Matrix_{name}");
                     ImGui.PushItemWidth(OSD.DefaultItemWidth / 2);
 
-                    ImGui.InputFloat("##matrix_M11", ref m.M11, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M11"), ref m.M11, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M12", ref m.M12, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M12"), ref m.M12, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M13", ref m.M13, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M13"), ref m.M13, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M14", ref m.M14, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M14"), ref m.M14, 0, 0);
                     
                     
-                    ImGui.InputFloat("##matrix_M21", ref m.M21, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M21"), ref m.M21, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M22", ref m.M22, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M22"), ref m.M22, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M23", ref m.M23, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M23"), ref m.M23, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M24", ref m.M24, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M24"), ref m.M24, 0, 0);
                     
                     
-                    ImGui.InputFloat("##matrix_M31", ref m.M31, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M31"), ref m.M31, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M32", ref m.M32, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M32"), ref m.M32, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M33", ref m.M33, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M33"), ref m.M33, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M34", ref m.M34, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M34"), ref m.M34, 0, 0);
                     
                     
-                    ImGui.InputFloat("##matrix_M41", ref m.M41, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M41"), ref m.M41, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M42", ref m.M42, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M42"), ref m.M42, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M43", ref m.M43, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M43"), ref m.M43, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M44", ref m.M44, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M44"), ref m.M44, 0, 0);
                     
                     ImGui.PopItemWidth();
                     ImGui.PopID();
@@ -392,9 +393,9 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     ImGui.PushID($"Vector3_{name}");
 
-                    ImGui.InputFloat($"X", ref v.X, 0, 0);
-                    ImGui.InputFloat($"Y", ref v.Y, 0, 0);
-                    ImGui.InputFloat($"Z", ref v.Z, 0, 0);
+                    ImGui.InputFloat(Loc.TF("X"), ref v.X, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Y"), ref v.Y, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Z"), ref v.Z, 0, 0);
 
                     ImGui.PopID();
                     ImGui.TreePop();
@@ -407,10 +408,10 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     ImGui.PushID($"Vector4_{name}");
 
-                    ImGui.InputFloat($"X", ref v.X, 0, 0);
-                    ImGui.InputFloat($"Y", ref v.Y, 0, 0);
-                    ImGui.InputFloat($"Z", ref v.Z, 0, 0);
-                    ImGui.InputFloat($"W", ref v.W, 0, 0);
+                    ImGui.InputFloat(Loc.TF("X"), ref v.X, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Y"), ref v.Y, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Z"), ref v.Z, 0, 0);
+                    ImGui.InputFloat(Loc.TF("W"), ref v.W, 0, 0);
 
                     ImGui.PopID();
                     ImGui.TreePop();
@@ -423,10 +424,10 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     ImGui.PushID($"Quaternion_{name}");
 
-                    ImGui.InputFloat($"X", ref v.X, 0, 0);
-                    ImGui.InputFloat($"Y", ref v.Y, 0, 0);
-                    ImGui.InputFloat($"Z", ref v.Z, 0, 0);
-                    ImGui.InputFloat($"W", ref v.W, 0, 0);
+                    ImGui.InputFloat(Loc.TF("X"), ref v.X, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Y"), ref v.Y, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Z"), ref v.Z, 0, 0);
+                    ImGui.InputFloat(Loc.TF("W"), ref v.W, 0, 0);
 
                     ImGui.PopID();
                     ImGui.TreePop();
@@ -440,40 +441,40 @@ namespace DSAnimStudio.ImguiOSD
                     ImGui.PushID($"Matrix_CS_{name}");
                     ImGui.PushItemWidth(OSD.DefaultItemWidth / 2);
 
-                    ImGui.InputFloat("##matrix_M11", ref m.M11, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M11"), ref m.M11, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M12", ref m.M12, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M12"), ref m.M12, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M13", ref m.M13, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M13"), ref m.M13, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M14", ref m.M14, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M14"), ref m.M14, 0, 0);
                     
                     
-                    ImGui.InputFloat("##matrix_M21", ref m.M21, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M21"), ref m.M21, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M22", ref m.M22, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M22"), ref m.M22, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M23", ref m.M23, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M23"), ref m.M23, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M24", ref m.M24, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M24"), ref m.M24, 0, 0);
                     
                     
-                    ImGui.InputFloat("##matrix_M31", ref m.M31, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M31"), ref m.M31, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M32", ref m.M32, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M32"), ref m.M32, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M33", ref m.M33, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M33"), ref m.M33, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M34", ref m.M34, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M34"), ref m.M34, 0, 0);
                     
                     
-                    ImGui.InputFloat("##matrix_M41", ref m.M41, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M41"), ref m.M41, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M42", ref m.M42, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M42"), ref m.M42, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M43", ref m.M43, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M43"), ref m.M43, 0, 0);
                     ImGui.SameLine();
-                    ImGui.InputFloat("##matrix_M44", ref m.M44, 0, 0);
+                    ImGui.InputFloat(Loc.T("##matrix_M44"), ref m.M44, 0, 0);
                     
                     ImGui.PopItemWidth();
                     ImGui.PopID();
@@ -487,9 +488,9 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     ImGui.PushID($"Vector3_CS_{name}");
 
-                    ImGui.InputFloat($"X", ref v.X, 0, 0);
-                    ImGui.InputFloat($"Y", ref v.Y, 0, 0);
-                    ImGui.InputFloat($"Z", ref v.Z, 0, 0);
+                    ImGui.InputFloat(Loc.TF("X"), ref v.X, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Y"), ref v.Y, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Z"), ref v.Z, 0, 0);
 
                     ImGui.PopID();
                     ImGui.TreePop();
@@ -502,10 +503,10 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     ImGui.PushID($"Vector4_CS_{name}");
 
-                    ImGui.InputFloat($"X", ref v.X, 0, 0);
-                    ImGui.InputFloat($"Y", ref v.Y, 0, 0);
-                    ImGui.InputFloat($"Z", ref v.Z, 0, 0);
-                    ImGui.InputFloat($"W", ref v.W, 0, 0);
+                    ImGui.InputFloat(Loc.TF("X"), ref v.X, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Y"), ref v.Y, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Z"), ref v.Z, 0, 0);
+                    ImGui.InputFloat(Loc.TF("W"), ref v.W, 0, 0);
 
                     ImGui.PopID();
                     ImGui.TreePop();
@@ -518,10 +519,10 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     ImGui.PushID($"Quaternion_CS_{name}");
 
-                    ImGui.InputFloat($"X", ref v.X, 0, 0);
-                    ImGui.InputFloat($"Y", ref v.Y, 0, 0);
-                    ImGui.InputFloat($"Z", ref v.Z, 0, 0);
-                    ImGui.InputFloat($"W", ref v.W, 0, 0);
+                    ImGui.InputFloat(Loc.TF("X"), ref v.X, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Y"), ref v.Y, 0, 0);
+                    ImGui.InputFloat(Loc.TF("Z"), ref v.Z, 0, 0);
+                    ImGui.InputFloat(Loc.TF("W"), ref v.W, 0, 0);
 
                     ImGui.PopID();
                     ImGui.TreePop();
@@ -688,7 +689,7 @@ namespace DSAnimStudio.ImguiOSD
             void doAtkParam(ParamData.AtkParam atkParam)
             {
                 ImGui.PushID("AtkParam");
-                if (ImGui.TreeNode("[AtkParam]"))
+                if (ImGui.TreeNode(Loc.T("[AtkParam]")))
                 {
                     ImGui.InputText(nameof(atkParam.Name), ref atkParam.Name, 1024);
                     ImGui.InputInt(nameof(atkParam.ID), ref atkParam.ID);
@@ -702,11 +703,11 @@ namespace DSAnimStudio.ImguiOSD
                     ImGui.InputFloat(nameof(atkParam.AC6_Hit0Extend_SpreadDelay), ref atkParam.AC6_Hit0Extend_SpreadDelay);
 
 
-                    if (ImGui.TreeNode("Hits"))
+                    if (ImGui.TreeNode(Loc.T("Hits")))
                     {
                         for (int h = 0; h < atkParam.Hits.Length; h++)
                         {
-                            if (ImGui.TreeNode($"Hit[{h}]"))
+                            if (ImGui.TreeNode(Loc.TF("Hit[{0}]", h)))
                             {
                                 ImGui.PushID($"Hit[{h}]");
                                 doHit(atkParam.Hits[h]);
@@ -717,7 +718,7 @@ namespace DSAnimStudio.ImguiOSD
                         ImGui.TreePop();
                     }
 
-                    if (ImGui.TreeNode("Damage Stats"))
+                    if (ImGui.TreeNode(Loc.T("Damage Stats")))
                     {
                         atkParam.AtkDark = nonref_doShort(nameof(atkParam.AtkDark), atkParam.AtkDark);
                         atkParam.AtkDarkCorrection = nonref_doShort(nameof(atkParam.AtkDarkCorrection), atkParam.AtkDarkCorrection);
@@ -756,16 +757,16 @@ namespace DSAnimStudio.ImguiOSD
                 ImGui.Checkbox(nameof(dmy.OverrideDummyPolyFollowFlag_EnableOverride), ref dmy.OverrideDummyPolyFollowFlag_EnableOverride);
                 ImGui.Checkbox(nameof(dmy.OverrideDummyPolyFollowFlag_Value), ref dmy.OverrideDummyPolyFollowFlag_Value);
 
-                if (ImGui.TreeNode("DummyPoly List"))
+                if (ImGui.TreeNode(Loc.T("DummyPoly List")))
                 {
 
                     foreach (var kvp in dmy.DummyPolyByRefID)
                     {
-                        if (ImGui.TreeNode($"DummyPoly {kvp.Key}"))
+                        if (ImGui.TreeNode(Loc.TF("DummyPoly {0}", kvp.Key)))
                         {
                             for (int i = 0; i < kvp.Value.Count; i++)
                             {
-                                if (ImGui.TreeNode($"DummyPoly {kvp.Key}[{i}]"))
+                                if (ImGui.TreeNode(Loc.TF("DummyPoly {0}[{1}]", kvp.Key, i)))
                                 {
                                     var d = kvp.Value[i];
                                     ImGui.PushID(d.GUID);
@@ -808,7 +809,7 @@ namespace DSAnimStudio.ImguiOSD
                 int hitSlotIndex = 0;
                 foreach (var hitSlot in dmy.HitboxSlots)
                 {
-                    if (ImGui.TreeNode($"HitSlot[{hitSlotIndex}]"))
+                    if (ImGui.TreeNode(Loc.TF("HitSlot[{0}]", hitSlotIndex)))
                     {
                         ImGui.PushID($"HitSlot[{hitSlotIndex}]");
                         if (hitSlot.Attack != null)
@@ -819,16 +820,16 @@ namespace DSAnimStudio.ImguiOSD
                         int hitPrimIndex = 0;
                         foreach (var kvp in hitSlot.HitPrims)
                         {
-                            if (ImGui.TreeNode($"HitPrim[{hitPrimIndex}]"))
+                            if (ImGui.TreeNode(Loc.TF("HitPrim[{0}]", hitPrimIndex)))
                             {
                                 ImGui.PushID($"HitPrim[{hitPrimIndex}]");
-                                if (ImGui.TreeNode("Hit"))
+                                if (ImGui.TreeNode(Loc.T("Hit")))
                                 {
                                     doHit(kvp.Key);
                                     ImGui.TreePop();
                                 }
 
-                                ImGui.Text($"Prims count = {kvp.Value.Count}");
+                                ImGui.Text(Loc.TF("Prims count = {0}", kvp.Value.Count));
                                 
                                 ImGui.PopID();
                                 ImGui.TreePop();
@@ -882,17 +883,17 @@ namespace DSAnimStudio.ImguiOSD
                                 }
                                 else
                                 {
-                                    ImGui.Text($"Mapped To Bone: <OUT OF RANGE>");
+                                    ImGui.Text(Loc.TF("Mapped To Bone: <OUT OF RANGE>"));
                                 }
                             }
                             else
                             {
-                                ImGui.Text($"Mapped To Bone: <NONE>");
+                                ImGui.Text(Loc.TF("Mapped To Bone: <NONE>"));
                             }
                         }
                         else
                         {
-                            ImGui.Text($"Mapped To Bone: <NOT MAPPED TO OTHER SKELETON>");
+                            ImGui.Text(Loc.TF("Mapped To Bone: <NOT MAPPED TO OTHER SKELETON>"));
                         }
 
                         if (ImGui.TreeNode($"{nameof(bone.Masks)}"))
@@ -901,7 +902,7 @@ namespace DSAnimStudio.ImguiOSD
                             foreach (var boneMaskVal in boneMasks)
                             {
                                 bool hasMask = (bone.Masks & boneMaskVal) != 0;
-                                ImGui.Checkbox($"{boneMaskVal}", ref hasMask);
+                                ImGui.Checkbox(Loc.TF("{0}", boneMaskVal), ref hasMask);
                                 if (hasMask)
                                     bone.Masks |= boneMaskVal;
                                 else
@@ -936,7 +937,7 @@ namespace DSAnimStudio.ImguiOSD
                     ImGui.PopID();
                 }
 
-                if (ImGui.TreeNode("[Bones]"))
+                if (ImGui.TreeNode(Loc.T("[Bones]")))
                 {
                     foreach (var idx in skel.TopLevelBoneIndices)
                     {
@@ -948,28 +949,28 @@ namespace DSAnimStudio.ImguiOSD
 
             void doRootMotionData(string name, RootMotionData data)
             {
-                ImGui.Text("[Under Construction]");
+                ImGui.Text(Loc.T("[Under Construction]"));
             }
             
             void doHavokAnimationData_Contents(HavokAnimationData data)
             {
                 if (data is NewHavokAnimation_Dummy)
-                    ImGui.Text("Data Type: Dummy");
+                    ImGui.Text(Loc.T("Data Type: Dummy"));
                 else if (data is NewHavokAnimation_SplineCompressed)
-                    ImGui.Text("Data Type: SplineCompressed");
+                    ImGui.Text(Loc.T("Data Type: SplineCompressed"));
                 if (data is NewHavokAnimation_InterleavedUncompressed)
-                    ImGui.Text("Data Type: InterleavedUncompressed");
+                    ImGui.Text(Loc.T("Data Type: InterleavedUncompressed"));
                 
                 doRootMotionData($"{nameof(data.RootMotion)}", data.RootMotion);
                 
-                ImGui.Text("[Under Construction]");
+                ImGui.Text(Loc.T("[Under Construction]"));
             }
             
             void doNewHavokAnimation_Contents(NewHavokAnimation anim)
             {
                 if (anim == null)
                 {
-                    ImGui.Text("<NULL>");
+                    ImGui.Text(Loc.T("<NULL>"));
                     return;
                 }
                 
@@ -1042,7 +1043,7 @@ namespace DSAnimStudio.ImguiOSD
 
             void doBoneGluer(string name, NewBoneGluer gluer)
             {
-                if (ImGui.TreeNode($"{name}##BoneGluer_{name}"))
+                if (ImGui.TreeNode(Loc.TF("{0}##BoneGluer_{1}", name, name)))
                 {
                     ImGui.PushID(gluer.GUID);
                     
@@ -1070,7 +1071,7 @@ namespace DSAnimStudio.ImguiOSD
                             foreach (var entry in gluer.BoneGlueEntries)
                             {
                                 ImGui.PushID(entry.GUID);
-                                if (ImGui.TreeNode($"'{entry.FollowerBoneName}'-->'{entry.LeaderBoneName}'"))
+                                if (ImGui.TreeNode(Loc.TF("'{0}'-->'{1}'", entry.FollowerBoneName, entry.LeaderBoneName)))
                                 {
                                     ImGui.Checkbox($"{nameof(entry.Enabled)}", ref entry.Enabled);
                                     ImGui.Checkbox($"{nameof(entry.EnableDebugDraw)}", ref entry.EnableDebugDraw);
@@ -1091,7 +1092,7 @@ namespace DSAnimStudio.ImguiOSD
 
             void doSkeletonMapper(string name, NewSkeletonMapper mapper)
             {
-                if (ImGui.TreeNode($"{name}##SkeletonMapper_{name}"))
+                if (ImGui.TreeNode(Loc.TF("{0}##SkeletonMapper_{1}", name, name)))
                 {
                     ImGui.PushID(mapper.GUID);
                     
@@ -1262,17 +1263,17 @@ namespace DSAnimStudio.ImguiOSD
                     if (model.ChrAsm != null)
                     {
                         ImGui.Separator();
-                        ImGui.Text("[Armor Slots]");
+                        ImGui.Text(Loc.T("[Armor Slots]"));
                         model.ChrAsm?.ForAllArmorModels(doModel);
                         ImGui.Separator();
-                        ImGui.Text("[Weapon Slots]");
+                        ImGui.Text(Loc.T("[Weapon Slots]"));
                         model.ChrAsm?.ForAllWeaponModels(doModel);
                     }
 
                     if (model.AC6NpcParts != null)
                     {
                         ImGui.Separator();
-                        ImGui.Text("[AC6 NPC Parts]");
+                        ImGui.Text(Loc.T("[AC6 NPC Parts]"));
                         model.AC6NpcParts?.AccessModelsOfAllParts((i, p, m) =>
                         {
                             if (m != null)
@@ -1314,7 +1315,7 @@ namespace DSAnimStudio.ImguiOSD
             {
                 if (p.ParameterType == Microsoft.Xna.Framework.Graphics.EffectParameterType.Void)
                 {
-                    ImGui.Text($"{compositeStr}");
+                    ImGui.Text(Loc.TF("{0}", compositeStr));
                 }
                 else if (p.ParameterType == Microsoft.Xna.Framework.Graphics.EffectParameterType.Bool)
                 {
@@ -1387,7 +1388,7 @@ namespace DSAnimStudio.ImguiOSD
                 else if (p.ParameterType == Microsoft.Xna.Framework.Graphics.EffectParameterType.String)
                 {
                     var v = p.GetValueString();
-                    ImGui.Text($"{compositeStr} = '{v}'");
+                    ImGui.Text(Loc.TF("{0} = '{1}'", compositeStr, v));
                 }
                 else if (p.ParameterType == Microsoft.Xna.Framework.Graphics.EffectParameterType.Texture2D)
                 {
@@ -1409,7 +1410,7 @@ namespace DSAnimStudio.ImguiOSD
                         }
                         else
                         {
-                            ImGui.Text($"<Unloaded>");
+                            ImGui.Text(Loc.TF("<Unloaded>"));
                         }
                         
                         //ImGui.Image(v.GetNativePointer(), new Vector2(256, 256));
@@ -1419,7 +1420,7 @@ namespace DSAnimStudio.ImguiOSD
                 }
                 else
                 {
-                    ImGui.Text($"{compositeStr} <Value type not implemented.>");
+                    ImGui.Text(Loc.TF("{0} <Value type not implemented.>", compositeStr));
                 }
             }
 
@@ -1428,7 +1429,7 @@ namespace DSAnimStudio.ImguiOSD
                 if (ImGui.TreeNode($"{shaderKind}<{(effect.Name ?? "No Name")}>##Shader__{shaderKind}"))
                 {
                     ImGui.PushID($"Shader__{shaderKind}");
-                    if (ImGui.TreeNode("Parameters"))
+                    if (ImGui.TreeNode(Loc.T("Parameters")))
                     {
                         for (int i = 0; i < effect.Parameters.Count; i++)
                         {

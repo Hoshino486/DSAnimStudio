@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -21,7 +22,7 @@ namespace DSAnimStudio.ImguiOSD
             //    Proj = proj;
             //}
 
-            public override string NewImguiWindowTitle => "Combo Viewer";
+            public override string NewImguiWindowTitle => Loc.Win("Combo Viewer");
 
             private List<NewCombo.Entry> entries = new List<NewCombo.Entry>();
             
@@ -46,15 +47,15 @@ namespace DSAnimStudio.ImguiOSD
             protected override void BuildContents(ref bool anyFieldFocused)
             {
                 ImGui.PushID(GUID);
-                if (ImGui.BeginTable($"##NewComboViewerTable", 5,
+                if (ImGui.BeginTable(Loc.TF("##NewComboViewerTable"), 5,
                         ImGuiTableFlags.Borders | ImGuiTableFlags.Resizable |
                         ImGuiTableFlags.NoSavedSettings | ImGuiTableFlags.ScrollY))
                 {
-                    ImGui.TableSetupColumn("Anim", ImGuiTableColumnFlags.None, 5);
-                    ImGui.TableSetupColumn("Loop", ImGuiTableColumnFlags.None, 1);
-                    ImGui.TableSetupColumn("Start", ImGuiTableColumnFlags.None, 4);
-                    ImGui.TableSetupColumn("End", ImGuiTableColumnFlags.None, 4);
-                    ImGui.TableSetupColumn("Blend", ImGuiTableColumnFlags.None, 4);
+                    ImGui.TableSetupColumn(Loc.T("Anim"), ImGuiTableColumnFlags.None, 5);
+                    ImGui.TableSetupColumn(Loc.T("Loop"), ImGuiTableColumnFlags.None, 1);
+                    ImGui.TableSetupColumn(Loc.T("Start"), ImGuiTableColumnFlags.None, 4);
+                    ImGui.TableSetupColumn(Loc.T("End"), ImGuiTableColumnFlags.None, 4);
+                    ImGui.TableSetupColumn(Loc.T("Blend"), ImGuiTableColumnFlags.None, 4);
                         
                     ImGui.TableSetupScrollFreeze(5, 1);
     
@@ -76,46 +77,46 @@ namespace DSAnimStudio.ImguiOSD
 
                     var entry = entries[i];
                     ImGui.TableNextColumn();
-                    if (Tools.SimpleClickButton("X"))
+                    if (Tools.SimpleClickButton(Loc.T("X")))
                     {
                         entryToDelete = entry;
                     }
                     ImGui.SameLine();
                     ImGui.PushItemWidth(80);
-                    ImGui.InputInt($"##ComboEntry[{i}]_Category", ref entry.AnimationID.CategoryID, 0, 0);
+                    ImGui.InputInt(Loc.TF("##ComboEntry[{0}]_Category", i), ref entry.AnimationID.CategoryID, 0, 0);
                     ImGui.PopItemWidth();
                     ImGui.SameLine();
-                    ImGui.InputInt($"##ComboEntry[{i}]_AnimSubID", ref entry.AnimationID.SubID, 0, 0);
+                    ImGui.InputInt(Loc.TF("##ComboEntry[{0}]_AnimSubID", i), ref entry.AnimationID.SubID, 0, 0);
 
                     ImGui.TableNextColumn();
 
-                    ImGui.Checkbox($"##ComboEntry[{i}]_Loop", ref entry.IsLoop);
+                    ImGui.Checkbox(Loc.TF("##ComboEntry[{0}]_Loop", i), ref entry.IsLoop);
 
                     ImGui.TableNextColumn();
 
-                    ImGui.InputFloat($"##ComboEntry[{i}]_Start", ref entry.StartFrame, 0, 0);
+                    ImGui.InputFloat(Loc.TF("##ComboEntry[{0}]_Start", i), ref entry.StartFrame, 0, 0);
                     
                     ImGui.TableNextColumn();
 
-                    ImGui.InputFloat($"##ComboEntry[{i}]_End", ref entry.EndFrame, 0, 0);
+                    ImGui.InputFloat(Loc.TF("##ComboEntry[{0}]_End", i), ref entry.EndFrame, 0, 0);
                     
                     ImGui.TableNextColumn();
 
-                    ImGui.InputFloat($"##ComboEntry[{i}]_Blend", ref entry.BlendDuration, 0, 0);
+                    ImGui.InputFloat(Loc.TF("##ComboEntry[{0}]_Blend", i), ref entry.BlendDuration, 0, 0);
                 }
                 ImGui.TableNextRow();
                 ImGui.TableNextColumn();
-                if (Tools.SimpleClickButton("Add New"))
+                if (Tools.SimpleClickButton(Loc.T("Add New")))
                 { 
                     entries.Add(new NewCombo.Entry());   
                 }
                 
-                if (Tools.SimpleClickButton("Play Combo"))
+                if (Tools.SimpleClickButton(Loc.T("Play Combo")))
                 { 
                     MainTaeScreen.Graph?.ViewportInteractor?.RequestCombo(entries);
                 }
                 
-                if (Tools.SimpleClickButton("Copy combo to clipboard"))
+                if (Tools.SimpleClickButton(Loc.T("Copy combo to clipboard")))
                 {
                     var sb = new StringBuilder();
                     foreach (var e in entries)
@@ -125,7 +126,7 @@ namespace DSAnimStudio.ImguiOSD
                     Clipboard.SetText(sb.ToString());
                 }
                 
-                if (Tools.SimpleClickButton("Paste combo from clipboard"))
+                if (Tools.SimpleClickButton(Loc.T("Paste combo from clipboard")))
                 {
                     var newEntries = new List<NewCombo.Entry>();
                     var lines = Clipboard.GetText().Replace("\r", "").Split("\n");

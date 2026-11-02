@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -47,7 +48,7 @@ namespace DSAnimStudio
                         ProjectJson.WorldViews.Add(new WorldView("Default"));
                     ParentDocument.WorldViewManager.SetWorldViewList(ProjectJson.WorldViews);
 
-                    zzz_NotificationManagerIns.PushNotification($"Loaded workspace config from '{System.IO.Path.GetFullPath(ProjectPath)}'.");
+                    zzz_NotificationManagerIns.PushNotification(Loc.TF("Loaded workspace config from '{0}'.", System.IO.Path.GetFullPath(ProjectPath)));
                     result = true;
                 }
                 else
@@ -61,7 +62,7 @@ namespace DSAnimStudio
                     ProjectJson.InitDefaults(ParentDocument);
                     ProjectJson.Save(ProjectPath, ParentDocument);
 
-                    zzz_NotificationManagerIns.PushNotification($"Saved default project config to '{System.IO.Path.GetFullPath(ProjectPath)}'.");
+                    zzz_NotificationManagerIns.PushNotification(Loc.TF("Saved default project config to '{0}'.", System.IO.Path.GetFullPath(ProjectPath)));
                     result = false;
                 }
             }
@@ -141,7 +142,7 @@ namespace DSAnimStudio
                 entry.HasWwiseFnvHash = true;
                 Entries.Add(entry);
 
-                zzz_NotificationManagerIns.PushNotification($"New BHD info entry created for '{bhdName}'.");
+                zzz_NotificationManagerIns.PushNotification(Loc.TF("New BHD info entry created for '{0}'.", bhdName));
             }
         }
 
@@ -182,7 +183,7 @@ namespace DSAnimStudio
                 if (!string.IsNullOrEmpty(ParentDocument.GameRoot.CachePath))
                 {
                     CacheInfo.WriteJson(CacheInfoPath);
-                    zzz_NotificationManagerIns.PushNotification($"BHD info entries saved.");
+                    zzz_NotificationManagerIns.PushNotification(Loc.T("BHD info entries saved."));
                 }
             }
         }

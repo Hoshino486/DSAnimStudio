@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -122,9 +123,7 @@ namespace DSAnimStudio
                         {
                             _messageBoxSpamCancel = true;
 
-                            System.Windows.Forms.MessageBox.Show($"TagTools failed to downgrade '{debug_hkxName}'.\n" +
-                                "If this is DS1R, try copying the file from PTDE and saving it as '<filename>.2010'.\n" +
-                                "If this is an SDT file, I guess you're just out of luck.", "Failed to Downgrade",
+                            System.Windows.Forms.MessageBox.Show(Loc.TF("TagTools failed to downgrade '{0}'.\nIf this is DS1R, try copying the file from PTDE and saving it as '<filename>.2010'.\nIf this is an SDT file, I guess you're just out of luck.", debug_hkxName), Loc.T("Failed to Downgrade"),
                                 System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                         }
                     }

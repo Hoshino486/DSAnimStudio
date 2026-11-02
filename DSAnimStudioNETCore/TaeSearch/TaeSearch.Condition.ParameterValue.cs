@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -6,6 +6,7 @@ using DSAnimStudio.ImguiOSD;
 using ImGuiNET;
 using SoulsAssetPipeline.Animation;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public partial class TaeSearch
@@ -110,7 +111,7 @@ namespace DSAnimStudio
 
                     int actionTypeIndex = (ActionType >= 0) ? ActionTypes_Values.IndexOf(ActionType) : -1;
                     int prevActionTypeIndex = actionTypeIndex;
-                    ImGui.Combo("##Action", ref actionTypeIndex, ActionTypes_Names, ActionTypes_Names.Length);
+                    ImGui.Combo(Loc.T("##Action"), ref actionTypeIndex, ActionTypes_Names, ActionTypes_Names.Length);
                     
                     if (ImGui.IsItemActive())
                         anyFieldFocused = true;
@@ -179,7 +180,7 @@ namespace DSAnimStudio
                         int prevParamIndex = paramIndex;
                         
                         ImGui.PushItemWidth(0);
-                        ImGui.Combo("##Param", ref paramIndex, ParameterNames, ParameterNames.Length);
+                        ImGui.Combo(Loc.T("##Param"), ref paramIndex, ParameterNames, ParameterNames.Length);
                         ImGui.PopItemWidth();
                         if (ImGui.IsItemActive())
                             anyFieldFocused = true;
@@ -273,7 +274,7 @@ namespace DSAnimStudio
                             
                             //ImGui.PushItemWidth(24);
                             int prevItemIndex = currentItemIndex;
-                            ImGui.Combo($"###Operand_Enum", ref currentItemIndex, dispItems, items.Length);
+                            ImGui.Combo(Loc.TF("###Operand_Enum"), ref currentItemIndex, dispItems, items.Length);
                             //ImGui.PopItemWidth();
                             if (currentItemIndex != prevItemIndex && currentItemIndex >= 0 && currentItemIndex < items.Length)
                                 currentVal = Convert.ToInt32(p.EnumEntries[currentItemIndex].Value);
@@ -286,7 +287,7 @@ namespace DSAnimStudio
                             ImGui.PushItemWidth(100);
                         
                         
-                        ImGui.InputInt($"###Operand_IntVal", ref currentVal, 1, 5, intHex ? (ImGuiInputTextFlags.CharsHexadecimal |
+                        ImGui.InputInt(Loc.TF("###Operand_IntVal"), ref currentVal, 1, 5, intHex ? (ImGuiInputTextFlags.CharsHexadecimal |
                             ImGuiInputTextFlags.CharsUppercase) : ImGuiInputTextFlags.None);
                         anyFieldFocused |= ImGui.IsItemActive();
                         
@@ -324,7 +325,7 @@ namespace DSAnimStudio
                     {
                         float currentVal = Convert.ToSingle(Operand);
                         float prevVal = currentVal;
-                        ImGui.InputFloat($"###Operand_Float", ref currentVal);
+                        ImGui.InputFloat(Loc.TF("###Operand_Float"), ref currentVal);
                         anyFieldFocused |= ImGui.IsItemActive();
                         if (currentVal != prevVal)
                             Operand = currentVal;
@@ -333,7 +334,7 @@ namespace DSAnimStudio
                     {
                         bool currentVal = Convert.ToBoolean(Operand);
                         bool prevVal = currentVal;
-                        ImGui.Checkbox($"###Operand_Bool", ref currentVal);
+                        ImGui.Checkbox(Loc.TF("###Operand_Bool"), ref currentVal);
                         if (currentVal != prevVal)
                             Operand = currentVal;
                     }

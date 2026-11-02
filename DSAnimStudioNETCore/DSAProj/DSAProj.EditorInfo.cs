@@ -10,6 +10,7 @@ using ImGuiNET;
 using Microsoft.Xna.Framework;
 using SoulsFormats;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public partial class DSAProj
@@ -339,11 +340,11 @@ namespace DSAnimStudio
 
                     if (!showTagsOnly)
                     {
-                        ImguiOSD.Tools.InputTextNullable("Custom Name", ref DisplayName, 1024, nullToken: "");
+                        ImguiOSD.Tools.InputTextNullable(Loc.T("Custom Name"), ref DisplayName, 1024, nullToken: "");
                         anyFieldFocused |= ImGui.IsItemActive();
-                        ImguiOSD.Tools.InputTextNullable("Custom Description", ref Description, 1024, nullToken: "");
+                        ImguiOSD.Tools.InputTextNullable(Loc.T("Custom Description"), ref Description, 1024, nullToken: "");
                         anyFieldFocused |= ImGui.IsItemActive();
-                        ImguiOSD.Tools.CustomColorPicker("Custom Color", $"EditorInfoCustomColor_{GUID}", ref CustomColor, Main.Colors.ColorProjectTagDefault);
+                        ImguiOSD.Tools.CustomColorPicker(Loc.T("Custom Color"), $"EditorInfoCustomColor_{GUID}", ref CustomColor, Main.Colors.ColorProjectTagDefault);
                         anyFieldFocused |= ImGui.IsItemActive();
 
                         if (DisplayName != oldDisplayName || oldDescription != Description || oldCustomColor != CustomColor)
@@ -483,7 +484,7 @@ namespace DSAnimStudio
                                 // Test dummy blank thing to make window scroll horizontally
                                 var tempStoreImguiCursorPos_Inner = ImGui.GetCursorPos();
                                 ImGui.SameLine();
-                                ImGui.Text("    ");
+                                ImGui.Text(Loc.T("    "));
                                 ImGui.SetCursorPos(tempStoreImguiCursorPos_Inner);
 
                                 //TODO
@@ -517,7 +518,7 @@ namespace DSAnimStudio
                             // Test dummy blank thing to make window scroll horizontally
                             var tempStoreImguiCursorPos = ImGui.GetCursorPos();
                             ImGui.SameLine();
-                            ImGui.Text("    ");
+                            ImGui.Text(Loc.T("    "));
                             ImGui.SetCursorPos(tempStoreImguiCursorPos);
 
                             if (wasXClicked)
@@ -606,7 +607,7 @@ namespace DSAnimStudio
 
 
 
-                    ImGui.Text(" ");
+                    ImGui.Text(Loc.T(" "));
 
 
                     //ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 4 * dpi);
@@ -624,17 +625,17 @@ namespace DSAnimStudio
 
                     ImGui.SetCursorPosY(ImGui.GetCursorPosY() + (10 * dpi));
 
-                    if (ImGui.BeginPopup($"EditorInfo_AvailableTagsList##{GUID}"))
+                    if (ImGui.BeginPopup(Loc.TF("EditorInfo_AvailableTagsList##{0}", GUID)))
                     {
                         anyFieldFocused = true;
 
-                        ImGui.MenuItem($"Quickly Add New Tag...##EditorInfo_AvailableTagsList_AddNewTag");
+                        ImGui.MenuItem(Loc.TF("Quickly Add New Tag...##EditorInfo_AvailableTagsList_AddNewTag"));
                         anyFieldFocused |= ImGui.IsItemActive();
                         if (ImGui.IsItemClicked())
                         {
                             ImGui.CloseCurrentPopup();
 
-                            ImguiOSD.DialogManager.AskForInputString("Add New Tag", "Enter name for new tag.", "", result =>
+                            ImguiOSD.DialogManager.AskForInputString(Loc.T("Add New Tag"), Loc.T("Enter name for new tag."), Loc.T(""), result =>
                             {
                                 lock (proj._lock_Tags)
                                 {
@@ -657,14 +658,14 @@ namespace DSAnimStudio
                                 {
                                     errCheck = errCheck.Trim();
                                     if (proj.Tags.Any(tag => tag.Name == errCheck))
-                                        result = $"Tag named '{errCheck}' already exists.";
+                                        result = Loc.TF("Tag named '{0}' already exists.", errCheck);
                                 }
                                 return result;
                             }, canBeCancelled: true);
                         }
 
                         ImGui.Separator();
-                        ImGui.MenuItem("Open Tags section in Project panel##EditorInfo_AvailableTagsList_OpenTagsPanel");
+                        ImGui.MenuItem(Loc.T("Open Tags section in Project panel##EditorInfo_AvailableTagsList_OpenTagsPanel"));
                         anyFieldFocused |= ImGui.IsItemActive();
                         if (ImGui.IsItemClicked())
                         {
@@ -680,7 +681,7 @@ namespace DSAnimStudio
                         {
                             var thisTag = proj.Tags[i];
                             bool isTagAdded = TagInstances.Contains(thisTag);
-                            ImGui.MenuItem($"{thisTag.Name}##EditorInfo_AvailableTagsList_Tag{i}", null, isTagAdded);
+                            ImGui.MenuItem(Loc.TF("{0}##EditorInfo_AvailableTagsList_Tag{1}", thisTag.Name, i), null, isTagAdded);
                             anyFieldFocused |= ImGui.IsItemActive();
                             if (ImGui.IsItemClicked())
                             {

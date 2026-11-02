@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public static partial class MenuBar
@@ -15,7 +16,7 @@ namespace DSAnimStudio.ImguiOSD
         public static void BuildMenuBar_080_SupportMeowmaritus(ref bool anyItemFocused, ref bool isAnyMenuExpanded)
         {
             ImGui.PushStyleColor(ImGuiCol.Text, Color.Lime.ToNVector4());
-            bool supportMenu = ImGui.BeginMenu("Support Meowmaritus");
+            bool supportMenu = ImGui.BeginMenu(Loc.T("Support Meowmaritus"));
             ImGui.PopStyleColor();
 
             
@@ -24,15 +25,15 @@ namespace DSAnimStudio.ImguiOSD
             {
                 isAnyMenuExpanded = true;
 
-                if (ClickItem("On Patreon...", textColor: Color.Lime,
+                if (ClickItem(Loc.T("On Patreon..."), textColor: Color.Lime,
                         shortcut: "(https://www.patreon.com/Meowmaritus)", shortcutColor: Color.Lime))
                     OpenSite("https://www.patreon.com/Meowmaritus");
 
-                if (ClickItem("On Paypal...", textColor: Color.Lime,
+                if (ClickItem(Loc.T("On Paypal..."), textColor: Color.Lime,
                         shortcut: "(https://paypal.me/Meowmaritus)", shortcutColor: Color.Lime))
                     OpenSite("https://paypal.me/Meowmaritus");
 
-                if (ClickItem("On Ko-fi...", textColor: Color.Lime,
+                if (ClickItem(Loc.T("On Ko-fi..."), textColor: Color.Lime,
                         shortcut: "(https://ko-fi.com/meowmaritus)", shortcutColor: Color.Lime))
                     OpenSite("https://ko-fi.com/meowmaritus");
 

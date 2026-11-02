@@ -11,6 +11,7 @@ using SoulsAssetPipeline;
 using Vector3 = System.Numerics.Vector3;
 using static DSAnimStudio.ParamData;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -19,7 +20,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.SaveAlways;
 
-            public override string NewImguiWindowTitle => "Entity";
+            public override string NewImguiWindowTitle => Loc.Win("Entity");
             
             protected override void Init()
             {
@@ -35,7 +36,7 @@ namespace DSAnimStudio.ImguiOSD
             int manuallySelectNpcParamID = 0;
 
             public TaeViewportInteractor.TaeEntityType EntityType;
-            public string EntityName => DSAnimStudio.zzz_DocumentManager.CurrentDocument.Scene.MainModel?.Name ?? "?EntityName?";
+            public string EntityName => DSAnimStudio.zzz_DocumentManager.CurrentDocument.Scene.MainModel?.Name ?? Loc.T("?EntityName?");
 
             private object _lock = new object();
 
@@ -95,24 +96,24 @@ namespace DSAnimStudio.ImguiOSD
 
             private static string GetEntityDispText(TaeViewportInteractor.TaeEntityType entityType, string entityName)
             {
-                string namePart = (!string.IsNullOrWhiteSpace(entityName) ? $"[{entityName}]" : "");
+                string namePart = (!string.IsNullOrWhiteSpace(entityName) ? $"[" + entityName + "]" : "");
                 switch (entityType)
                 {
-                    case TaeViewportInteractor.TaeEntityType.NONE: return "No Entity";
-                    case TaeViewportInteractor.TaeEntityType.PC: return $"Player{namePart}";
-                    case TaeViewportInteractor.TaeEntityType.NPC: return $"NPC Character{namePart}";
-                    case TaeViewportInteractor.TaeEntityType.OBJ: return $"Object{namePart}";
-                    case TaeViewportInteractor.TaeEntityType.PARTS: return $"Animated Player Equipment{namePart}";
-                    case TaeViewportInteractor.TaeEntityType.REMO: return $"DS1 Cutscene{namePart}";
-                    default: return "Invalid Entity Type";
+                    case TaeViewportInteractor.TaeEntityType.NONE: return Loc.T("No Entity");
+                    case TaeViewportInteractor.TaeEntityType.PC: return Loc.T("Player") + namePart;
+                    case TaeViewportInteractor.TaeEntityType.NPC: return Loc.T("NPC Character") + namePart;
+                    case TaeViewportInteractor.TaeEntityType.OBJ: return Loc.T("Object") + namePart;
+                    case TaeViewportInteractor.TaeEntityType.PARTS: return Loc.T("Animated Player Equipment") + namePart;
+                    case TaeViewportInteractor.TaeEntityType.REMO: return Loc.T("DS1 Cutscene") + namePart;
+                    default: return Loc.T("Invalid Entity Type");
                 }
             }
             
-            private static string[] BehaviorHitboxSrcEnum_Names = new string[]
+            private static string[] BehaviorHitboxSrcEnum_Names => new string[]
             {
-                "Body",
-                "Right Weapon",
-                "Left Weapon",
+                Loc.T("Body"),
+                Loc.T("Right Weapon"),
+                Loc.T("Left Weapon"),
             };
             private static List<ParamData.AtkParam.DummyPolySource> BehaviorHitboxSrcEnum_Values = new List<ParamData.AtkParam.DummyPolySource>
             {
@@ -143,8 +144,8 @@ namespace DSAnimStudio.ImguiOSD
                         int eldenRingHandAnim_SubID = curModel.EldenRingHandPoseAnimID.SubID;
                         int old_eldenRingHandAnim_SubID = eldenRingHandAnim_SubID;
 
-                        ImGui.InputInt($"ER Hand Anim Category ID##ER_Hand_Anim_CategoryID[{curModel.GUID}]", ref eldenRingHandAnim_CategoryID);
-                        ImGui.InputInt($"ER Hand Anim Sub ID##ER_Hand_Anim_SubID[{curModel.GUID}]", ref eldenRingHandAnim_SubID);
+                        ImGui.InputInt(Loc.TF("ER Hand Anim Category ID##ER_Hand_Anim_CategoryID[{0}]", curModel.GUID), ref eldenRingHandAnim_CategoryID);
+                        ImGui.InputInt(Loc.TF("ER Hand Anim Sub ID##ER_Hand_Anim_SubID[{0}]", curModel.GUID), ref eldenRingHandAnim_SubID);
 
                         if (eldenRingHandAnim_CategoryID != old_eldenRingHandAnim_CategoryID ||
                             eldenRingHandAnim_SubID != old_eldenRingHandAnim_SubID)
@@ -162,7 +163,7 @@ namespace DSAnimStudio.ImguiOSD
 
                     var modelPos = curModel.OriginOffset.ToCS();
                     var modelPos_Prev = modelPos;
-                    ImGui.DragFloat3($"Model Position##Entity_ModelPosition_Model[{curModel.GUID}]", ref modelPos, 0.01f, -10000, 10000, "%.3f m");
+                    ImGui.DragFloat3(Loc.TF("Model Position##Entity_ModelPosition_Model[{0}]", curModel.GUID), ref modelPos, 0.01f, -10000, 10000, "%.3f m");
                     if (ImGui.IsItemActive())
                         anyFieldFocused = true;
                     if (modelPos != modelPos_Prev)
@@ -170,7 +171,7 @@ namespace DSAnimStudio.ImguiOSD
                     
                     var modelRotation = new Vector3(MathHelper.ToDegrees(curModel.OriginRotation.X), MathHelper.ToDegrees(curModel.OriginRotation.Y), MathHelper.ToDegrees(curModel.OriginRotation.Z));
                     var modelRotation_Prev = modelRotation;
-                    ImGui.DragFloat3($"Model Rotation##Entity_ModelRotation_Model[{curModel.GUID}]", ref modelRotation, 1, -180, 180, "%.3f °");
+                    ImGui.DragFloat3(Loc.TF("Model Rotation##Entity_ModelRotation_Model[{0}]", curModel.GUID), ref modelRotation, 1, -180, 180, "%.3f °");
                     if (ImGui.IsItemActive())
                         anyFieldFocused = true;
                     if (modelRotation_Prev != modelRotation)
@@ -178,7 +179,7 @@ namespace DSAnimStudio.ImguiOSD
                     
                     var modelScale = curModel.OriginScale.ToCS() * 100f;
                     var modelScale_Prev = modelScale;
-                    ImGui.DragFloat3($"Model Scale##Entity_ModelScale_Model[{curModel.GUID}]", ref modelScale, 1, 0.1f, 1000, "%.2f%%");
+                    ImGui.DragFloat3(Loc.TF("Model Scale##Entity_ModelScale_Model[{0}]", curModel.GUID), ref modelScale, 1, 0.1f, 1000, "%.2f%%");
                     if (ImGui.IsItemActive())
                         anyFieldFocused = true;
                     if (modelScale != modelScale_Prev)
@@ -186,7 +187,7 @@ namespace DSAnimStudio.ImguiOSD
                     
                     ImGui.PopItemWidth();
 
-                    if (Tools.SimpleClickButton("Reset Transform"))
+                    if (Tools.SimpleClickButton(Loc.T("Reset Transform")))
                     {
                         curModel.OriginOffset = Microsoft.Xna.Framework.Vector3.Zero;
                         curModel.OriginRotation = Microsoft.Xna.Framework.Vector3.Zero;
@@ -197,7 +198,7 @@ namespace DSAnimStudio.ImguiOSD
                 }
                 
                 
-                if (ImGui.TreeNode("StateInfo Toggle"))
+                if (ImGui.TreeNode(Loc.T("StateInfo Toggle")))
                 {
                     int i = 0;
                     lock (_lock)
@@ -210,13 +211,13 @@ namespace DSAnimStudio.ImguiOSD
                             StateInfoSelectConfig_Enabled[kvp.Key] = isChecked;
                             ImGui.SameLine(ImGui.GetWindowWidth() - 50 - 64);
                             ImGui.PushItemWidth(64);
-                            ImGui.Button($"Rename###EntitySettings_StateInfoSelect_{kvp.Key}_RenameButton");
+                            ImGui.Button(Loc.TF("Rename###EntitySettings_StateInfoSelect_{0}_RenameButton", kvp.Key));
                             ImGui.PopItemWidth();
                             if (ImGui.IsItemClicked())
                             {
                                 int captureKey = kvp.Key;
                                 string captureValue = kvp.Value;
-                                ImguiOSD.DialogManager.AskForInputString("Rename StateInfo", $"Enter new name for StateInfo {kvp.Key}:", "", result =>
+                                ImguiOSD.DialogManager.AskForInputString(Loc.T("Rename StateInfo"), Loc.TF("Enter new name for StateInfo {0}:", kvp.Key), Loc.T(""), result =>
                                 {
                                     lock (_lock)
                                     {
@@ -228,13 +229,13 @@ namespace DSAnimStudio.ImguiOSD
 
                             ImGui.SameLine(ImGui.GetWindowWidth() - 50);
                             ImGui.PushItemWidth(32);
-                            ImGui.Button($"×###EntitySettings_StateInfoSelect_{kvp.Key}_DeleteButton");
+                            ImGui.Button(Loc.TF("×###EntitySettings_StateInfoSelect_{0}_DeleteButton", kvp.Key));
                             ImGui.PopItemWidth();
                             if (ImGui.IsItemClicked())
                             {
                                 int captureKey = kvp.Key;
                                 string captureValue = kvp.Value;
-                                ImguiOSD.DialogManager.AskYesNo("Delete StateInfo?", $"Are you sure you wish to delete StateInfo {captureKey}?", result =>
+                                ImguiOSD.DialogManager.AskYesNo(Loc.T("Delete StateInfo?"), Loc.TF("Are you sure you wish to delete StateInfo {0}?", captureKey), result =>
                                 {
                                     lock (_lock)
                                     {
@@ -251,10 +252,10 @@ namespace DSAnimStudio.ImguiOSD
                             }
                         }
 
-                        ImGui.Button("＋###EntitySettings_StateInfoSelect_AddNew");
+                        ImGui.Button(Loc.T("＋###EntitySettings_StateInfoSelect_AddNew"));
                         if (ImGui.IsItemClicked())
                         {
-                            ImguiOSD.DialogManager.AskForInputString("Add New StateInfo", $"Enter ID for the new StateInfo to add:", "", result =>
+                            ImguiOSD.DialogManager.AskForInputString(Loc.T("Add New StateInfo"), Loc.TF("Enter ID for the new StateInfo to add:"), Loc.T(""), result =>
                             {
                                 var digitString = result.ExtractDigits();
                                 if (digitString.Length > 0)
@@ -275,13 +276,13 @@ namespace DSAnimStudio.ImguiOSD
                                     }
 
                                     if (error_alreadyExists)
-                                        zzz_NotificationManagerIns.PushNotificationWarn($"Cannot add StateInfo - ID {stateInfoID} already exists.");
+                                        zzz_NotificationManagerIns.PushNotificationWarn(Loc.TF("Cannot add StateInfo - ID {0} already exists.", stateInfoID));
                                     else
                                         zzz_DocumentManager.CurrentDocument.GameData.SaveProjectJson(silent: true);
                                 }
                                 else
                                 {
-                                    zzz_NotificationManagerIns.PushNotificationWarn($"Cannot add StateInfo - Unable to parse an integer ID from given string '{result}'.");
+                                    zzz_NotificationManagerIns.PushNotificationWarn(Loc.TF("Cannot add StateInfo - Unable to parse an integer ID from given string '{0}'.", result));
                                 }
                                 
 
@@ -303,12 +304,12 @@ namespace DSAnimStudio.ImguiOSD
                                     }
 
                                     if (error_alreadyExists)
-                                        return $"StateInfo ID {stateInfoID} already exists.";
+                                        return Loc.TF("StateInfo ID {0} already exists.", stateInfoID);
                                 }
                                 else
                                 {
                                     return
-                                        $"Unable to parse an integer ID from given string '{input}'.";
+                                        Loc.TF("Unable to parse an integer ID from given string '{0}'.", input);
                                 }
 
                                 return null;
@@ -324,16 +325,16 @@ namespace DSAnimStudio.ImguiOSD
                 var entityType = MainTaeScreen.Graph?.ViewportInteractor?.EntityType;
                 if (entityType == TaeViewportInteractor.TaeEntityType.NPC)
                 {
-                    ImGui.Button("Load Additional Texture File(s)...");
+                    ImGui.Button(Loc.T("Load Additional Texture File(s)..."));
                     if (ImGui.IsItemClicked())
                         MainTaeScreen.BrowseForMoreTextures();
 
                     if (curModel != null)
                     {
-                        ImGui.Text($"NPC Param: ");
+                        ImGui.Text(Loc.TF("NPC Param: "));
                         //ImGui.SameLine();
                         int npcParamIndex = curModel.PossibleNpcParams.IndexOf(curModel.NpcParam);
-                        ImGui.Button("-");
+                        ImGui.Button(Loc.T("-"));
                         if (ImGui.IsItemClicked())
                         {
                             npcParamIndex--;
@@ -341,7 +342,7 @@ namespace DSAnimStudio.ImguiOSD
                                 npcParamIndex = curModel.PossibleNpcParams.Count - 1;
                         }
                         ImGui.SameLine();
-                        ImGui.Button("+");
+                        ImGui.Button(Loc.T("+"));
                         if (ImGui.IsItemClicked())
                         {
                             npcParamIndex++;
@@ -350,7 +351,7 @@ namespace DSAnimStudio.ImguiOSD
                         }
                         ImGui.SameLine();
                         if (curModel.NpcParam == null)
-                            ImGui.Text($"<No NpcParam Selected>");
+                            ImGui.Text(Loc.TF("<No NpcParam Selected>"));
                         else
                             ImGui.Text($"{curModel.NpcParam.ID}: {(curModel.NpcParam.Name ?? "")}");
 
@@ -365,7 +366,7 @@ namespace DSAnimStudio.ImguiOSD
                             }
                         }
 
-                        if (ImGui.TreeNode("NPC Param Selection"))
+                        if (ImGui.TreeNode(Loc.T("NPC Param Selection")))
                         {
 
 
@@ -385,14 +386,14 @@ namespace DSAnimStudio.ImguiOSD
                                     ImGui.PushStyleColor(ImGuiCol.Text, new System.Numerics.Vector4(0, 1, 1, 1));
                                     {
 
-                                        ImGui.Text($"BehaviorVariationID: {npc.BehaviorVariationID}");
+                                        ImGui.Text(Loc.TF("BehaviorVariationID: {0}", npc.BehaviorVariationID));
                                         if (zzz_DocumentManager.CurrentDocument.GameRoot.GameType is SoulsGames.AC6)
-                                            ImGui.Text($"NpcEquipPartsParam ID: {npc.AC6NpcEquipPartsParamID}");
+                                            ImGui.Text(Loc.TF("NpcEquipPartsParam ID: {0}", npc.AC6NpcEquipPartsParamID));
 
                                         if (curModel.NpcMaterialNamesPerMask.Any(kvp => kvp.Key >= 0))
                                         {
 
-                                            ImGui.Text($"Meshes Visible:");
+                                            ImGui.Text(Loc.TF("Meshes Visible:"));
 
                                             ImGui.Indent();
                                             {
@@ -429,9 +430,9 @@ namespace DSAnimStudio.ImguiOSD
                             ImGui.TreePop();
                         }
 
-                        ImGui.Text("Manually Select NPC Param:");
-                        ImGui.InputInt("NPC Param ID", ref manuallySelectNpcParamID);
-                        ImGui.Button("Select");
+                        ImGui.Text(Loc.T("Manually Select NPC Param:"));
+                        ImGui.InputInt(Loc.T("NPC Param ID"), ref manuallySelectNpcParamID);
+                        ImGui.Button(Loc.T("Select"));
                         if (ImGui.IsItemClicked())
                         {
                             if (curModel.Document.ParamManager.NpcParam.ContainsKey(manuallySelectNpcParamID))
@@ -454,14 +455,14 @@ namespace DSAnimStudio.ImguiOSD
                     {
                         ImGui.Separator();
 
-                        ImGui.Button("[Debug] Open NPC Model Importer");
+                        ImGui.Button(Loc.T("[Debug] Open NPC Model Importer"));
                         if (ImGui.IsItemClicked())
                             MainTaeScreen.BringUpImporter_FLVER2();
                     }
                 }
                 else if (entityType == TaeViewportInteractor.TaeEntityType.OBJ)
                 {
-                    ImGui.Button("Load Additional Texture File(s)...");
+                    ImGui.Button(Loc.T("Load Additional Texture File(s)..."));
                     if (ImGui.IsItemClicked())
                         MainTaeScreen.BrowseForMoreTextures();
                     
@@ -486,7 +487,7 @@ namespace DSAnimStudio.ImguiOSD
                         var currentHitViewSource = MainTaeScreen.Config.HitViewDummyPolySource;
 
                         int currentHitViewSourceIndex = BehaviorHitboxSrcEnum_Values.IndexOf(currentHitViewSource);
-                        ImGui.ListBox("Behavior / Hitbox Source", ref currentHitViewSourceIndex, BehaviorHitboxSrcEnum_Names, BehaviorHitboxSrcEnum_Names.Length);
+                        ImGui.ListBox(Loc.T("Behavior / Hitbox Source"), ref currentHitViewSourceIndex, BehaviorHitboxSrcEnum_Names, BehaviorHitboxSrcEnum_Names.Length);
                         var newHitViewSource = currentHitViewSourceIndex >= 0 ? BehaviorHitboxSrcEnum_Values[currentHitViewSourceIndex] : ParamData.AtkParam.DummyPolySource.BaseModel;
 
                         if (currentHitViewSource != newHitViewSource)
@@ -509,11 +510,11 @@ namespace DSAnimStudio.ImguiOSD
                 }
                 else if (entityType == TaeViewportInteractor.TaeEntityType.REMO)
                 {
-                    RemoManager.EnableRemoCameraInViewport = MenuBar.CheckboxBig("Show Cutscene Camera View", RemoManager.EnableRemoCameraInViewport);
-                    RemoManager.EnableDummyPrims = MenuBar.CheckboxBig("Enable Dummy Node Helpers", RemoManager.EnableDummyPrims);
+                    RemoManager.EnableRemoCameraInViewport = MenuBar.CheckboxBig(Loc.T("Show Cutscene Camera View"), RemoManager.EnableRemoCameraInViewport);
+                    RemoManager.EnableDummyPrims = MenuBar.CheckboxBig(Loc.T("Enable Dummy Node Helpers"), RemoManager.EnableDummyPrims);
                     //Main.Config.LockAspectRatioDuringRemo = MenuBar.CheckboxBig("Lock Aspect Ratio to 16:9", Main.Config.LockAspectRatioDuringRemo);
 
-                    ImGui.Button("Preview Full Cutscene With Streamed Audio");
+                    ImGui.Button(Loc.T("Preview Full Cutscene With Streamed Audio"));
                     if (ImGui.IsItemClicked())
                     {
                         RemoManager.StartFullPreview();
@@ -521,7 +522,7 @@ namespace DSAnimStudio.ImguiOSD
                 }
                 else
                 {
-                    ImGui.Text("No entity loaded.");
+                    ImGui.Text(Loc.T("No entity loaded."));
                 }
 
 
@@ -530,17 +531,17 @@ namespace DSAnimStudio.ImguiOSD
                 string[] viewportStatusTypes = Enum.GetNames(typeof(TaeConfigFile.ViewportStatusTypes));
                 var viewportStatusTypeValues = Enum.GetValues<TaeConfigFile.ViewportStatusTypes>().ToList();
                 int curIndex = viewportStatusTypeValues.IndexOf(Main.Config.ShowStatusInViewport);
-                ImguiOSD.Tools.FancyComboBox("Viewport Status Type", ref curIndex, viewportStatusTypes);
+                ImguiOSD.Tools.FancyComboBox(Loc.T("Viewport Status Type"), ref curIndex, viewportStatusTypes);
                 if (curIndex < 0)
                     curIndex = 1;
                 Main.Config.ShowStatusInViewport = viewportStatusTypeValues[curIndex];
 
-                if (ImGui.TreeNode("STATUS###WorkspaceConfig_Status"))
+                if (ImGui.TreeNode(Loc.T("STATUS###WorkspaceConfig_Status")))
                 {
                     MainTaeScreen?.Graph?.ViewportInteractor?.BuildImGuiStatus();
 
                     ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 2000);
-                    ImGui.Text(" ");
+                    ImGui.Text(Loc.T(" "));
 
                     ImGui.TreePop();
                 }

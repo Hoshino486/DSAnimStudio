@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -47,7 +48,7 @@ namespace DSAnimStudio
 
         //public string MediaPath = null;
 
-        public string StatusString = "FMOD: (Not Running)";
+        public string StatusString = Loc.T("FMOD: (Not Running)");
 
         //private static FMOD.System _system = null;
 

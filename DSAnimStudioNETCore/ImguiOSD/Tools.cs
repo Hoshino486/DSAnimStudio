@@ -8,6 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public static class Tools
@@ -57,7 +58,7 @@ namespace DSAnimStudio.ImguiOSD
         public static void CustomColorPicker(string text, string imguiID, ref Color? c, Color defaultColor)
         {
             bool hasValue = c.HasValue;
-            ImGui.Checkbox($"##{imguiID}__Checkbox", ref hasValue);
+            ImGui.Checkbox(Loc.TF("##{0}__Checkbox", imguiID), ref hasValue);
             ImGui.SameLine();
             if (hasValue && !c.HasValue)
                 c = defaultColor;
@@ -67,14 +68,14 @@ namespace DSAnimStudio.ImguiOSD
             if (c.HasValue)
             {
                 var colVec4 = c.Value.ToNVector4();
-                ImGui.ColorEdit4($"{text}##{imguiID}__ColorPicker", ref colVec4, ImGuiColorEditFlags.Uint8 | ImGuiColorEditFlags.DisplayHex | ImGuiColorEditFlags.PickerHueBar);
+                ImGui.ColorEdit4(Loc.TF("{0}##{1}__ColorPicker", text, imguiID), ref colVec4, ImGuiColorEditFlags.Uint8 | ImGuiColorEditFlags.DisplayHex | ImGuiColorEditFlags.PickerHueBar);
                 c = new Color(colVec4);
             }
             else
             {
                 ImGui.BeginDisabled();
                 var colVec4 = System.Numerics.Vector4.Zero;
-                ImGui.ColorEdit4($"{text}##{imguiID}__ColorPicker", ref colVec4, ImGuiColorEditFlags.Uint8 | ImGuiColorEditFlags.DisplayHex | ImGuiColorEditFlags.PickerHueBar);
+                ImGui.ColorEdit4(Loc.TF("{0}##{1}__ColorPicker", text, imguiID), ref colVec4, ImGuiColorEditFlags.Uint8 | ImGuiColorEditFlags.DisplayHex | ImGuiColorEditFlags.PickerHueBar);
                 ImGui.EndDisabled();
             }
 
@@ -133,12 +134,12 @@ namespace DSAnimStudio.ImguiOSD
             {
                 ImGui.ColorPicker4(name, ref c);
                 anyFieldFocused |= ImGui.IsItemActive();
-                OSD.TooltipManager_ColorPicker.DoTooltip($"Color: {name}", "Allows you to adjust the color in detail." +
+                OSD.TooltipManager_ColorPicker.DoTooltip(Loc.TF("Color: {0}", name), Loc.T("Allows you to adjust the color in detail." +
                     "\n" +
                     "\nThe number boxes are as follows:" +
                     "\n    [R] [G] [B] [A] (Red/Green/Blue/Alpha)" +
                     "\n    [H] [S] [V] [A] (Hue/Saturation/Value/Alpha)" +
-                    "\n    [ Hexadecimal ] (Hexadecimal representation of the color)");
+                    "\n    [ Hexadecimal ] (Hexadecimal representation of the color)"));
                 ImGui.Separator();
             }
 

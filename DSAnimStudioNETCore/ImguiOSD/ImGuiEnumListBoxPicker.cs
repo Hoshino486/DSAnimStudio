@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public class ImGuiEnumListBoxPicker<T>
@@ -23,7 +24,7 @@ namespace DSAnimStudio.ImguiOSD
         public void ShowPickerCombo(string label, string imguiTag, ref T val, T unmappedVal, string descriptionForTooltip = null, int imguiItemWidthBase = 320)
         {
             ImGui.PushItemWidth(imguiItemWidthBase * Main.DPI * OSD.RenderScale * OSD.WidthScale);
-            ImGui.LabelText(" ", $"{(label ?? " ")}");
+            ImGui.LabelText(Loc.T(" "), $"{(label ?? " ")}");
             ImGui.PopItemWidth();
 
             if (descriptionForTooltip != null)
@@ -32,7 +33,7 @@ namespace DSAnimStudio.ImguiOSD
             {
                 int currentItemIndex = itemValues.IndexOf(val);
                 //ImGui.ListBox($" ###{imguiTag}", ref currentItemIndex, itemNames, itemNames.Length);
-                ImGui.Combo($" ###{imguiTag}", ref currentItemIndex, itemNames, itemNames.Length);
+                ImGui.Combo(Loc.TF(" ###{0}", imguiTag), ref currentItemIndex, itemNames, itemNames.Length);
 
                 val = currentItemIndex >= 0 ? itemValues[currentItemIndex] : unmappedVal;
             }
@@ -42,7 +43,7 @@ namespace DSAnimStudio.ImguiOSD
         public void ShowPicker(string label, string imguiTag, ref T val, T unmappedVal, string descriptionForTooltip = null, int imguiItemWidthBase = 320)
         {
             ImGui.PushItemWidth(imguiItemWidthBase * Main.DPI * OSD.RenderScale * OSD.WidthScale);
-            ImGui.LabelText(" ", $"{(label ?? " ")}###{imguiTag}");
+            ImGui.LabelText(Loc.T(" "), $"{(label ?? " ")}###{imguiTag}");
             ImGui.PopItemWidth();
 
             if (descriptionForTooltip != null)
@@ -50,7 +51,7 @@ namespace DSAnimStudio.ImguiOSD
             ImGui.PushItemWidth(imguiItemWidthBase * Main.DPI * OSD.RenderScale * OSD.WidthScale);
             {
                 int currentItemIndex = itemValues.IndexOf(val);
-                ImGui.ListBox($" ###{imguiTag}", ref currentItemIndex, itemNames, itemNames.Length);
+                ImGui.ListBox(Loc.TF(" ###{0}", imguiTag), ref currentItemIndex, itemNames, itemNames.Length);
                 val = currentItemIndex >= 0 ? itemValues[currentItemIndex] : unmappedVal;
             }
             ImGui.PopItemWidth();

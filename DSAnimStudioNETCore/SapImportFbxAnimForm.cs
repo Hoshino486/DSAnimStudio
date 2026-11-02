@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public partial class SapImportFbxAnimForm : Form
@@ -94,6 +95,8 @@ namespace DSAnimStudio
         public SapImportFbxAnimForm()
         {
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
 
         }
 
@@ -155,7 +158,7 @@ namespace DSAnimStudio
         {
             if (!(zzz_DocumentManager.CurrentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.DS1 || zzz_DocumentManager.CurrentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.DS1R || zzz_DocumentManager.CurrentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.DS3))
             {
-                ImguiOSD.DialogManager.DialogOK("Not Supported", "Only supported on DS1 PTDE, DS1R, and DS3 for now.");
+                ImguiOSD.DialogManager.DialogOK(Loc.T("Not Supported"), Loc.T("Only supported on DS1 PTDE, DS1R, and DS3 for now."));
                 return;
             }
 
@@ -189,7 +192,7 @@ namespace DSAnimStudio
                     }
                     else
                     {
-                        DialogManager.DialogOK("Failed", "Failed to save (TagTools refused to work), just try again.");
+                        DialogManager.DialogOK(Loc.T("Failed"), Loc.T("Failed to save (TagTools refused to work), just try again."));
                     }
 
                     
@@ -198,7 +201,7 @@ namespace DSAnimStudio
                 }
                 catch (Exception ex)
                 {
-                    ImguiOSD.DialogManager.DialogOK("Import Failed", $"Failed to import animation. Error below:\n\n{ex}");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("Import Failed"), Loc.TF("Failed to import animation. Error below:\n\n{0}", ex));
                 }
                 finally
                 {
@@ -238,7 +241,7 @@ namespace DSAnimStudio
         {
             if (!(zzz_DocumentManager.CurrentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.DS1 || zzz_DocumentManager.CurrentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.DS1R || zzz_DocumentManager.CurrentDocument.GameRoot.GameType == SoulsAssetPipeline.SoulsGames.DS3))
             {
-                ImguiOSD.DialogManager.DialogOK("Not Supported", "Only supported on DS1 PTDE, DS1R, and DS3 for now.");
+                ImguiOSD.DialogManager.DialogOK(Loc.T("Not Supported"), Loc.T("Only supported on DS1 PTDE, DS1R, and DS3 for now."));
                 return;
             }
 
@@ -301,7 +304,7 @@ namespace DSAnimStudio
                 }
                 catch (Exception ex)
                 {
-                    ImguiOSD.DialogManager.DialogOK("Import Failed", $"Failed to import animation. Error below:\n\n{ex}");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("Import Failed"), Loc.TF("Failed to import animation. Error below:\n\n{0}", ex));
                 }
                 finally
                 {
@@ -341,7 +344,7 @@ namespace DSAnimStudio
                 }
                 catch (Exception ex)
                 {
-                    ImguiOSD.DialogManager.DialogOK("Import Failed", $"Failed to import animation. Error below:\n\n{ex}");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("Import Failed"), Loc.TF("Failed to import animation. Error below:\n\n{0}", ex));
                 }
                 finally
                 {

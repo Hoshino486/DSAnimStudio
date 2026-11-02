@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.TaeEditor
 {
@@ -15,6 +16,8 @@ namespace DSAnimStudio.TaeEditor
         public TaeLoadFromArchivesFilePicker()
         {
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
         }
 
         public string SelectedEblFile

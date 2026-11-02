@@ -1,6 +1,7 @@
-using System.Linq;
+﻿using System.Linq;
 using ImGuiNET;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public static class ImGuiWidgets
@@ -17,7 +18,7 @@ namespace DSAnimStudio.ImguiOSD
                 ImGui.PushItemWidth(24);
                 int curBVal = aob[b];
                 int prevBVal = curBVal;
-                ImGui.InputInt($"{name}##{imguiTag}[{b}]", ref curBVal, 0, 0, ImGuiInputTextFlags.CharsHexadecimal |
+                ImGui.InputInt(Loc.TF("{0}##{1}[{2}]", name, imguiTag, b), ref curBVal, 0, 0, ImGuiInputTextFlags.CharsHexadecimal |
                     ImGuiInputTextFlags.CharsUppercase);
                 if (curBVal < 0)
                     curBVal = 0;

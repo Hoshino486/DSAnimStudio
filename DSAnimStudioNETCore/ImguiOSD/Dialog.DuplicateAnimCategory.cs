@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Dialog
@@ -26,7 +27,7 @@ namespace DSAnimStudio.ImguiOSD
             public int CurrentAnimCategoryID;
 
             public unsafe DuplicateAnimCategory(DSAProj proj, DSAProj.AnimCategory tae)
-                : base("Duplicate Anim Category")
+                : base(Loc.T("Duplicate Anim Category"))
             {
                 Proj = proj;
                 Tae = tae;
@@ -40,12 +41,12 @@ namespace DSAnimStudio.ImguiOSD
                 //ImGui.PushTextWrapPos(ImGui.GetFontSize() * 400);
                 //ImGui.TextWrapped(Question);
                 //ImGui.PopTextWrapPos();
-                ImGui.Text("Anim Category ID to copy to: a");
+                ImGui.Text(Loc.T("Anim Category ID to copy to: a"));
                 ImGui.SameLine();
                 if (IsFirstFrameBuildingWindow)
                     ImGui.SetKeyboardFocusHere();
                 ImGui.PushItemWidth(100);
-                ImGui.InputInt("##Dialog.DuplicateTaeSection.SelectedAnimCategory", ref Res.SelectedAnimCategoryID);
+                ImGui.InputInt(Loc.T("##Dialog.DuplicateTaeSection.SelectedAnimCategory"), ref Res.SelectedAnimCategoryID);
                 ImGui.PopItemWidth();
 
                 if (Res.SelectedAnimCategoryID < 0)
@@ -61,11 +62,11 @@ namespace DSAnimStudio.ImguiOSD
                         Res.SelectedAnimCategoryID = 999;
                 }
 
-                ImGui.Checkbox("Reference HKX animations of original category", ref Res.ReferenceHkxOfOriginalCategory);
+                ImGui.Checkbox(Loc.T("Reference HKX animations of original category"), ref Res.ReferenceHkxOfOriginalCategory);
 
-                ImGui.Text(" ");
+                ImGui.Text(Loc.T(" "));
 
-                if (Tools.SimpleClickButton("Cancel") || IsTitleBarXRequested || IsEscapeKeyRequested)
+                if (Tools.SimpleClickButton(Loc.T("Cancel")) || IsTitleBarXRequested || IsEscapeKeyRequested)
                 {
                     ResultType = ResultTypes.Cancel;
                     Dismiss();
@@ -77,13 +78,13 @@ namespace DSAnimStudio.ImguiOSD
                 if (invalid)
                     ImGui.BeginDisabled();
 
-                if (Tools.SimpleClickButton("Accept"))
+                if (Tools.SimpleClickButton(Loc.T("Accept")))
                 {
                     if (!invalid)
                     {
                         if (Proj.SAFE_CategoryExists(Res.SelectedAnimCategoryID))
                         {
-                            DialogManager.AskYesNo("Anim Category ID Conflict", $"Anim Category ID {Res.SelectedAnimCategoryID} already exists. If you choose this ID, it will cause an ID conflict error. Are you sure you wish to continue?", res =>
+                            DialogManager.AskYesNo(Loc.T("Anim Category ID Conflict"), Loc.TF("Anim Category ID {0} already exists. If you choose this ID, it will cause an ID conflict error. Are you sure you wish to continue?", Res.SelectedAnimCategoryID), res =>
                             {
                                 if (res)
                                 {

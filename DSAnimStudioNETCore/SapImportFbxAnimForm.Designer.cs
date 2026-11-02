@@ -1,4 +1,5 @@
-﻿namespace DSAnimStudio
+﻿using DSAnimStudio.Localization;
+namespace DSAnimStudio
 {
     partial class SapImportFbxAnimForm
     {
@@ -102,7 +103,7 @@
             this.groupBoxSettings.Size = new System.Drawing.Size(857, 368);
             this.groupBoxSettings.TabIndex = 13;
             this.groupBoxSettings.TabStop = false;
-            this.groupBoxSettings.Text = "Import Settings";
+            this.groupBoxSettings.Text = Loc.T("Import Settings");
             // 
             // fbxAnim_ExcludeRootMotionNodeFromTransformTracks
             // 
@@ -112,7 +113,7 @@
             this.fbxAnim_ExcludeRootMotionNodeFromTransformTracks.Name = "fbxAnim_ExcludeRootMotionNodeFromTransformTracks";
             this.fbxAnim_ExcludeRootMotionNodeFromTransformTracks.Size = new System.Drawing.Size(234, 33);
             this.fbxAnim_ExcludeRootMotionNodeFromTransformTracks.TabIndex = 25;
-            this.fbxAnim_ExcludeRootMotionNodeFromTransformTracks.Text = "Exclude Specified Root Motion Node From Animation Tracks";
+            this.fbxAnim_ExcludeRootMotionNodeFromTransformTracks.Text = Loc.T("Exclude Specified Root Motion Node From Animation Tracks");
             this.fbxAnim_ExcludeRootMotionNodeFromTransformTracks.UseVisualStyleBackColor = true;
             // 
             // fbxAnim_InitializeTracksToTPose
@@ -122,7 +123,7 @@
             this.fbxAnim_InitializeTracksToTPose.Name = "fbxAnim_InitializeTracksToTPose";
             this.fbxAnim_InitializeTracksToTPose.Size = new System.Drawing.Size(188, 17);
             this.fbxAnim_InitializeTracksToTPose.TabIndex = 24;
-            this.fbxAnim_InitializeTracksToTPose.Text = "Put Un-Animated Bones In T-Pose";
+            this.fbxAnim_InitializeTracksToTPose.Text = Loc.T("Put Un-Animated Bones In T-Pose");
             this.fbxAnim_InitializeTracksToTPose.UseVisualStyleBackColor = true;
             // 
             // fbxAnim_EnableRootMotionRotation
@@ -134,7 +135,7 @@
             this.fbxAnim_EnableRootMotionRotation.Name = "fbxAnim_EnableRootMotionRotation";
             this.fbxAnim_EnableRootMotionRotation.Size = new System.Drawing.Size(171, 17);
             this.fbxAnim_EnableRootMotionRotation.TabIndex = 23;
-            this.fbxAnim_EnableRootMotionRotation.Text = "Enable Rotational Root Motion";
+            this.fbxAnim_EnableRootMotionRotation.Text = Loc.T("Enable Rotational Root Motion");
             this.fbxAnim_EnableRootMotionRotation.UseVisualStyleBackColor = true;
             // 
             // fbxAnim_NegateQuaternionW
@@ -184,7 +185,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(162, 13);
             this.label8.TabIndex = 18;
-            this.label8.Text = "Negate Quaternion Components:";
+            this.label8.Text = Loc.T("Negate Quaternion Components:");
             // 
             // fbxAnim_BonesToFlipBackwards
             // 
@@ -205,7 +206,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(347, 13);
             this.label7.TabIndex = 16;
-            this.label7.Text = "Names of Bones To Rotate 180 Degrees About the Y Axis (for hotfixing):";
+            this.label7.Text = Loc.T("Names of Bones To Rotate 180 Degrees About the Y Axis (for hotfixing):");
             // 
             // fbxAnim_RootMotionNodeName
             // 
@@ -222,7 +223,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(128, 13);
             this.label6.TabIndex = 14;
-            this.label6.Text = "Root Motion Node Name:";
+            this.label6.Text = Loc.T("Root Motion Node Name:");
             // 
             // fbxAnim_RotationQuantizationType
             // 
@@ -246,7 +247,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(139, 13);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Rotation Quantization Type:";
+            this.label5.Text = Loc.T("Rotation Quantization Type:");
             // 
             // fbxAnim_SampleToFramerate
             // 
@@ -278,7 +279,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(111, 13);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Sample To Framerate:";
+            this.label4.Text = Loc.T("Sample To Framerate:");
             // 
             // fbxAnim_RotationTolerance
             // 
@@ -315,7 +316,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 13);
             this.label3.TabIndex = 9;
-            this.label3.Text = "Rotation Tolerance:";
+            this.label3.Text = Loc.T("Rotation Tolerance:");
             // 
             // fbxAnim_checkboxMirrorQuaternions
             // 
@@ -324,7 +325,7 @@
             this.fbxAnim_checkboxMirrorQuaternions.Name = "fbxAnim_checkboxMirrorQuaternions";
             this.fbxAnim_checkboxMirrorQuaternions.Size = new System.Drawing.Size(175, 17);
             this.fbxAnim_checkboxMirrorQuaternions.TabIndex = 7;
-            this.fbxAnim_checkboxMirrorQuaternions.Text = "Turn Bone Rotations Inside Out";
+            this.fbxAnim_checkboxMirrorQuaternions.Text = Loc.T("Turn Bone Rotations Inside Out");
             this.fbxAnim_checkboxMirrorQuaternions.UseVisualStyleBackColor = true;
             // 
             // flver2_checkBoxConvertFromZUp
@@ -334,7 +335,7 @@
             this.flver2_checkBoxConvertFromZUp.Name = "flver2_checkBoxConvertFromZUp";
             this.flver2_checkBoxConvertFromZUp.Size = new System.Drawing.Size(217, 17);
             this.flver2_checkBoxConvertFromZUp.TabIndex = 6;
-            this.flver2_checkBoxConvertFromZUp.Text = "Convert from Z-Up to Y-Up (Deprecated)";
+            this.flver2_checkBoxConvertFromZUp.Text = Loc.T("Convert from Z-Up to Y-Up (Deprecated)");
             this.flver2_checkBoxConvertFromZUp.UseVisualStyleBackColor = true;
             // 
             // flver2_numericUpDownScale
@@ -367,7 +368,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Scene Scale Percent:";
+            this.label2.Text = Loc.T("Scene Scale Percent:");
             // 
             // buttonBrowseFBX
             // 
@@ -376,7 +377,7 @@
             this.buttonBrowseFBX.Name = "buttonBrowseFBX";
             this.buttonBrowseFBX.Size = new System.Drawing.Size(75, 23);
             this.buttonBrowseFBX.TabIndex = 12;
-            this.buttonBrowseFBX.Text = "Browse...";
+            this.buttonBrowseFBX.Text = Loc.T("Browse...");
             this.buttonBrowseFBX.UseVisualStyleBackColor = true;
             this.buttonBrowseFBX.Click += new System.EventHandler(this.buttonBrowseFBX_Click);
             // 
@@ -396,7 +397,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 10;
-            this.label1.Text = "FBX File:";
+            this.label1.Text = Loc.T("FBX File:");
             // 
             // buttonImport
             // 
@@ -406,7 +407,7 @@
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(286, 42);
             this.buttonImport.TabIndex = 9;
-            this.buttonImport.Text = "IMPORT FBX TO CURRENT ANIMATION\r\n(Not recommended for c0000)";
+            this.buttonImport.Text = Loc.T("IMPORT FBX TO CURRENT ANIMATION\r\n(Not recommended for c0000)");
             this.buttonImport.UseVisualStyleBackColor = true;
             this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             // 
@@ -418,7 +419,7 @@
             this.buttonImportToLooseHKX.Name = "buttonImportToLooseHKX";
             this.buttonImportToLooseHKX.Size = new System.Drawing.Size(217, 42);
             this.buttonImportToLooseHKX.TabIndex = 14;
-            this.buttonImportToLooseHKX.Text = "IMPORT FBX TO LOOSE HKX FILE";
+            this.buttonImportToLooseHKX.Text = Loc.T("IMPORT FBX TO LOOSE HKX FILE");
             this.buttonImportToLooseHKX.UseVisualStyleBackColor = true;
             this.buttonImportToLooseHKX.Click += new System.EventHandler(this.buttonImportToLooseHKX_Click);
             // 
@@ -430,8 +431,8 @@
             this.buttonImportDirectlyTest.Name = "buttonImportDirectlyTest";
             this.buttonImportDirectlyTest.Size = new System.Drawing.Size(345, 42);
             this.buttonImportDirectlyTest.TabIndex = 15;
-            this.buttonImportDirectlyTest.Text = "IMPORT STRAIGHT INTO DSAS UNCOMPRESSED\r\n(Does NOT save to game data; for testing " +
-    "only)";
+            this.buttonImportDirectlyTest.Text = Loc.T("IMPORT STRAIGHT INTO DSAS UNCOMPRESSED\r\n(Does NOT save to game data; for testing "
+                    + "only)");
             this.buttonImportDirectlyTest.UseVisualStyleBackColor = true;
             this.buttonImportDirectlyTest.Click += new System.EventHandler(this.buttonImportDirectlyTest_Click);
             // 
@@ -446,7 +447,7 @@
             this.richTextBoxHint.ReadOnly = true;
             this.richTextBoxHint.Size = new System.Drawing.Size(169, 120);
             this.richTextBoxHint.TabIndex = 26;
-            this.richTextBoxHint.Text = "For DS3 c0000 try these:\n\nRootPos\nL_Foot_Target2\nR_Foot_Target2";
+            this.richTextBoxHint.Text = Loc.T("For DS3 c0000 try these:\n\nRootPos\nL_Foot_Target2\nR_Foot_Target2");
             // 
             // fbxAnim_OverrideRootMotionScale
             // 
@@ -455,7 +456,7 @@
             this.fbxAnim_OverrideRootMotionScale.Name = "fbxAnim_OverrideRootMotionScale";
             this.fbxAnim_OverrideRootMotionScale.Size = new System.Drawing.Size(160, 17);
             this.fbxAnim_OverrideRootMotionScale.TabIndex = 27;
-            this.fbxAnim_OverrideRootMotionScale.Text = "Override Root Motion Scale:";
+            this.fbxAnim_OverrideRootMotionScale.Text = Loc.T("Override Root Motion Scale:");
             this.fbxAnim_OverrideRootMotionScale.UseVisualStyleBackColor = true;
             this.fbxAnim_OverrideRootMotionScale.CheckedChanged += new System.EventHandler(this.fbxAnim_OverrideRootMotionScale_CheckedChanged);
             // 
@@ -500,7 +501,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Import Animation FBX";
+            this.Text = Loc.T("Import Animation FBX");
             this.TopMost = true;
             this.Load += new System.EventHandler(this.SapImportFbxAnimForm_Load);
             this.groupBoxSettings.ResumeLayout(false);

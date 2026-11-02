@@ -1274,7 +1274,7 @@
 //                }
 //                catch (Exception ex)
 //                {
-//                    System.Windows.Forms.MessageBox.Show(ex.ToString(), "Error During Paste Operation", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+//                    System.Windows.Forms.MessageBox.Show(ex.ToString(), Loc.T("Error During Paste Operation"), System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 //                }
 //            }
 

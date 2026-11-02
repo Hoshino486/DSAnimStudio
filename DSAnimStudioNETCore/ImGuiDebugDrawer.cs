@@ -9,6 +9,7 @@ using DSAnimStudio.TaeEditor;
 using Microsoft.Xna.Framework.Graphics;
 using NVector4 = System.Numerics.Vector4;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public static class ImGuiDebugDrawer
@@ -53,7 +54,7 @@ namespace DSAnimStudio
         {
             ImGui.PushStyleColor(ImGuiCol.Border, System.Numerics.Vector4.Zero);
             ImGui.PushStyleColor(ImGuiCol.WindowBg, System.Numerics.Vector4.Zero);
-            ImGui.Begin("CUSTOM_DRAW_DUMMY_WINDOW",
+            ImGui.Begin(Loc.T("CUSTOM_DRAW_DUMMY_WINDOW"),
                 ImGuiWindowFlags.NoTitleBar |
                 ImGuiWindowFlags.NoResize |
                 ImGuiWindowFlags.NoMove |

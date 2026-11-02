@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -337,8 +338,8 @@ namespace DSAnimStudio
             }
             catch (Exception ex)
             {
-                var dlgRes = System.Windows.Forms.MessageBox.Show($"Failed to export HKX file '{hkxNameForErrorMsg}'.\nWould you like to continue anyways?\n\n\nError shown below:\n\n{ex}",
-                    "Continue With Errors?", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
+                var dlgRes = System.Windows.Forms.MessageBox.Show(Loc.TF("Failed to export HKX file '{0}'.\nWould you like to continue anyways?\n\n\nError shown below:\n\n{1}", hkxNameForErrorMsg, ex),
+                    Loc.T("Continue With Errors?"), System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
                 requestCancel = (dlgRes == System.Windows.Forms.DialogResult.No);
             }
             userRequestCancel = requestCancel;
@@ -435,7 +436,7 @@ namespace DSAnimStudio
         //    catch (Exception ex)
         //    {
         //        var dlgRes = System.Windows.Forms.MessageBox.Show($"Failed to export animation '{fileNameForError}'.\nWould you like to continue anyways?" +
-        //            $"\n\n\nError shown below:\n\n{ex}", "Continue With Errors?", 
+        //            $"\n\n\nError shown below:\n\n{ex}", Loc.T("Continue With Errors?"), 
         //            System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
         //        requestCancel = (dlgRes == System.Windows.Forms.DialogResult.No);
         //    }

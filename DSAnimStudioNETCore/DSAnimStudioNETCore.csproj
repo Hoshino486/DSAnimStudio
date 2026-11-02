@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -35,11 +35,31 @@
     <EmbeddedResource Remove="Res\WEM\**" />
     <None Remove="Res\WEM\**" />
     <None Remove="EmbRes\Help.txt" />
+    <None Remove="EmbRes\Help.zh-Hans.txt" />
+    <None Remove="EmbRes\Credits.zh-Hans.txt" />
     <None Remove="EmbRes\imgui_default_Legacy.ini" />
     <None Remove="EmbRes\imgui_default_V5.ini" />
+    <None Remove="EmbRes\Lang\zh-Hans.json" />
     <EmbeddedResource Include="EmbRes\Help.txt" />
     <EmbeddedResource Include="EmbRes\imgui_default_Legacy.ini" />
     <EmbeddedResource Include="EmbRes\imgui_default_V5.ini" />
+    <!--
+      注意：文件名里带 "zh-Hans" 会被 MSBuild 的 AssignCulture 当成区域性，
+      从而被打进 zh-Hans\xx.resources.dll 附属程序集，主程序集里 GetManifestResourceStream
+      就取不到。这里用 WithCulture=false 关掉区域性推断，并用 LogicalName 钉死资源名。
+    -->
+    <EmbeddedResource Include="EmbRes\Lang\zh-Hans.json">
+      <WithCulture>false</WithCulture>
+      <LogicalName>DSAnimStudio.EmbRes.Lang.zh-Hans.json</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmbRes\Help.zh-Hans.txt">
+      <WithCulture>false</WithCulture>
+      <LogicalName>DSAnimStudio.EmbRes.Help.zh-Hans.txt</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmbRes\Credits.zh-Hans.txt">
+      <WithCulture>false</WithCulture>
+      <LogicalName>DSAnimStudio.EmbRes.Credits.zh-Hans.txt</LogicalName>
+    </EmbeddedResource>
     <None Update="Content\Cubemaps\DefaultCubemap.dds">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

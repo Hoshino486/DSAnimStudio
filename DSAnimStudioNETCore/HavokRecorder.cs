@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public class HavokRecorder
@@ -93,9 +94,9 @@ namespace DSAnimStudio
 
             void AskForIDInput()
             {
-                DialogManager.AskForInputString("Input to TAE Animation ID", "Enter the animation ID to save the actions of the recording to as well as to save the HKX to.\n" +
+                DialogManager.AskForInputString(Loc.T("Input to TAE Animation ID"), Loc.T("Enter the animation ID to save the actions of the recording to as well as to save the HKX to.\n" +
                     "Accepts the full string with prefix or just the ID as a number.\n" +
-                    "EXISTING TAE ENTRY AND ANIMATION FILES WITH THIS NAME WILL BE OVERRIDDEN WITHOUT ASKING.\nSAVE / BACKUP YOUR WORK IF UNSURE..",
+                    "EXISTING TAE ENTRY AND ANIMATION FILES WITH THIS NAME WILL BE OVERRIDDEN WITHOUT ASKING.\nSAVE / BACKUP YOUR WORK IF UNSURE.."),
                 mainScreen.ParentDocument.GameRoot.CurrentAnimIDFormatType.ToString(), idResult =>
                 {
                 
@@ -107,7 +108,7 @@ namespace DSAnimStudio
 
                         if (dataForAnimContainer == null)
                         {
-                            DialogManager.DialogOK("Failed", "Failed to save (TagTools refused to work), just try again.");
+                            DialogManager.DialogOK(Loc.T("Failed"), Loc.T("Failed to save (TagTools refused to work), just try again."));
                             return;
                         }
 
@@ -122,13 +123,13 @@ namespace DSAnimStudio
                         }
                         else
                         {
-                            DialogManager.DialogOK("Import Complete", $"Finished importing animation HKX.");
+                            DialogManager.DialogOK(Loc.T("Import Complete"), Loc.TF("Finished importing animation HKX."));
                             //mainScreen.Graph.ViewportInteractor.IsComboRecordingEnding = false;
                         }
                     }
                     else
                     {
-                        DialogManager.DialogOK("Invalid Import ID", $"\"{idResult}\" is not a valid animation ID.");
+                        DialogManager.DialogOK(Loc.T("Invalid Import ID"), Loc.TF("\"{0}\" is not a valid animation ID.", idResult));
                         AskForIDInput();
                     }
                 }, checkError: input =>

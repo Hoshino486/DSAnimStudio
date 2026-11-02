@@ -3,6 +3,7 @@ using SoulsAssetPipeline.Animation;
 using System;
 using System.Windows.Forms;
 using TAE = SoulsAssetPipeline.Animation.TAE;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.TaeEditor
 {
@@ -110,10 +111,8 @@ namespace DSAnimStudio.TaeEditor
                 }
                 else
                 {
-                    MessageBox.Show("Invalid import from animation ID formatting. " +
-                        $"Expected either a blank value for none or '{CurFormattingString()}' " +
-                        "type formatting, where X and Y are integers.",
-                    "Invalid Value", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Loc.TF("Invalid import from animation ID formatting. Expected either a blank value for none or '{0}' type formatting, where X and Y are integers.", CurFormattingString()),
+                    Loc.T("Invalid Value"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
 
@@ -133,10 +132,8 @@ namespace DSAnimStudio.TaeEditor
                 }
                 else
                 {
-                    MessageBox.Show("Invalid import from animation ID formatting. " +
-                        $"Expected either a blank value for none or '{CurFormattingString()}' " +
-                        "type formatting, where X and Y are integers.",
-                    "Invalid Value", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Loc.TF("Invalid import from animation ID formatting. Expected either a blank value for none or '{0}' type formatting, where X and Y are integers.", CurFormattingString()),
+                    Loc.T("Invalid Value"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
 
@@ -146,8 +143,8 @@ namespace DSAnimStudio.TaeEditor
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Unknown value format. Expected an unsigned integer.",
-                    "Invalid Value", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Loc.T("Invalid Unknown value format. Expected an unsigned integer."),
+                    Loc.T("Invalid Value"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
 
@@ -244,7 +241,7 @@ namespace DSAnimStudio.TaeEditor
 
             if (IsAbsoluteAnimID)
             {
-                labelAnimSubIDPrefix.Text = "Animation ID: ";
+                labelAnimSubIDPrefix.Text = DSAnimStudio.Localization.Loc.T("Animation ID: ");
                 textBoxAnimSubID.Text = HKXNameFromCompositeID(AnimRef.ID);
             }
             else
@@ -296,10 +293,8 @@ namespace DSAnimStudio.TaeEditor
                 }
                 else
                 {
-                    MessageBox.Show("Invalid animation ID formatting. " +
-                        $"Expected '{CurFormattingString()}' " +
-                        "type formatting, where X and Y are integers.",
-                    "Invalid Value", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Loc.TF("Invalid animation ID formatting. Expected '{0}' type formatting, where X and Y are integers.", CurFormattingString()),
+                    Loc.T("Invalid Value"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -311,8 +306,8 @@ namespace DSAnimStudio.TaeEditor
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Sub-ID value format. Expected an unsigned integer.",
-                        "Invalid Value", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Loc.T("Invalid Sub-ID value format. Expected an unsigned integer."),
+                        Loc.T("Invalid Value"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -333,6 +328,8 @@ namespace DSAnimStudio.TaeEditor
             originalID = animRef.ID;
             originalMiniHeader = animRef.Header.GetClone();
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
         }
 
         private void TaeEditAnimPropertiesForm_Shown(object sender, EventArgs e)
@@ -357,8 +354,8 @@ namespace DSAnimStudio.TaeEditor
                 AnimRef.ID = originalID;
                 AnimRef.Header = originalMiniHeader;
 
-                MessageBox.Show("Changes were not saved due to formatting errors.",
-                    "Changes Not Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Loc.T("Changes were not saved due to formatting errors."),
+                    Loc.T("Changes Not Saved"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -390,8 +387,8 @@ namespace DSAnimStudio.TaeEditor
         private void buttonDeleteAnim_Click(object sender, EventArgs e)
         {
             var yesNoDlgResult = MessageBox.Show(
-                $"Are you sure you want to delete animation entry {originalID}?",
-                "Permanently Delete Animation Entry?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                Loc.TF("Are you sure you want to delete animation entry {0}?", originalID),
+                Loc.T("Permanently Delete Animation Entry?"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (yesNoDlgResult == DialogResult.Yes)
             {

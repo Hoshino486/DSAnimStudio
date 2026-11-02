@@ -1,10 +1,11 @@
-﻿using DSAnimStudio.TaeEditor;
+using DSAnimStudio.TaeEditor;
 using ImGuiNET;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.ImguiOSD
 {
@@ -14,7 +15,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.SaveAlways;
 
-            public override string NewImguiWindowTitle => "Help";
+            public override string NewImguiWindowTitle => Loc.Win("Help");
             
             protected override void Init()
             {
@@ -22,6 +23,7 @@ namespace DSAnimStudio.ImguiOSD
             }
 
             private string[] helpText = null;
+            private LocLanguage helpTextLanguage = LocLanguage.English;
             private object _lock_helpText = new object();
 
             protected override void BuildContents(ref bool anyFieldFocused)
@@ -31,9 +33,24 @@ namespace DSAnimStudio.ImguiOSD
 
                 lock (_lock_helpText)
                 {
-                    if (helpText == null)
+                    if (helpText == null || helpTextLanguage != Loc.Language)
                     {
-                        helpText = Main.GetEmbeddedResourceText("/EmbRes/Help.txt").Split('\n');
+                        helpTextLanguage = Loc.Language;
+                        string resName = Loc.IsChinese
+                            ? "/EmbRes/Help.zh-Hans.txt"
+                            : "/EmbRes/Help.txt";
+                        string raw = null;
+                        try
+                        {
+                            raw = Main.GetEmbeddedResourceText(resName);
+                        }
+                        catch
+                        {
+                            raw = null;
+                        }
+                        if (string.IsNullOrEmpty(raw))
+                            raw = Main.GetEmbeddedResourceText("/EmbRes/Help.txt");
+                        helpText = raw.Split('\n');
                     }
 
                     for (int i = 0; i < helpText.Length; i++)

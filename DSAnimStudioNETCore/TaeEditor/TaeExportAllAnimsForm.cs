@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.TaeEditor
 {
@@ -37,6 +38,8 @@ namespace DSAnimStudio.TaeEditor
         public TaeExportAllAnimsForm()
         {
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
         }
 
         public void ShownInitValues()
@@ -93,8 +96,8 @@ namespace DSAnimStudio.TaeEditor
 
         private bool AskToCancelOperation()
         {
-            var res = MessageBox.Show("Cancel current export operation?\nFiles already exported will not be deleted.", 
-                "Cancel Operation?", MessageBoxButtons.YesNo, MessageBoxIcon.None);
+            var res = MessageBox.Show(Loc.T("Cancel current export operation?\nFiles already exported will not be deleted."), 
+                Loc.T("Cancel Operation?"), MessageBoxButtons.YesNo, MessageBoxIcon.None);
             return res == DialogResult.Yes;
         }
 
@@ -199,9 +202,8 @@ namespace DSAnimStudio.TaeEditor
             userEnteredPath = userEnteredPath.Trim();
             if (userEnteredPath.ToLower() != finalPath.ToLower())
             {
-                bool areYouSure = MessageBox.Show($"Specified destination folder path '{userEnteredPath}' evaluates to the full path '{finalPath}'.\n\n" +
-                    $"Please confirm that '{finalPath}' is the path you wish to export to.",
-                    "Confirm Path", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+                bool areYouSure = MessageBox.Show(Loc.TF("Specified destination folder path '{0}' evaluates to the full path '{1}'.\n\nPlease confirm that '{2}' is the path you wish to export to.", userEnteredPath, finalPath, finalPath),
+                    Loc.T("Confirm Path"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
 
                 if (!areYouSure)
                     return false;
@@ -220,8 +222,8 @@ namespace DSAnimStudio.TaeEditor
 
             if (string.IsNullOrWhiteSpace(exportDirectory))
             {
-                MessageBox.Show($"No destination folder path specified.",
-                    "Invalid Destination Folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Loc.T("No destination folder path specified."),
+                    Loc.T("Invalid Destination Folder"), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 directoryFailed = true;
             }
@@ -230,8 +232,8 @@ namespace DSAnimStudio.TaeEditor
                 var invalidChars = System.IO.Path.GetInvalidPathChars();
                 if (exportDirectory.Any(c => invalidChars.Contains(c)))
                 {
-                    MessageBox.Show($"Invalid characters in the specified destination folder path.",
-                        "Invalid Destination Folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Loc.T("Invalid characters in the specified destination folder path."),
+                        Loc.T("Invalid Destination Folder"), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     directoryFailed = true;
                 }
@@ -248,8 +250,8 @@ namespace DSAnimStudio.TaeEditor
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Invalid destination path specified.\n\n\n\n\n\n\n\nSystem exception that was encountered is shown below:\n\n{ex}",
-                            "Invalid Destination Folder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Loc.TF("Invalid destination path specified.\n\n\n\n\n\n\n\nSystem exception that was encountered is shown below:\n\n{0}", ex),
+                            Loc.T("Invalid Destination Folder"), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         directoryFailed = true;
                     }
@@ -272,8 +274,8 @@ namespace DSAnimStudio.TaeEditor
 
             if (filesAlreadyExistInDestinationDir)
             {
-                bool areYouSure = MessageBox.Show($"Specified destination folder exists and already contains files.\nExport anyway and permanently overwrite existing files?",
-                    "Overwrite Existing Files?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+                bool areYouSure = MessageBox.Show(Loc.T("Specified destination folder exists and already contains files.\nExport anyway and permanently overwrite existing files?"),
+                    Loc.T("Overwrite Existing Files?"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
 
                 if (!areYouSure)
                     return;
@@ -312,8 +314,8 @@ namespace DSAnimStudio.TaeEditor
 
             if (animNames.Count == 0 && !isExportSkeleton)
             {
-                System.Windows.Forms.MessageBox.Show($"No files were selected to export. Operation cancelled.",
-                                "Nothing Selected", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                System.Windows.Forms.MessageBox.Show(Loc.T("No files were selected to export. Operation cancelled."),
+                                Loc.T("Nothing Selected"), System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
                 SetBusy(false);
                 SetStatus($"Done.");
                 return;
@@ -350,9 +352,8 @@ namespace DSAnimStudio.TaeEditor
                         }
                         catch (Exception ex)
                         {
-                            var dlgRes = System.Windows.Forms.MessageBox.Show($"Failed to write exported skeleton file 'Skeleton.hkx' to destination directory.\n" +
-                                $"Would you like to continue anyways?\n\n\nError shown below:\n\n{ex}",
-                                "Continue With Errors?", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
+                            var dlgRes = System.Windows.Forms.MessageBox.Show(Loc.TF("Failed to write exported skeleton file 'Skeleton.hkx' to destination directory.\nWould you like to continue anyways?\n\n\nError shown below:\n\n{0}", ex),
+                                Loc.T("Continue With Errors?"), System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
                             userRequestCancelSkeleton = (dlgRes == System.Windows.Forms.DialogResult.No);
                         }
                     }
@@ -387,9 +388,8 @@ namespace DSAnimStudio.TaeEditor
                                 }
                                 catch (Exception ex)
                                 {
-                                    var dlgRes = System.Windows.Forms.MessageBox.Show($"Failed to write exported animation file '{animShortName}' to destination directory.\n" +
-                                    $"Would you like to continue anyways?\n\n\nError shown below:\n\n{ex}",
-                                    "Continue With Errors?", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
+                                    var dlgRes = System.Windows.Forms.MessageBox.Show(Loc.TF("Failed to write exported animation file '{0}' to destination directory.\nWould you like to continue anyways?\n\n\nError shown below:\n\n{1}", animShortName, ex),
+                                    Loc.T("Continue With Errors?"), System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Warning);
                                         userRequestCancelAnim = (dlgRes == System.Windows.Forms.DialogResult.No);
                                 }
                             }

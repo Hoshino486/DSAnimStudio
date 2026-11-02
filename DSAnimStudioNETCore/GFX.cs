@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public enum GFXDrawStep : byte
@@ -132,8 +133,8 @@ namespace DSAnimStudio
 
             { FlverShadingModes.PBR_GLOSS, "PBR (DS2/DS3/SDT/ER/DS1R)" },
             //{ FlverShadingModes.PBR_GLOSS_BB, "Bloodborne PBR" },
-            { FlverShadingModes.CLASSIC_DIFFUSE_PTDE, "Diffuse to PBR Approximation (DS1:PTDE)" },
-            { FlverShadingModes.LEGACY, "Legacy Diffuse (MVDX)" },
+            { FlverShadingModes.CLASSIC_DIFFUSE_PTDE, Loc.T("Diffuse to PBR Approximation (DS1:PTDE)") },
+            { FlverShadingModes.LEGACY, Loc.T("Legacy Diffuse (MVDX)") },
 
             //{ FlverShadingModes.TEXDEBUG_DIFFUSEMAP, "TEX DEBUG: Diffuse/Albedo Map" },
             //{ FlverShadingModes.TEXDEBUG_SPECULARMAP, "TEX DEBUG: Specular/Reflectance Map" },
@@ -388,7 +389,7 @@ namespace DSAnimStudio
                 else
                 {
                     var fullPath = Path.GetFullPath($@"{Main.Directory}\..\..\..\..\Content\Shaders\FlverShader.xnb");
-                    ImguiOSD.DialogManager.DialogOK("File Not Found", $@"Could not find shader file '{fullPath}'.");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("File Not Found"), Loc.TF(@"Could not find shader file '{0}'.", fullPath));
                 }
             }
         }
@@ -407,7 +408,7 @@ namespace DSAnimStudio
                 else
                 {
                     var fullPath = Path.GetFullPath($@"{Main.Directory}\..\..\..\..\Content\Shaders\NewGrid3D.xnb");
-                    ImguiOSD.DialogManager.DialogOK("File Not Found", $@"Could not find shader file '{fullPath}'.");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("File Not Found"), Loc.TF(@"Could not find shader file '{0}'.", fullPath));
                 }
             }
         }
@@ -426,7 +427,7 @@ namespace DSAnimStudio
                 else
                 {
                     var fullPath = Path.GetFullPath($@"{Main.Directory}\..\..\..\..\Content\Shaders\NewSimpleGridShader.xnb");
-                    ImguiOSD.DialogManager.DialogOK("File Not Found", $@"Could not find shader file '{fullPath}'.");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("File Not Found"), Loc.TF(@"Could not find shader file '{0}'.", fullPath));
                 }
             }
         }
@@ -464,7 +465,7 @@ namespace DSAnimStudio
                 else
                 {
                     var fullPath = Path.GetFullPath($@"{Main.Directory}\..\..\..\..\Content\Shaders\FlverTonemapShader.xnb");
-                    ImguiOSD.DialogManager.DialogOK("File Not Found", $@"Could not find shader file '{fullPath}'.");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("File Not Found"), Loc.TF(@"Could not find shader file '{0}'.", fullPath));
                 }
             }
         }
@@ -483,7 +484,7 @@ namespace DSAnimStudio
                 else
                 {
                     var fullPath = Path.GetFullPath($@"{Main.Directory}\..\..\..\..\Content\Shaders\CubemapSkyboxShader.xnb");
-                    ImguiOSD.DialogManager.DialogOK("File Not Found", $@"Could not find shader file '{fullPath}'.");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("File Not Found"), Loc.TF(@"Could not find shader file '{0}'.", fullPath));
                 }
             }
         }
@@ -876,7 +877,7 @@ namespace DSAnimStudio
                     //DBG.DrawOutlinedText($"Rendering {(Main.SceneRenderTarget.Width)}x{(Main.SceneRenderTarget.Height)} @ {(Math.Round(GFX.AverageFPS))} FPS",
                     //    new Vector2(4, (GFX.Device.Viewport.Height / Main.DPI) - 24), Color.Cyan, font: DBG.DEBUG_FONT_SMALL);
 
-                    ImGuiDebugDrawer.DrawText($"Rendering {(Main.RenderTarget0_Color.Width)}x{(Main.RenderTarget0_Color.Height)} @ {(Math.Round(GFX.AverageFPS))} FPS",
+                    ImGuiDebugDrawer.DrawText(Loc.TF("Rendering {0}x{1} @ {2} FPS", Main.RenderTarget0_Color.Width, Main.RenderTarget0_Color.Height, (int)Math.Round(GFX.AverageFPS)),
                         new Vector2(4, (GFX.Device.Viewport.Height / Main.DPI) - (16 * scale)), Color.Cyan, Color.Black, 16 * scale);
 
                     GFX.SpriteBatchEnd();

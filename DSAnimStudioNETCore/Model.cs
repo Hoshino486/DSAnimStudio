@@ -15,6 +15,7 @@ using System.Diagnostics;
 using static DSAnimStudio.ImguiOSD.Window;
 using static DSAnimStudio.NewDummyPolyManager;
 using SharpDX.Direct2D1;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -640,9 +641,9 @@ namespace DSAnimStudio
                         }
                         catch (Exception ex) when (Main.EnableErrorHandler.AnimContainer_LoadBaseANIBND)
                         {
-                            //DialogManager.DialogOK(null, "Failed to load animations.");
+                            //DialogManager.DialogOK(null, Loc.T("Failed to load animations."));
                             ErrorLog.LogWarning($"Failed to load animations for model '{Name}'.");
-                            //System.Windows.Forms.MessageBox.Show("Failed to load animations.", "Error",
+                            //System.Windows.Forms.MessageBox.Show(Loc.T("Failed to load animations."), Loc.T("Error"),
                             //    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                         }
                     });

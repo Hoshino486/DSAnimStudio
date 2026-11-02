@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -15,15 +16,17 @@ namespace DSAnimStudio
         public ExceptionHandleForm()
         {
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
         }
 
         public bool CreateBackup;
 
         public void InitializeForException(Exception ex, string messageBeforeColon, string currentFileNameForBackup)
         {
-            labelHeader.Text = "[Logged to DSAnimStudio_ErrorLog.txt]\n" + $"{messageBeforeColon}:";
+            labelHeader.Text = DSAnimStudio.Localization.Loc.T("[Logged to DSAnimStudio_ErrorLog.txt]\n") + $"{messageBeforeColon}:";
             textBoxError.Text = ex.ToString();
-            checkBoxBackup.Text = "Create emergency backup file of last saved version before continuing: \r\n" + System.IO.Path.GetFullPath(currentFileNameForBackup);
+            checkBoxBackup.Text = DSAnimStudio.Localization.Loc.T("Create emergency backup file of last saved version before continuing: \r\n") + System.IO.Path.GetFullPath(currentFileNameForBackup);
             checkBoxBackup.Checked = false;
         }
 

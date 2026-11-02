@@ -1,4 +1,5 @@
-﻿namespace DSAnimStudio.TaeEditor
+﻿using DSAnimStudio.Localization;
+namespace DSAnimStudio.TaeEditor
 {
     partial class TaeGameDirPicker
     {
@@ -57,7 +58,7 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(119, 15);
             label1.TabIndex = 0;
-            label1.Text = "Game Data Directory:";
+            label1.Text = Loc.T("Game Data Directory:");
             // 
             // label2
             // 
@@ -67,7 +68,7 @@
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(223, 15);
             label2.TabIndex = 1;
-            label2.Text = "ModEngine '/mod/' Directory (Optional):";
+            label2.Text = Loc.T("ModEngine '/mod/' Directory (Optional):");
             // 
             // textBoxGameDir
             // 
@@ -95,7 +96,7 @@
             buttonBrowseGameDir.Name = "buttonBrowseGameDir";
             buttonBrowseGameDir.Size = new System.Drawing.Size(75, 23);
             buttonBrowseGameDir.TabIndex = 4;
-            buttonBrowseGameDir.Text = "Browse...";
+            buttonBrowseGameDir.Text = Loc.T("Browse...");
             buttonBrowseGameDir.UseVisualStyleBackColor = true;
             buttonBrowseGameDir.Click += buttonBrowseGameDir_Click;
             // 
@@ -107,7 +108,7 @@
             buttonBrowseModDir.Name = "buttonBrowseModDir";
             buttonBrowseModDir.Size = new System.Drawing.Size(75, 23);
             buttonBrowseModDir.TabIndex = 5;
-            buttonBrowseModDir.Text = "Browse...";
+            buttonBrowseModDir.Text = Loc.T("Browse...");
             buttonBrowseModDir.UseVisualStyleBackColor = true;
             buttonBrowseModDir.Click += buttonBrowseModDir_Click;
             // 
@@ -120,7 +121,7 @@
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new System.Drawing.Size(100, 23);
             buttonSave.TabIndex = 6;
-            buttonSave.Text = "Apply";
+            buttonSave.Text = Loc.T("Apply");
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
             // 
@@ -132,7 +133,7 @@
             buttonClearModDir.Name = "buttonClearModDir";
             buttonClearModDir.Size = new System.Drawing.Size(75, 23);
             buttonClearModDir.TabIndex = 7;
-            buttonClearModDir.Text = "Clear";
+            buttonClearModDir.Text = Loc.T("Clear");
             buttonClearModDir.UseVisualStyleBackColor = true;
             buttonClearModDir.Click += buttonClearModDir_Click;
             // 
@@ -145,7 +146,7 @@
             checkBoxLoadLooseParams.Name = "checkBoxLoadLooseParams";
             checkBoxLoadLooseParams.Size = new System.Drawing.Size(366, 19);
             checkBoxLoadLooseParams.TabIndex = 8;
-            checkBoxLoadLooseParams.Text = "Load loose GameParam instead of loading them from regulation";
+            checkBoxLoadLooseParams.Text = Loc.T("Load loose GameParam instead of loading them from regulation");
             checkBoxLoadLooseParams.UseVisualStyleBackColor = true;
             // 
             // checkBoxLoadUnpackedGameFiles
@@ -157,7 +158,7 @@
             checkBoxLoadUnpackedGameFiles.Name = "checkBoxLoadUnpackedGameFiles";
             checkBoxLoadUnpackedGameFiles.Size = new System.Drawing.Size(168, 19);
             checkBoxLoadUnpackedGameFiles.TabIndex = 9;
-            checkBoxLoadUnpackedGameFiles.Text = "Load Unpacked Game Files";
+            checkBoxLoadUnpackedGameFiles.Text = Loc.T("Load Unpacked Game Files");
             checkBoxLoadUnpackedGameFiles.UseVisualStyleBackColor = true;
             // 
             // label3
@@ -168,7 +169,7 @@
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(98, 15);
             label3.TabIndex = 10;
-            label3.Text = "Project Directory:";
+            label3.Text = Loc.T("Project Directory:");
             // 
             // textBoxProjectDirectory
             // 
@@ -224,7 +225,7 @@
             buttonABORT.Name = "buttonABORT";
             buttonABORT.Size = new System.Drawing.Size(74, 23);
             buttonABORT.TabIndex = 15;
-            buttonABORT.Text = "Cancel";
+            buttonABORT.Text = Loc.T("Cancel");
             buttonABORT.UseVisualStyleBackColor = true;
             buttonABORT.Click += buttonABORT_Click;
             // 
@@ -237,7 +238,7 @@
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(373, 15);
             label4.TabIndex = 16;
-            label4.Text = "Tip: Press Enter key to quickly accept the current values and continue.";
+            label4.Text = Loc.T("Tip: Press Enter key to quickly accept the current values and continue.");
             // 
             // checkBoxDisableInterrootDCX
             // 
@@ -248,7 +249,7 @@
             checkBoxDisableInterrootDCX.Name = "checkBoxDisableInterrootDCX";
             checkBoxDisableInterrootDCX.Size = new System.Drawing.Size(139, 19);
             checkBoxDisableInterrootDCX.TabIndex = 17;
-            checkBoxDisableInterrootDCX.Text = "Disable Interroot DCX";
+            checkBoxDisableInterrootDCX.Text = Loc.T("Disable Interroot DCX");
             checkBoxDisableInterrootDCX.UseVisualStyleBackColor = true;
             // 
             // buttonHelpDisableInterrootDCX

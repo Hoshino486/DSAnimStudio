@@ -9,6 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public class AC6NpcPartsEquipper
@@ -175,9 +176,9 @@ namespace DSAnimStudio
         {
             lock (_lock_ImguiDummyPolySourceFieldThing)
             {
-                ImGuiNET.ImGui.Text("Behavior Source Model:");
+                ImGuiNET.ImGui.Text(Loc.T("Behavior Source Model:"));
                 ImGuiNET.ImGui.PushItemWidth(400 * Main.DPI);
-                ImGuiNET.ImGui.ListBox($"##{MODEL.GUID}_AC6NpcPartsEquipper_BehaviorSel", ref DummyPolySource_ImguiListIndex, 
+                ImGuiNET.ImGui.ListBox(Loc.TF("##{0}_AC6NpcPartsEquipper_BehaviorSel", MODEL.GUID), ref DummyPolySource_ImguiListIndex, 
                     DummyPolySource_ImguiListStrings, DummyPolySource_ImguiListStrings.Length);
                 ImGuiNET.ImGui.PopItemWidth();
                 anyFieldFocused |= ImGuiNET.ImGui.IsItemActive();
@@ -195,7 +196,7 @@ namespace DSAnimStudio
                 var stringList = new List<string>();
 
                 DummyPolySource_ValueMap.Add(ParamData.AtkParam.DummyPolySource.BaseModel); 
-                stringList.Add($"Base Character Model [{MODEL.Name}]");
+                stringList.Add(Loc.TF("Base Character Model [{0}]", MODEL.Name));
 
                 lock (_lock_Parts)
                 {
@@ -205,7 +206,7 @@ namespace DSAnimStudio
                         if (Parts[i] != null && Parts[i].Mdl != null)
                         {
                             DummyPolySource_ValueMap.Add(ParamData.AtkParam.DummyPolySource.AC6Parts0 + i);
-                            stringList.Add($"NPC Equip Part {i} [{Parts[i].Mdl.Name}]");
+                            stringList.Add(Loc.TF("NPC Equip Part {0} [{1}]", i, Parts[i].Mdl.Name));
                         }
                     }
 
@@ -354,7 +355,7 @@ namespace DSAnimStudio
         
         private void SwitchToPartListList(ParamData.AC6NpcEquipPartsParam partList)
         {
-            zzz_DocumentManager.CurrentDocument.LoadingTaskMan.DoLoadingTask("AC6NpcPartsEquipper_SwitchToPartListList", "Updating AC6 NPC Parts...", progress =>
+            zzz_DocumentManager.CurrentDocument.LoadingTaskMan.DoLoadingTask("AC6NpcPartsEquipper_SwitchToPartListList", Loc.T("Updating AC6 NPC Parts..."), progress =>
             {
                 lock (_lock_Parts)
                 {

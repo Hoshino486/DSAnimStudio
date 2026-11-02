@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public class zzz_WorldViewManagerIns : IDisposable
@@ -77,7 +78,7 @@ namespace DSAnimStudio
 
         public void DrawImguiPanel(ref bool anyFieldFocused)
         {
-            ImGui.Text("Cameras:");
+            ImGui.Text(Loc.T("Cameras:"));
 
             bool isSave = false;
 
@@ -95,14 +96,14 @@ namespace DSAnimStudio
                     var selected = (view == current);
                     var oldSelected = selected;
                     //ImGui.PushItemWidth(ImGui.GetWindowWidth() - 30 - 50);
-                    ImGui.Selectable($"{view.Name}###WorldViewManager_View{index}", ref selected, ImGuiSelectableFlags.None, new System.Numerics.Vector2(ImGui.GetWindowWidth() - 30 - 80, 25));
+                    ImGui.Selectable(Loc.TF("{0}###WorldViewManager_View{1}", view.Name, index), ref selected, ImGuiSelectableFlags.None, new System.Numerics.Vector2(ImGui.GetWindowWidth() - 30 - 80, 25));
                     //ImGui.PopItemWidth();
 
                     ImGui.SameLine(ImGui.GetWindowWidth() - 30 - 54);
-                    ImGui.Button("Rename");
+                    ImGui.Button(Loc.T("Rename"));
                     if (ImGui.IsItemClicked())
                     {
-                        ImguiOSD.DialogManager.AskForInputString("Rename Camera", $"Enter new name for camera '{view.Name}':", view.Name, result =>
+                        ImguiOSD.DialogManager.AskForInputString(Loc.T("Rename Camera"), Loc.TF("Enter new name for camera '{0}':", view.Name), view.Name, result =>
                         {
                             lock (_lock)
                             {
@@ -113,10 +114,10 @@ namespace DSAnimStudio
                     }
 
                     ImGui.SameLine(ImGui.GetWindowWidth() - 30);
-                    ImGui.Button("×");
+                    ImGui.Button(Loc.T("×"));
                     if (ImGui.IsItemClicked())
                     {
-                        ImguiOSD.DialogManager.AskYesNo("Delete Camera?", $"Are you sure you wish to delete camera '{view.Name}'?", result =>
+                        ImguiOSD.DialogManager.AskYesNo(Loc.T("Delete Camera?"), Loc.TF("Are you sure you wish to delete camera '{0}'?", view.Name), result =>
                         {
                             lock (_lock)
                             {
@@ -146,10 +147,10 @@ namespace DSAnimStudio
                 }
 
 
-                ImGui.Button("＋");
+                ImGui.Button(Loc.T("＋"));
                 if (ImGui.IsItemClicked())
                 {
-                    ImguiOSD.DialogManager.AskForInputString("Add Camera", $"Enter name for new camera to add:", "", result =>
+                    ImguiOSD.DialogManager.AskForInputString(Loc.T("Add Camera"), Loc.TF("Enter name for new camera to add:"), Loc.T(""), result =>
                     {
                         lock (_lock)
                         {
@@ -163,11 +164,11 @@ namespace DSAnimStudio
                 ImGui.Separator();
 
 
-                ImGui.Text("Selected Camera's Settings:");
+                ImGui.Text(Loc.T("Selected Camera's Settings:"));
 
                 float newFov = GFX.CurrentWorldView.ProjectionVerticalFoV;
 
-                ImGui.SliderFloat("Vertical FOV", ref newFov, 1, 160, newFov <= 1.0001f ? "Orthographic" : "%.0f°");
+                ImGui.SliderFloat(Loc.T("Vertical FOV"), ref newFov, 1, 160, newFov <= 1.0001f ? "Orthographic" : "%.0f°");
                 anyFieldFocused |= ImGui.IsItemFocused();
                 if (newFov != GFX.CurrentWorldView.ProjectionVerticalFoV)
                 {
@@ -187,7 +188,7 @@ namespace DSAnimStudio
 
                 bool lockAspect = GFX.CurrentWorldView.LockAspectRatioDuringRemo;
                 bool lockAspectPrev = lockAspect;
-                ImGui.Checkbox("Lock to 16:9 For Cutscenes", ref lockAspect);
+                ImGui.Checkbox(Loc.T("Lock to 16:9 For Cutscenes"), ref lockAspect);
                 anyFieldFocused |= ImGui.IsItemFocused();
                 GFX.CurrentWorldView.LockAspectRatioDuringRemo = lockAspect;
                 if (lockAspect != lockAspectPrev)
@@ -195,9 +196,9 @@ namespace DSAnimStudio
                     Main.RequestViewportRenderTargetResolutionChange = true;
                 }
 
-                ImGui.Checkbox("Snap Cam to 45° Angles", ref GFX.CurrentWorldView.AngleSnapEnable);
+                ImGui.Checkbox(Loc.T("Snap Cam to 45° Angles"), ref GFX.CurrentWorldView.AngleSnapEnable);
                 anyFieldFocused |= ImGui.IsItemFocused();
-                ImGui.Checkbox("Show Cam Pivot Indicator Cube", ref GFX.CurrentWorldView.PivotPrimIsEnabled);
+                ImGui.Checkbox(Loc.T("Show Cam Pivot Indicator Cube"), ref GFX.CurrentWorldView.PivotPrimIsEnabled);
                 anyFieldFocused |= ImGui.IsItemFocused();
 
                 float nearClipDist = GFX.CurrentWorldView.ProjectionNearClipDist;
@@ -212,21 +213,21 @@ namespace DSAnimStudio
                 float prevNearClipDist = nearClipDist;
                 float prevFarClipDist = farClipDist;
 
-                ImGui.SliderFloat("Near Clip Dist", ref nearClipDist, 0.001f, 1);
+                ImGui.SliderFloat(Loc.T("Near Clip Dist"), ref nearClipDist, 0.001f, 1);
                 anyFieldFocused |= ImGui.IsItemFocused();
-                OSD.TooltipManager_Scene.DoTooltip("Near Clipping Distance",
-                    "Distance for the near clipping plane. " +
+                OSD.TooltipManager_Scene.DoTooltip(Loc.T("Near Clipping Distance"),
+                    Loc.T("Distance for the near clipping plane. " +
                     "\nSetting it too high will cause geometry to disappear when near the camera. " +
                     "\nSetting it too low will cause geometry to flicker or render with " +
-                    "the wrong depth when very far away from the camera.");
+                    "the wrong depth when very far away from the camera."));
 
-                ImGui.SliderFloat("Far Clip Dist", ref farClipDist, 1000, 100000);
+                ImGui.SliderFloat(Loc.T("Far Clip Dist"), ref farClipDist, 1000, 100000);
                 anyFieldFocused |= ImGui.IsItemFocused();
-                OSD.TooltipManager_Scene.DoTooltip("Far Clipping Distance",
-                    "Distance for the far clipping plane. " +
+                OSD.TooltipManager_Scene.DoTooltip(Loc.T("Far Clipping Distance"),
+                    Loc.T("Distance for the far clipping plane. " +
                     "\nSetting it too low will cause geometry to disappear when far from the camera. " +
                     "\nSetting it too high will cause geometry to flicker or render with " +
-                    "the wrong depth when near the camera.");
+                    "the wrong depth when near the camera."));
 
                 if (nearClipDist != prevNearClipDist)
                 {
@@ -242,7 +243,7 @@ namespace DSAnimStudio
                     GFX.CurrentWorldView.ProjectionFarClipDist = farClipDist;
                 }
 
-                ImGui.Button("Reset This Camera's Settings");
+                ImGui.Button(Loc.T("Reset This Camera's Settings"));
                 if (ImGui.IsItemClicked())
                 {
                     GFX.CurrentWorldView.ProjectionVerticalFoV = 43;
@@ -255,14 +256,14 @@ namespace DSAnimStudio
 
                 ImGui.Separator();
 
-                ImGui.Text("Grid Settings:");
+                ImGui.Text(Loc.T("Grid Settings:"));
 
-                ImGui.Checkbox("Show Grid", ref GFX.CurrentWorldView.ShowGrid_New3D);
+                ImGui.Checkbox(Loc.T("Show Grid"), ref GFX.CurrentWorldView.ShowGrid_New3D);
 
 
                 if (GFX.CurrentWorldView.ShowGrid_New3D && Main.IsDebugBuild)
                 {
-                    if (ImGui.TreeNode("[DEBUG - NEW GRID 3D]"))
+                    if (ImGui.TreeNode(Loc.T("[DEBUG - NEW GRID 3D]")))
                     {
 
                         lock (DBG._lock_NewGrid3D)
@@ -311,7 +312,7 @@ namespace DSAnimStudio
                             anyFieldFocused |= ImGui.IsItemFocused();
 
 
-                            if (Tools.SimpleClickButton("Gen Default Grid Entries"))
+                            if (Tools.SimpleClickButton(Loc.T("Gen Default Grid Entries")))
                             {
                                 ParentDocument.Scene.AccessMainModel(m =>
                                 {
@@ -322,7 +323,7 @@ namespace DSAnimStudio
 
                             bool addGridEntryEnabled = grid.GridEntries.Length < NewGrid3DShader.MAX_CFGS;
 
-                            if (Tools.SimpleClickButton("Remove Grid Entry"))
+                            if (Tools.SimpleClickButton(Loc.T("Remove Grid Entry")))
                             {
                                 if (grid.GridEntries.Length > 0)
                                 {
@@ -332,7 +333,7 @@ namespace DSAnimStudio
                             ImGui.SameLine();
                             if (!addGridEntryEnabled)
                                 ImGui.BeginDisabled();
-                            if (Tools.SimpleClickButton("Add Grid Entry") && addGridEntryEnabled)
+                            if (Tools.SimpleClickButton(Loc.T("Add Grid Entry")) && addGridEntryEnabled)
                             {
                                 ParentDocument.Scene.AccessMainModel(m =>
                                 {
@@ -348,7 +349,7 @@ namespace DSAnimStudio
                             {
                                 ImGui.PushID($"WorldViewManager_NewGrid3D_GridEntries_{i}");
 
-                                if (ImGui.TreeNode($"Grid Entry {(i + 1)}"))
+                                if (ImGui.TreeNode(Loc.TF("Grid Entry {0}", (i + 1))))
                                 {
                                     var ge = grid.GridEntries[i];
 
@@ -452,11 +453,11 @@ namespace DSAnimStudio
                             }
                         }
 
-                        ImGui.Button("Hot Reload NewGrid3D.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder");
+                        ImGui.Button(Loc.T("Hot Reload NewGrid3D.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder"));
                         if (ImGui.IsItemClicked())
                             GFX.ReloadNewGrid3DShader();
 
-                        ImGui.Button("Regen Grid Primitive");
+                        ImGui.Button(Loc.T("Regen Grid Primitive"));
                         if (ImGui.IsItemClicked())
                             DBG.RegenNewGrid3DPrimitive();
 
@@ -468,11 +469,11 @@ namespace DSAnimStudio
                 }
 
 
-                ImGui.Checkbox("Show Grid (Experimental Texture-Based)", ref GFX.CurrentWorldView.ShowGrid_NewSimple);
+                ImGui.Checkbox(Loc.T("Show Grid (Experimental Texture-Based)"), ref GFX.CurrentWorldView.ShowGrid_NewSimple);
 
                 if (GFX.CurrentWorldView.ShowGrid_NewSimple && Main.IsDebugBuild)
                 {
-                    if (ImGui.TreeNode("[DEBUG - NEW SIMPLE GRID]"))
+                    if (ImGui.TreeNode(Loc.T("[DEBUG - NEW SIMPLE GRID]")))
                     {
 
                         lock (DBG._lock_NewSimpleGrid)
@@ -483,14 +484,14 @@ namespace DSAnimStudio
 
                             ImGui.Checkbox(nameof(grid.AutoGenEntries), ref grid.AutoGenEntries);
 
-                            if (Tools.SimpleClickButton("Gen Default Grid Entries"))
+                            if (Tools.SimpleClickButton(Loc.T("Gen Default Grid Entries")))
                             {
                                 grid.GenerateDefaults();
                             }
 
                             bool addGridEntryEnabled = grid.SimpleGridEntries.Count < NewGrid3DShader.MAX_CFGS;
 
-                            if (Tools.SimpleClickButton("Remove Grid Entry"))
+                            if (Tools.SimpleClickButton(Loc.T("Remove Grid Entry")))
                             {
                                 if (grid.SimpleGridEntries.Count > 0)
                                 {
@@ -500,7 +501,7 @@ namespace DSAnimStudio
                             ImGui.SameLine();
                             if (!addGridEntryEnabled)
                                 ImGui.BeginDisabled();
-                            if (Tools.SimpleClickButton("Add Grid Entry") && addGridEntryEnabled)
+                            if (Tools.SimpleClickButton(Loc.T("Add Grid Entry")) && addGridEntryEnabled)
                             {
                                 grid.SimpleGridEntries.Add(new NewSimpleGrid.SimpleGridEntry());
                             }
@@ -511,7 +512,7 @@ namespace DSAnimStudio
                             {
                                 ImGui.PushID($"WorldViewManager_NewSimpleGrid_GridEntries_{i}");
 
-                                if (ImGui.TreeNode($"Grid Entry {(i + 1)}"))
+                                if (ImGui.TreeNode(Loc.TF("Grid Entry {0}", (i + 1))))
                                 {
                                     var ge = grid.SimpleGridEntries[i];
 
@@ -579,7 +580,7 @@ namespace DSAnimStudio
                             }
                         }
 
-                        ImGui.Button("Hot Reload NewSimpleGrid.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder");
+                        ImGui.Button(Loc.T("Hot Reload NewSimpleGrid.xnb\nFrom '..\\..\\..\\..\\Content\\Shaders\\' Folder"));
                         if (ImGui.IsItemClicked())
                             GFX.ReloadNewSimpleGridShader();
                         ImGui.TreePop();
@@ -597,7 +598,7 @@ namespace DSAnimStudio
                 //}
                 //gridDist *= gridDistBase;
                 float oldGridDist = gridDist;
-                ImGui.DragFloat("Grid Distance Mult", ref gridDist, 0.01f, 0, 100000, "%.2fx");
+                ImGui.DragFloat(Loc.T("Grid Distance Mult"), ref gridDist, 0.01f, 0, 100000, "%.2fx");
                 anyFieldFocused |= ImGui.IsItemFocused();
                 if (gridDist != oldGridDist)
                 {
@@ -618,7 +619,7 @@ namespace DSAnimStudio
                 //}
                 //anisoFadeDist *= anisoFadeDistBase;
                 float oldAnisoFadeDist = anisoFadeDist;
-                ImGui.DragFloat("Grid Anisotropic Fade Out Power Mult", ref anisoFadeDist, 0.01f, 0, 100000, "%.2fx");
+                ImGui.DragFloat(Loc.T("Grid Anisotropic Fade Out Power Mult"), ref anisoFadeDist, 0.01f, 0, 100000, "%.2fx");
                 anyFieldFocused |= ImGui.IsItemFocused();
                 if (anisoFadeDist != oldAnisoFadeDist)
                 {
@@ -628,10 +629,10 @@ namespace DSAnimStudio
 
 
 
-                ImGui.Checkbox("Mark Every 10 Units Of Grid", ref GFX.CurrentWorldView.ShowGrid10u);
-                ImGui.Checkbox("Mark Every 100 Units Of Grid", ref GFX.CurrentWorldView.ShowGrid100u);
+                ImGui.Checkbox(Loc.T("Mark Every 10 Units Of Grid"), ref GFX.CurrentWorldView.ShowGrid10u);
+                ImGui.Checkbox(Loc.T("Mark Every 100 Units Of Grid"), ref GFX.CurrentWorldView.ShowGrid100u);
 
-                ImGui.Checkbox("Show Legacy Grid (From Prior DSAS Versions)", ref GFX.CurrentWorldView.ShowGrid_Old);
+                ImGui.Checkbox(Loc.T("Show Legacy Grid (From Prior DSAS Versions)"), ref GFX.CurrentWorldView.ShowGrid_Old);
 
 
 

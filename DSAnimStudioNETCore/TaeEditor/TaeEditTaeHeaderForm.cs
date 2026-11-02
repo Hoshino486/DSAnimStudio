@@ -3,6 +3,7 @@ using SoulsAssetPipeline.Animation;
 using System;
 using System.IO;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.TaeEditor
 {
@@ -48,6 +49,8 @@ namespace DSAnimStudio.TaeEditor
             //}
 
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
 
             //Text = $"Editing Header of {Path.GetFileName(Tae.FilePath ?? Tae.VirtualUri)}";
         }

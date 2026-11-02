@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using ImGuiNET;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public partial class TaeSearch
@@ -29,7 +30,7 @@ namespace DSAnimStudio
                 protected override void InnerShowImGuiControlForOperand(DSAProj proj, ref bool anyFieldFocused)
                 {
                     int actualOperand = Convert.ToInt32(Operand);
-                    ImGui.InputInt("##Operand", ref actualOperand, 0, 0);
+                    ImGui.InputInt(Loc.T("##Operand"), ref actualOperand, 0, 0);
                     if (ImGui.IsItemActive())
                         anyFieldFocused = true;
                     Operand = actualOperand;

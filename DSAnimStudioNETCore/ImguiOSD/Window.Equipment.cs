@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SoulsAssetPipeline;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -16,7 +17,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.SaveAlways;
 
-            public override string NewImguiWindowTitle => "Equipment";
+            public override string NewImguiWindowTitle => Loc.Win("Equipment");
             
             protected override void Init()
             {
@@ -144,7 +145,7 @@ namespace DSAnimStudio.ImguiOSD
                 else if (equipInfo.Gender is NewEquipSlot_Armor.DirectEquipGender.BothGendersUseMF)
                     return $"{shortPartType}_F_{equipInfo.ModelID:D4} | {shortPartType}_M_{equipInfo.ModelID:D4}";
 
-                return $"Gender: {equipInfo.Gender}, Model ID: {equipInfo.ModelID}";
+                return Loc.TF("Gender: {0}, Model ID: {1}", equipInfo.Gender, equipInfo.ModelID);
             }
 
             private void SearchDirectEquips()
@@ -278,7 +279,7 @@ namespace DSAnimStudio.ImguiOSD
                 var fmgMan = MainDoc.FmgManager;
 
                 bool oldIncludeAllIDs = fmgMan.IncludeAllIDs;
-                ImGui.Checkbox("Show All Equipment Entries", ref fmgMan.IncludeAllIDs);
+                ImGui.Checkbox(Loc.T("Show All Equipment Entries"), ref fmgMan.IncludeAllIDs);
                 if (fmgMan.IncludeAllIDs != oldIncludeAllIDs)
                 {
                     fmgMan.LoadAllFMG(true);
@@ -342,12 +343,12 @@ namespace DSAnimStudio.ImguiOSD
 
                             EquipStyle_Names = new string[]
                             {
-                                "0: None",
-                                "1: One-Handed",
-                                "2: Left Weapon Two-Handed",
-                                "3: Right Weapon Two-Handed",
-                                "4: One-Handed (Left Weapon Transformed)",
-                                "5: One-Handed (Right Weapon Transformed)",
+                                Loc.T("0: None"),
+                                Loc.T("1: One-Handed"),
+                                Loc.T("2: Left Weapon Two-Handed"),
+                                Loc.T("3: Right Weapon Two-Handed"),
+                                Loc.T("4: One-Handed (Left Weapon Transformed)"),
+                                Loc.T("5: One-Handed (Right Weapon Transformed)"),
                             };
                         }
 
@@ -363,10 +364,10 @@ namespace DSAnimStudio.ImguiOSD
 
                             PartSuffixes_Names = new string[]
                             {
-                                "None",
-                                "_L: Low-quality version",
-                                "_U: Ultra-quality version (AC6 only)",
-                                "_M: Hollowed skin version (DS1 only)",
+                                Loc.T("None"),
+                                Loc.T("_L: Low-quality version"),
+                                Loc.T("_U: Ultra-quality version (AC6 only)"),
+                                Loc.T("_M: Hollowed skin version (DS1 only)"),
                             };
                         }
 
@@ -405,14 +406,14 @@ namespace DSAnimStudio.ImguiOSD
                     if (tree)
                     {
                         state.IsDropdownOpen = true;
-                        ImGui.InputText($"##EditPlayerEquip_Dropdown_{disp}_SearchField", ref state.SearchTerm, 256);
+                        ImGui.InputText(Loc.TF("##EditPlayerEquip_Dropdown_{0}_SearchField", disp), ref state.SearchTerm, 256);
                         anyfieldfocused |= ImGui.IsItemActive();
                         equipSearchStates[disp].CheckSearchTermUpdated(currentSelectedID);
                         idx = state.SearchResultsIDs.ToList().IndexOf(currentSelectedID);
                         int oldIdx = idx;
                         //ImGui.ListBox($"##EditPlayerEquip_Dropdown_{disp}_Dropdown", ref idx, state.SearchResultsNames, state.SearchResultsNames.Length);
                         ImGui.PushItemWidth(OSD.DefaultItemWidth * 3);
-                        if (ImGui.BeginListBox($"##EditPlayerEquip_Dropdown_{disp}_Dropdown"))
+                        if (ImGui.BeginListBox(Loc.TF("##EditPlayerEquip_Dropdown_{0}_Dropdown", disp)))
                         {
                             for (int i = 0; i < state.SearchResultsNames.Length; i++)
                             {
@@ -486,7 +487,7 @@ namespace DSAnimStudio.ImguiOSD
                 if (asm == null && zzz_DocumentManager.CurrentDocument.GameRoot.GameType is SoulsGames.AC6 && AC6NpcParts != null)
                 {
                     ImGui.Checkbox(
-                        "Use Parts File Caching\n(Disable if you want to see parts file changes reflected in editor)",
+                        Loc.T("Use Parts File Caching\n(Disable if you want to see parts file changes reflected in editor)"),
                         ref AC6NpcParts.EnablePartsFileCaching);
 
                     int oldEquip = AC6NpcParts.EquipID;
@@ -525,11 +526,11 @@ namespace DSAnimStudio.ImguiOSD
 
 
                     ImGui.Checkbox(
-                        "Use Parts File Caching\n(Disable if you want to see parts file changes reflected in editor)",
+                        Loc.T("Use Parts File Caching\n(Disable if you want to see parts file changes reflected in editor)"),
                         ref asm.EnablePartsFileCaching);
 
                     if (Tools.SimpleClickButton(
-                            "Force Reload All Parts\n(Ignores cache option, always reloading the files. Can be slow.)"))
+                            Loc.T("Force Reload All Parts\n(Ignores cache option, always reloading the files. Can be slow.)")))
                     {
                         isChanged = true;
                         isChangedGenderOrSuffix = true;
@@ -541,8 +542,8 @@ namespace DSAnimStudio.ImguiOSD
 
                     if (zzz_DocumentManager.CurrentDocument.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.AC6)
                     {
-                        ImGui.Checkbox("Weapon Bay - Left Weapon Swapped", ref asm.AC6LeftWeaponBaySwapped);
-                        ImGui.Checkbox("Weapon Bay - Right Weapon Swapped", ref asm.AC6RightWeaponBaySwapped);
+                        ImGui.Checkbox(Loc.T("Weapon Bay - Left Weapon Swapped"), ref asm.AC6LeftWeaponBaySwapped);
+                        ImGui.Checkbox(Loc.T("Weapon Bay - Right Weapon Swapped"), ref asm.AC6RightWeaponBaySwapped);
                     }
                     else
                     {
@@ -573,7 +574,7 @@ namespace DSAnimStudio.ImguiOSD
                         ImGui.Separator();
 
                         bool isFemale = asm.IsFemale;
-                        ImGui.Checkbox("Is Female", ref isFemale);
+                        ImGui.Checkbox(Loc.T("Is Female"), ref isFemale);
                         if (isFemale != asm.IsFemale)
                         {
                             asm.IsFemale = isFemale;
@@ -599,7 +600,7 @@ namespace DSAnimStudio.ImguiOSD
 
                     ImGui.Separator();
 
-                    if (Tools.SimpleClickButton("Debug: Regen Skeleton Remappers And Gluers"))
+                    if (Tools.SimpleClickButton(Loc.T("Debug: Regen Skeleton Remappers And Gluers")))
                     {
                         asm.RegenSkelRemappersAndGluers();
                     }
@@ -727,7 +728,7 @@ namespace DSAnimStudio.ImguiOSD
                         {
                             bool equipped = slot.EquipID == 9700000;
                             bool prevEquipped = equipped;
-                            ImGui.Checkbox("Mortal Blade Equipped", ref equipped);
+                            ImGui.Checkbox(Loc.T("Mortal Blade Equipped"), ref equipped);
                             if (equipped != prevEquipped)
                             {
                                 slot.EquipID = equipped ? 9700000 : -1;
@@ -740,7 +741,7 @@ namespace DSAnimStudio.ImguiOSD
                         {
                             bool equipped = slot.EquipID == 9500000;
                             bool prevEquipped = equipped;
-                            ImGui.Checkbox("Grappling Hook Equipped", ref equipped);
+                            ImGui.Checkbox(Loc.T("Grappling Hook Equipped"), ref equipped);
                             if (equipped != prevEquipped)
                             {
                                 slot.EquipID = equipped ? 9500000 : -1;
@@ -750,7 +751,7 @@ namespace DSAnimStudio.ImguiOSD
 
 
                         var modelDebugLineupPre = slot.DebugWeaponModelPositions;
-                        ImGui.Checkbox($"{slot.SlotDisplayName} Model Debug Lineup",
+                        ImGui.Checkbox(Loc.TF("{0} Model Debug Lineup", slot.SlotDisplayName),
                             ref slot.DebugWeaponModelPositions);
                         if (modelDebugLineupPre != slot.DebugWeaponModelPositions)
                         {
@@ -835,11 +836,11 @@ namespace DSAnimStudio.ImguiOSD
 
 
 
-                    if (ImGui.TreeNode("[WEAPON SLOT DEBUG]"))
+                    if (ImGui.TreeNode(Loc.T("[WEAPON SLOT DEBUG]")))
                     {
                         asm.ForAllWeaponSlots(slot =>
                         {
-                            if (ImGui.TreeNode($"{slot.SlotDisplayName}"))
+                            if (ImGui.TreeNode(Loc.TF("{0}", slot.SlotDisplayName)))
                             {
                                 ImGui.Text($"{nameof(slot.Absorp)}.{nameof(slot.Absorp.Model0DummyPoly)} = {slot.Absorp.Model0DummyPoly}");
                                 ImGui.Text($"{nameof(slot.Absorp)}.{nameof(slot.Absorp.Model1DummyPoly)} = {slot.Absorp.Model1DummyPoly}");
@@ -874,7 +875,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                 if (slot.EquipParam != null)
                                 {
-                                    if (ImGui.TreeNode("EquipParam"))
+                                    if (ImGui.TreeNode(Loc.T("EquipParam")))
                                     {
                                         ImGui.Text($"{nameof(slot.EquipParam.BehaviorVariationID)} = {slot.EquipParam.BehaviorVariationID}");
                                         ImGui.Text($"{nameof(slot.EquipParam.EquipModelID)} = {slot.EquipParam.EquipModelID}");
@@ -958,7 +959,7 @@ namespace DSAnimStudio.ImguiOSD
                         if (key == FlverMaterial.ChrCustomizeTypes.None)
                             continue;
                         var color = chrCustomize[key].ToCS();
-                        ImGui.ColorEdit4($"{key}###ChrAsm_ChrCustomize_{key}", ref color, ImGuiColorEditFlags.HDR);
+                        ImGui.ColorEdit4(Loc.TF("{0}###ChrAsm_ChrCustomize_{1}", key, key), ref color, ImGuiColorEditFlags.HDR);
                         anyFieldFocused |= ImGui.IsItemActive();
                         chrCustomize[key] = color.ToXna();
                     }

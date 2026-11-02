@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using DSAnimStudio.ImguiOSD;
 using Microsoft.Xna.Framework.Input;
 using static DSAnimStudio.DSAProj;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.TaeEditor
 {
@@ -620,7 +621,7 @@ namespace DSAnimStudio.TaeEditor
                                 var frameSnap = GetFrameSnap();
                                 act.StartTime = (float)Math.Min(act.StartTime, act.EndTime - frameSnap);
                             }
-                        }, () => { }, "Resize left of action(s)");
+                        }, () => { }, Loc.T("Resize left of action(s)"));
 
                         Graph.AnimRef.SAFE_SetIsModified(true);
                     }
@@ -635,7 +636,7 @@ namespace DSAnimStudio.TaeEditor
                                 var frameSnap = GetFrameSnap();
                                 act.EndTime = (float)Math.Max(act.EndTime, act.StartTime + frameSnap);
                             }
-                        }, () => { }, "Resize right of action(s)");
+                        }, () => { }, Loc.T("Resize right of action(s)"));
 
                         Graph.AnimRef.SAFE_SetIsModified(true);
                     }
@@ -658,7 +659,7 @@ namespace DSAnimStudio.TaeEditor
                                     maxRow = act.TrackIndex;
                             }
                             Graph.AnimRef.SAFE_EnsureMinimumActionTrackCount(maxRow + 1);
-                        }, () => { }, "Move action(s)");
+                        }, () => { }, Loc.T("Move action(s)"));
 
                         Graph.AnimRef.SAFE_SetIsModified(true);
                     }
@@ -1048,7 +1049,7 @@ namespace DSAnimStudio.TaeEditor
                 }
 
 
-            }, () => { }, "Cut event(s)");
+            }, () => { }, Loc.T("Cut event(s)"));
             Graph.AnimRef.SAFE_SetIsModified(true);
         }
 
@@ -1110,7 +1111,7 @@ namespace DSAnimStudio.TaeEditor
                     {
                         Graph.AnimRef.SAFE_AddActionTrack(new ActionTrack()
                         {
-                            Info = new EditorInfo("Empty Row"),
+                            Info = new EditorInfo(Loc.T("Empty Row")),
                             TrackData = new SoulsAssetPipeline.Animation.TAE.ActionTrack.ActionTrackDataStruct()
                             { DataType = SoulsAssetPipeline.Animation.TAE.ActionTrack.ActionTrackDataType.TrackData0 },
                             TrackType = 0,
@@ -1142,7 +1143,7 @@ namespace DSAnimStudio.TaeEditor
                 Graph.AnimRef.SAFE_AddAction(act);
 
 
-            }, () => { }, "Add new action");
+            }, () => { }, Loc.T("Add new action"));
 
 
             
@@ -1228,7 +1229,7 @@ namespace DSAnimStudio.TaeEditor
                     Graph.AnimRef.SAFE_AddAction(act);
                     Graph.MainScreen.NewSelectedActions.Add(act);
                 }
-            }, () => { }, "Paste event(s)");
+            }, () => { }, Loc.T("Paste event(s)"));
             Graph.AnimRef.SAFE_SetIsModified(true);
         }
 
@@ -1237,7 +1238,7 @@ namespace DSAnimStudio.TaeEditor
             if (MainScreen.NewSelectedActions.Count < 1)
                 return;
 
-            string actionName = "Toggle mute";
+            string actionName = Loc.T("Toggle mute");
             if (uniform)
                 actionName += " (uniform)";
             
@@ -1260,7 +1261,7 @@ namespace DSAnimStudio.TaeEditor
             if (MainScreen.NewSelectedActions.Count < 1)
                 return;
 
-            string actionName = "Toggle solo";
+            string actionName = Loc.T("Toggle solo");
             if (uniform)
                 actionName += " (uniform)";
             
@@ -1283,7 +1284,7 @@ namespace DSAnimStudio.TaeEditor
             if (MainScreen.NewSelectedActions.Count < 1)
                 return;
 
-            string actionName = "Toggle StateInfo";
+            string actionName = Loc.T("Toggle StateInfo");
             if (uniform)
                 actionName += " (uniform)";
             
@@ -1355,7 +1356,7 @@ namespace DSAnimStudio.TaeEditor
                 });
                 if (anyChange)
                     Graph.AnimRef.SAFE_SetIsModified(true);
-            }, actionDescription: "Clear solo/mute");
+            }, actionDescription: Loc.T("Clear solo/mute"));
             
         }
         
@@ -1374,7 +1375,7 @@ namespace DSAnimStudio.TaeEditor
                         Graph.AnimRef.SAFE_RemoveAction(act);
                         Graph.MainScreen.NewSelectedActions.Remove(act);
                     }
-                }, () => { }, "Delete action(s)");
+                }, () => { }, Loc.T("Delete action(s)"));
                 Graph.AnimRef.SAFE_SetIsModified(true);
             }
             

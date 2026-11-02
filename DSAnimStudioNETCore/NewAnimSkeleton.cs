@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SoulsAssetPipeline;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -39,7 +40,7 @@ namespace DSAnimStudio
         public void DebugViewWeightOfBone_GenerateBoneNames()
         {
             List<string> list = new List<string>();
-            list.Add("<None>");
+            list.Add(Loc.T("<None>"));
             foreach (var b in Bones)
             {
                 list.Add($"[{b.Index}] {b.Name}");

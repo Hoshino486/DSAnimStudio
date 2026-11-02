@@ -21,6 +21,7 @@ using System.Xml;
 using DSAnimStudio.TaeEditor;
 using System.Runtime;
 using SoulsAssetPipeline;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -123,14 +124,8 @@ namespace DSAnimStudio
             if (unsure)
             {
                 var answer = System.Windows.Forms.MessageBox.Show(
-                    "The application is unable to detect whether copying the Oodle DLL from the game is needed for this file, so you must specify." +
-                    "\n" +
-                    "\nIs the file you're loading from any of the following games?" +
-                    "\n -Sekiro" +
-                    "\n -Elden Ring" +
-                    "\n -Amored Core 6" +
-                    "\n -Elden Ring Nightreign",
-                        "More Info Needed", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                    Loc.T("The application is unable to detect whether copying the Oodle DLL from the game is needed for this file, so you must specify.\n\nIs the file you're loading from any of the following games?\n -Sekiro\n -Elden Ring\n -Amored Core 6\n -Elden Ring Nightreign"),
+                        Loc.T("More Info Needed"), MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
                 if (answer == DialogResult.No)
                     return true;
             }
@@ -153,7 +148,7 @@ namespace DSAnimStudio
                 //{
                 //    System.Windows.Forms.MessageBox.Show("Was unable to automatically find the " +
                 //    "`oo2core_6_win64.dll` file in the Sekiro folder. Please copy that file to the " +
-                //    "'lib' folder next to DS Anim Studio.exe in order to load Sekiro files.", "Unable to find compression DLL",
+                //    "'lib' folder next to DS Anim Studio.exe in order to load Sekiro files.", Loc.T("Unable to find compression DLL"),
                 //    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
 
                 //    return false;
@@ -165,8 +160,8 @@ namespace DSAnimStudio
                 {
                     System.IO.File.Copy(oodleSource, oodleTarget, true);
 
-                    zzz_NotificationManagerIns.PushNotification("Oodle compression library was automatically copied from game directory " +
-                                        "to editor's directory and SDT/ER/AC6/NR files will load now.");
+                    zzz_NotificationManagerIns.PushNotification(Loc.T("Oodle compression library was automatically copied from game directory " +
+                                        "to editor's directory and SDT/ER/AC6/NR files will load now."));
 
                     return true;
                 }
@@ -182,10 +177,8 @@ namespace DSAnimStudio
             if (TryOodle("oo2core_9_win64.dll"))
                 return true;
 
-            System.Windows.Forms.MessageBox.Show("To load Sekiro / Elden Ring / Armored Core 6 / Elden Ring Nightreign files, " +
-                            "you need to give DS Anim Studio access to the 'oo2core_6_win64.dll', 'oo2core_8_win64.dll', or 'oo2core_9_win64.dll' file " +
-                            "bundled next to the EXE of one of those games. Click OK to browse to this file for the current game now.", 
-                            "Action Needed", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            System.Windows.Forms.MessageBox.Show(Loc.T("To load Sekiro / Elden Ring / Armored Core 6 / Elden Ring Nightreign files, you need to give DS Anim Studio access to the 'oo2core_6_win64.dll', 'oo2core_8_win64.dll', or 'oo2core_9_win64.dll' file bundled next to the EXE of one of those games. Click OK to browse to this file for the current game now."), 
+                            Loc.T("Action Needed"), MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
             var browseDlgOodle = new OpenFileDialog()
             {
@@ -826,11 +819,7 @@ namespace DSAnimStudio
                     }
                     else
                     {
-                        var ask = System.Windows.Forms.MessageBox.Show($"Failed 10 times in a row to read configuration file '{ConfigFileShortName}' from the application folder. " +
-                            "It may have been in use by another " +
-                            "application (e.g. another instance of DS Anim Studio). " +
-                            "\n\nWould you like to RETRY the configuration file reading operation or CANCEL, " +
-                            "disabling configuration file autosaving to be safe?", "Configuration File IO Failure",
+                        var ask = System.Windows.Forms.MessageBox.Show(Loc.TF("Failed 10 times in a row to read configuration file '{0}' from the application folder. It may have been in use by another application (e.g. another instance of DS Anim Studio). \n\nWould you like to RETRY the configuration file reading operation or CANCEL, disabling configuration file autosaving to be safe?", ConfigFileShortName), Loc.T("Configuration File IO Failure"),
                             MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
 
                         if (ask == DialogResult.Retry)
@@ -859,10 +848,7 @@ namespace DSAnimStudio
 
             void jsonFailure()
             {
-                var ask = System.Windows.Forms.MessageBox.Show($"Failed to parse configuration file '{ConfigFileShortName}' in the application folder. " +
-                            "It may have been saved by an incompatible version of the application or corrupted. " +
-                            "\n\nWould you like to overwrite it with default settings? " +
-                            "\n\nIf not, configuration file autosaving will be disabled to keep the file as-is.", "Configuration File Parse Failure",
+                var ask = System.Windows.Forms.MessageBox.Show(Loc.TF("Failed to parse configuration file '{0}' in the application folder. It may have been saved by an incompatible version of the application or corrupted. \n\nWould you like to overwrite it with default settings? \n\nIf not, configuration file autosaving will be disabled to keep the file as-is.", ConfigFileShortName), Loc.T("Configuration File Parse Failure"),
                             MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (ask == DialogResult.Yes)
                 {
@@ -939,11 +925,7 @@ namespace DSAnimStudio
                         }
                         else
                         {
-                            var ask = System.Windows.Forms.MessageBox.Show($"Failed 10 times in a row to write configuration file '{ConfigFileShortName}' in the application folder. " +
-                                "It may have been in use by another " +
-                                "application (e.g. another instance of DS Anim Studio). " +
-                                "\n\nWould you like to RETRY the configuration file writing operation or CANCEL, " +
-                                "disabling configuration file autosaving to be safe?", "Configuration File IO Failure",
+                            var ask = System.Windows.Forms.MessageBox.Show(Loc.TF("Failed 10 times in a row to write configuration file '{0}' in the application folder. It may have been in use by another application (e.g. another instance of DS Anim Studio). \n\nWould you like to RETRY the configuration file writing operation or CANCEL, disabling configuration file autosaving to be safe?", ConfigFileShortName), Loc.T("Configuration File IO Failure"),
                                 MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
 
                             if (ask == DialogResult.Retry)
@@ -1274,9 +1256,7 @@ namespace DSAnimStudio
             graphics.PreferredBackBufferHeight = (int)Math.Round(GFX.Display.Height * DPI);
             if (!GraphicsAdapter.DefaultAdapter.IsProfileSupported(GraphicsProfile.HiDef))
             {
-                System.Windows.Forms.MessageBox.Show("MonoGame is detecting your GPU as too " +
-                    "low-end and refusing to enter the non-mobile Graphics Profile, " +
-                    "which is needed for the model viewer. The app will likely crash now.");
+                System.Windows.Forms.MessageBox.Show(Loc.T("MonoGame is detecting your GPU as too low-end and refusing to enter the non-mobile Graphics Profile, which is needed for the model viewer. The app will likely crash now."));
 
                 graphics.GraphicsProfile = GraphicsProfile.Reach;
             }
@@ -1540,8 +1520,8 @@ namespace DSAnimStudio
             catch (Exception ex) when (Main.EnableErrorHandler.MainInit)
             {
                 System.Windows.Forms.MessageBox.Show(
-                    $"Error occurred while initializing DS Anim Studio (please report):\n\n{ex.ToString()}", 
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Loc.TF("Error occurred while initializing DS Anim Studio (please report):\n\n{0}", ex.ToString()), 
+                    Loc.T("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
         }
@@ -1861,7 +1841,29 @@ namespace DSAnimStudio
             }
             //var glyphsBytes = bw.FinishBytes();
             //File.WriteAllBytes($@"{Directory}\ImguiFontGlyphs.bin", glyphsBytes);
-                    
+
+            // 把中文词条里出现的所有字形也加进图集，否则切换成中文后大段方块。
+            // GetAllTranslatedCharacters() 返回 key+value 的全部字符，重复字符由
+            // ImFontGlyphRangesBuilder 自己去重，代价可忽略。
+            var localizedChars = DSAnimStudio.Localization.Loc.GetAllTranslatedCharacters();
+            if (!string.IsNullOrEmpty(localizedChars))
+            {
+                for (int i = 0; i < localizedChars.Length; i++)
+                {
+                    char c = localizedChars[i];
+                    if (char.IsHighSurrogate(c) && i + 1 < localizedChars.Length
+                        && char.IsLowSurrogate(localizedChars[i + 1]))
+                    {
+                        builder.AddText(localizedChars.Substring(i, 2));
+                        i++;
+                    }
+                    else if (!char.IsSurrogate(c))
+                    {
+                        builder.AddChar(c);
+                    }
+                }
+            }
+
             builder.BuildRanges(out ranges);
             var ptr = ImGuiNET.ImGuiNative.ImFontConfig_ImFontConfig();
             var cfg = new ImGuiNET.ImFontConfigPtr(ptr);
@@ -1926,8 +1928,8 @@ namespace DSAnimStudio
             if (scale <= 0)
                 return;
             
-            var str_managed = GetMemoryUseString("CLR Mem:  ", MemoryUsage_Managed);
-            var str_unmanaged = GetMemoryUseString("RAM USE:  ", MemoryUsage_Unmanaged);
+            var str_managed = GetMemoryUseString(Loc.T("CLR Mem:  "), MemoryUsage_Managed);
+            var str_unmanaged = GetMemoryUseString(Loc.T("RAM USE:  "), MemoryUsage_Unmanaged);
 
             //var strSize_managed = DBG.DEBUG_FONT_SMALL.MeasureString(str_managed);
             //var strSize_unmanaged = DBG.DEBUG_FONT_SMALL.MeasureString(str_unmanaged);

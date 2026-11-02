@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Dialog
@@ -20,7 +21,7 @@ namespace DSAnimStudio.ImguiOSD
             public bool WasAnimCategoryDeleted = false;
 
             public AnimCategoryPropertiesEdit(DSAProj proj, DSAProj.AnimCategory category)
-                : base("Edit Animation Category Properties")
+                : base(Loc.T("Edit Animation Category Properties"))
             {
                 Proj = proj;
                 Category = category;
@@ -56,19 +57,19 @@ namespace DSAnimStudio.ImguiOSD
 
                 if (Proj.RootTaeProperties.SaveEachCategoryToSeparateTae)
                 {
-                    ImGui.InputInt("Action Set Version", ref NewState_ActionSetVersion_ForMultiTaeOutput);
+                    ImGui.InputInt(Loc.T("Action Set Version"), ref NewState_ActionSetVersion_ForMultiTaeOutput);
                 }
                 else
                 {
-                    ImGui.Text("(Action Set Version is located in Root TAE Properties for non-c0000)");
+                    ImGui.Text(Loc.T("(Action Set Version is located in Root TAE Properties for non-c0000)"));
                 }
 
                 ImGui.Separator();
 
-                ImGui.Button("Delete This Animation Category...");
+                ImGui.Button(Loc.T("Delete This Animation Category..."));
                 if (ImGui.IsItemClicked())
                 {
-                    DialogManager.AskYesNo("Permanently Delete Animation Category Entry?", $"Are you sure you want to delete the current animation category and all animations within it?",
+                    DialogManager.AskYesNo(Loc.T("Permanently Delete Animation Category Entry?"), Loc.TF("Are you sure you want to delete the current animation category and all animations within it?"),
                         choice =>
                         {
                             if (choice)
@@ -76,7 +77,7 @@ namespace DSAnimStudio.ImguiOSD
                                 WasAnimCategoryDeleted = true;
                                 ResultType = ResultTypes.Accept;
                                 Dismiss();
-                                DialogManager.DialogOK("Success", "Animation category deleted successfully.");
+                                DialogManager.DialogOK(Loc.T("Success"), Loc.T("Animation category deleted successfully."));
                             }
 
                         });
@@ -84,7 +85,7 @@ namespace DSAnimStudio.ImguiOSD
                 }
                 ImGui.Separator();
 
-                bool clickedCancel = Tools.SimpleClickButton("Cancel") || IsTitleBarXRequested;
+                bool clickedCancel = Tools.SimpleClickButton(Loc.T("Cancel")) || IsTitleBarXRequested;
                 bool pressedEscape = IsEscapeKeyRequested;
 
                 if (clickedCancel || pressedEscape)
@@ -102,7 +103,7 @@ namespace DSAnimStudio.ImguiOSD
                     }
                     else
                     {
-                        DialogManager.AskYesNo("Unsaved Changes", "You have unsaved changes, would you like to discard them and close this dialog?", choice =>
+                        DialogManager.AskYesNo(Loc.T("Unsaved Changes"), Loc.T("You have unsaved changes, would you like to discard them and close this dialog?"), choice =>
                         {
                             if (choice == true)
                             {
@@ -113,7 +114,7 @@ namespace DSAnimStudio.ImguiOSD
                     }
                 }
 
-                if (Tools.SimpleClickButton("Save & Accept"))
+                if (Tools.SimpleClickButton(Loc.T("Save & Accept")))
                 {
                     ResultType = ResultTypes.Accept;
                     Dismiss();

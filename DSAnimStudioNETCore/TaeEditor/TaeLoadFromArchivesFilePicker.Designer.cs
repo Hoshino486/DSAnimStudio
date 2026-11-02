@@ -1,4 +1,5 @@
-﻿namespace DSAnimStudio.TaeEditor
+﻿using DSAnimStudio.Localization;
+namespace DSAnimStudio.TaeEditor
 {
     partial class TaeLoadFromArchivesFilePicker
     {
@@ -54,7 +55,7 @@
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 1;
-            this.buttonOK.Text = "OK";
+            this.buttonOK.Text = Loc.T("OK");
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -67,7 +68,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(382, 15);
             this.label4.TabIndex = 17;
-            this.label4.Text = "Tip: Press Enter key to quickly select the highlighted item and continue.";
+            this.label4.Text = Loc.T("Tip: Press Enter key to quickly select the highlighted item and continue.");
             // 
             // TaeLoadFromArchivesFilePicker
             // 
@@ -81,7 +82,7 @@
             this.Controls.Add(this.listBoxFiles);
             this.MinimumSize = new System.Drawing.Size(520, 240);
             this.Name = "TaeLoadFromArchivesFilePicker";
-            this.Text = "Choose File From Archives";
+            this.Text = Loc.T("Choose File From Archives");
             this.Load += new System.EventHandler(this.TaeLoadFromArchivesFilePicker_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

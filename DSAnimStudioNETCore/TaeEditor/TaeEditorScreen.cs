@@ -26,6 +26,7 @@ using Keys = Microsoft.Xna.Framework.Input.Keys;
 //using static DSAnimStudio.ImguiOSD.Window;
 using TAE = SoulsAssetPipeline.Animation.TAE;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.TaeEditor
 {
     public class TaeEditorScreen : IDisposable
@@ -299,11 +300,11 @@ namespace DSAnimStudio.TaeEditor
         //             {
         //                 var binaryData = SelectedAnimCategory.ToBinary();
         //                 File.WriteAllBytes(browseDlg.FileName, binaryData);
-        //                 System.Windows.Forms.MessageBox.Show("TAE saved successfully.", "Saved");
+        //                 System.Windows.Forms.MessageBox.Show(Loc.T("TAE saved successfully."), Loc.T("Saved"));
         //             }
         //             catch (Exception exc)
         //             {
-        //                 System.Windows.Forms.MessageBox.Show($"Error saving TAE file:\n\n{exc}", "Failed to Save",
+        //                 System.Windows.Forms.MessageBox.Show($"Error saving TAE file:\n\n{exc}", Loc.T("Failed to Save"),
         //                     System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
         //             }
         //         }
@@ -548,7 +549,7 @@ namespace DSAnimStudio.TaeEditor
 
 
 
-            zzz_NotificationManagerIns.PushNotification($"Successfully imported animation names from text file." +
+            zzz_NotificationManagerIns.PushNotification(Loc.T("Successfully imported animation names from text file.") +
                 $"\n{numNamesEdited} animation names were modified by the import process.");
         }
 
@@ -678,7 +679,7 @@ namespace DSAnimStudio.TaeEditor
 
                 if (animRef == null || animRef.ParentCategory == null)
                 {
-                    DialogManager.DialogOK("Invalid Animation Reference", $"Animation ID referenced ({asImportOtherAnim.ImportFromAnimID}) does not exist.");
+                    DialogManager.DialogOK(Loc.T("Invalid Animation Reference"), Loc.TF("Animation ID referenced ({0}) does not exist.", asImportOtherAnim.ImportFromAnimID));
                     return;
                 }
                 SelectNewAnimRef(animRef.ParentCategory, animRef);
@@ -733,8 +734,8 @@ namespace DSAnimStudio.TaeEditor
         {
             if (false && SelectedAnimCategory.SAFE_GetAnimCount() <= 1)
             {
-                DialogManager.DialogOK("Can't Delete Last Animation",
-                    "Cannot delete the only animation remaining in the animation category.");
+                DialogManager.DialogOK(Loc.T("Can't Delete Last Animation"),
+                    Loc.T("Cannot delete the only animation remaining in the animation category."));
             }
             else
             {
@@ -912,7 +913,7 @@ namespace DSAnimStudio.TaeEditor
                     if (!proj.Tags.Contains(tag))
                         proj.Tags.Add(tag);
                 }
-            }, () => { }, "Add tag to selection action(s)");
+            }, () => { }, Loc.T("Add tag to selection action(s)"));
             Graph.AnimRef.SAFE_SetIsModified(true);
         }
 
@@ -928,7 +929,7 @@ namespace DSAnimStudio.TaeEditor
                         act.Info.TagInstances.Clear();
                     }
                 }
-            }, () => { }, "Clear tags from selected action(s)");
+            }, () => { }, Loc.T("Clear tags from selected action(s)"));
             Graph.AnimRef.SAFE_SetIsModified(true);
         }
 
@@ -948,7 +949,7 @@ namespace DSAnimStudio.TaeEditor
                 {
                     DialogManager.ShowDialogChangeActionColors(actions);
                 }
-            }, () => { }, isClearing ? "Clear custom colors of selected action(s)" : "Set custom color of selected action(s)");
+            }, () => { }, isClearing ? Loc.T("Clear custom colors of selected action(s)") : Loc.T("Set custom color of selected action(s)"));
             Graph.AnimRef.SAFE_SetIsModified(true);
         }
 
@@ -1093,20 +1094,18 @@ namespace DSAnimStudio.TaeEditor
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show($"Unable to load file. Error shown below.\n\n{loadErrMsg}", "Load Failed",
+                        System.Windows.Forms.MessageBox.Show(Loc.TF("Unable to load file. Error shown below.\n\n{0}", loadErrMsg), Loc.T("Load Failed"),
                         System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
                     }
                 }
                 catch (SoulsFormats.Exceptions.NoOodleFoundException)
                 {
-                    //System.Windows.Forms.MessageBox.Show("Cannot open Sekiro files unless you " +
+                    //System.Windows.Forms.MessageBox.Show(Loc.T("Cannot open Sekiro files unless you ") +
                     //    "copy the `oo2core_6_win64.dll` file from the Sekiro folder into the " +
-                    //    "'lib' folder next to DS Anim Studio.exe.", "Additional DLL Required", 
+                    //    "'lib' folder next to DS Anim Studio.exe.", Loc.T("Additional DLL Required"), 
                     //    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
 
-                    System.Windows.Forms.MessageBox.Show("Was unable to automatically find the " +
-                        "`oo2core_6_win64.dll`/`oo2core_8_win64.dll`/`oo2core_9_win64.dll` file in the Sekiro / Elden Ring / Armored Core 6 / Nightreign game folder. Please copy that file to the " +
-                        "program folder next to DS Anim Studio.exe in order to load Sekiro / Elden Ring / Armored Core 6 / Nightreign files.", "Unable to find compression DLL",
+                    System.Windows.Forms.MessageBox.Show(Loc.T("Was unable to automatically find the `oo2core_6_win64.dll`/`oo2core_8_win64.dll`/`oo2core_9_win64.dll` file in the Sekiro / Elden Ring / Armored Core 6 / Nightreign game folder. Please copy that file to the program folder next to DS Anim Studio.exe in order to load Sekiro / Elden Ring / Armored Core 6 / Nightreign files."), Loc.T("Unable to find compression DLL"),
                         System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
 
                     ParentDocument.RequestClose_ForceDelete = true;
@@ -1128,7 +1127,7 @@ namespace DSAnimStudio.TaeEditor
                     //    return false;
                     //}
 
-                    System.Windows.Forms.MessageBox.Show("No TAE files in selected binder. Cancelling load operation.", "Unsupported File",
+                    System.Windows.Forms.MessageBox.Show(Loc.T("No TAE files in selected binder. Cancelling load operation."), Loc.T("Unsupported File"),
                         System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
 
                     ParentDocument.RequestClose_ForceDelete = true;
@@ -1238,10 +1237,7 @@ namespace DSAnimStudio.TaeEditor
 
             if (IsReadOnlyFileMode)
             {
-                System.Windows.Forms.MessageBox.Show("Read-only mode is" +
-                    " active so nothing was saved. To open a file in re-saveable mode," +
-                    " make sure the Read-Only checkbox is unchecked in the open" +
-                    " file dialog.", "Read-Only Mode Active",
+                System.Windows.Forms.MessageBox.Show(Loc.T("Read-only mode is active so nothing was saved. To open a file in re-saveable mode, make sure the Read-Only checkbox is unchecked in the open file dialog."), Loc.T("Read-Only Mode Active"),
                     System.Windows.Forms.MessageBoxButtons.OK,
                     System.Windows.Forms.MessageBoxIcon.Stop);
                 return;
@@ -1312,7 +1308,7 @@ namespace DSAnimStudio.TaeEditor
                     {
                         string bakName = $"{baseBakPath}{(maxBackupIndex + 1):D4}";
                         File.Copy(NewFileContainerName, bakName);
-                        zzz_NotificationManagerIns.PushNotification($"Saved file to '{bakName}'.");
+                        zzz_NotificationManagerIns.PushNotification(Loc.TF("Saved file to '{0}'.", bakName));
                     }
                     else
                     {
@@ -1322,7 +1318,7 @@ namespace DSAnimStudio.TaeEditor
                         if (!hash_bak.SequenceEqual(hash))
                         {
                             File.Copy(NewFileContainerName, bakName);
-                            zzz_NotificationManagerIns.PushNotification($"Saved file to '{bakName}'.");
+                            zzz_NotificationManagerIns.PushNotification(Loc.TF("Saved file to '{0}'.", bakName));
                         }
                     }
 
@@ -1461,7 +1457,7 @@ namespace DSAnimStudio.TaeEditor
             }, undoAction: () =>
             {
 
-            }, "Sort action tracks");
+            }, Loc.T("Sort action tracks"));
         }
 
         public void RegenTrackNames_Anim()
@@ -1472,7 +1468,7 @@ namespace DSAnimStudio.TaeEditor
             }, undoAction: () =>
             {
 
-            }, "Regenerate action track names");
+            }, Loc.T("Regenerate action track names"));
         }
 
         public void ResortTracks_Proj()
@@ -1497,7 +1493,7 @@ namespace DSAnimStudio.TaeEditor
             }, undoAction: () =>
             {
 
-            }, "Sort action tracks");
+            }, Loc.T("Sort action tracks"));
         }
 
         public void RegenTrackNames_Proj()
@@ -1518,7 +1514,7 @@ namespace DSAnimStudio.TaeEditor
             }, undoAction: () =>
             {
 
-            }, "Regenerate action track names");
+            }, Loc.T("Regenerate action track names"));
         }
 
         private void ResortAndRegenRows_Inner_Deprecated(DSAProj.Animation anim)
@@ -1692,8 +1688,8 @@ namespace DSAnimStudio.TaeEditor
                 var currentAnim = SelectedAnim;
             var currentAnimID = SelectedAnim.SplitID;
 
-            DialogManager.AskForInputString("Duplicate To New Animation ID", "Enter the animation ID to duplicate the current animation to.\n" +
-                "Accepts the full string with prefix or just the ID as a number.",
+            DialogManager.AskForInputString(Loc.T("Duplicate To New Animation ID"), Loc.T("Enter the animation ID to duplicate the current animation to.\n" +
+                "Accepts the full string with prefix or just the ID as a number."),
                 ParentDocument.GameRoot.CurrentAnimIDFormatType.ToString(), result =>
                 {
                     Main.WinForm.Invoke(new Action(() =>
@@ -1703,7 +1699,7 @@ namespace DSAnimStudio.TaeEditor
 
                         if (!parseSuccess)
                         {
-                            DialogManager.DialogOK("Duplication Failed", detailedError);
+                            DialogManager.DialogOK(Loc.T("Duplication Failed"), detailedError);
                             return;
                         }
 
@@ -1727,7 +1723,7 @@ namespace DSAnimStudio.TaeEditor
                         }
                         else
                         {
-                            DialogManager.AskYesNo("Anim ID Already Exists",
+                            DialogManager.AskYesNo(Loc.T("Anim ID Already Exists"),
                                 $"An animation already exists with ID {splitID.GetFormattedIDString(Proj)}. Duplicating to this ID will cause an ID conflict. Continue anyways?",
                                 choice =>
                             {
@@ -1804,8 +1800,8 @@ namespace DSAnimStudio.TaeEditor
             }
             catch (Exception ex) when (Main.EnableErrorHandler.ApplyTaeTemplate)
             {
-                System.Windows.Forms.MessageBox.Show($"Failed to write TAE template:\n\n{ex}",
-                    "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(Loc.TF("Failed to write TAE template:\n\n{0}", ex),
+                    Loc.T("Error"), System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
         }
 
@@ -1863,14 +1859,14 @@ namespace DSAnimStudio.TaeEditor
                 {
                     if (DSAnimStudio.LiveRefresh.RequestFileReload.RequestReload(
                         DSAnimStudio.LiveRefresh.RequestFileReload.ReloadType.Chr, chrNameBase))
-                        zzz_NotificationManagerIns.PushNotification($"Requested game to reload character '{chrNameBase}'.");
+                        zzz_NotificationManagerIns.PushNotification(Loc.TF("Requested game to reload character '{0}'.", chrNameBase));
 
                 }
                 else if (chrNameBase.StartsWith("o"))
                 {
                     if (DSAnimStudio.LiveRefresh.RequestFileReload.RequestReload(
                         DSAnimStudio.LiveRefresh.RequestFileReload.ReloadType.Object, chrNameBase))
-                        zzz_NotificationManagerIns.PushNotification($"Requested game to reload object '{chrNameBase}'.");
+                        zzz_NotificationManagerIns.PushNotification(Loc.TF("Requested game to reload object '{0}'.", chrNameBase));
                 }
             }
 
@@ -2045,10 +2041,7 @@ namespace DSAnimStudio.TaeEditor
             if (anibndShort.StartsWith("c0000_") && File.Exists($"{anibndDirectory}\\c0000.anibnd.dcx")
                 && TaeFileContainer.AnibndContainsTae($"{anibndDirectory}\\c0000.anibnd.dcx"))
             {
-                var askResult = System.Windows.Forms.MessageBox.Show($"The selected anibnd, '{anibndPathJustFile}', does not " +
-                    $"have any TimeAct (.TAE) data inside of it, just animations.\n" +
-                    $"It's a supplemental file which the base anibnd, 'c0000.anibnd.dcx', pulls animations from.\n" +
-                    $"Would you like to load that base anibnd for editing instead?", "Load Base ANIBND?", System.Windows.Forms.MessageBoxButtons.YesNoCancel);
+                var askResult = System.Windows.Forms.MessageBox.Show(Loc.TF("The selected anibnd, '{0}', does not have any TimeAct (.TAE) data inside of it, just animations.\nIt's a supplemental file which the base anibnd, 'c0000.anibnd.dcx', pulls animations from.\nWould you like to load that base anibnd for editing instead?", anibndPathJustFile), Loc.T("Load Base ANIBND?"), System.Windows.Forms.MessageBoxButtons.YesNoCancel);
                 if (askResult == System.Windows.Forms.DialogResult.Yes)
                 {
                     fileContainerName = $"{anibndDirectory}\\c0000.anibnd.dcx";
@@ -2064,10 +2057,7 @@ namespace DSAnimStudio.TaeEditor
                 && File.Exists($"{anibndDirectory}\\{anibndShort.Substring(0, 5)}.anibnd.dcx")
                 && TaeFileContainer.AnibndContainsTae($"{anibndDirectory}\\{anibndShort.Substring(0, 5)}.anibnd.dcx"))
             {
-                var askResult = System.Windows.Forms.MessageBox.Show($"The selected anibnd, '{anibndPathJustFile}', does not " +
-                    $"have any TimeAct (.TAE) data inside of it, just animations.\n" +
-                    $"It's a supplemental file which the base anibnd, '{anibndShort.Substring(0, 5)}.anibnd.dcx', pulls animations from.\n" +
-                    $"Would you like to load that base anibnd for editing instead?", "Load Base ANIBND?", System.Windows.Forms.MessageBoxButtons.YesNoCancel);
+                var askResult = System.Windows.Forms.MessageBox.Show(Loc.TF("The selected anibnd, '{0}', does not have any TimeAct (.TAE) data inside of it, just animations.\nIt's a supplemental file which the base anibnd, '{1}.anibnd.dcx', pulls animations from.\nWould you like to load that base anibnd for editing instead?", anibndPathJustFile, anibndShort.Substring(0, 5)), Loc.T("Load Base ANIBND?"), System.Windows.Forms.MessageBoxButtons.YesNoCancel);
                 if (askResult == System.Windows.Forms.DialogResult.Yes)
                 {
                     fileContainerName = $"{anibndDirectory}\\{anibndShort.Substring(0, 5)}.anibnd.dcx";
@@ -2081,9 +2071,7 @@ namespace DSAnimStudio.TaeEditor
 
             else if (File.Exists(possibleFallbackPath) && TaeFileContainer.AnibndContainsTae(possibleFallbackPath))
             {
-                var askResult = System.Windows.Forms.MessageBox.Show($"The selected anibnd, '{anibndPathJustFile}', does not " +
-                    $"have any TimeAct (.TAE) data inside of it. It appears to read from the base anibnd, '{basePathJustFile}', " +
-                    $"which has TimeAct data. Would you like to load the base anibnd instead?", "Load Base ANIBND?", System.Windows.Forms.MessageBoxButtons.YesNoCancel);
+                var askResult = System.Windows.Forms.MessageBox.Show(Loc.TF("The selected anibnd, '{0}', does not have any TimeAct (.TAE) data inside of it. It appears to read from the base anibnd, '{1}', which has TimeAct data. Would you like to load the base anibnd instead?", anibndPathJustFile, basePathJustFile), Loc.T("Load Base ANIBND?"), System.Windows.Forms.MessageBoxButtons.YesNoCancel);
                 if (askResult == System.Windows.Forms.DialogResult.Yes)
                 {
                     fileContainerName = possibleFallbackPath;
@@ -2104,10 +2092,7 @@ namespace DSAnimStudio.TaeEditor
                     if (anibndShort.StartsWith("c0000_") && ParentDocument.GameData.FileExists("chr/c0000.anibnd.dcx")
                         && TaeFileContainer.AnibndContainsTae(ParentDocument.GameData.ReadFile("chr/c0000.anibnd.dcx")))
                     {
-                        var askResult = System.Windows.Forms.MessageBox.Show($"The selected anibnd, '{anibndPathJustFile}', does not " +
-                        $"have any TimeAct (.TAE) data inside of it, just animations.\n" +
-                        $"It's a supplemental file which the base anibnd, 'c0000.anibnd.dcx', pulls animations from.\n" +
-                        $"Would you like to unpack that base anibnd into the project folder and open it for editing instead?", "Load Base ANIBND?", System.Windows.Forms.MessageBoxButtons.YesNoCancel);
+                        var askResult = System.Windows.Forms.MessageBox.Show(Loc.TF("The selected anibnd, '{0}', does not have any TimeAct (.TAE) data inside of it, just animations.\nIt's a supplemental file which the base anibnd, 'c0000.anibnd.dcx', pulls animations from.\nWould you like to unpack that base anibnd into the project folder and open it for editing instead?", anibndPathJustFile), Loc.T("Load Base ANIBND?"), System.Windows.Forms.MessageBoxButtons.YesNoCancel);
                         if (askResult == System.Windows.Forms.DialogResult.Yes)
                         {
                             fileContainerName = $"{anibndDirectory}\\c0000.anibnd.dcx";
@@ -2124,10 +2109,7 @@ namespace DSAnimStudio.TaeEditor
                         && ParentDocument.GameData.FileExists($"chr/{anibndShort.Substring(0, 5)}.anibnd.dcx")
                         && TaeFileContainer.AnibndContainsTae(ParentDocument.GameData.ReadFile($"chr/{anibndShort.Substring(0, 5)}.anibnd.dcx")))
                     {
-                        var askResult = System.Windows.Forms.MessageBox.Show($"The selected anibnd, '{anibndPathJustFile}', does not " +
-                            $"have any TimeAct (.TAE) data inside of it, just animations.\n" +
-                            $"It's a supplemental file which the base anibnd, '{anibndShort.Substring(0, 5)}.anibnd.dcx', pulls animations from.\n" +
-                            $"Would you like to unpack that base anibnd into the project folder and open it for editing instead?", "Load Base ANIBND?", System.Windows.Forms.MessageBoxButtons.YesNoCancel);
+                        var askResult = System.Windows.Forms.MessageBox.Show(Loc.TF("The selected anibnd, '{0}', does not have any TimeAct (.TAE) data inside of it, just animations.\nIt's a supplemental file which the base anibnd, '{1}.anibnd.dcx', pulls animations from.\nWould you like to unpack that base anibnd into the project folder and open it for editing instead?", anibndPathJustFile, anibndShort.Substring(0, 5)), Loc.T("Load Base ANIBND?"), System.Windows.Forms.MessageBoxButtons.YesNoCancel);
                         if (askResult == System.Windows.Forms.DialogResult.Yes)
                         {
                             fileContainerName = $"{anibndDirectory}\\{anibndShort.Substring(0, 5)}.anibnd.dcx";
@@ -2141,9 +2123,7 @@ namespace DSAnimStudio.TaeEditor
                     }
                     else if (ParentDocument.GameData.FileExists(possibleGameDataFallbackPath) && TaeFileContainer.AnibndContainsTae(ParentDocument.GameData.ReadFile(possibleGameDataFallbackPath)))
                     {
-                        var askResult = System.Windows.Forms.MessageBox.Show($"The selected anibnd, '{anibndPathJustFile}', does not " +
-                            $"have any TimeAct (.TAE) data inside of it. It appears to read from the base anibnd, '{possibleGameDataFallbackPathJustFile}', " +
-                            $"which has TimeAct data. Would you like to unpack that base anibnd into the project folder and open it for editing instead?", "Load Base ANIBND?", System.Windows.Forms.MessageBoxButtons.YesNoCancel);
+                        var askResult = System.Windows.Forms.MessageBox.Show(Loc.TF("The selected anibnd, '{0}', does not have any TimeAct (.TAE) data inside of it. It appears to read from the base anibnd, '{1}', which has TimeAct data. Would you like to unpack that base anibnd into the project folder and open it for editing instead?", anibndPathJustFile, possibleGameDataFallbackPathJustFile), Loc.T("Load Base ANIBND?"), System.Windows.Forms.MessageBoxButtons.YesNoCancel);
                         if (askResult == System.Windows.Forms.DialogResult.Yes)
                         {
                             fileContainerName = possibleFallbackPath;
@@ -2160,9 +2140,7 @@ namespace DSAnimStudio.TaeEditor
 
                 }
 
-                System.Windows.Forms.MessageBox.Show($"The selected anibnd, '{anibndPathJustFile}', does not " +
-                    $"have any TimeAct (.TAE) data inside of it. Unable to find any base ANIBND that the game reads TimeAct " +
-                    $"data from in combination with this file. Aborting load operation.", "Invalid ANIBND", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
+                System.Windows.Forms.MessageBox.Show(Loc.TF("The selected anibnd, '{0}', does not have any TimeAct (.TAE) data inside of it. Unable to find any base ANIBND that the game reads TimeAct data from in combination with this file. Aborting load operation.", anibndPathJustFile), Loc.T("Invalid ANIBND"), System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
                 return null;
             }
 
@@ -2177,7 +2155,7 @@ namespace DSAnimStudio.TaeEditor
                 return -1;
             var matchedFilesStrings = matchedFiles.Select(x => $"[{x.ID}] {(x.Name ?? "<No Name>")}").ToList();
             var picker = new TaeLoadFromArchivesFilePicker();
-            picker.Text = "Select File In Binder";
+            picker.Text = DSAnimStudio.Localization.Loc.T("Select File In Binder");
             picker.InitEblFileList(matchedFilesStrings, null, null);
             picker.SelectedEblFileIndex = 0;
             var result = picker.ShowDialog();
@@ -2202,7 +2180,7 @@ namespace DSAnimStudio.TaeEditor
             //    var yesNoCancel = System.Windows.Forms.MessageBox.Show(
             //        $"File \"{System.IO.Path.GetFileName(NewFileContainerName)}\" has " +
             //        $"unsaved changes. Would you like to save these changes before " +
-            //        $"loading a new file?", "Save Unsaved Changes?",
+            //        $"loading a new file?", Loc.T("Save Unsaved Changes?"),
             //        System.Windows.Forms.MessageBoxButtons.YesNoCancel,
             //        System.Windows.Forms.MessageBoxIcon.None);
 
@@ -2300,8 +2278,7 @@ namespace DSAnimStudio.TaeEditor
                 if (failedFileInBinderPicker)
                 {
                     System.Windows.Forms.MessageBox.Show(
-                        "Selected binder file had no ANIBND files containing TAE within it. " +
-                        "Cancelling load operation.", "Invalid File",
+                        Loc.T("Selected binder file had no ANIBND files containing TAE within it. Cancelling load operation."), Loc.T("Invalid File"),
                         System.Windows.Forms.MessageBoxButtons.OK,
                         System.Windows.Forms.MessageBoxIcon.Stop);
                     ParentDocument.RequestClose_ForceDelete = true;
@@ -2327,7 +2304,7 @@ namespace DSAnimStudio.TaeEditor
                 //            fileContainerName = "";
                 //            System.Windows.Forms.MessageBox.Show(
                 //                "Selected file had no TAE files within it. " +
-                //                "Cancelling load operation.", "Invalid File",
+                //                "Cancelling load operation.", Loc.T("Invalid File"),
                 //                System.Windows.Forms.MessageBoxButtons.OK,
                 //                System.Windows.Forms.MessageBoxIcon.Stop);
                 //        }
@@ -2336,7 +2313,7 @@ namespace DSAnimStudio.TaeEditor
                 //            fileContainerName = "";
                 //            System.Windows.Forms.MessageBox.Show(
                 //                "Selected file did not exist (how did you " +
-                //                "get this message to appear, anyways?).", "File Does Not Exist",
+                //                "get this message to appear, anyways?).", Loc.T("File Does Not Exist"),
                 //                System.Windows.Forms.MessageBoxButtons.OK,
                 //                System.Windows.Forms.MessageBoxIcon.Stop);
                 //        }
@@ -2359,7 +2336,7 @@ namespace DSAnimStudio.TaeEditor
             string selectedTemplate = null;
             do
             {
-                var templateOption = System.Windows.Forms.MessageBox.Show("Select an XML template file to open.", "Open Template", System.Windows.Forms.MessageBoxButtons.OKCancel, System.Windows.Forms.MessageBoxIcon.Information);
+                var templateOption = System.Windows.Forms.MessageBox.Show(Loc.T("Select an XML template file to open."), Loc.T("Open Template"), System.Windows.Forms.MessageBoxButtons.OKCancel, System.Windows.Forms.MessageBoxIcon.Information);
                 if (templateOption == System.Windows.Forms.DialogResult.Cancel)
                 {
                     return null;
@@ -2526,7 +2503,7 @@ namespace DSAnimStudio.TaeEditor
 
                                 SelectedAnim.SAFE_SetIsModified(!IsReadOnlyFileMode);
                                 SelectedAnimCategory.SAFE_SetIsModified(!IsReadOnlyFileMode);
-                            }, "Change type of event");
+                            }, Loc.T("Change type of event"));
                     }
                 }
 
@@ -2723,7 +2700,7 @@ namespace DSAnimStudio.TaeEditor
                 //newAnimRef.ParentAnimCategory = fromTae;
                 newAnimRef.SAFE_SetHeader(new TAE.Animation.AnimFileHeader.Standard()
                 {
-                    AnimFileName = "New Anim Entry",
+                    AnimFileName = Loc.T("New Anim Entry"),
                     ImportsHKX = false,
                     ImportHKXSourceAnimID = -1,
                     IsNullHeader = false,
@@ -2746,7 +2723,7 @@ namespace DSAnimStudio.TaeEditor
 
                 RecreateAnimList();
                 SelectNewAnimRef(fromTae, newAnimRef);
-            }, actionDescription: "Quick Add animation");
+            }, actionDescription: Loc.T("Quick Add animation"));
 
            
         }
@@ -2905,7 +2882,7 @@ namespace DSAnimStudio.TaeEditor
             {
 
                 string animID = anim.SplitID.GetFormattedIDString(proj);
-                DialogManager.AskForInputString("Set Animation Name", $"Set the display name of animation {animID}.", "", result =>
+                DialogManager.AskForInputString(Loc.T("Set Animation Name"), Loc.TF("Set the display name of animation {0}.", animID), Loc.T(""), result =>
                 {
                     if (string.IsNullOrWhiteSpace(result))
                         result = null;
@@ -2951,7 +2928,7 @@ namespace DSAnimStudio.TaeEditor
                         var clonedCategory = category.SAFE_GetClone();
                         clonedCategory.CategoryID = result.SelectedAnimCategoryID;
                         if (!string.IsNullOrWhiteSpace(clonedCategory.Info.DisplayName))
-                            clonedCategory.Info.DisplayName += " (copy)";
+                            clonedCategory.Info.DisplayName += Loc.T(" (copy)");
 
                         var anims = clonedCategory.SAFE_GetAnimations();
 
@@ -3037,10 +3014,10 @@ namespace DSAnimStudio.TaeEditor
         {
             if (cat != null)
             {
-                DialogManager.AskForInputString("Set Animation Category Name", 
+                DialogManager.AskForInputString(Loc.T("Set Animation Category Name"), 
                     $"Set the name of animation category {cat.CategoryID}. " +
                     $"Setting a name does not affect game data in any way, it is purely for your convenience.", 
-                    "", result =>
+                    Loc.T(""), result =>
                 {
                     if (cat.Info.DisplayName != result)
                     {
@@ -3090,7 +3067,7 @@ namespace DSAnimStudio.TaeEditor
             //    if (gotoAnim.Any())
             //        SelectNewAnimRef(SelectedTae, gotoAnim.First());
             //    else
-            //        MessageBox.Show("None Found", "No events of that type found within the currently loaded files.", new[] { "OK" });
+            //        MessageBox.Show(Loc.T("None Found"), Loc.T("No events of that type found within the currently loaded files."), new[] { "OK" });
             //}
             //else 
             //{
@@ -3098,7 +3075,7 @@ namespace DSAnimStudio.TaeEditor
             //    if (gotoAnim.Any())
             //        SelectNewAnimRef(SelectedTae, gotoAnim.First());
             //    else
-            //        MessageBox.Show("None Found", "No events of that type found within the currently loaded files.", new[] { "OK" });
+            //        MessageBox.Show(Loc.T("None Found"), Loc.T("No events of that type found within the currently loaded files."), new[] { "OK" });
             //}
 
 
@@ -3111,9 +3088,9 @@ namespace DSAnimStudio.TaeEditor
             if (FileContainer == null || SelectedAnimCategory == null)
                 return;
 
-            DialogManager.AskForInputString("Go To Anim Category ID", $"Enter the Anim Category ID (The X part of {ParentDocument.GameRoot.CurrentAnimIDFormatType})\n" +
+            DialogManager.AskForInputString(Loc.T("Go To Anim Category ID"), $"Enter the Anim Category ID (The X part of {ParentDocument.GameRoot.CurrentAnimIDFormatType})\n" +
                 "to jump to the first animation in that category.",
-                $"", result =>
+                Loc.TF(""), result =>
                 {
                     Main.WinForm.Invoke(new Action(() =>
                     {
@@ -3121,12 +3098,12 @@ namespace DSAnimStudio.TaeEditor
                         {
                             if (!GotoAnimSectionID(id, scrollOnCenter: true))
                             {
-                                DialogManager.DialogOK("Goto Failed", $"Unable to find Anim Category {id}.");
+                                DialogManager.DialogOK(Loc.T("Goto Failed"), Loc.TF("Unable to find Anim Category {0}.", id));
                             }
                         }
                         else
                         {
-                            DialogManager.DialogOK("Goto Failed", $"\"{result}\" is not a valid integer.");
+                            DialogManager.DialogOK(Loc.T("Goto Failed"), Loc.TF("\"{0}\" is not a valid integer.", result));
                         }
                     }));
                     
@@ -3154,8 +3131,8 @@ namespace DSAnimStudio.TaeEditor
             if (FileContainer == null || SelectedAnimCategory == null)
                 return;
 
-            DialogManager.AskForInputString("Go To Animation ID", "Enter the animation ID to jump to.\n" +
-                "Accepts the full string with prefix or just the ID as a number.",
+            DialogManager.AskForInputString(Loc.T("Go To Animation ID"), Loc.T("Enter the animation ID to jump to.\n" +
+                "Accepts the full string with prefix or just the ID as a number."),
                 ParentDocument.GameRoot.CurrentAnimIDFormatType.ToString(), result =>
                 {
                     Main.WinForm.Invoke(new Action(() =>
@@ -3325,8 +3302,8 @@ namespace DSAnimStudio.TaeEditor
 
             var currentAnimID = SelectedAnim.SplitID;
             
-            DialogManager.AskForInputString("Import From Animation ID", "Enter the animation ID to import from. This will replace animation and all events with those of the specified animation.\n" +
-                "Accepts the full string with prefix or just the ID as a number.",
+            DialogManager.AskForInputString(Loc.T("Import From Animation ID"), Loc.T("Enter the animation ID to import from. This will replace animation and all events with those of the specified animation.\n" +
+                "Accepts the full string with prefix or just the ID as a number."),
                 ParentDocument.GameRoot.CurrentAnimIDFormatType.ToString(), result =>
                 {
                     Main.MainThreadLazyDispatch(new Action(() =>
@@ -3337,17 +3314,17 @@ namespace DSAnimStudio.TaeEditor
 
                             if (animRefToImportFrom == null)
                             {
-                                DialogManager.DialogOK("Import Failed", $"Unable to find anim {id}.");
+                                DialogManager.DialogOK(Loc.T("Import Failed"), Loc.TF("Unable to find anim {0}.", id));
                             }
                             else if (id == currentAnimID)
                             {
-                                DialogManager.DialogOK("Import Failed", $"Animation {id} is the current animation.");
+                                DialogManager.DialogOK(Loc.T("Import Failed"), Loc.TF("Animation {0} is the current animation.", id));
                             }
 
                             
                             if (!ImmediateImportAnim(SelectedAnim, id))
                             {
-                                DialogManager.DialogOK("Import Warning", $"Anim with ID {id} didn't resolve to a valid HKX so only event data was imported.");
+                                DialogManager.DialogOK(Loc.T("Import Warning"), Loc.TF("Anim with ID {0} didn't resolve to a valid HKX so only event data was imported.", id));
                             }
 
                             SelectNewAnimRef(SelectedAnimCategory, SelectedAnim, doNotCommitToGraph: true, isPushCurrentToHistBackwardStack: true);
@@ -3356,7 +3333,7 @@ namespace DSAnimStudio.TaeEditor
                         }
                         else
                         {
-                            DialogManager.DialogOK("Import Failed", $"\"{result}\" is not a valid animation ID.");
+                            DialogManager.DialogOK(Loc.T("Import Failed"), Loc.TF("\"{0}\" is not a valid animation ID.", result));
                         }
                     }));
                 }, checkError: input =>
@@ -3648,7 +3625,7 @@ namespace DSAnimStudio.TaeEditor
         {
             string text = isUnformatted ? ((long)SelectedAnim.SplitID.GetFullID(Proj)).ToString() : SelectedAnim.SplitID.GetFormattedIDString(Proj);
             System.Windows.Forms.Clipboard.SetText(text);
-            zzz_NotificationManagerIns.PushNotification($"Copied '{text}' to clipboard.");
+            zzz_NotificationManagerIns.PushNotification(Loc.TF("Copied '{0}' to clipboard.", text));
         }
 
         public void GotoAnimIDInClipboard()
@@ -3658,7 +3635,7 @@ namespace DSAnimStudio.TaeEditor
             {
                 if (GotoAnimID(SplitAnimID.FromFullID(Proj, id), true, false, out _))
                 {
-                    zzz_NotificationManagerIns.PushNotification($"Went to animation with ID in clipboard ({id}).");
+                    zzz_NotificationManagerIns.PushNotification(Loc.TF("Went to animation with ID in clipboard ({0}).", id));
                 }
                 else
                 {
@@ -3879,7 +3856,7 @@ namespace DSAnimStudio.TaeEditor
                 {
                     if (Input.ShiftOnlyHeld)
                     {
-                        DialogManager.AskYesNo("Remove Custom Colors From Selected Actions", "Are you sure you want to remove the custom colors from all selected actions?", choice =>
+                        DialogManager.AskYesNo(Loc.T("Remove Custom Colors From Selected Actions"), Loc.T("Are you sure you want to remove the custom colors from all selected actions?"), choice =>
                         {
                             if (choice)
                                 Graph.MainScreen.SetColorOfSelectedActions(isClearing: true);
@@ -3897,7 +3874,7 @@ namespace DSAnimStudio.TaeEditor
                 {
                     if (Input.ShiftOnlyHeld)
                     {
-                        DialogManager.AskYesNo("Remove Tags From Selected Actions", "Are you sure you want to remove all tags from all selected actions?", choice =>
+                        DialogManager.AskYesNo(Loc.T("Remove Tags From Selected Actions"), Loc.T("Are you sure you want to remove all tags from all selected actions?"), choice =>
                         {
                             if (choice)
                                 Graph.MainScreen.ClearAllTagsFromSelectedActions(Proj);
@@ -4036,7 +4013,7 @@ namespace DSAnimStudio.TaeEditor
                 if (Input.ShiftOnlyHeld && Input.KeyDown(Keys.Delete) && !DialogManager.AnyDialogsShowing)
                 {
                     GhettoInputCooldown = 5;
-                    DialogManager.AskYesNo("Permanently Delete Animation Entry?", $"Are you sure you want to delete the current animation?",
+                    DialogManager.AskYesNo(Loc.T("Permanently Delete Animation Entry?"), Loc.TF("Are you sure you want to delete the current animation?"),
                         choice =>
                         {
                             if (choice)
@@ -4320,10 +4297,10 @@ namespace DSAnimStudio.TaeEditor
                     {
                         if (GlobalUndoMan?.CanUndo == true)
                         {
-                            DialogManager.AskYesNo("WARNING",
-                                "All changes on all animations since the [Global] operation was " +
+                            DialogManager.AskYesNo(Loc.T("WARNING"),
+                                Loc.T("All changes on all animations since the [Global] operation was " +
                                 "\nperformed will be lost if you undo the global operation. " +
-                                "\nAre you sure you wish to do this?",
+                                "\nAre you sure you wish to do this?"),
                                 choice =>
                                 {
                                     if (choice)
@@ -4343,10 +4320,10 @@ namespace DSAnimStudio.TaeEditor
                     {
                         if (GlobalUndoMan?.CanRedo == true)
                         {
-                            DialogManager.AskYesNo("WARNING",
-                                "All changes on all animations since the [Global] operation was " +
+                            DialogManager.AskYesNo(Loc.T("WARNING"),
+                                Loc.T("All changes on all animations since the [Global] operation was " +
                                 "\nundone will be lost if you redo the global operation. " +
-                                "\nAre you sure you wish to do this?",
+                                "\nAre you sure you wish to do this?"),
                                 choice =>
                                 {
                                     if (choice)

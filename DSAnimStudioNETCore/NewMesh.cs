@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -15,7 +16,7 @@ namespace DSAnimStudio
         public static NewMesh GetDummyMesh()
         {
             NewMesh mesh = new NewMesh();
-            mesh.Name = "Empty Mesh";
+            mesh.Name = Loc.T("Empty Mesh");
             mesh.Flver2Header = new FLVER2.FLVERHeader();
             mesh.Materials = new List<FlverMaterial>();
             mesh.Submeshes = new List<FlverSubmeshRenderer>();

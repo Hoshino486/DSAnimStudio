@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -257,7 +258,7 @@ namespace DSAnimStudio
             }
             if (exception != null)
             {
-                System.Windows.Forms.MessageBox.Show(exception, "Configuration File Parse Failure",
+                System.Windows.Forms.MessageBox.Show(exception, Loc.T("Configuration File Parse Failure"),
                                 System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
             }
             return config;

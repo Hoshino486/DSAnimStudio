@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public static partial class MenuBar
@@ -15,21 +16,21 @@ namespace DSAnimStudio.ImguiOSD
         public static void BuildMenuBar_070_Help(ref bool anyItemFocused, ref bool isAnyMenuExpanded)
         {
             ImGui.PushStyleColor(ImGuiCol.Text, Color.Cyan.ToNVector4());
-            bool helpMenu = ImGui.BeginMenu("Help");
+            bool helpMenu = ImGui.BeginMenu(Loc.T("Help"));
             ImGui.PopStyleColor();
             if (helpMenu)
             {
                 isAnyMenuExpanded = true;
 
-                OSD.WindowHelp.IsOpen = Checkbox("Show Basic Help Window", OSD.WindowHelp.IsOpen, textColor: Color.White);
+                OSD.WindowHelp.IsOpen = Checkbox(Loc.T("Show Basic Help Window"), OSD.WindowHelp.IsOpen, textColor: Color.White);
 
                 ImGui.Separator();
 
-                if (ClickItem("Souls Modding Discord Server", textColor: Color.White,
+                if (ClickItem(Loc.T("Souls Modding Discord Server"), textColor: Color.White,
                         shortcut: "?ServerName? (https://discord.gg/mT2JJjx)", shortcutColor: Color.Cyan))
                     OpenSite("https://discord.gg/mT2JJjx");
 
-                if (ClickItem("My Discord Server (Less Active)", textColor: Color.White,
+                if (ClickItem(Loc.T("My Discord Server (Less Active)"), textColor: Color.White,
                         shortcut: "Meowmaritus Zone (https://discord.gg/J79XMgR)", shortcutColor: Color.Cyan))
                     OpenSite("https://discord.gg/J79XMgR");
 

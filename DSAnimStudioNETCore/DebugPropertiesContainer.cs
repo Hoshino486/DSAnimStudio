@@ -1,4 +1,4 @@
-using DSAnimStudio.ImguiOSD;
+﻿using DSAnimStudio.ImguiOSD;
 using ImGuiNET;
 using System;
 using System.Collections.Generic;
@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public abstract class DebugPropertiesContainer<TContainer>
@@ -166,12 +167,12 @@ namespace DSAnimStudio
                 ImGui.SetNextItemOpen(true, ImGuiCond.Once);
                 if (ImGui.TreeNode(treeNodeName))
                 {
-                    if (Tools.SimpleClickButton("Enable All"))
+                    if (Tools.SimpleClickButton(Loc.T("Enable All")))
                     {
                         SetAllToggles(true);
                     }
                     ImGui.SameLine();
-                    if (Tools.SimpleClickButton("Disable All"))
+                    if (Tools.SimpleClickButton(Loc.T("Disable All")))
                     {
                         SetAllToggles(false);
                     }
@@ -179,7 +180,7 @@ namespace DSAnimStudio
                     
                     ImGui.Separator();
 
-                    if (Tools.SimpleClickButton("Reinit Reflection"))
+                    if (Tools.SimpleClickButton(Loc.T("Reinit Reflection")))
                     {
                         RefreshReflection();
                     }

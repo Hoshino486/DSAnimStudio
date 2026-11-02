@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using SoulsAssetPipeline;
 using System.Drawing.Printing;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public class zzz_FmgManagerIns
@@ -204,8 +205,8 @@ namespace DSAnimStudio
 
                 if (msgbnd == null)
                 {
-                    ImguiOSD.DialogManager.DialogOK("Unable to find asset",
-                        $"Unable to find text file '{msgbndRelativePath}'. Some player equipment may not show names.");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("Unable to find asset"),
+                        Loc.TF("Unable to find text file '{0}'. Some player equipment may not show names.", msgbndRelativePath));
 
                     return;
                 }
@@ -322,7 +323,7 @@ namespace DSAnimStudio
                 sb.AppendLine("Unable to find any weapon names in the game's text files, so functionality of player equipment editor may be limited. Files searched: ");
                 foreach (var fn in msgbndsSearched_ForError)
                     sb.AppendLine($"    -{fn}");
-                ImguiOSD.DialogManager.DialogOK("Text Not Found", sb.ToString());
+                ImguiOSD.DialogManager.DialogOK(Loc.T("Text Not Found"), sb.ToString());
             }
 
             if (armorNameFMGs.Count == 0)
@@ -331,7 +332,7 @@ namespace DSAnimStudio
                 sb.AppendLine("Unable to find any armor names in the game's text files, so functionality of player equipment editor may be limited. Files searched: ");
                 foreach (var fn in msgbndsSearched_ForError)
                     sb.AppendLine($"    -{fn}");
-                ImguiOSD.DialogManager.DialogOK("Text Not Found", sb.ToString());
+                ImguiOSD.DialogManager.DialogOK(Loc.T("Text Not Found"), sb.ToString());
             }
 
             WeaponNamesMap_A.Clear();

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Dialog
@@ -40,7 +41,7 @@ namespace DSAnimStudio.ImguiOSD
             }
 
             public TaeActionTrackPropertiesEdit(DSAProj.Animation anim, int trackIndex, DSAProj.ActionTrack track)
-                : base("Edit Action Track Properties")
+                : base(Loc.T("Edit Action Track Properties"))
             {
                 AnimRef = anim;
                 TrackIndex = trackIndex;
@@ -58,24 +59,24 @@ namespace DSAnimStudio.ImguiOSD
                 ImGui.PushID($"ImGui_TaeActionTrackPropertiesEdit_{Track.GUID}");
                 try
                 {
-                    ImGui.InputInt("Track Type", ref TrackCopy.TrackType);
+                    ImGui.InputInt(Loc.T("Track Type"), ref TrackCopy.TrackType);
                     Tools.InputTextNullable("Name", ref TrackCopy.Info.DisplayName, 256);
 
-                    if (ImGui.TreeNode("Track Data"))
+                    if (ImGui.TreeNode(Loc.T("Track Data")))
                     {
-                        Tools.EnumPicker("Track Data Type", ref TrackCopy.TrackData.DataType);
+                        Tools.EnumPicker(Loc.T("Track Data Type"), ref TrackCopy.TrackData.DataType);
 
                         if (TrackCopy.TrackData.DataType ==
                             TAE.ActionTrack.ActionTrackDataType.ApplyToSpecificCutsceneEntity)
                         {
-                            Tools.EnumPicker("Entity Type", ref TrackCopy.TrackData.CutsceneEntityType);
-                            Tools.GhettoInputShort("Entity ID First Part", ref TrackCopy.TrackData.CutsceneEntityIDPart1, minVal: -1, maxVal: 9999);
-                            Tools.GhettoInputShort("Entity ID Second Part", ref TrackCopy.TrackData.CutsceneEntityIDPart2, minVal: -1, maxVal: 9999);
-                            ImGui.LabelText(TrackCopy.TrackData.GetEntityNameString(), "Entity Name Preview");
+                            Tools.EnumPicker(Loc.T("Entity Type"), ref TrackCopy.TrackData.CutsceneEntityType);
+                            Tools.GhettoInputShort(Loc.T("Entity ID First Part"), ref TrackCopy.TrackData.CutsceneEntityIDPart1, minVal: -1, maxVal: 9999);
+                            Tools.GhettoInputShort(Loc.T("Entity ID Second Part"), ref TrackCopy.TrackData.CutsceneEntityIDPart2, minVal: -1, maxVal: 9999);
+                            ImGui.LabelText(TrackCopy.TrackData.GetEntityNameString(), Loc.T("Entity Name Preview"));
                             
-                            Tools.GhettoInputSbyte("Entity Area ID", ref TrackCopy.TrackData.Area, minVal: -1, maxVal: 99);
-                            Tools.GhettoInputSbyte("Entity Block ID", ref TrackCopy.TrackData.Block, minVal: -1, maxVal: 99);
-                            ImGui.LabelText(TrackCopy.TrackData.GetAreaNameString(), "Area Name Preview");
+                            Tools.GhettoInputSbyte(Loc.T("Entity Area ID"), ref TrackCopy.TrackData.Area, minVal: -1, maxVal: 99);
+                            Tools.GhettoInputSbyte(Loc.T("Entity Block ID"), ref TrackCopy.TrackData.Block, minVal: -1, maxVal: 99);
+                            ImGui.LabelText(TrackCopy.TrackData.GetAreaNameString(), Loc.T("Area Name Preview"));
                         }
                         
                         
@@ -86,7 +87,7 @@ namespace DSAnimStudio.ImguiOSD
                     
                     
                     ImGui.Separator();
-                    bool clickedCancel = Tools.SimpleClickButton("Cancel") || IsTitleBarXRequested;
+                    bool clickedCancel = Tools.SimpleClickButton(Loc.T("Cancel")) || IsTitleBarXRequested;
                     bool pressedEscape = IsEscapeKeyRequested;
     
                     if (clickedCancel || pressedEscape)
@@ -100,7 +101,7 @@ namespace DSAnimStudio.ImguiOSD
                         }
                         else
                         {
-                            DialogManager.AskYesNo("Unsaved Changes", "You have unsaved changes, would you like to discard them and close this dialog?", choice =>
+                            DialogManager.AskYesNo(Loc.T("Unsaved Changes"), Loc.T("You have unsaved changes, would you like to discard them and close this dialog?"), choice =>
                             {
                                 if (choice == true)
                                 {
@@ -115,13 +116,13 @@ namespace DSAnimStudio.ImguiOSD
     
                     if (invalidState)
                         Tools.PushGrayedOut();
-                    ImGui.Button("Save & Accept");
+                    ImGui.Button(Loc.T("Save & Accept"));
                     if (invalidState)
                     {
                         Tools.PopGrayedOut();
                         if (ImGui.IsItemHovered())
                         {
-                            ImGui.SetTooltip("Cannot accept changes until the animation ID formatting errors (shown in red) are fixed.");
+                            ImGui.SetTooltip(Loc.T("Cannot accept changes until the animation ID formatting errors (shown in red) are fixed."));
                         }
                     }
                     if (ImGui.IsItemClicked())

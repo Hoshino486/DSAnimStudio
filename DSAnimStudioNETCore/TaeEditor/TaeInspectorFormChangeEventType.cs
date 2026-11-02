@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TAE = SoulsAssetPipeline.Animation.TAE;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.TaeEditor
 {
@@ -20,6 +21,8 @@ namespace DSAnimStudio.TaeEditor
         public TaeInspectorFormChangeEventType()
         {
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
         }
 
         private void InspectorFormChangeEventType_Load(object sender, EventArgs e)

@@ -1,8 +1,9 @@
-using System;
+﻿using System;
 using DSAnimStudio.ImguiOSD;
 using DSAnimStudio.TaeEditor;
 using ImGuiNET;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public struct HelperDrawConfig
@@ -122,117 +123,117 @@ namespace DSAnimStudio
         public void ShowImGui(ref bool anyFieldFocused)
         {
             MASTER =
-                MenuBar.CheckboxDual("[MASTER TOGGLE] ALL HELPERS",
+                MenuBar.CheckboxDual(Loc.T("[MASTER TOGGLE] ALL HELPERS"),
                     MASTER,
                     enabled: true);
 
             EnableDummyPolyTexts =
-                MenuBar.CheckboxDual("[MASTER TOGGLE] DummyPoly Text Displays",
+                MenuBar.CheckboxDual(Loc.T("[MASTER TOGGLE] DummyPoly Text Displays"),
                     EnableDummyPolyTexts,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperDummyPolyTexts);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperDummyPolyTexts);
 
             EnableFlverBoneLines =
-                MenuBar.CheckboxDual("FLVER Bone Lines",
+                MenuBar.CheckboxDual(Loc.T("FLVER Bone Lines"),
                     EnableFlverBoneLines,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperFlverBoneLines);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperFlverBoneLines);
             
             EnableFlverBoneTransforms =
-                MenuBar.CheckboxDual("FLVER Bone Transforms",
+                MenuBar.CheckboxDual(Loc.T("FLVER Bone Transforms"),
                     EnableFlverBoneTransforms,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperFlverBoneTransforms);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperFlverBoneTransforms);
 
             EnableFlverBoneNames =
-                MenuBar.CheckboxDual("FLVER Bone Names",
+                MenuBar.CheckboxDual(Loc.T("FLVER Bone Names"),
                     EnableFlverBoneNames,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperFlverBoneTexts);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperFlverBoneTexts);
 
             EnableFlverBoneBoxes =
-                MenuBar.CheckboxDual("FLVER Bone Boxes",
+                MenuBar.CheckboxDual(Loc.T("FLVER Bone Boxes"),
                     EnableFlverBoneBoxes,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperFlverBoneBoundingBox);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperFlverBoneBoundingBox);
             
             EnableHkxBoneTransforms =
-                MenuBar.CheckboxDual("HKX Bone Transforms",
+                MenuBar.CheckboxDual(Loc.T("HKX Bone Transforms"),
                     EnableHkxBoneTransforms,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperHkxBoneTransforms);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperHkxBoneTransforms);
 
             EnableHkxBoneLines =
-                MenuBar.CheckboxDual("HKX Bone Lines",
+                MenuBar.CheckboxDual(Loc.T("HKX Bone Lines"),
                     EnableHkxBoneLines,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperHkxBoneLines);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperHkxBoneLines);
 
             EnableHkxBoneNames =
-                MenuBar.CheckboxDual("HKX Bone Names",
+                MenuBar.CheckboxDual(Loc.T("HKX Bone Names"),
                     EnableHkxBoneNames,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperHkxBoneTexts);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperHkxBoneTexts);
 
             EnableBoneGlue =
-                MenuBar.CheckboxDual("Bone Glue Joints",
+                MenuBar.CheckboxDual(Loc.T("Bone Glue Joints"),
                     EnableBoneGlue,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperBoneGlue);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperBoneGlue);
 
             EnableDummyPolyTransforms =
-                MenuBar.CheckboxDual("DummyPoly Transforms",
+                MenuBar.CheckboxDual(Loc.T("DummyPoly Transforms"),
                     EnableDummyPolyTransforms,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperDummyPolyTransforms);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperDummyPolyTransforms);
 
             EnableDummyPolyIDs =
-                MenuBar.CheckboxDual("DummyPoly IDs",
+                MenuBar.CheckboxDual(Loc.T("DummyPoly IDs"),
                     EnableDummyPolyIDs,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperDummyPolyTexts);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperDummyPolyTexts);
 
             DummyPolyIDsAreGlobal = 
-                MenuBar.CheckboxDual("Show c0000 Parts DummyPoly IDs With Global Offsets (1000+)", 
+                MenuBar.CheckboxDual(Loc.T("Show c0000 Parts DummyPoly IDs With Global Offsets (1000+)"), 
                     DummyPolyIDsAreGlobal);
 
             ImGui.Separator();
 
             BoostTransformVisibility_Bones =
-                MenuBar.CheckboxDual("Boost Transform Visibility - Bones",
+                MenuBar.CheckboxDual(Loc.T("Boost Transform Visibility - Bones"),
                     BoostTransformVisibility_Bones,
                     enabled: true);
 
             BoostTransformVisibility_Bones_IgnoreAlpha =
-                MenuBar.CheckboxDual("Boost Transform Visibility - Bones - Force Opaque",
+                MenuBar.CheckboxDual(Loc.T("Boost Transform Visibility - Bones - Force Opaque"),
                     BoostTransformVisibility_Bones_IgnoreAlpha,
                     enabled: true);
 
             BoostTransformVisibility_DummyPoly =
-                MenuBar.CheckboxDual("Boost Transform Visibility - DummyPoly",
+                MenuBar.CheckboxDual(Loc.T("Boost Transform Visibility - DummyPoly"),
                     BoostTransformVisibility_DummyPoly,
                     enabled: true);
 
             BoostTransformVisibility_DummyPoly_IgnoreAlpha =
-                MenuBar.CheckboxDual("Boost Transform Visibility - DummyPoly - Force Opaque",
+                MenuBar.CheckboxDual(Loc.T("Boost Transform Visibility - DummyPoly - Force Opaque"),
                     BoostTransformVisibility_DummyPoly_IgnoreAlpha,
                     enabled: true);
 
             float thickness = (ExtraTransformVisibilityThickness * 100) - 0.01f;
 
-            ImGui.DragFloat("Boost Transform Visibility - Thickness", ref thickness, 0.1f, 0, 500);
+            ImGui.DragFloat(Loc.T("Boost Transform Visibility - Thickness"), ref thickness, 0.1f, 0, 500);
             if (thickness != ExtraTransformVisibilityThickness)
             {
                 ExtraTransformVisibilityThickness = ((thickness + 0.01f) / 100);
             }
-            DoOpacitySlider("Transform Render Scale - Bones", ref TransformScale_Bones, 0, 400);
-            DoOpacitySlider("Transform Render Scale - DummyPoly", ref TransformScale_DummyPoly, 0, 400);
-            DoOpacitySlider("Transform Render Scale - Other", ref TransformScale, 0, 400);
+            DoOpacitySlider(Loc.T("Transform Render Scale - Bones"), ref TransformScale_Bones, 0, 400);
+            DoOpacitySlider(Loc.T("Transform Render Scale - DummyPoly"), ref TransformScale_DummyPoly, 0, 400);
+            DoOpacitySlider(Loc.T("Transform Render Scale - Other"), ref TransformScale, 0, 400);
 
             ImGui.Separator();
 
             EnableChrHitCapsule =
-                MenuBar.CheckboxDual("Character Hit Capsule",
+                MenuBar.CheckboxDual(Loc.T("Character Hit Capsule"),
                     EnableChrHitCapsule,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperChrHitCapsule);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperChrHitCapsule);
 
-            DoOpacitySlider("Character Hit Capsule Opacity", ref ChrHitCapsuleOpacity);
+            DoOpacitySlider(Loc.T("Character Hit Capsule Opacity"), ref ChrHitCapsuleOpacity);
 
             EnableChrHitCapsule_StartOfAnim =
-                MenuBar.CheckboxDual("Character Hit Capsule (Start Of Anim)",
+                MenuBar.CheckboxDual(Loc.T("Character Hit Capsule (Start Of Anim)"),
                     EnableChrHitCapsule_StartOfAnim,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperChrHitCapsule);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperChrHitCapsule);
 
-            DoOpacitySlider("Character Hit Capsule (Start Of Anim) Opacity", ref ChrHitCapsuleOpacity_StartOfAnim);
+            DoOpacitySlider(Loc.T("Character Hit Capsule (Start Of Anim) Opacity"), ref ChrHitCapsuleOpacity_StartOfAnim);
 
             ImGui.Separator();
 
@@ -240,12 +241,12 @@ namespace DSAnimStudio
             bool prevShowAttackNames = EnableAttackNames;
 
             EnableAttackHitShapes =
-                MenuBar.CheckboxDual("Attack Hit Shapes",
+                MenuBar.CheckboxDual(Loc.T("Attack Hit Shapes"),
                     EnableAttackHitShapes,
                     enabled: true);
 
             EnableAttackNames =
-                MenuBar.CheckboxDual("Attack Names",
+                MenuBar.CheckboxDual(Loc.T("Attack Names"),
                     EnableAttackNames,
                     enabled: true);
 
@@ -262,59 +263,59 @@ namespace DSAnimStudio
             ImGui.Separator();
 
             EnableAttackDistanceLine =
-                MenuBar.CheckboxDual("Attack Distance Line",
+                MenuBar.CheckboxDual(Loc.T("Attack Distance Line"),
                     EnableAttackDistanceLine,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperAttackDistanceLine);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperAttackDistanceLine);
 
-            DoOpacitySlider("Attack Distance Line Opacity", ref AttackDistanceLineOpacity);
-            DoOpacitySlider("Attack Distance Line Opacity (Secondary)", ref AttackDistanceLineOpacity_Secondary);
+            DoOpacitySlider(Loc.T("Attack Distance Line Opacity"), ref AttackDistanceLineOpacity);
+            DoOpacitySlider(Loc.T("Attack Distance Line Opacity (Secondary)"), ref AttackDistanceLineOpacity_Secondary);
 
             EnableAttackDistanceText =
-                MenuBar.CheckboxDual("Attack Distance Text",
+                MenuBar.CheckboxDual(Loc.T("Attack Distance Text"),
                     EnableAttackDistanceText,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperAttackDistanceText);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperAttackDistanceText);
 
-            DoOpacitySlider("Attack Distance Text Opacity", ref AttackDistanceTextOpacity);
-            DoOpacitySlider("Attack Distance Text Opacity (Secondary)", ref AttackDistanceTextOpacity_Secondary);
+            DoOpacitySlider(Loc.T("Attack Distance Text Opacity"), ref AttackDistanceTextOpacity);
+            DoOpacitySlider(Loc.T("Attack Distance Text Opacity (Secondary)"), ref AttackDistanceTextOpacity_Secondary);
 
 
 
             ImGui.Separator();
             
             EnableSoundInstanceTransforms =
-                MenuBar.CheckboxDual("Sound Instance Transforms",
+                MenuBar.CheckboxDual(Loc.T("Sound Instance Transforms"),
                     EnableSoundInstanceTransforms,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperSoundEventTransforms);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperSoundEventTransforms);
             
             EnableSoundInstanceNames =
-                MenuBar.CheckboxDual("Sound Instance Names",
+                MenuBar.CheckboxDual(Loc.T("Sound Instance Names"),
                     EnableSoundInstanceNames,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperSoundEventTexts);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperSoundEventTexts);
             
             ImGui.Separator();
             
             EnableRootMotionStartTransform =
-                MenuBar.CheckboxDual("Root Motion Start Transform",
+                MenuBar.CheckboxDual(Loc.T("Root Motion Start Transform"),
                     EnableRootMotionStartTransform,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperRootMotionStartLocation);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperRootMotionStartLocation);
             
             EnableRootMotionTransform =
-                MenuBar.CheckboxDual("Root Motion Transform",
+                MenuBar.CheckboxDual(Loc.T("Root Motion Transform"),
                     EnableRootMotionTransform,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperRootMotionCurrentLocation);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperRootMotionCurrentLocation);
             
             EnableRootMotionTrail =
-                MenuBar.CheckboxDual("Root Motion Trail",
+                MenuBar.CheckboxDual(Loc.T("Root Motion Trail"),
                     EnableRootMotionTrail,
-                    enabled: true, shortcut: "(This Color)", shortcutColor: Main.Colors.ColorHelperRootMotionTrail);
+                    enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Main.Colors.ColorHelperRootMotionTrail);
 
             float rootMotionUpdateRate = RootMotionTrailUpdateRate;
-            ImGui.SliderFloat("Root Motion Path Update Rate", ref rootMotionUpdateRate, 1, 300, "%.3f Hz");
+            ImGui.SliderFloat(Loc.T("Root Motion Path Update Rate"), ref rootMotionUpdateRate, 1, 300, "%.3f Hz");
             anyFieldFocused |= ImGui.IsItemActive();
             RootMotionTrailUpdateRate = Math.Max(Math.Min(rootMotionUpdateRate, 300), 1);
 
             int rootMotionMaxSamples = RootMotionTrailSampleMax;
-            ImGui.SliderInt("Root Motion Path Sample Max", ref rootMotionMaxSamples, 1, RootMotionTrailSampleMaxInfinityValue, rootMotionMaxSamples >= RootMotionTrailSampleMaxInfinityValue ? "%d (Unlimited)" : "Up to %d");
+            ImGui.SliderInt(Loc.T("Root Motion Path Sample Max"), ref rootMotionMaxSamples, 1, RootMotionTrailSampleMaxInfinityValue, rootMotionMaxSamples >= RootMotionTrailSampleMaxInfinityValue ? Loc.T("%d (Unlimited)") : "Up to %d");
             anyFieldFocused |= ImGui.IsItemActive();
             RootMotionTrailSampleMax = Math.Max(Math.Min(rootMotionMaxSamples, RootMotionTrailSampleMaxInfinityValue), 1);
 
@@ -323,23 +324,23 @@ namespace DSAnimStudio
             // RemoManager.EnableDummyPrims =
             //     MenuBar.CheckboxDual("Cutscene Dummies",
             //     RemoManager.EnableDummyPrims,
-            //     enabled: true, shortcut: "(This Color)", shortcutColor: Microsoft.Xna.Framework.Color.Lime);
+            //     enabled: true, shortcut: Loc.T("(This Color)"), shortcutColor: Microsoft.Xna.Framework.Color.Lime);
 
-            DoOpacitySlider("Attack (Action 1) Hitbox Opacity", ref AttackBehaviorHitboxOpacity);
-            DoOpacitySlider("CommonBehavior (Action 5) Hitbox Opacity", ref CommonBehaviorHitboxOpacity);
-            DoOpacitySlider("ThrowAttack (Action 304) Hitbox Opacity", ref ThrowAttackBehaviorHitboxOpacity);
-            DoOpacitySlider("PCBehavior (Action 307) Hitbox Opacity", ref PCBehaviorHitboxOpacity);
+            DoOpacitySlider(Loc.T("Attack (Action 1) Hitbox Opacity"), ref AttackBehaviorHitboxOpacity);
+            DoOpacitySlider(Loc.T("CommonBehavior (Action 5) Hitbox Opacity"), ref CommonBehaviorHitboxOpacity);
+            DoOpacitySlider(Loc.T("ThrowAttack (Action 304) Hitbox Opacity"), ref ThrowAttackBehaviorHitboxOpacity);
+            DoOpacitySlider(Loc.T("PCBehavior (Action 307) Hitbox Opacity"), ref PCBehaviorHitboxOpacity);
             ImGui.Separator();
-            DoOpacitySlider("DummyPoly Cluster Opacity", ref DummyPolyClusterOpacity);
-            ImGui.InputInt("DummyPoly Cluster Threshold", ref DummyPolyClusterThreshold);
+            DoOpacitySlider(Loc.T("DummyPoly Cluster Opacity"), ref DummyPolyClusterOpacity);
+            ImGui.InputInt(Loc.T("DummyPoly Cluster Threshold"), ref DummyPolyClusterThreshold);
             if (DummyPolyClusterThreshold < 2)
                 DummyPolyClusterThreshold = 2;
             ImGui.Separator();
-            DoOpacitySlider("Stationary DummyPoly Opacity", ref StationaryDummyPolyOpacity);
+            DoOpacitySlider(Loc.T("Stationary DummyPoly Opacity"), ref StationaryDummyPolyOpacity);
             
             ImGui.Separator();
 
-            EnableXRayMode = MenuBar.CheckboxDual("Helper X-Ray Mode", EnableXRayMode);
+            EnableXRayMode = MenuBar.CheckboxDual(Loc.T("Helper X-Ray Mode"), EnableXRayMode);
         }
 
         private static void DoOpacitySlider(string name, ref float val, float min = 0, float max = 100)

@@ -1,10 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using DSAnimStudio.ImguiOSD;
 using ImGuiNET;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public partial class TaeSearch
@@ -19,15 +20,15 @@ namespace DSAnimStudio
             
             
             
-            if (ImGui.BeginTable($"##TaeSearchTable7", 5,
+            if (ImGui.BeginTable(Loc.TF("##TaeSearchTable7"), 5,
                     ImGuiTableFlags.Borders | ImGuiTableFlags.Resizable |
                     ImGuiTableFlags.NoSavedSettings))
             {
-                ImGui.TableSetupColumn("Condition Type", ImGuiTableColumnFlags.None, 5);
-                ImGui.TableSetupColumn("Action", ImGuiTableColumnFlags.None, 5);
-                ImGui.TableSetupColumn("Param", ImGuiTableColumnFlags.None, 5);
-                ImGui.TableSetupColumn("Operator", ImGuiTableColumnFlags.None, 1.25f);
-                ImGui.TableSetupColumn("Operand", ImGuiTableColumnFlags.None, 5);
+                ImGui.TableSetupColumn(Loc.T("Condition Type"), ImGuiTableColumnFlags.None, 5);
+                ImGui.TableSetupColumn(Loc.T("Action"), ImGuiTableColumnFlags.None, 5);
+                ImGui.TableSetupColumn(Loc.T("Param"), ImGuiTableColumnFlags.None, 5);
+                ImGui.TableSetupColumn(Loc.T("Operator"), ImGuiTableColumnFlags.None, 1.25f);
+                ImGui.TableSetupColumn(Loc.T("Operand"), ImGuiTableColumnFlags.None, 5);
     
                 ImGui.TableHeadersRow();
             }
@@ -55,7 +56,7 @@ namespace DSAnimStudio
                     // Column 1 - Condition Type
                     ImGui.TableNextColumn();
 
-                    var clickedDeleteCondition = Tools.SimpleClickButton("X");
+                    var clickedDeleteCondition = Tools.SimpleClickButton(Loc.T("X"));
 
                     if (ImGui.IsItemActive())
                         anyFieldFocused = true;
@@ -119,7 +120,7 @@ namespace DSAnimStudio
             
             ImGui.EndTable();
             
-            var clickedAddCondition = Tools.SimpleClickButton("Add Condition");
+            var clickedAddCondition = Tools.SimpleClickButton(Loc.T("Add Condition"));
             
             if (ImGui.IsItemActive())
                 anyFieldFocused = true;

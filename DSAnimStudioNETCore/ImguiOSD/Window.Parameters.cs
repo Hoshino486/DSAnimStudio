@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Vector2 = System.Numerics.Vector2;
 using TAE = SoulsAssetPipeline.Animation.TAE;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -21,7 +22,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.SaveAlways;
 
-            public override string NewImguiWindowTitle => "Parameters";
+            public override string NewImguiWindowTitle => Loc.Win("Parameters");
             
             public bool IsInEditMode = false;
 
@@ -40,12 +41,13 @@ namespace DSAnimStudio.ImguiOSD
 
             string CurrentUnmappedEventHex = "";
 
-            static string[] listBox_EntityTypeNames = new string[]
+            // 属性而不是静态字段：切换界面语言后会重新求值。
+            static string[] listBox_EntityTypeNames => new string[]
             {
-                "0: Character (cXXXX_YYYY)",
-                "1: Object (oXXXX_YYYY)",
-                "2: Map Piece (mXXXX_YYYY)",
-                "4: Dummy Node (dXXXX_YYYY)",
+                Loc.T("0: Character (cXXXX_YYYY)"),
+                Loc.T("1: Object (oXXXX_YYYY)"),
+                Loc.T("2: Map Piece (mXXXX_YYYY)"),
+                Loc.T("4: Dummy Node (dXXXX_YYYY)"),
             };
             static List<SoulsAssetPipeline.Animation.TAE.ActionTrack.ActionTrackDataStruct.EntityTypes> listBox_EntityTypes = 
                 new List<SoulsAssetPipeline.Animation.TAE.ActionTrack.ActionTrackDataStruct.EntityTypes>
@@ -56,12 +58,12 @@ namespace DSAnimStudio.ImguiOSD
                 SoulsAssetPipeline.Animation.TAE.ActionTrack.ActionTrackDataStruct.EntityTypes.DummyNode
             };
 
-            static string[] listBox_ActionTrackDataTypeNames = new string[]
+            static string[] listBox_ActionTrackDataTypeNames => new string[]
             {
-                "0: Standard",
-                "16: Unknown",
-                "128: Specific Scene Entity",
-                "192: Unknown",
+                Loc.T("0: Standard"),
+                Loc.T("16: Unknown"),
+                Loc.T("128: Specific Scene Entity"),
+                Loc.T("192: Unknown"),
             };
             static List<SoulsAssetPipeline.Animation.TAE.ActionTrack.ActionTrackDataType> listBox_EventGroupDataTypes =
                 new List<SoulsAssetPipeline.Animation.TAE.ActionTrack.ActionTrackDataType>
@@ -87,13 +89,13 @@ namespace DSAnimStudio.ImguiOSD
                 int curValType = _paramTypeValues.IndexOf(inputParamType);
 
                 ImGui.PushItemWidth(60 * Main.DPI);
-                if (ImGui.BeginCombo($"###ParamTypeEditor_{paramIndex}", _paramTypeNames[curValType]))
+                if (ImGui.BeginCombo(Loc.TF("###ParamTypeEditor_{0}", paramIndex), _paramTypeNames[curValType]))
                 {
                     for (int i = 0; i < _paramTypeNames.Length; i++)
                     {
                         bool selected = i == curValType;
                         bool prevSelected = selected;
-                        ImGui.Selectable($"{_paramTypeNames[i]}###ParamTypeEditor_{paramIndex}_Type{i}", ref selected);
+                        ImGui.Selectable(Loc.TF("{0}###ParamTypeEditor_{1}_Type{2}", _paramTypeNames[i], paramIndex, i), ref selected);
                         if (selected && !prevSelected)
                             curValType = i;
                     }
@@ -189,7 +191,7 @@ namespace DSAnimStudio.ImguiOSD
                         //ImGui.SameLine();
                         //ImGui.Text(actionTypeString);
                         ImGui.SameLine();
-                        ImGui.Checkbox($"###{actIndex}_TemplateEditModeToggle", ref editMode);
+                        ImGui.Checkbox(Loc.TF("###{0}_TemplateEditModeToggle", actIndex), ref editMode);
                         IsInEditMode = editMode;
 
                         ImGui.SameLine();
@@ -219,7 +221,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                 string evTemplateName = act.Template.Name;
                                 string prevEvTemplateName = evTemplateName;
-                                ImGui.InputText($"Action {act.Type} Name###{actIndex}_TemplateEditModeToggle_Template{act.Type}_Name", ref evTemplateName, 256);
+                                ImGui.InputText(Loc.TF("Action {0} Name###{1}_TemplateEditModeToggle_Template{2}_Name", act.Type, actIndex, act.Type), ref evTemplateName, 256);
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 if (evTemplateName != prevEvTemplateName)
                                 {
@@ -237,12 +239,12 @@ namespace DSAnimStudio.ImguiOSD
                                 }
 
                                 ImGui.Separator();
-                                if (Tools.SimpleClickButton("Quick Save CustomTemplate XML"))
+                                if (Tools.SimpleClickButton(Loc.T("Quick Save CustomTemplate XML")))
                                 {
                                     MainTaeScreen.SaveCustomXMLTemplate();
                                 }
                                 ImGui.Separator();
-                                if (Tools.SimpleClickButton("Immediately Force Refresh Template On All Actions (Slow)"))
+                                if (Tools.SimpleClickButton(Loc.T("Immediately Force Refresh Template On All Actions (Slow)")))
                                 {
                                     MainTaeScreen.RefreshTemplateForAllActions(act.Template, isSoftRefresh: false);
                                 }
@@ -288,13 +290,13 @@ namespace DSAnimStudio.ImguiOSD
                             {
 
 
-                                if (ImGui.BeginTable($"##Window.Parameters.Table|New5", 3,
+                                if (ImGui.BeginTable(Loc.TF("##Window.Parameters.Table|New5"), 3,
                                         ImGuiTableFlags.Borders | ImGuiTableFlags.Resizable |
                                         ImGuiTableFlags.NoSavedSettings))
                                 {
-                                    ImGui.TableSetupColumn("Type", ImGuiTableColumnFlags.None, columnA);
-                                    ImGui.TableSetupColumn("Name", ImGuiTableColumnFlags.None, columnB);
-                                    ImGui.TableSetupColumn("Value", ImGuiTableColumnFlags.None, columnC);
+                                    ImGui.TableSetupColumn(Loc.T("Type"), ImGuiTableColumnFlags.None, columnA);
+                                    ImGui.TableSetupColumn(Loc.T("Name"), ImGuiTableColumnFlags.None, columnB);
+                                    ImGui.TableSetupColumn(Loc.T("Value"), ImGuiTableColumnFlags.None, columnC);
 
                                     ImGui.TableHeadersRow();
                                 }
@@ -309,7 +311,7 @@ namespace DSAnimStudio.ImguiOSD
 
                             if (act.Parameters.Template.Count == 0)
                             {
-                                if (Tools.SimpleClickButton($"+###AddFieldHere_-1"))
+                                if (Tools.SimpleClickButton(Loc.TF("+###AddFieldHere_-1")))
                                 {
                                     act.Template.Add(new TAE.Template.ParameterTemplate()
                                     {
@@ -357,7 +359,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                     ImGui.SameLine();
 
-                                    if (Tools.SimpleClickButton($"X###RemoveFieldHere_{templateImguiParamIndex}"))
+                                    if (Tools.SimpleClickButton(Loc.TF("X###RemoveFieldHere_{0}", templateImguiParamIndex)))
                                     {
                                         act.Template.Remove(p);
                                         act.NewLoadParamsFromBytes(lenientOnAssert: true, act.Template);
@@ -374,7 +376,7 @@ namespace DSAnimStudio.ImguiOSD
                                     }
                                     ImGui.SameLine();
 
-                                    if (Tools.SimpleClickButton($"+###AddFieldHere_{templateImguiParamIndex}"))
+                                    if (Tools.SimpleClickButton(Loc.TF("+###AddFieldHere_{0}", templateImguiParamIndex)))
                                     {
                                         act.Template.Insert(act.Template.IndexOf(p), p.GetCopy());
                                         act.NewLoadParamsFromBytes(lenientOnAssert: true, act.Template);
@@ -398,7 +400,7 @@ namespace DSAnimStudio.ImguiOSD
                                     ImGui.SameLine();
                                     bool isAssert = p.ValueToAssert != null;
                                     bool prevIsAssert = isAssert;
-                                    ImGui.Checkbox($"###AssertFlag{templateImguiParamIndex}", ref isAssert);
+                                    ImGui.Checkbox(Loc.TF("###AssertFlag{0}", templateImguiParamIndex), ref isAssert);
                                     if (isAssert != prevIsAssert)
                                     {
                                         if (isAssert)
@@ -416,7 +418,7 @@ namespace DSAnimStudio.ImguiOSD
                                     string prevName = currentName;
                                     var prevNameIsUnk = p.NameIsUnk;
                                     ImGui.PushItemWidth(256 * Main.DPI);
-                                    ImGui.InputText($"###NameInput{templateImguiParamIndex}", ref currentName, 256);
+                                    ImGui.InputText(Loc.TF("###NameInput{0}", templateImguiParamIndex), ref currentName, 256);
                                     ImGui.PopItemWidth();
                                     anyFieldFocused |= ImGui.IsItemActive();
                                     if (string.IsNullOrWhiteSpace(currentName))
@@ -598,7 +600,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                         //ImGui.PushItemWidth(24);
                                         int prevItemIndex = currentItemIndex;
-                                        ImGui.Combo($"###{actIndex}|{pIndex}|Combo", ref currentItemIndex, dispItems, items.Length);
+                                        ImGui.Combo(Loc.TF("###{0}|{1}|Combo", actIndex, pIndex), ref currentItemIndex, dispItems, items.Length);
                                         //ImGui.PopItemWidth();
                                         if (currentItemIndex != prevItemIndex && currentItemIndex >= 0 && currentItemIndex < items.Length)
                                             currentVal = Convert.ToInt32(p.EnumEntries[currentItemIndex].Value);
@@ -814,7 +816,7 @@ namespace DSAnimStudio.ImguiOSD
                                     {
                                         bool curValBool = currentVal == 1;
                                         bool prevValBool = curValBool;
-                                        ImGui.Checkbox($"###{actIndex}|{pIndex}__Checkbox", ref curValBool);
+                                        ImGui.Checkbox(Loc.TF("###{0}|{1}__Checkbox", actIndex, pIndex), ref curValBool);
                                         if (curValBool != prevValBool)
                                             currentVal = (byte)(curValBool ? 1 : 0);
                                         ImGui.SameLine();
@@ -911,7 +913,7 @@ namespace DSAnimStudio.ImguiOSD
                                     if (isAssertValue)
                                         ImGui.EndDisabled();
                                     ImGui.SameLine();
-                                    if (ImGui.TreeNode($"Enum Values###TemplateEdit_Parameter{templateImguiParamIndex}_EnumValueTree"))
+                                    if (ImGui.TreeNode(Loc.TF("Enum Values###TemplateEdit_Parameter{0}_EnumValueTree", templateImguiParamIndex)))
                                     {
                                         if (p.EnumEntries != null)
                                         {
@@ -919,7 +921,7 @@ namespace DSAnimStudio.ImguiOSD
                                             for (int enumEntryIndex = 0; enumEntryIndex < p.EnumEntries.Count; enumEntryIndex++)
                                             {
                                                 var enumEntry = p.EnumEntries[enumEntryIndex];
-                                                if (Tools.SimpleClickButton("X"))
+                                                if (Tools.SimpleClickButton(Loc.T("X")))
                                                 {
                                                     p.EnumEntries.Remove(enumEntry);
                                                     if (p.EnumEntries.Count == 0)
@@ -931,7 +933,7 @@ namespace DSAnimStudio.ImguiOSD
                                                 string curEnumEntryName = enumEntry.Key;
                                                 var prevEnumEntryName = curEnumEntryName;
                                                 ImGui.SameLine();
-                                                ImGui.InputText($"###{actIndex}|{pIndex}_EnumEntry{enumEntryIndex}_Name", ref curEnumEntryName, 256);
+                                                ImGui.InputText(Loc.TF("###{0}|{1}_EnumEntry{2}_Name", actIndex, pIndex, enumEntryIndex), ref curEnumEntryName, 256);
                                                 anyFieldFocused |= ImGui.IsItemActive();
                                                 if (curEnumEntryName != prevEnumEntryName)
                                                 {
@@ -947,7 +949,7 @@ namespace DSAnimStudio.ImguiOSD
                                                     int curEnumVal = Convert.ToInt32(enumEntry.Value);
                                                     int prevEnumVal = curEnumVal;
                                                     ImGui.SameLine();
-                                                    ImGui.InputInt($"###{actIndex}|{pIndex}_EnumEntry{enumEntryIndex}",
+                                                    ImGui.InputInt(Loc.TF("###{0}|{1}_EnumEntry{2}", actIndex, pIndex, enumEntryIndex),
                                                         ref curEnumVal, 1, 5, intHex ? (ImGuiInputTextFlags.CharsHexadecimal |
                                                         ImGuiInputTextFlags.CharsUppercase) : ImGuiInputTextFlags.None);
                                                     anyFieldFocused |= ImGui.IsItemActive();
@@ -973,7 +975,7 @@ namespace DSAnimStudio.ImguiOSD
                                                     float curEnumVal = Convert.ToSingle(enumEntry.Value);
                                                     float prevEnumVal = curEnumVal;
                                                     ImGui.SameLine();
-                                                    ImGui.InputFloat($"###{actIndex}|{pIndex}_EnumEntry{enumEntryIndex}", ref curEnumVal);
+                                                    ImGui.InputFloat(Loc.TF("###{0}|{1}_EnumEntry{2}", actIndex, pIndex, enumEntryIndex), ref curEnumVal);
                                                     anyFieldFocused |= ImGui.IsItemActive();
                                                     if (curEnumVal != prevEnumVal)
                                                     {
@@ -986,7 +988,7 @@ namespace DSAnimStudio.ImguiOSD
                                                     System.Numerics.Vector2 curEnumVal = (System.Numerics.Vector2)(act.Parameters[pIndex]);
                                                     System.Numerics.Vector2 prevEnumVal = curEnumVal;
                                                     ImGui.SameLine();
-                                                    ImGui.InputFloat2($"###{actIndex}|{pIndex}_EnumEntry{enumEntryIndex}", ref curEnumVal);
+                                                    ImGui.InputFloat2(Loc.TF("###{0}|{1}_EnumEntry{2}", actIndex, pIndex, enumEntryIndex), ref curEnumVal);
                                                     anyFieldFocused |= ImGui.IsItemActive();
                                                     if (curEnumVal != prevEnumVal)
                                                     {
@@ -1005,7 +1007,7 @@ namespace DSAnimStudio.ImguiOSD
                                                         bool curEnumValBool = curEnumVal == 1;
                                                         bool prevEnumValBool = curEnumValBool;
                                                         ImGui.Checkbox(
-                                                            $"###{actIndex}|{pIndex}_EnumEntry{enumEntryIndex}__Checkbox",
+                                                            Loc.TF("###{0}|{1}_EnumEntry{2}__Checkbox", actIndex, pIndex, enumEntryIndex),
                                                             ref curEnumValBool);
                                                         if (curEnumValBool != prevEnumValBool)
                                                             curEnumVal = (byte)(curEnumValBool ? 1 : 0);
@@ -1021,7 +1023,7 @@ namespace DSAnimStudio.ImguiOSD
                                                     int prevEnumValInt = curEnumValInt;
 
                                                     
-                                                    ImGui.InputInt( $"###{actIndex}|{pIndex}_EnumEntry{enumEntryIndex}", ref curEnumValInt, 
+                                                    ImGui.InputInt( Loc.TF("###{0}|{1}_EnumEntry{2}", actIndex, pIndex, enumEntryIndex), ref curEnumValInt, 
                                                         1, 5, intHex ? (ImGuiInputTextFlags.CharsHexadecimal |
                                                                         ImGuiInputTextFlags.CharsUppercase) : ImGuiInputTextFlags.None);
 
@@ -1042,7 +1044,7 @@ namespace DSAnimStudio.ImguiOSD
                                                     byte[] newBuf = new byte[buf.Length];
                                                     string current = string.Join("", buf.Select(bb => bb.ToString("X2")));
                                                     ImGui.SameLine();
-                                                    ImGui.InputText($"###{actIndex}|{pIndex}_EnumEntry{enumEntryIndex}", ref current, (uint)((p.AobLength * 2) - 0), ImGuiInputTextFlags.CharsHexadecimal |
+                                                    ImGui.InputText(Loc.TF("###{0}|{1}_EnumEntry{2}", actIndex, pIndex, enumEntryIndex), ref current, (uint)((p.AobLength * 2) - 0), ImGuiInputTextFlags.CharsHexadecimal |
                                                         ImGuiInputTextFlags.CharsUppercase);
                                                     anyFieldFocused |= ImGui.IsItemActive();
                                                     //current = current.Replace(" ", "");
@@ -1068,7 +1070,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                         }
 
-                                        if (Tools.SimpleClickButton("+"))
+                                        if (Tools.SimpleClickButton(Loc.T("+")))
                                         {
                                             if (p.EnumEntries == null)
                                             {
@@ -1118,7 +1120,7 @@ namespace DSAnimStudio.ImguiOSD
                                     var extraDataAtEnd = string.Join(" ", act.ParameterBytes
                                         .Skip(act.ParameterBytes.Length - extraDataAtEndCount)
                                         .Select(xx => xx.ToString("X2")));
-                                    ImGui.TextWrapped($"WARNING: Data {extraDataAtEndCount} bytes longer than template.\n" +
+                                    ImGui.TextWrapped(Loc.TF("WARNING: Data {0} bytes longer than template.\n", extraDataAtEndCount) +
                                         $"Remaining Unmapped Data:\n{extraDataAtEnd}");
                                     ImGui.PopStyleColor();
                                 }
@@ -1126,7 +1128,7 @@ namespace DSAnimStudio.ImguiOSD
                                 {
                                     ImGui.PushStyleColor(ImGuiCol.Text, new System.Numerics.Vector4(1, 0, 0, 1));
                                     ImGui.NewLine();
-                                    ImGui.TextWrapped($"WARNING: Template {(templateByteCount - act.OriginalParamBytesLength)} bytes longer than data.");
+                                    ImGui.TextWrapped(Loc.TF("WARNING: Template {0} bytes longer than data.", (templateByteCount - act.OriginalParamBytesLength)));
                                     ImGui.PopStyleColor();
                                 }
                             }
@@ -1142,7 +1144,7 @@ namespace DSAnimStudio.ImguiOSD
 
                             if (editMode)
                             {
-                                if (Tools.SimpleClickButton($"Add Template for Event {act.Type}"))
+                                if (Tools.SimpleClickButton(Loc.TF("Add Template for Event {0}", act.Type)))
                                 {
                                     var newEvTemplate = new TAE.Template.ActionTemplate(act.Type, $"Type{act.Type}", MainTaeScreen.FileContainer.Proj.RootTaeProperties.BigEndian);
                                     newEvTemplate.Add(new TAE.Template.ParameterTemplate()
@@ -1158,12 +1160,12 @@ namespace DSAnimStudio.ImguiOSD
                             }
 
                             ImGui.PushStyleColor(ImGuiCol.Text, new System.Numerics.Vector4(1, 0, 0, 1));
-                            ImGui.TextWrapped("Unmapped Event Data:\n" + string.Join(" ", act.ParameterBytes.Select(xx => xx.ToString("X2"))));
+                            ImGui.TextWrapped(Loc.T("Unmapped Event Data:\n") + string.Join(" ", act.ParameterBytes.Select(xx => xx.ToString("X2"))));
                             ImGui.PopStyleColor();
 
 
 
-                            ImGui.Button("Copy to clipboard" + $"###{actIndex}");
+                            ImGui.Button(Loc.T("Copy to clipboard") + $"###{actIndex}");
                             if (ImGui.IsItemClicked())
                             {
                                 System.Windows.Forms.Clipboard.SetText(string.Join(" ", act.ParameterBytes.Select(xx => xx.ToString("X2"))));
@@ -1176,12 +1178,12 @@ namespace DSAnimStudio.ImguiOSD
                         {
                             ImGui.Separator();
 
-                            ImGui.LabelText("", "CUTSCENE DATA");
+                            ImGui.LabelText(Loc.T(""), Loc.T("CUTSCENE DATA"));
 
 
 
                             int groupTypeIndex = listBox_EventGroupDataTypes.IndexOf(actionTrack.TrackData.DataType);
-                            ImGui.ListBox("Cutscene Event Context", ref groupTypeIndex, listBox_ActionTrackDataTypeNames, listBox_ActionTrackDataTypeNames.Length);
+                            ImGui.ListBox(Loc.T("Cutscene Event Context"), ref groupTypeIndex, listBox_ActionTrackDataTypeNames, listBox_ActionTrackDataTypeNames.Length);
                             actionTrack.TrackData.DataType = groupTypeIndex < 0 ?
                                 SoulsAssetPipeline.Animation.TAE.ActionTrack.ActionTrackDataType.TrackData0
                                 : listBox_EventGroupDataTypes[groupTypeIndex];
@@ -1192,34 +1194,34 @@ namespace DSAnimStudio.ImguiOSD
                             {
                                 ImGui.Separator();
 
-                                ImGui.LabelText("", "CUTSCENE ENTITY SELECTION");
+                                ImGui.LabelText(Loc.T(""), Loc.T("CUTSCENE ENTITY SELECTION"));
 
                                 int entityTypeIndex = listBox_EntityTypes.IndexOf(actionTrack.TrackData.CutsceneEntityType);
-                                ImGui.ListBox("Entity Type" + $"###{actIndex}", ref entityTypeIndex, listBox_EntityTypeNames, listBox_EntityTypeNames.Length);
+                                ImGui.ListBox(Loc.T("Entity Type") + $"###{actIndex}", ref entityTypeIndex, listBox_EntityTypeNames, listBox_EntityTypeNames.Length);
                                 actionTrack.TrackData.CutsceneEntityType = entityTypeIndex < 0 ?
                                     SoulsAssetPipeline.Animation.TAE.ActionTrack.ActionTrackDataStruct.EntityTypes.Character
                                     : listBox_EntityTypes[entityTypeIndex];
 
                                 int x = actionTrack.TrackData.CutsceneEntityIDPart1;
-                                ImGui.InputInt("Entity ID First Half (XXXX)" + $"###{actIndex}", ref x);
+                                ImGui.InputInt(Loc.T("Entity ID First Half (XXXX)") + $"###{actIndex}", ref x);
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 x = Math.Min(Math.Max(x, 0), 9999);
                                 actionTrack.TrackData.CutsceneEntityIDPart1 = (short)x;
 
                                 x = actionTrack.TrackData.CutsceneEntityIDPart2;
-                                ImGui.InputInt("Entity ID Second Half (YYYY)" + $"###{actIndex}", ref x);
+                                ImGui.InputInt(Loc.T("Entity ID Second Half (YYYY)") + $"###{actIndex}", ref x);
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 x = Math.Min(Math.Max(x, 0), 9999);
                                 actionTrack.TrackData.CutsceneEntityIDPart2 = (short)x;
 
                                 x = actionTrack.TrackData.Area;
-                                ImGui.InputInt("Entity Area (-1: Default)" + $"###{actIndex}", ref x);
+                                ImGui.InputInt(Loc.T("Entity Area (-1: Default)") + $"###{actIndex}", ref x);
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 x = Math.Min(Math.Max(x, -1), 99);
                                 actionTrack.TrackData.Area = (sbyte)x;
 
                                 x = actionTrack.TrackData.Block;
-                                ImGui.InputInt("Entity Block (-1: Default)" + $"###{actIndex}", ref x);
+                                ImGui.InputInt(Loc.T("Entity Block (-1: Default)") + $"###{actIndex}", ref x);
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 x = Math.Min(Math.Max(x, -1), 99);
                                 actionTrack.TrackData.Block = (sbyte)x;
@@ -1234,9 +1236,9 @@ namespace DSAnimStudio.ImguiOSD
 
 
 
-                        if (ImGui.TreeNode($"Action Info##{nameof(Window)}.{nameof(Window.Parameters)}_{nameof(DSAProj.EditorInfo)}_Tree"))
+                        if (ImGui.TreeNode(Loc.T("Action Info") + $"##{nameof(Window)}.{nameof(Window.Parameters)}_{nameof(DSAProj.EditorInfo)}_Tree"))
                         {
-                            ImGui.Text($"Start Time: {act.StartTime}, End Time: {act.EndTime}");
+                            ImGui.Text(Loc.TF("Start Time: {0}, End Time: {1}", act.StartTime, act.EndTime));
 
                             
 
@@ -1269,10 +1271,10 @@ namespace DSAnimStudio.ImguiOSD
                             ImGui.TreePop();
                         }
 
-                        ImGui.Button("Delete Action...");
+                        ImGui.Button(Loc.T("Delete Action..."));
                         if (ImGui.IsItemClicked())
                         {
-                            DialogManager.AskYesNo("Delete Action?", "Are you sure you want to delete this action?", choice =>
+                            DialogManager.AskYesNo(Loc.T("Delete Action?"), Loc.T("Are you sure you want to delete this action?"), choice =>
                             {
                                 if (choice)
                                 {
@@ -1291,7 +1293,7 @@ namespace DSAnimStudio.ImguiOSD
                                                 MainTaeScreen.NewSelectedActions.Remove(act);
                                             anim.SAFE_SetIsModified(true);
                                         }
-                                    }, actionDescription: "Delete action");
+                                    }, actionDescription: Loc.T("Delete action"));
 
                                     breakAfterThisAction = true;
                                 }
@@ -1299,7 +1301,7 @@ namespace DSAnimStudio.ImguiOSD
                         }
                         ImGui.Separator();
 
-                        ImGui.Text(" ");
+                        ImGui.Text(Loc.T(" "));
 
                         
 

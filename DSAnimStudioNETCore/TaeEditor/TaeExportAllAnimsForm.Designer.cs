@@ -1,4 +1,6 @@
-﻿namespace DSAnimStudio.TaeEditor
+﻿using DSAnimStudio.Localization;
+
+namespace DSAnimStudio.TaeEditor
 {
     partial class TaeExportAllAnimsForm
     {
@@ -28,15 +30,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("a00_0000.hkx");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("a00_0001.hkx");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("a00", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode(Loc.T("a00_0000.hkx"));
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode(Loc.T("a00_0001.hkx"));
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode(Loc.T("a00"), new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("a01_0000.hkx");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("a01", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode(Loc.T("a01_0000.hkx"));
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode(Loc.T("a01"), new System.Windows.Forms.TreeNode[] {
             treeNode4});
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Skeleton.hkx");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode(Loc.T("Skeleton.hkx"));
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxDestinationFolder = new System.Windows.Forms.TextBox();
             this.buttonBrowse = new System.Windows.Forms.Button();
@@ -61,7 +63,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Destination Folder:";
+            this.label1.Text = Loc.T("Destination Folder:");
             // 
             // textBoxDestinationFolder
             // 
@@ -85,7 +87,7 @@
             this.buttonBrowse.Name = "buttonBrowse";
             this.buttonBrowse.Size = new System.Drawing.Size(133, 23);
             this.buttonBrowse.TabIndex = 2;
-            this.buttonBrowse.Text = "Browse...";
+            this.buttonBrowse.Text = Loc.T("Browse...");
             this.buttonBrowse.UseCompatibleTextRendering = true;
             this.buttonBrowse.UseVisualStyleBackColor = true;
             this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
@@ -98,7 +100,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 15);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Export As File Type:";
+            this.label2.Text = Loc.T("Export As File Type:");
             // 
             // listBoxExportAsFileType
             // 
@@ -127,7 +129,7 @@
             this.buttonStartExport.Name = "buttonStartExport";
             this.buttonStartExport.Size = new System.Drawing.Size(107, 24);
             this.buttonStartExport.TabIndex = 6;
-            this.buttonStartExport.Text = "Start Export";
+            this.buttonStartExport.Text = Loc.T("Start Export");
             this.buttonStartExport.UseCompatibleTextRendering = true;
             this.buttonStartExport.UseVisualStyleBackColor = true;
             this.buttonStartExport.Click += new System.EventHandler(this.buttonStartExport_Click);
@@ -160,7 +162,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 15);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Files to Export:";
+            this.label3.Text = Loc.T("Files to Export:");
             // 
             // buttonSelectAll
             // 
@@ -171,7 +173,7 @@
             this.buttonSelectAll.Name = "buttonSelectAll";
             this.buttonSelectAll.Size = new System.Drawing.Size(133, 23);
             this.buttonSelectAll.TabIndex = 11;
-            this.buttonSelectAll.Text = "Select All";
+            this.buttonSelectAll.Text = Loc.T("Select All");
             this.buttonSelectAll.UseCompatibleTextRendering = true;
             this.buttonSelectAll.UseVisualStyleBackColor = true;
             this.buttonSelectAll.Click += new System.EventHandler(this.buttonSelectAll_Click);
@@ -185,7 +187,7 @@
             this.buttonSelectNone.Name = "buttonSelectNone";
             this.buttonSelectNone.Size = new System.Drawing.Size(133, 23);
             this.buttonSelectNone.TabIndex = 12;
-            this.buttonSelectNone.Text = "Select None";
+            this.buttonSelectNone.Text = Loc.T("Select None");
             this.buttonSelectNone.UseCompatibleTextRendering = true;
             this.buttonSelectNone.UseVisualStyleBackColor = true;
             this.buttonSelectNone.Click += new System.EventHandler(this.buttonSelectNone_Click);
@@ -199,7 +201,7 @@
             this.buttonSelectInvert.Name = "buttonSelectInvert";
             this.buttonSelectInvert.Size = new System.Drawing.Size(133, 23);
             this.buttonSelectInvert.TabIndex = 13;
-            this.buttonSelectInvert.Text = "Invert Selection";
+            this.buttonSelectInvert.Text = Loc.T("Invert Selection");
             this.buttonSelectInvert.UseCompatibleTextRendering = true;
             this.buttonSelectInvert.UseVisualStyleBackColor = true;
             this.buttonSelectInvert.Click += new System.EventHandler(this.buttonSelectInvert_Click);
@@ -214,17 +216,17 @@
             this.treeViewHkxSelect.Name = "treeViewHkxSelect";
             treeNode1.Checked = true;
             treeNode1.Name = "Node1";
-            treeNode1.Text = "a00_0000.hkx";
+            treeNode1.Text = Loc.T("a00_0000.hkx");
             treeNode2.Name = "Node2";
-            treeNode2.Text = "a00_0001.hkx";
+            treeNode2.Text = Loc.T("a00_0001.hkx");
             treeNode3.Name = "Node0";
-            treeNode3.Text = "a00";
+            treeNode3.Text = Loc.T("a00");
             treeNode4.Name = "Node4";
-            treeNode4.Text = "a01_0000.hkx";
+            treeNode4.Text = Loc.T("a01_0000.hkx");
             treeNode5.Name = "Node3";
-            treeNode5.Text = "a01";
+            treeNode5.Text = Loc.T("a01");
             treeNode6.Name = "Node5";
-            treeNode6.Text = "Skeleton.hkx";
+            treeNode6.Text = Loc.T("Skeleton.hkx");
             this.treeViewHkxSelect.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode3,
             treeNode5,
@@ -243,7 +245,7 @@
             this.buttonCancelExport.Name = "buttonCancelExport";
             this.buttonCancelExport.Size = new System.Drawing.Size(107, 24);
             this.buttonCancelExport.TabIndex = 15;
-            this.buttonCancelExport.Text = "Cancel Export";
+            this.buttonCancelExport.Text = Loc.T("Cancel Export");
             this.buttonCancelExport.UseCompatibleTextRendering = true;
             this.buttonCancelExport.UseVisualStyleBackColor = true;
             this.buttonCancelExport.Click += new System.EventHandler(this.buttonCancelExport_Click);
@@ -276,7 +278,7 @@
             this.Name = "TaeExportAllAnimsForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Export Skeleton & Animations";
+            this.Text = Loc.T("Export Skeleton & Animations");
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TaeExportAllAnimsForm_FormClosing);
             this.Load += new System.EventHandler(this.TaeComboMenu_Load);
             this.ResumeLayout(false);

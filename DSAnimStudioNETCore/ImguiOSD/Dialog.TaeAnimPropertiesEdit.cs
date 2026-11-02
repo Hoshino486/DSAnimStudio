@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Dialog
@@ -107,7 +108,7 @@ namespace DSAnimStudio.ImguiOSD
             }
 
             public TaeAnimPropertiesEdit(DSAProj proj, DSAProj.Animation anim)
-                : base("Edit Animation Properties")
+                : base(Loc.T("Edit Animation Properties"))
             {
                 Proj = proj;
                 AllowedResultTypes = ResultTypes.Accept | ResultTypes.Cancel;
@@ -174,7 +175,7 @@ namespace DSAnimStudio.ImguiOSD
                 if (TaeAnimID_Value == null)
                     ImGui.PushStyleColor(ImGuiCol.Text, new System.Numerics.Vector4(1, 0, 0, 1));
 
-                anyValueAdjusted |= ImGui.InputText("Animation ID", ref TaeAnimID_String, 256); 
+                anyValueAdjusted |= ImGui.InputText(Loc.T("Animation ID"), ref TaeAnimID_String, 256); 
 
                 if (ImGui.IsItemHovered() && TaeAnimID_Error != null)
                     ImGui.SetTooltip(TaeAnimID_Error);
@@ -183,7 +184,7 @@ namespace DSAnimStudio.ImguiOSD
                 if (string.IsNullOrWhiteSpace(TaeAnimID_String))
                 {
                     TaeAnimID_Value = null;
-                    TaeAnimID_Error = "Animation entry ID must be specified.";
+                    TaeAnimID_Error = Loc.T("Animation entry ID must be specified.");
                 }
                 else
                 {
@@ -208,7 +209,7 @@ namespace DSAnimStudio.ImguiOSD
 
                 var newAnimName = NewTaeAnimName ?? "%null%";
 
-                anyValueAdjusted |= ImGui.InputText("Anim File Name", ref newAnimName, 256);
+                anyValueAdjusted |= ImGui.InputText(Loc.T("Anim File Name"), ref newAnimName, 256);
 
                 if (newAnimName == "%null%")
                     NewTaeAnimName = null;
@@ -233,19 +234,19 @@ namespace DSAnimStudio.ImguiOSD
 
                 ImGui.Separator();
 
-                ImGui.Text("Animation Type:");
+                ImGui.Text(Loc.T("Animation Type:"));
 
                 ImGui.Indent();
                 {
-                    ImGui.MenuItem("Original Anim Entry", "", isCurrentlyStandard);
+                    ImGui.MenuItem(Loc.T("Original Anim Entry"), "", isCurrentlyStandard);
                     bool clickedStandard = ImGui.IsItemClicked();
 
-                    ImGui.MenuItem("Clone Anim Entry", "", TaeAnimHeader.Type == TAE.Animation.AnimFileHeaderType.ImportOtherAnim);
+                    ImGui.MenuItem(Loc.T("Clone Anim Entry"), "", TaeAnimHeader.Type == TAE.Animation.AnimFileHeaderType.ImportOtherAnim);
                     bool clickedImportOther = ImGui.IsItemClicked();
 
                     if (clickedStandard && !isCurrentlyStandard)
                     {
-                        DialogManager.AskYesNo("Change Animation Type", "Change animation type, losing the values you entered?",
+                        DialogManager.AskYesNo(Loc.T("Change Animation Type"), Loc.T("Change animation type, losing the values you entered?"),
                             choice =>
                             {
                                 if (choice)
@@ -257,7 +258,7 @@ namespace DSAnimStudio.ImguiOSD
                     }
                     else if (clickedImportOther && !isCurrentlyImportOther)
                     {
-                        DialogManager.AskYesNo("Change Animation Type", "Change animation type, losing the values you entered?",
+                        DialogManager.AskYesNo(Loc.T("Change Animation Type"), Loc.T("Change animation type, losing the values you entered?"),
                             choice =>
                             {
                                 if (choice)
@@ -272,10 +273,10 @@ namespace DSAnimStudio.ImguiOSD
 
 
                 bool isNull = TaeAnimHeader.IsNullHeader;
-                anyValueAdjusted |= ImGui.Checkbox("Is Null Header", ref isNull);
+                anyValueAdjusted |= ImGui.Checkbox(Loc.T("Is Null Header"), ref isNull);
                 if (isNull && !TaeAnimHeader.IsNullHeader)
                 { 
-                    DialogManager.AskYesNo("Wipe Header To Null", "Change animation header to null? Properties below the checkbox will be erased.",
+                    DialogManager.AskYesNo(Loc.T("Wipe Header To Null"), Loc.T("Change animation header to null? Properties below the checkbox will be erased."),
                         choice =>
                         {
                             if (choice)
@@ -296,14 +297,14 @@ namespace DSAnimStudio.ImguiOSD
 
                     if (TaeAnimHeader is TAE.Animation.AnimFileHeader.ImportOtherAnim asImportOtherAnim)
                     {
-                        ImGui.Text("Properties - Clone Anim Entry:");
+                        ImGui.Text(Loc.T("Properties - Clone Anim Entry:"));
                         ImGui.Indent();
                         {
                             //Tools.InputTextNullable("Animation Name", ref TaeAnimName, 256);
                             //ImGui.Separator();
                             if (ImportFromAnimID_Value == null)
                                 ImGui.PushStyleColor(ImGuiCol.Text, new System.Numerics.Vector4(1, 0, 0, 1));
-                            anyValueAdjusted |= ImGui.InputText("Clone Anim Entry ID", ref ImportFromAnimID_String, 256);
+                            anyValueAdjusted |= ImGui.InputText(Loc.T("Clone Anim Entry ID"), ref ImportFromAnimID_String, 256);
                             if (ImGui.IsItemHovered() && ImportFromAnimID_Error != null)
                                 ImGui.SetTooltip(ImportFromAnimID_Error);
                             if (ImportFromAnimID_Value == null)
@@ -330,7 +331,7 @@ namespace DSAnimStudio.ImguiOSD
                             }
 
                             int prevUnknownVal = asImportOtherAnim.Unknown;
-                            asImportOtherAnim.Unknown = MenuBar.IntItem("Unknown Value", asImportOtherAnim.Unknown);
+                            asImportOtherAnim.Unknown = MenuBar.IntItem(Loc.T("Unknown Value"), asImportOtherAnim.Unknown);
                             if (prevUnknownVal != asImportOtherAnim.Unknown)
                                 anyValueAdjusted = true;
                         }
@@ -338,20 +339,20 @@ namespace DSAnimStudio.ImguiOSD
                     }
                     else if (TaeAnimHeader is TAE.Animation.AnimFileHeader.Standard asStandard)
                     {
-                        ImGui.Text("Properties - Original Anim Entry:");
+                        ImGui.Text(Loc.T("Properties - Original Anim Entry:"));
                         ImGui.Indent();
                         {
                             //Tools.InputTextNullable("Animation Name", ref TaeAnimName, 256);
                             //ImGui.Separator();
                             bool prevImportsHKX = asStandard.ImportsHKX;
-                            asStandard.ImportsHKX = MenuBar.CheckboxBig("Override HKX", asStandard.ImportsHKX);
+                            asStandard.ImportsHKX = MenuBar.CheckboxBig(Loc.T("Override HKX"), asStandard.ImportsHKX);
                             if (prevImportsHKX != asStandard.ImportsHKX)
                                 anyValueAdjusted = true;
 
                             if (ImportFromAnimID_Value == null)
                                 ImGui.PushStyleColor(ImGuiCol.Text, new System.Numerics.Vector4(1, 0, 0, 1));
 
-                            anyValueAdjusted |= ImGui.InputText("Override HKX ID", ref ImportFromAnimID_String, 256);
+                            anyValueAdjusted |= ImGui.InputText(Loc.T("Override HKX ID"), ref ImportFromAnimID_String, 256);
 
                             if (ImGui.IsItemHovered() && ImportFromAnimID_Error != null)
                                 ImGui.SetTooltip(ImportFromAnimID_Error);
@@ -379,8 +380,8 @@ namespace DSAnimStudio.ImguiOSD
                             }
                             bool prevAllowDelayLoad = asStandard.AllowDelayLoad;
                             bool prevIsLoopByDefault = asStandard.IsLoopByDefault;
-                            asStandard.AllowDelayLoad = MenuBar.CheckboxBig("Allow loading from DelayLoad ANIBNDs", asStandard.AllowDelayLoad);
-                            asStandard.IsLoopByDefault = MenuBar.CheckboxBig("Loop By Default", asStandard.IsLoopByDefault);
+                            asStandard.AllowDelayLoad = MenuBar.CheckboxBig(Loc.T("Allow loading from DelayLoad ANIBNDs"), asStandard.AllowDelayLoad);
+                            asStandard.IsLoopByDefault = MenuBar.CheckboxBig(Loc.T("Loop By Default"), asStandard.IsLoopByDefault);
                             if (asStandard.AllowDelayLoad != prevAllowDelayLoad || asStandard.IsLoopByDefault != prevIsLoopByDefault)
                                 anyValueAdjusted = true;
                         }
@@ -389,10 +390,10 @@ namespace DSAnimStudio.ImguiOSD
                 }
 
                 ImGui.Separator();
-                ImGui.Button("Delete This Animation...");
+                ImGui.Button(Loc.T("Delete This Animation..."));
                 if (ImGui.IsItemClicked())
                 {
-                    DialogManager.AskYesNo("Permanently Delete Animation Entry?", $"Are you sure you want to delete the current animation?",
+                    DialogManager.AskYesNo(Loc.T("Permanently Delete Animation Entry?"), Loc.TF("Are you sure you want to delete the current animation?"),
                         choice =>
                         {
                             if (choice)
@@ -407,7 +408,7 @@ namespace DSAnimStudio.ImguiOSD
                 }
                 ImGui.Separator();
 
-                bool clickedCancel = Tools.SimpleClickButton("Cancel") || IsTitleBarXRequested;
+                bool clickedCancel = Tools.SimpleClickButton(Loc.T("Cancel")) || IsTitleBarXRequested;
                 //bool pressedEscape = IsEscapeKeyRequested;
 
                 if (anyValueAdjusted && !HasAnyUnsavedChanges)
@@ -427,7 +428,7 @@ namespace DSAnimStudio.ImguiOSD
                     }
                     else
                     {
-                        DialogManager.AskYesNo("Unsaved Changes", "You have unsaved changes, would you like to discard them and close this dialog?", choice =>
+                        DialogManager.AskYesNo(Loc.T("Unsaved Changes"), Loc.T("You have unsaved changes, would you like to discard them and close this dialog?"), choice =>
                         {
                             if (choice == true)
                             {
@@ -444,13 +445,13 @@ namespace DSAnimStudio.ImguiOSD
 
                 if (grayedOutAcceptButton)
                     Tools.PushGrayedOut();
-                ImGui.Button("Save & Accept");
+                ImGui.Button(Loc.T("Save & Accept"));
                 if (grayedOutAcceptButton)
                 {
                     Tools.PopGrayedOut();
                     if (ImGui.IsItemHovered())
                     {
-                        ImGui.SetTooltip("Cannot accept changes until the animation ID formatting errors (shown in red) are fixed.");
+                        ImGui.SetTooltip(Loc.T("Cannot accept changes until the animation ID formatting errors (shown in red) are fixed."));
                     }
                 }
                 if (ImGui.IsItemClicked())

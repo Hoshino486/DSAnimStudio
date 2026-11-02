@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -18,6 +19,8 @@ namespace DSAnimStudio
         public FormAskWhatGame()
         {
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
         }
 
         private void FormAskWhatGame_Load(object sender, EventArgs e)

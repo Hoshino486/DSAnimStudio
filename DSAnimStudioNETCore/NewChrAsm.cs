@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using SoulsAssetPipeline;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -481,22 +482,22 @@ namespace DSAnimStudio
 
         private void InitWeaponSlots()
         {
-            WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.RightWeapon, "Right Weapon", "R WPN"));
-            WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.LeftWeapon, "Left Weapon", "L WPN"));
+            WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.RightWeapon, Loc.T("Right Weapon"), "R WPN"));
+            WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.LeftWeapon, Loc.T("Left Weapon"), "L WPN"));
             if (Document.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.AC6)
             {
-                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.AC6BackRightWeapon, "Back-Right Weapon", "BK-R WPN"));
-                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.AC6BackLeftWeapon, "Back-Left Weapon", "BK-L WPN"));
+                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.AC6BackRightWeapon, Loc.T("Back-Right Weapon"), "BK-R WPN"));
+                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.AC6BackLeftWeapon, Loc.T("Back-Left Weapon"), "BK-L WPN"));
 
-                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.AC6BackRightWeaponRail, "Back-Right Weapon Rail", "BK-R RAIL"));
-                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.AC6BackLeftWeaponRail, "Back-Left Weapon Rail", "BK-L RAIL"));
+                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.AC6BackRightWeaponRail, Loc.T("Back-Right Weapon Rail"), "BK-R RAIL"));
+                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.AC6BackLeftWeaponRail, Loc.T("Back-Left Weapon Rail"), "BK-L RAIL"));
                 
             }
 
             if (Document.GameRoot.GameType is SoulsGames.SDT)
             {
-                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.SekiroMortalBlade, "Mortal Blade", "MB"));
-                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.SekiroGrapplingHook, "Grappling Hook", "GH"));
+                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.SekiroMortalBlade, Loc.T("Mortal Blade"), "MB"));
+                WeaponSlots.Add(new NewEquipSlot_Weapon(this, EquipSlotTypes.SekiroGrapplingHook, Loc.T("Grappling Hook"), "GH"));
             }
             //ac6 additional weapons
             //if (GameRoot.GameType is SoulsAssetPipeline.SoulsGames.AC6)
@@ -513,10 +514,10 @@ namespace DSAnimStudio
 
             if (Document.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.AC6)
             {
-                WeaponSlots_ByEquipSlot[EquipSlotTypes.RightWeapon].SlotDisplayName = "Right Front Weapon";
+                WeaponSlots_ByEquipSlot[EquipSlotTypes.RightWeapon].SlotDisplayName = Loc.T("Right Front Weapon");
                 WeaponSlots_ByEquipSlot[EquipSlotTypes.RightWeapon].SlotDisplayNameShort = "R Front Weapon";
 
-                WeaponSlots_ByEquipSlot[EquipSlotTypes.LeftWeapon].SlotDisplayName = "Left Front Weapon";
+                WeaponSlots_ByEquipSlot[EquipSlotTypes.LeftWeapon].SlotDisplayName = Loc.T("Left Front Weapon");
                 WeaponSlots_ByEquipSlot[EquipSlotTypes.LeftWeapon].SlotDisplayNameShort = "L Front Weapon";
             }
 
@@ -531,7 +532,7 @@ namespace DSAnimStudio
 
             if (Document.GameRoot.GameTypeUsesOldShittyFacegen)
             {
-                ArmorSlots.Add(new NewEquipSlot_Armor(this, EquipSlotTypes.OldShittyFacegen, "Legacy Facegen", "FG", usesEquipParam: false));
+                ArmorSlots.Add(new NewEquipSlot_Armor(this, EquipSlotTypes.OldShittyFacegen, Loc.T("Legacy Facegen"), "FG", usesEquipParam: false));
             }
             else
             {
@@ -1604,8 +1605,8 @@ namespace DSAnimStudio
                                 
 
                                 System.Windows.Forms.MessageBox.Show(
-                                    $"Failed to load right-hand weapon model:\n\n{ex}",
-                                    "Failed To Load RH Weapon Model",
+                                    Loc.TF("Failed to load right-hand weapon model:\n\n{0}", ex),
+                                    Loc.T("Failed To Load RH Weapon Model"),
                                     System.Windows.Forms.MessageBoxButtons.OK,
                                     System.Windows.Forms.MessageBoxIcon.Error);
                             }

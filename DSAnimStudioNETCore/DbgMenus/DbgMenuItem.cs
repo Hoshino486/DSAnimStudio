@@ -21,7 +21,7 @@ namespace DSAnimStudio.DbgMenus
     {
         public static void Init()
         {
-            CurrentMenu.Text = "Main Menu";
+            CurrentMenu.Text = DSAnimStudio.Localization.Loc.T("Main Menu");
             CurrentMenu.Items = new List<DbgMenuItem>()
             {
                 new DbgMenuItem() { Text = "[DEBUG MENU MOSTLY SCRAPPED]"},

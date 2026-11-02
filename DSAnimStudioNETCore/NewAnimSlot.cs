@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using DSAnimStudio.ImguiOSD;
@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using SoulsAssetPipeline.Animation;
 using Vector4 = System.Numerics.Vector4;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public class NewAnimSlot
@@ -58,7 +59,7 @@ namespace DSAnimStudio
             ImGui.Checkbox(nameof(request.ClearOnEnd), ref request.ClearOnEnd);
             ImGui.Checkbox(nameof(request.KeepPlayingUntilEnd), ref request.KeepPlayingUntilEnd);
 
-            if (Tools.SimpleClickButton("Request"))
+            if (Tools.SimpleClickButton(Loc.T("Request")))
             {
                 container.NewSetSlotRequest(slotType, request);
             }

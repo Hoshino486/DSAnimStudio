@@ -1,4 +1,4 @@
-﻿using DSAnimStudio.TaeEditor;
+using DSAnimStudio.TaeEditor;
 using ImGuiNET;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework;
 using Vector2 = System.Numerics.Vector2;
 using Vector4 = System.Numerics.Vector4;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public static class OSD
@@ -62,7 +63,7 @@ namespace DSAnimStudio.ImguiOSD
                 {
 
                     var entry = new WindowOpenStateEntry();
-                    entry.WindowName = win.NewImguiWindowTitle;
+                    entry.WindowName = Loc.StableKey(win.NewImguiWindowTitle);
                     entry.IsOpen = win.IsOpen;
                     entry.IsFocused = win.Focused;
                     result.Add(entry);
@@ -81,7 +82,7 @@ namespace DSAnimStudio.ImguiOSD
 
             foreach (var entry in entries)
             {
-                var matchingWindow = staticWindows.FirstOrDefault(w => w.NewImguiWindowTitle == entry.WindowName);
+                var matchingWindow = staticWindows.FirstOrDefault(w => Loc.StableKey(w.NewImguiWindowTitle) == entry.WindowName);
                 if (matchingWindow != null)
                 {
                     if (entry.IsOpen)
@@ -356,7 +357,7 @@ namespace DSAnimStudio.ImguiOSD
 
                 ImGui.PushStyleVar(ImGuiStyleVar.WindowPadding, Vector2.Zero);
 
-                ImGui.Begin("MainDockSpace###Window_ForMainDockSpace", 
+                ImGui.Begin(Loc.T("MainDockSpace###Window_ForMainDockSpace"), 
                     ImGuiWindowFlags.NoDocking | 
                     ImGuiWindowFlags.NoTitleBar | 
                     ImGuiWindowFlags.NoCollapse |

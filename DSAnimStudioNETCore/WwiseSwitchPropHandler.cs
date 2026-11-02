@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public abstract class WwiseSwitchPropHandler
@@ -40,7 +41,7 @@ namespace DSAnimStudio
             {
                 lock (_lock)
                 {
-                    if (ImGui.TreeNode($"{SwitchPropKey}###WwiseSwitchPropHandler_{SwitchPropKey}"))
+                    if (ImGui.TreeNode(Loc.TF("{0}###WwiseSwitchPropHandler_{1}", SwitchPropKey, SwitchPropKey)))
                     {
                         bool innerItemFocused = false;
                         InnerBuildImguiIfApplicable(ww, ref innerItemFocused);
@@ -162,19 +163,19 @@ namespace DSAnimStudio
             {
                 if (AutomationType != AutomationTypes.None)
                 {
-                    ImGui.Checkbox($"Handle Automatically###WwiseSwitchPropHandler_{SwitchPropKey}_HandleAutomatically", ref AutomationEnabled);
+                    ImGui.Checkbox(Loc.TF("Handle Automatically###WwiseSwitchPropHandler_{0}_HandleAutomatically", SwitchPropKey), ref AutomationEnabled);
                 }
 
                 if (AutomationEnabled && AutomationType != AutomationTypes.None)
                 {
                     if (!string.IsNullOrEmpty(AutomationResultValue))
-                        ImGui.Text($"Selected Value: {AutomationResultValue}");
+                        ImGui.Text(Loc.TF("Selected Value: {0}", AutomationResultValue));
                     else
-                        ImGui.Text($"Selected Entry: <None>");
+                        ImGui.Text(Loc.TF("Selected Entry: <None>"));
                 }
                 else
                 {
-                    ImGui.InputText($"###WwiseSwitchPropHandler_{SwitchPropKey}_TextField", ref ManuallyPickedValue, 256);
+                    ImGui.InputText(Loc.TF("###WwiseSwitchPropHandler_{0}_TextField", SwitchPropKey), ref ManuallyPickedValue, 256);
                     if (ImGui.IsItemFocused())
                         anyItemFocused = true;
                 }
@@ -333,27 +334,27 @@ namespace DSAnimStudio
             {
                 if (AutomationType != AutomationTypes.None)
                 {
-                    ImGui.Checkbox($"Handle Automatically###WwiseSwitchPropHandler_{SwitchPropKey}_HandleAutomatically", ref AutomationEnabled);
+                    ImGui.Checkbox(Loc.TF("Handle Automatically###WwiseSwitchPropHandler_{0}_HandleAutomatically", SwitchPropKey), ref AutomationEnabled);
                 }
 
                 if (AutomationEnabled && AutomationType != AutomationTypes.None)
                 {
                     if (!string.IsNullOrEmpty(AutomationResultValue))
-                        ImGui.Text($"Selected Value: {AutomationResultValue}");
+                        ImGui.Text(Loc.TF("Selected Value: {0}", AutomationResultValue));
                     else
-                        ImGui.Text($"Selected Entry: <None>");
+                        ImGui.Text(Loc.TF("Selected Entry: <None>"));
                 }
                 else
                 {
-                    ImGui.ListBox($"###WwiseSwitchPropHandler_{SwitchPropKey}_ListBox", ref SelectedValueIndex, ValueNames, ValueNames.Length);
+                    ImGui.ListBox(Loc.TF("###WwiseSwitchPropHandler_{0}_ListBox", SwitchPropKey), ref SelectedValueIndex, ValueNames, ValueNames.Length);
                     if (ImGui.IsItemFocused())
                         anyItemFocused = true;
 
                     if (SelectedValueIndex == Values.Length - 1)
                     {
-                        ImGui.Text("Custom Value:");
+                        ImGui.Text(Loc.T("Custom Value:"));
                         var prevCustomValue = CustomValue;
-                        ImGui.InputText($"Custom Value###WwiseSwitchPropHandler_{SwitchPropKey}_CustomValueInput", ref CustomValue, 256);
+                        ImGui.InputText(Loc.TF("Custom Value###WwiseSwitchPropHandler_{0}_CustomValueInput", SwitchPropKey), ref CustomValue, 256);
                         if (ImGui.IsItemFocused())
                             anyItemFocused = true;
                         if (CustomValue != prevCustomValue)
@@ -568,27 +569,27 @@ namespace DSAnimStudio
 
                 if (AutomationType != AutomationTypes.None)
                 {
-                    ImGui.Checkbox($"Handle Automatically###WwiseSwitchPropHandler_{SwitchPropKey}_HandleAutomatically", ref AutomationEnabled);
+                    ImGui.Checkbox(Loc.TF("Handle Automatically###WwiseSwitchPropHandler_{0}_HandleAutomatically", SwitchPropKey), ref AutomationEnabled);
                 }
 
                 if (AutomationEnabled && AutomationType != AutomationTypes.None)
                 {
                     if (SelectedEntryIndex >= 0 && SelectedEntryIndex < EntryNames.Length)
-                        ImGui.Text($"Selected Entry: {EntryNames[SelectedEntryIndex]}");
+                        ImGui.Text(Loc.TF("Selected Entry: {0}", EntryNames[SelectedEntryIndex]));
                     else
-                        ImGui.Text($"Selected Entry: <None>");
+                        ImGui.Text(Loc.TF("Selected Entry: <None>"));
                 }
                 else
                 {
-                    ImGui.ListBox($"###WwiseSwitchPropHandler_{SwitchPropKey}_ListBox", ref SelectedEntryIndex, EntryNames, EntryNames.Length);
+                    ImGui.ListBox(Loc.TF("###WwiseSwitchPropHandler_{0}_ListBox", SwitchPropKey), ref SelectedEntryIndex, EntryNames, EntryNames.Length);
                     if (ImGui.IsItemFocused())
                         anyItemFocused = true;
 
                     if (SelectedEntryIndex == EntryValues.Length - 1)
                     {
-                        ImGui.Text("Custom Value:");
+                        ImGui.Text(Loc.T("Custom Value:"));
                         var prevCustomValue = CustomValue;
-                        ImGui.InputText($"Custom Value###WwiseSwitchPropHandler_{SwitchPropKey}_CustomValueInput", ref CustomValue, 256);
+                        ImGui.InputText(Loc.TF("Custom Value###WwiseSwitchPropHandler_{0}_CustomValueInput", SwitchPropKey), ref CustomValue, 256);
                         if (ImGui.IsItemFocused())
                             anyItemFocused = true;
                         if (CustomValue != prevCustomValue)

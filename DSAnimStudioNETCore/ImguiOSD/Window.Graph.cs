@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.ImguiOSD
 {
@@ -15,7 +16,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.NoSave;
 
-            public override string NewImguiWindowTitle => "Graph";
+            public override string NewImguiWindowTitle => Loc.Win("Graph");
 
             protected override void Init()
             {
@@ -42,7 +43,7 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     var thisWindowRect = GetRect(subtractTitleBar: false);
                     if (ImGuiDebugDrawer.FakeButton(new Vector2(thisWindowRect.X + 10, thisWindowRect.Y + (ImGui.GetCursorPosY() / Main.DPI) + 1), 
-                            new Vector2((int)(170), 20) - new Vector2(2,2), "Go To Original (F4 Key)", 0, out bool isHovering))
+                            new Vector2((int)(170), 20) - new Vector2(2,2), Loc.T("Go To Original (F4 Key)"), 0, out bool isHovering))
                     {
                         MainTaeScreen.RequestGoToEventSource = true;
                         
@@ -52,7 +53,7 @@ namespace DSAnimStudio.ImguiOSD
                 
                 ImGui.SetCursorPosX(cursorX);
                 
-                ImGui.Text("  " + (MainTaeScreen?.SelectedTaeAnimInfoText ?? ""));
+                ImGui.Text(Loc.T("  ") + (MainTaeScreen?.SelectedTaeAnimInfoText ?? ""));
                 //ImGui.Text(OSD.FocusedWindow?.NewImguiWindowTitle ?? "");
                 
                 var dsid = ImGui.GetID("DockSpace_NewActionGraph");

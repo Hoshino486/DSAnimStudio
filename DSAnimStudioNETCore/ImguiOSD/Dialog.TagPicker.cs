@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Dialog
@@ -134,7 +135,7 @@ namespace DSAnimStudio.ImguiOSD
 
                 var oldText = InputtedString;
                 
-                bool accepted = ImGui.InputTextWithHint($"Search Tag Name##{GUID}_TextInput", "", ref InputtedString,
+                bool accepted = ImGui.InputTextWithHint($"Search Tag Name##{GUID}_TextInput", Loc.T(""), ref InputtedString,
                     256, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.CallbackAlways,
                     TextCallbackDelegate);
 
@@ -148,7 +149,7 @@ namespace DSAnimStudio.ImguiOSD
                     UpdateTagSearch();
                 }
 
-                ImGui.ListBox($"Filtered Tags List##{GUID}_FilteredTagList", ref FilteredTags_SelectedIndex, FilteredTags, FilteredTags.Length);
+                ImGui.ListBox(Loc.TF("Filtered Tags List##{0}_FilteredTagList", GUID), ref FilteredTags_SelectedIndex, FilteredTags, FilteredTags.Length);
 
                 RepeaterUp.Update(GamePadState.Default, Main.DELTA_UPDATE, DialogManager.Input.KeyHeld(Keys.Up));
                 if (RepeaterUp.State)
@@ -193,7 +194,7 @@ namespace DSAnimStudio.ImguiOSD
 
                 if (noTagChosen)
                     ImGui.BeginDisabled();
-                ImGui.Button("Add Selected Tag");
+                ImGui.Button(Loc.T("Add Selected Tag"));
                 if (noTagChosen)
                     ImGui.EndDisabled();
 

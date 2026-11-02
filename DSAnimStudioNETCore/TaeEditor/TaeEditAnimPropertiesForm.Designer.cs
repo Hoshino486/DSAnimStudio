@@ -1,4 +1,5 @@
-﻿namespace DSAnimStudio.TaeEditor
+﻿using DSAnimStudio.Localization;
+namespace DSAnimStudio.TaeEditor
 {
     partial class TaeEditAnimPropertiesForm
     {
@@ -59,7 +60,7 @@
             this.buttonDiscardChanges.Name = "buttonDiscardChanges";
             this.buttonDiscardChanges.Size = new System.Drawing.Size(114, 23);
             this.buttonDiscardChanges.TabIndex = 1;
-            this.buttonDiscardChanges.Text = "Discard Changes";
+            this.buttonDiscardChanges.Text = Loc.T("Discard Changes");
             this.buttonDiscardChanges.UseVisualStyleBackColor = true;
             this.buttonDiscardChanges.Click += new System.EventHandler(this.buttonDiscardChanges_Click);
             // 
@@ -69,7 +70,7 @@
             this.buttonSaveChanges.Name = "buttonSaveChanges";
             this.buttonSaveChanges.Size = new System.Drawing.Size(105, 23);
             this.buttonSaveChanges.TabIndex = 2;
-            this.buttonSaveChanges.Text = "Keep Changes";
+            this.buttonSaveChanges.Text = Loc.T("Keep Changes");
             this.buttonSaveChanges.UseVisualStyleBackColor = true;
             this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
             // 
@@ -79,7 +80,7 @@
             this.buttonDeleteAnim.Name = "buttonDeleteAnim";
             this.buttonDeleteAnim.Size = new System.Drawing.Size(136, 23);
             this.buttonDeleteAnim.TabIndex = 3;
-            this.buttonDeleteAnim.Text = "Delete This Animation...";
+            this.buttonDeleteAnim.Text = Loc.T("Delete This Animation...");
             this.buttonDeleteAnim.UseVisualStyleBackColor = true;
             this.buttonDeleteAnim.Click += new System.EventHandler(this.buttonDeleteAnim_Click);
             // 
@@ -90,7 +91,7 @@
             this.labelAnimSubIDPrefix.Name = "labelAnimSubIDPrefix";
             this.labelAnimSubIDPrefix.Size = new System.Drawing.Size(138, 21);
             this.labelAnimSubIDPrefix.TabIndex = 4;
-            this.labelAnimSubIDPrefix.Text = "Animation Sub-ID: aXXX_";
+            this.labelAnimSubIDPrefix.Text = Loc.T("Animation Sub-ID: aXXX_");
             this.labelAnimSubIDPrefix.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -100,7 +101,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 20);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Display Name:";
+            this.label2.Text = Loc.T("Display Name:");
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // groupBoxMHStandard
@@ -115,7 +116,7 @@
             this.groupBoxMHStandard.Size = new System.Drawing.Size(498, 101);
             this.groupBoxMHStandard.TabIndex = 6;
             this.groupBoxMHStandard.TabStop = false;
-            this.groupBoxMHStandard.Text = "Mini-Header Data: Standard";
+            this.groupBoxMHStandard.Text = Loc.T("Mini-Header Data: Standard");
             // 
             // textBoxMHStandardImportHKXFrom
             // 
@@ -131,7 +132,7 @@
             this.checkBoxMHStandardImportHKX.Name = "checkBoxMHStandardImportHKX";
             this.checkBoxMHStandardImportHKX.Size = new System.Drawing.Size(327, 21);
             this.checkBoxMHStandardImportHKX.TabIndex = 2;
-            this.checkBoxMHStandardImportHKX.Text = "Import the model animation data (.HKX) from this animation ID:";
+            this.checkBoxMHStandardImportHKX.Text = Loc.T("Import the model animation data (.HKX) from this animation ID:");
             this.checkBoxMHStandardImportHKX.UseVisualStyleBackColor = true;
             this.checkBoxMHStandardImportHKX.CheckedChanged += new System.EventHandler(this.checkBoxMHStandardImportHKX_CheckedChanged);
             // 
@@ -141,7 +142,7 @@
             this.checkBoxMHStandardImportEvents.Name = "checkBoxMHStandardImportEvents";
             this.checkBoxMHStandardImportEvents.Size = new System.Drawing.Size(302, 21);
             this.checkBoxMHStandardImportEvents.TabIndex = 1;
-            this.checkBoxMHStandardImportEvents.Text = "Allow this animation to be pulled from DelayLoad ANIBNDs";
+            this.checkBoxMHStandardImportEvents.Text = Loc.T("Allow this animation to be pulled from DelayLoad ANIBNDs");
             this.checkBoxMHStandardImportEvents.UseVisualStyleBackColor = true;
             // 
             // checkBoxMHStandardLoopByDefault
@@ -150,7 +151,7 @@
             this.checkBoxMHStandardLoopByDefault.Name = "checkBoxMHStandardLoopByDefault";
             this.checkBoxMHStandardLoopByDefault.Size = new System.Drawing.Size(192, 21);
             this.checkBoxMHStandardLoopByDefault.TabIndex = 0;
-            this.checkBoxMHStandardLoopByDefault.Text = "Make this animation loop by default";
+            this.checkBoxMHStandardLoopByDefault.Text = Loc.T("Make this animation loop by default");
             this.checkBoxMHStandardLoopByDefault.UseVisualStyleBackColor = true;
             // 
             // textBoxAnimSubID
@@ -177,7 +178,7 @@
             this.radioButtonMHStandard.Name = "radioButtonMHStandard";
             this.radioButtonMHStandard.Size = new System.Drawing.Size(167, 17);
             this.radioButtonMHStandard.TabIndex = 10;
-            this.radioButtonMHStandard.Text = "Standard Animation Type";
+            this.radioButtonMHStandard.Text = Loc.T("Standard Animation Type");
             this.radioButtonMHStandard.UseVisualStyleBackColor = true;
             this.radioButtonMHStandard.CheckedChanged += new System.EventHandler(this.radioButtonMHStandard_CheckedChanged);
             // 
@@ -189,7 +190,7 @@
             this.radioButtonMHImportOtherAnimation.Name = "radioButtonMHImportOtherAnimation";
             this.radioButtonMHImportOtherAnimation.Size = new System.Drawing.Size(196, 17);
             this.radioButtonMHImportOtherAnimation.TabIndex = 11;
-            this.radioButtonMHImportOtherAnimation.Text = "Exact Duplicate of Other Anim";
+            this.radioButtonMHImportOtherAnimation.Text = Loc.T("Exact Duplicate of Other Anim");
             this.radioButtonMHImportOtherAnimation.UseVisualStyleBackColor = true;
             this.radioButtonMHImportOtherAnimation.CheckedChanged += new System.EventHandler(this.radioButtonMHImportOtherAnimation_CheckedChanged);
             // 
@@ -204,7 +205,7 @@
             this.groupBoxMHDuplicate.Size = new System.Drawing.Size(499, 87);
             this.groupBoxMHDuplicate.TabIndex = 12;
             this.groupBoxMHDuplicate.TabStop = false;
-            this.groupBoxMHDuplicate.Text = "Mini-Header Data: Duplicate";
+            this.groupBoxMHDuplicate.Text = Loc.T("Mini-Header Data: Duplicate");
             // 
             // label4
             // 
@@ -212,7 +213,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(286, 21);
             this.label4.TabIndex = 7;
-            this.label4.Text = "This animation is a duplicate of the animation with this ID:";
+            this.label4.Text = Loc.T("This animation is a duplicate of the animation with this ID:");
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBoxMHDuplicateUnk
@@ -229,7 +230,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(96, 21);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Unknown Value:";
+            this.label5.Text = Loc.T("Unknown Value:");
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBoxMHDuplicateSourceAnimID
@@ -269,7 +270,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit Anim Info";
+            this.Text = Loc.T("Edit Anim Info");
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TaeEditAnimPropertiesForm_FormClosing);
             this.Load += new System.EventHandler(this.TaeEditAnimPropertiesForm_Load);
             this.Shown += new System.EventHandler(this.TaeEditAnimPropertiesForm_Shown);

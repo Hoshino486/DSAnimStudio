@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -149,11 +150,11 @@ namespace DSAnimStudio
                     if (!zzz_SoundManagerIns.SOUND_DISABLED)
                     {
                         zzz_SoundManagerIns.SOUND_DISABLED = true;
-                        DialogManager.DialogOK(null, "Failed to initialize audio output. " +
+                        DialogManager.DialogOK(null, Loc.T("Failed to initialize audio output. " +
                             "Make sure you have an audio device connected and working and " +
                             "that no other app is taking exclusive control of the device.\n\n" +
                             "Once you free the device, go to the 'Sound' window and check 'Enable Audio System'\n" +
-                            "or restart DS Anim Studio for Wwise games (Elden Ring and later)");
+                            "or restart DS Anim Studio for Wwise games (Elden Ring and later)"));
                     }
                 }
             }

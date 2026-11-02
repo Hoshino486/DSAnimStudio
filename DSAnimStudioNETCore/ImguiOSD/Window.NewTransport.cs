@@ -8,6 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Color = Microsoft.Xna.Framework.Color;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.ImguiOSD
 {
@@ -17,7 +18,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.NoSave;
 
-            public override string NewImguiWindowTitle => "Transport";
+            public override string NewImguiWindowTitle => Loc.Win("Transport");
             protected override void Init()
             {
                 

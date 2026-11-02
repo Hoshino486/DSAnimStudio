@@ -1,4 +1,4 @@
-﻿using DSAnimStudio.TaeEditor;
+using DSAnimStudio.TaeEditor;
 using ImGuiNET;
 using System;
 using System.Collections.Generic;
@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -14,7 +15,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.SaveAlways;
 
-            public override string NewImguiWindowTitle => "Project";
+            public override string NewImguiWindowTitle => Loc.Win("Project");
 
             public DSAProj Proj;
 
@@ -46,8 +47,8 @@ namespace DSAnimStudio.ImguiOSD
                 if (Proj == null)
                     return;
 
-                ImGui.Text($"Game Type: {Proj.GameType}");
-                ImGui.Text($".DSAPROJ Format Version: {Proj.FILE_VERSION}");
+                ImGui.Text(Loc.TF("Game Type: {0}", Proj.GameType));
+                ImGui.Text(Loc.TF(".DSAPROJ Format Version: {0}", Proj.FILE_VERSION));
 
                 //testing
                 //ImGui.SetCursorPosY(ImGui.GetCursorPosY() + 500);
@@ -75,7 +76,7 @@ namespace DSAnimStudio.ImguiOSD
                     RequestShowTagsSection_ScrollNextFrame = true;
                 }
 
-                if (ImGui.TreeNode("Tags##Proj_TagList_TreeNode"))
+                if (ImGui.TreeNode(Loc.T("Tags##Proj_TagList_TreeNode")))
                 {
 
 
@@ -85,22 +86,22 @@ namespace DSAnimStudio.ImguiOSD
                     {
                         foreach (var t in Proj.Tags)
                         {
-                            ImGui.ColorButton($"{t.Name}##TagColorButton_{t.GUID}",
+                            ImGui.ColorButton(Loc.TF("{0}##TagColorButton_{1}", t.Name, t.GUID),
                                 (t.CustomColor ?? Main.Colors.ColorProjectTagDefault).ToNVector4());
                             anyFieldFocused |= ImGui.IsItemActive();
                             ImGui.SameLine();
-                            var tagNodeOpen = ImGui.TreeNode($"{t.Name}##Proj_TagList_Tag_{t.GUID}");
+                            var tagNodeOpen = ImGui.TreeNode(Loc.TF("{0}##Proj_TagList_Tag_{1}", t.Name, t.GUID));
                             //ImGui.SameLine();
 
                             if (tagNodeOpen)
                             {
-                                ImGui.Button("Rename Tag...");
+                                ImGui.Button(Loc.T("Rename Tag..."));
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 if (ImGui.IsItemClicked())
                                 {
-                                    ImguiOSD.DialogManager.AskForInputString("Change Tag Name", "Enter new name for tag." +
-                                        $"\nCurrent tag name: '{t.Name}'." +
-                                        "\n\nThis will change the name of this tag in all locations it is used.", "", result =>
+                                    ImguiOSD.DialogManager.AskForInputString(Loc.T("Change Tag Name"), Loc.T("Enter new name for tag.") +
+                                        Loc.TF("\nCurrent tag name: '{0}'.", t.Name) +
+                                        Loc.T("\n\nThis will change the name of this tag in all locations it is used."), Loc.T(""), result =>
                                     {
                                         lock (Proj._lock_Tags)
                                         {
@@ -114,20 +115,20 @@ namespace DSAnimStudio.ImguiOSD
                                         {
                                             errCheck = errCheck.Trim();
                                             if (Proj.Tags.Any(tag => tag.Name == errCheck && tag.GUID != t.GUID))
-                                                result = $"Another tag named '{errCheck}' already exists.";
+                                                result = Loc.TF("Another tag named '{0}' already exists.", errCheck);
                                         }
                                         return result;
                                     }, canBeCancelled: true);
                                 }
-                                ImguiOSD.Tools.CustomColorPicker("Custom Tag Color", $"TagCustomColor_{t.GUID}", ref t.CustomColor, Main.Colors.ColorProjectTagDefault);
-                                ImGui.Button("Delete Tag...");
+                                ImguiOSD.Tools.CustomColorPicker(Loc.T("Custom Tag Color"), $"TagCustomColor_{t.GUID}", ref t.CustomColor, Main.Colors.ColorProjectTagDefault);
+                                ImGui.Button(Loc.T("Delete Tag..."));
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 if (ImGui.IsItemClicked())
                                 {
                                     var tagToDelete = t;
-                                    DialogManager.AskYesNo("Delete Tag",
-                                        "Delete this tag from the project? All instances of it being used throughout the project will be lost." +
-                                        "\n\nThis is not undoable.", choice =>
+                                    DialogManager.AskYesNo(Loc.T("Delete Tag"),
+                                        Loc.T("Delete this tag from the project? All instances of it being used throughout the project will be lost." +
+                                        "\n\nThis is not undoable."), choice =>
                                         {
                                             lock (Proj._lock_Tags)
                                             {
@@ -143,11 +144,11 @@ namespace DSAnimStudio.ImguiOSD
                         }
 
                         ImGui.Separator();
-                        ImGui.Button("Add New Tag...");
+                        ImGui.Button(Loc.T("Add New Tag..."));
                         anyFieldFocused |= ImGui.IsItemActive();
                         if (ImGui.IsItemClicked())
                         {
-                            ImguiOSD.DialogManager.AskForInputString("Add New Tag", "Enter name for new tag.", "", result =>
+                            ImguiOSD.DialogManager.AskForInputString(Loc.T("Add New Tag"), Loc.T("Enter name for new tag."), Loc.T(""), result =>
                             {
                                 lock (Proj._lock_Tags)
                                 {
@@ -166,7 +167,7 @@ namespace DSAnimStudio.ImguiOSD
                                 {
                                     errCheck = errCheck.Trim();
                                     if (Proj.Tags.Any(tag => tag.Name == errCheck))                                    
-                                        result = $"Tag named '{errCheck}' already exists.";
+                                        result = Loc.TF("Tag named '{0}' already exists.", errCheck);
                                 }
                                 return result;
                             }, canBeCancelled: true);

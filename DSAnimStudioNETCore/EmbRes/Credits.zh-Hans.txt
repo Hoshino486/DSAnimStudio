@@ -1,0 +1,29 @@
+DS ANIM STUDIO © 2018-2026 Meowmaritus
+SoulsAssetPipeline © 2020-2026 Meowmaritus
+
+===============================================================================================================================
+    如果你把用本工具做的 Mod 拿去付费墙后面卖，我会让约定之王拉塔恩去你家。
+===============================================================================================================================
+
+MonoGame © 2009-2021 The MonoGame Team, Portions © The Mono.Xna Team
+SharpDX © 2010-2014 Alexandre Mutel
+Dear ImGui © 2014-2022 Omar Cornut
+TagTools © 2018 Skyth
+Havoc © 2018 Skyth, forked version by Ling Samuel
+NAudio © 2020 Mark Heath
+FMOD Ex SoundSystem © 2005-2011 Firelight Technologies Pty, Ltd.
+Newtonsoft.Json © 2007 James Newton-King
+RawInput.Sharp © 2019 mfakane
+BouncyCastle.Crypto © 2000 - 2021 The Legion of the Bouncy Castle Inc. (https://www.bouncycastle.org)
+Open Asset Import Library (Assimp) © 2006-2018 Assimp Development Team
+AssimpNet © 2012-2020 Nicholas Woodfield, TexImpNet © 2016-2020 Nicholas Woodfield
+SoulsFormatsNEXT by The Souls Modding Community
+vgmstream © 2008-2019 Adam Gashlin, Fastelbja, Ronny Elfert, bnnm, Christopher Snowhill, 
+                      NicknineTheEagle, bxaimc, Thealexbarney, CyberBotX, et al
+              
+特别感谢：
+    yamma anon,                  Grimrukh,                   Makai No Shinki,            Yrruf,                   metalcrow,
+    egor77,                      JCVocke,                    Nordgaren,                  Ewraith,                 Ian A Neinast,
+    violetwraith,                Daniel Larrea,              Dane Brennand,              Morgan,                  CyberpunkDre,
+
+      以及（撰稿时的）另外 149 位赞助者，见 https://www.patreon.com/Meowmaritus

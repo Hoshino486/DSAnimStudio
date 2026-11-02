@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Dialog
@@ -171,9 +172,9 @@ namespace DSAnimStudio.ImguiOSD
 
             bool didPopupWindow;
             if (isUsingTitleBarX)
-                didPopupWindow = ImGui.BeginPopupModal($"{Title}##{GUID}", ref isOpen, flags);
+                didPopupWindow = ImGui.BeginPopupModal(Loc.TF("{0}##{1}", Title, GUID), ref isOpen, flags);
             else
-                didPopupWindow = ImGuiEx.BeginPopupModal($"{Title}##{GUID}", flags);
+                didPopupWindow = ImGuiEx.BeginPopupModal(Loc.TF("{0}##{1}", Title, GUID), flags);
             
 
             bool buildWindowThisFrame = didPopupWindow;

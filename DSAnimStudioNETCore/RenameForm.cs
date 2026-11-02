@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -15,12 +16,14 @@ namespace DSAnimStudio
         public RenameForm()
         {
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
         }
 
         public void Init(string title, string prompt, string defaultName)
         {
-            Text = title;
-            labelPrompt.Text = prompt;
+            Text = DSAnimStudio.Localization.Loc.T(title);
+            labelPrompt.Text = DSAnimStudio.Localization.Loc.T(prompt);
             if (!string.IsNullOrWhiteSpace(defaultName))
             {
                 textBoxName.Text = defaultName;

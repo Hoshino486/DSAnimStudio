@@ -1,112 +1,145 @@
-## Basic User Instructions (Unpacked Game):
-  1. Run application.
-  1. Go to `File`->`Open`
-  1. Load a .anibnd or .anibnd.dcx.
-  1. Enter the information required, such as game executable, ModEngine folder (if applicable), etc.
-  1. Select where the unpacked ANIBND should be saved (the "project directory").
-  1. Select an animation ID on the left pane
-  1. Drag some events around or otherwise mess with things (try the bottom-right pane for editing the highlighted event)
-  1. (Optional) Play with the model/animation viewer pane on the top-right.
-  1. (Optional) Play with the options in the menu bar.
-  1. Hit Ctrl+S to save.
-  1. Make sure your game is setup to load the edited loose ANIBND file. This is more of a general Souls modding thing that is too specific to cover here.
+# DS Anim Studio（简体中文）
 
-## Basic User Instructions (Packed Game):
-  1. Run application.
-  1. Go to `File`->`Open From Packed Game Data Archives...`
-  1. Enter the information required, such as game executable, ModEngine folder (if applicable), etc.
-  1. Select which ANIBND/CHRBND you would like to use.
-  1. Select where the unpacked ANIBND should be saved (the "project directory").
-  1. Select an animation ID on the left pane
-  1. Drag some events around or otherwise mess with things (try the bottom-right pane for editing the highlighted event)
-  1. (Optional) Play with the model/animation viewer pane on the top-right.
-  1. (Optional) Play with the options in the menu bar.
-  1. Hit Ctrl+S to save.
-  1. Make sure your game is setup to load the edited loose ANIBND file. This is more of a general Souls modding thing that is too specific to cover here.
-  
-## About DS Anim Studio:
-* Edits the TimeAct Editor files of Dark Souls, Bloodborne, Dark Souls 3, and Sekiro. These files control **everything** that happens on a specific frame of an animation, such as:
-  * Activating invulnerability frames.
-  * Parry windows
-  * Applying an "SpEffect" (special temporary statuses such as ring effects, poisoning, buffs, AI triggers, etc)
-  * Allowing animation cancelling
-  * Setting the flag for YOU DIED and respawning
-  * Creating "SFX" / "FFX" (both refer to the exact same files: visual effects)
-  * Playing sound effects such as footsteps, sword swooshes, etc.
-  * Invoking an attack behavior (does damage to opponent, drains stamina from player, etc all in one event)
-  * Invoking a "bullet" (projectile) behavior (fires projectile, drains stamina from player, etc all in one event)
-  * Invoking a "common" behavior (like attack behaviors but for simpler things such as falling on someone's head causing stagger)
-  * Creating motion blur on weapon swings
-  * Setting the opacity of a character (used for getting summoned into other worlds, dying, etc)
-  * Setting attack aim tracking speed of a character
-  * Playing a "RumbleCam" file (relative screen movement e.g. Smough's footsteps shaking screen)
-  * Playing additional animation layers (e.g. all of Gwyn's animations have events to play his clothes-blowing-in-wind animation layered on top of the other animations)
-  * Adjusting model render masks (showing/hiding specific parts of characters)
-  * Many more that we haven't even figured out yet.
-* Shows an actual physical graph full of events represented as boxes.
-* Snaps to 30-fps increments just like the vanilla files do.
-* Allows you to add new events to animations by right-clicking (if a template is loaded).
-* Allows you to delete events by highlighting them and pressing the Delete key.
-* Allows you to modify the parameters passed to each event (click an event to highlight it, then the parameters appear in the pane on the right side of the window)
-* **Has full undo/redo functionality with Ctrl+Z/Ctrl+Y**
-* **Has full copy/paste functionality**:
-  * **Ctrl+C**: Copy
-  * **Ctrl+V**: Paste at Mouse Cursor
-  * **Ctrl+Shift+V**: Paste In-Place (keeps original start/end times, useful for copying between animations)
-* Edits the .anibnd or .anibnd.dcx files of the games directly. No need to use BND rebuilders.
-  
+**中文 | [English](README.en.md)**
 
-## Breakdown of Game Support:
-| Game                                        | Edit Support | Events Mapped / Identified | Anim Viewer Support  |
-| ---                                         | ---          | ---                        | ---                  |
-| **Dark Souls: Prepare to Die Edition**      | **Yes**      | Lots of them               | **Yes**              |
-| **Dark Souls Remastered**                   | **Yes**      | Lots of them               | Sort of\*...         |
-| **Dark Souls II**                           | No           | No                         | No (Never)           |
-| **Dark Souls II: Scholar of the First Sin** | No (may change in the future) | No        | No (Never)           |
-| **Dark Souls III**                          | **Yes**      | Lots of them               | **Yes**              |
-| **Bloodborne**                              | **Yes**      | Lots of them               | **Yes**              |
-| **Sekiro: Shadows Die Twice**               | **Yes**      | Lots of them               | **Yes**              |
-| **Elden Ring**                              | **Yes**      | Lots of them               | **Yes**              |
-\* For DS1R/Sekiro/Elden Ring, an animation downgrade process is no longer needed.
+> 本仓库已完整汉化：源码、内嵌资源、默认停靠布局、构建产物都是简体中文。
+> 程序内可在顶部菜单 **语言 → 简体中文 / English** 随时切换回英文，切换后立即生效并写入配置文件。
 
-## System Requirements (End Users):
-* Windows 7 SP1/8.1/10/11 (64-bit only)
+---
+
+## 基本使用说明（散装游戏文件）
+
+1. 运行程序。
+2. 打开菜单 `文件` → `打开`。
+3. 载入一个 .anibnd 或 .anibnd.dcx 文件。
+4. 填写所需信息，例如游戏可执行文件、ModEngine 目录（如果适用）等。
+5. 选择解包后的 ANIBND 要保存到哪里（即「工程目录」）。
+6. 在左侧面板选择一条动画 ID。
+7. 拖动事件、随便改点什么（右侧下方面板可以编辑高亮的事件）。
+8. （可选）玩一下右上角的模型 / 动画查看器。
+9. （可选）玩一下菜单栏里的各种选项。
+10. 按 Ctrl+S 保存。
+11. 确认你的游戏已配置成能加载改过的散装 ANIBND 文件。这属于 Souls Mod 的通用知识，情况太多，这里不展开。
+
+## 基本使用说明（打包的游戏文件）
+
+1. 运行程序。
+2. 打开菜单 `文件` → `从打包的游戏数据归档中打开...`。
+3. 填写所需信息，例如游戏可执行文件、ModEngine 目录（如果适用）等。
+4. 选择你要使用的 ANIBND / CHRBND。
+5. 选择解包后的 ANIBND 要保存到哪里（即「工程目录」）。
+6. 在左侧面板选择一条动画 ID。
+7. 拖动事件、随便改点什么（右侧下方面板可以编辑高亮的事件）。
+8. （可选）玩一下右上角的模型 / 动画查看器。
+9. （可选）玩一下菜单栏里的各种选项。
+10. 按 Ctrl+S 保存。
+11. 确认你的游戏已配置成能加载改过的散装 ANIBND 文件。这属于 Souls Mod 的通用知识，情况太多，这里不展开。
+
+## 关于 DS Anim Studio
+
+* 编辑黑暗之魂、血源诅咒、黑暗之魂 3、只狼的 TimeAct Editor 文件。这些文件控制着某条动画在**某一帧**上发生的**一切**，例如：
+  * 开启无敌帧。
+  * 弹反窗口。
+  * 施加「SpEffect」（特殊临时状态，比如戒指效果、中毒、增益、AI 触发等）。
+  * 允许动画取消。
+  * 设置「YOU DIED」标志与重生。
+  * 生成「SFX」/「FFX」（两者指同一类文件：视觉特效）。
+  * 播放音效，例如脚步声、挥剑破空声等。
+  * 触发攻击行为（对对手造成伤害、消耗玩家耐力等，全部在一个事件里完成）。
+  * 触发「子弹」（投射物）行为（发射投射物、消耗玩家耐力等，全部在一个事件里完成）。
+  * 触发「通用」行为（和攻击行为类似，但用于更简单的事，例如踩到别人头上造成硬直）。
+  * 在挥武器时创建运动模糊。
+  * 设置角色不透明度（用于被召唤到别人的世界、死亡等）。
+  * 设置角色的攻击自动转向速度。
+  * 播放「RumbleCam」文件（相对屏幕震动，例如斯摩的脚步让画面抖动）。
+  * 播放额外的动画层（例如葛温的所有动画都带有让衣服随风飘动的动画层，叠加在其他动画之上）。
+  * 调整模型渲染遮罩（显示 / 隐藏角色的特定部位）。
+  * 以及很多我们甚至还没搞明白的东西。
+* 以方块的形式，把事件画成一张真正的图形。
+* 和原版文件一样，吸附到 30 fps 的整数倍。
+* 如果已载入模板，右键即可给动画添加新事件。
+* 高亮事件后按 Delete 键即可删除。
+* 可以修改传给每个事件的参数（点选事件后，参数会出现在窗口右侧的面板里）。
+* **完整的撤销 / 重做，Ctrl+Z / Ctrl+Y**。
+* **完整的复制 / 粘贴**：
+  * **Ctrl+C**：复制
+  * **Ctrl+V**：粘贴到鼠标位置
+  * **Ctrl+Shift+V**：原位粘贴（保留原本的开始 / 结束时间，适合在动画之间复制）
+* 直接编辑游戏的 .anibnd 或 .anibnd.dcx 文件，不需要再用 BND 重打包工具。
+
+## 游戏支持情况
+
+| 游戏                                        | 编辑支持 | 已映射 / 已识别的事件 | 动画查看器支持 |
+| ---                                         | ---      | ---                   | ---            |
+| **黑暗之魂：受死版**                        | **支持** | 大量                  | **支持**       |
+| **黑暗之魂：重制版**                        | **支持** | 大量                  | 勉强可用\*...  |
+| **黑暗之魂 2**                              | 不支持   | 不支持                | 不支持（永远） |
+| **黑暗之魂 2：原罪学者**                    | 不支持（未来可能会变） | 不支持   | 不支持（永远） |
+| **黑暗之魂 3**                              | **支持** | 大量                  | **支持**       |
+| **血源诅咒**                                | **支持** | 大量                  | **支持**       |
+| **只狼：影逝二度**                          | **支持** | 大量                  | **支持**       |
+| **艾尔登法环**                              | **支持** | 大量                  | **支持**       |
+
+\* 对 DS1R / 只狼 / 艾尔登法环，已经不再需要做动画降级处理。
+
+## 系统需求（最终用户）
+
+* Windows 7 SP1 / 8.1 / 10 / 11（仅 64 位）
 * [.NET Desktop Runtime 6.0 (x64)](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.12-windows-x64-installer)
-* **A DirectX 11 Compatible Graphics Device**, even if you're just modding DS1: PTDE
-  * Note: even though Elden Ring uses DirectX 12, DS Anim Studio still uses DirectX 11.
-  
+* **一块兼容 DirectX 11 的显卡**，哪怕你只是给 DS1: PTDE 做 Mod
+  * 注意：虽然艾尔登法环用的是 DirectX 12，但 DS Anim Studio 依然使用 DirectX 11。
 
+## 系统需求（开发者）
 
-
-
-
-## System Requirements (Developers):
-* Windows 7 SP1/8.1/10/11 (64-bit only)
+* Windows 7 SP1 / 8.1 / 10 / 11（仅 64 位）
 * Visual Studio 2022
 * [.NET 6.0 SDK (Windows x64)](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.404-windows-x64-installer)
-* **A DirectX 11 Compatible Graphics Device**, even if you're just modding DS1: PTDE
-  * Note: even though Elden Ring uses DirectX 12, DS Anim Studio still uses DirectX 11.
+* **一块兼容 DirectX 11 的显卡**，哪怕你只是给 DS1: PTDE 做 Mod
+  * 注意：虽然艾尔登法环用的是 DirectX 12，但 DS Anim Studio 依然使用 DirectX 11。
 
-## Developer Instructions:
-* Clone repository (use `git clone --recursive`).
-* Ensure that all NuGet packages are installed (should in theory do it on its own now).
-* `Build Solution` should succeed.
+## 开发者说明
 
+* 克隆仓库（使用 `git clone --recursive`）。
+* 确认所有 NuGet 包已安装（理论上现在它会自动完成）。
+* `生成解决方案` 应当成功。
 
+### 本汉化版的构建方式
 
+```powershell
+# 需要 .NET 8 / 9 SDK；项目目标框架为 net9.0-windows7.0
+git submodule update --init --recursive
+dotnet build DSAnimStudioNETCore.sln -c Release -p:Platform=x64
+# 产物：DSAnimStudioNETCore\bin\x64\Release\net9.0-windows7.0\DS ANIM STUDIO.exe
+```
 
-## Special Thanks
-* [TKGP](https://github.com/JKAnderson) - Made some discoveries about the TAE format + made SoulsFormats, which this application depends on.
-* [Pav](https://github.com/JohrnaJohrna) - Tons and tons of TAE events mapped across all the games.
-* [Katalash](https://github.com/katalash) - Much help with animation file understanding.
-* [PredatorCZ](https://github.com/PredatorCZ) - Reverse engineered Havok Spline-Compressed Animation entirely.
-* [Horkrux](https://github.com/horkrux) - Reverse engineered the header and swizzling used on non-PC platform textures.
-* StaydMcButtermuffin - Many hours of helping me write and debug the shaders + reversing some basic Dark Souls 3 shaders to aid in the process. He also helped me understand Sekiro and Elden Ring shaders for the new versions of the application.
+### 汉化结构
 
-## Libraries Utilized
+| 位置 | 作用 |
+| --- | --- |
+| `DSAnimStudioNETCore/Localization/Loc.cs` | 本地化核心：`Loc.T` / `Loc.TF` / `Loc.Win` / `Loc.StableKey`，语言状态、词条缓存、`##`/`###` 后缀保护 |
+| `DSAnimStudioNETCore/EmbRes/Lang/zh-Hans.json` | 1303 条词条（英文原文 → 简体中文），编译进程序集 |
+| `DSAnimStudioNETCore/EmbRes/Help.zh-Hans.txt` | 帮助窗口的中文文本 |
+| `DSAnimStudioNETCore/EmbRes/Credits.zh-Hans.txt` | 启动画面滚动的中文版权信息 |
+| `DSAnimStudioNETCore/EmbRes/imgui_default_V5.ini` / `imgui_default_Legacy.ini` | 中文默认停靠布局（窗口标题使用 `<中文>###<英文原名>`） |
+| `DSAnimStudioNETCore/ImguiOSD/MenuBar.075.Language.cs` | 顶部「语言」菜单 |
+| `DSAnimStudio_Config.json` | 新增 `UILanguage` 字段（0 = 简体中文，1 = English），下次启动沿用 |
+
+自定义词条：在程序目录下新建 `Lang\zh-Hans.json`（与内嵌资源同格式），即可覆盖任意条目，无需重新编译。
+
+## 特别感谢
+
+* [TKGP](https://github.com/JKAnderson) —— 在 TAE 格式上有若干发现，并制作了本程序依赖的 SoulsFormats。
+* [Pav](https://github.com/JohrnaJohrna) —— 为各款游戏映射了海量的 TAE 事件。
+* [Katalash](https://github.com/katalash) —— 在理解动画文件方面给了大量帮助。
+* [PredatorCZ](https://github.com/PredatorCZ) —— 完整逆向出了 Havok 样条压缩动画。
+* [Horkrux](https://github.com/horkrux) —— 逆向出非 PC 平台纹理所用的头部与 swizzling。
+* StaydMcButtermuffin —— 花了很多小时帮我写和调着色器，并逆向了一些黑暗之魂 3 的基础着色器来辅助这个过程。他还帮我在新版本程序中理解只狼与艾尔登法环的着色器。
+
+## 使用的库
+
 * [SoulsAssetPipeline](https://github.com/Meowmaritus/SoulsAssetPipeline)
 * [SoulsFormatsNEXT](https://github.com/soulsmods/SoulsFormatsNEXT)
 * [Newtonsoft Json.NET](https://www.newtonsoft.com/json)
-* An edited version of MonoGame Framework where I added support for newer texture types.
-* A small portion of [HavokLib](https://github.com/PredatorCZ/HavokLib), specifically the spline-compressed animation decompressor, adapted for C#
-* A small portion of [Horkrux's copy of my fork of Wulf's BND Rebuilder](https://github.com/horkrux/DeS-BNDBuild), specifically the headerization and deswizzling of PS4 and PS3 textures, adapted for C# and modified to load the texture directly into MonoGame instead of save to a file.
+* 一份修改过的 MonoGame Framework，我给它加了对更新纹理类型的支持。
+* [HavokLib](https://github.com/PredatorCZ/HavokLib) 的一小部分，具体是样条压缩动画的解压器，已改写为 C#。
+* [Horkrux 维护的、我那份 Wulf's BND Rebuilder 的 fork](https://github.com/horkrux/DeS-BNDBuild) 的一小部分，具体是 PS4 与 PS3 纹理的头部化与 deswizzling，已改写为 C# 并改为直接把纹理读进 MonoGame 而不是存成文件。

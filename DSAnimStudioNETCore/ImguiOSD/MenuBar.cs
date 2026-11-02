@@ -1,4 +1,4 @@
-﻿using ImGuiNET;
+using ImGuiNET;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public static partial class MenuBar
@@ -20,7 +21,7 @@ namespace DSAnimStudio.ImguiOSD
 
         public static void DoWindow(Window w, string shortcut = null)
         {
-            w.IsOpen = Checkbox($"{w.NewImguiWindowTitle}###Checkbox_WindowIsOpen|{w.ImguiTag}", w.IsOpen, shortcut: shortcut);
+            w.IsOpen = Checkbox(Loc.TF("{0}###Checkbox_WindowIsOpen|{1}", w.NewImguiWindowTitle, w.ImguiTag), w.IsOpen, shortcut: shortcut);
         }
         
         public static void OpenSite(string url)
@@ -50,11 +51,12 @@ namespace DSAnimStudio.ImguiOSD
             BuildMenuBar_050_Tools(ref anyItemFocusedInner, ref isAnyMenuExpanded);
             BuildMenuBar_060_Window(ref anyItemFocusedInner, ref isAnyMenuExpanded);
             BuildMenuBar_070_Help(ref anyItemFocusedInner, ref isAnyMenuExpanded);
+            BuildMenuBar_075_Language(ref anyItemFocusedInner, ref isAnyMenuExpanded);
             BuildMenuBar_080_SupportMeowmaritus(ref anyItemFocusedInner, ref isAnyMenuExpanded);
 
             if (Main.IsDebugBuild)
             {
-                ImGui.MenuItem("Debug ImGui Dock Edit", "", ref Main.Debug.EnableImguiDebugDockEdit);
+                ImGui.MenuItem(Loc.T("Debug ImGui Dock Edit"), "", ref Main.Debug.EnableImguiDebugDockEdit);
             }
             
 
@@ -160,7 +162,7 @@ namespace DSAnimStudio.ImguiOSD
                 ImGui.PushStyleColor(ImGuiCol.Text, textColor.Value.ToNVector4());
             if (shortcutColor != null)
                 ImGui.PushStyleColor(ImGuiCol.TextDisabled, shortcutColor.Value.ToNVector4());
-            ImGui.Checkbox($"##Checkbox_{text}", ref v);
+            ImGui.Checkbox(Loc.TF("##Checkbox_{0}", text), ref v);
             ImGui.SameLine();
 
             ImGui.MenuItem(text, shortcut, ref v, enabled: enabled);

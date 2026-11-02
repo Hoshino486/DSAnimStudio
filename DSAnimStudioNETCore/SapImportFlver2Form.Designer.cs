@@ -1,4 +1,5 @@
-﻿namespace DSAnimStudio
+﻿using DSAnimStudio.Localization;
+namespace DSAnimStudio
 {
     partial class SapImportFlver2Form
     {
@@ -51,7 +52,7 @@
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(123, 42);
             this.buttonImport.TabIndex = 0;
-            this.buttonImport.Text = "IMPORT FBX TO DS ANIM STUDIO";
+            this.buttonImport.Text = Loc.T("IMPORT FBX TO DS ANIM STUDIO");
             this.buttonImport.UseVisualStyleBackColor = true;
             this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             this.buttonImport.DragEnter += new System.Windows.Forms.DragEventHandler(this.buttonImport_DragEnter);
@@ -63,7 +64,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "FBX File:";
+            this.label1.Text = Loc.T("FBX File:");
             // 
             // textBoxFBX
             // 
@@ -81,7 +82,7 @@
             this.buttonBrowseFBX.Name = "buttonBrowseFBX";
             this.buttonBrowseFBX.Size = new System.Drawing.Size(75, 23);
             this.buttonBrowseFBX.TabIndex = 3;
-            this.buttonBrowseFBX.Text = "Browse...";
+            this.buttonBrowseFBX.Text = Loc.T("Browse...");
             this.buttonBrowseFBX.UseVisualStyleBackColor = true;
             this.buttonBrowseFBX.Click += new System.EventHandler(this.buttonBrowseFBX_Click);
             // 
@@ -115,7 +116,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Scene Scale Percent:";
+            this.label2.Text = Loc.T("Scene Scale Percent:");
             // 
             // groupBoxSettings
             // 
@@ -131,7 +132,7 @@
             this.groupBoxSettings.Size = new System.Drawing.Size(613, 123);
             this.groupBoxSettings.TabIndex = 6;
             this.groupBoxSettings.TabStop = false;
-            this.groupBoxSettings.Text = "Import Settings";
+            this.groupBoxSettings.Text = Loc.T("Import Settings");
             // 
             // flver2_checkBoxKeepExistingDummyPoly
             // 
@@ -140,7 +141,7 @@
             this.flver2_checkBoxKeepExistingDummyPoly.Name = "flver2_checkBoxKeepExistingDummyPoly";
             this.flver2_checkBoxKeepExistingDummyPoly.Size = new System.Drawing.Size(147, 17);
             this.flver2_checkBoxKeepExistingDummyPoly.TabIndex = 7;
-            this.flver2_checkBoxKeepExistingDummyPoly.Text = "Keep existing DummyPoly";
+            this.flver2_checkBoxKeepExistingDummyPoly.Text = Loc.T("Keep existing DummyPoly");
             this.flver2_checkBoxKeepExistingDummyPoly.UseVisualStyleBackColor = true;
             // 
             // flver2_checkBoxConvertFromZUp
@@ -150,7 +151,7 @@
             this.flver2_checkBoxConvertFromZUp.Name = "flver2_checkBoxConvertFromZUp";
             this.flver2_checkBoxConvertFromZUp.Size = new System.Drawing.Size(152, 17);
             this.flver2_checkBoxConvertFromZUp.TabIndex = 6;
-            this.flver2_checkBoxConvertFromZUp.Text = "Convert from Z-Up to Y-Up";
+            this.flver2_checkBoxConvertFromZUp.Text = Loc.T("Convert from Z-Up to Y-Up");
             this.flver2_checkBoxConvertFromZUp.UseVisualStyleBackColor = true;
             // 
             // buttonSaveImportedData
@@ -161,7 +162,7 @@
             this.buttonSaveImportedData.Name = "buttonSaveImportedData";
             this.buttonSaveImportedData.Size = new System.Drawing.Size(256, 42);
             this.buttonSaveImportedData.TabIndex = 7;
-            this.buttonSaveImportedData.Text = "SAVE IMPORTED FBX TO GAME DATA (and save *.dsibak backups)";
+            this.buttonSaveImportedData.Text = Loc.T("SAVE IMPORTED FBX TO GAME DATA (and save *.dsibak backups)");
             this.buttonSaveImportedData.UseVisualStyleBackColor = true;
             this.buttonSaveImportedData.Click += new System.EventHandler(this.buttonSaveImportedData_Click);
             // 
@@ -173,7 +174,7 @@
             this.buttonRestoreBackups.Name = "buttonRestoreBackups";
             this.buttonRestoreBackups.Size = new System.Drawing.Size(169, 42);
             this.buttonRestoreBackups.TabIndex = 8;
-            this.buttonRestoreBackups.Text = "RESTORE BACKUPS (*.dsibak)";
+            this.buttonRestoreBackups.Text = Loc.T("RESTORE BACKUPS (*.dsibak)");
             this.buttonRestoreBackups.UseVisualStyleBackColor = true;
             this.buttonRestoreBackups.Click += new System.EventHandler(this.buttonRestoreBackups_Click);
             // 
@@ -194,7 +195,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Import Character Model From FBX";
+            this.Text = Loc.T("Import Character Model From FBX");
             this.TopMost = true;
             this.Load += new System.EventHandler(this.SapImportFlver2Form_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.SapImportFlver2Form_DragDrop);

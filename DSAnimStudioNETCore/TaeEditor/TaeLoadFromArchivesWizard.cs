@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.TaeEditor
 {
@@ -17,6 +18,8 @@ namespace DSAnimStudio.TaeEditor
         public TaeLoadFromArchivesWizard()
         {
             InitializeComponent();
+            WinformsLoc.Apply(this);
+            this.Shown += (_, __) => WinformsLoc.Apply(this);
         }
 
         public bool WizardCompleted = false;
@@ -71,18 +74,18 @@ namespace DSAnimStudio.TaeEditor
 
         private string[] FileTypeStrings_OBJ = new string[]
         {
-            "Select a file type",
-            "Character (/chr)",
-            "Parts (/parts)",
-            "Object (/obj)"
+            Loc.T("Select a file type"),
+            Loc.T("Character (/chr)"),
+            Loc.T("Parts (/parts)"),
+            Loc.T("Object (/obj)")
         };
 
         private string[] FileTypeStrings_AEG = new string[]
         {
-            "Select a file type",
-            "Character (/chr)",
-            "Parts (/parts)",
-            "Geometry (/asset)"
+            Loc.T("Select a file type"),
+            Loc.T("Character (/chr)"),
+            Loc.T("Parts (/parts)"),
+            Loc.T("Geometry (/asset)")
         };
 
         private int FileTypeIndex_NONE = 0;
@@ -165,14 +168,14 @@ namespace DSAnimStudio.TaeEditor
 
         private void buttonHelpGameEXE_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Browse for the game executable (e.g. DarkSoulsIII.exe). This tells DSAS what game it is and where the data is.",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("Browse for the game executable (e.g. DarkSoulsIII.exe). This tells DSAS what game it is and where the data is."),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonHelpSaveLoose_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("The location where the loose project files will be saved. In it will be a configuration json, a couple of folders to help DSAS out with loading, and the file you selected in step 3.",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("The location where the loose project files will be saved. In it will be a configuration json, a couple of folders to help DSAS out with loading, and the file you selected in step 3."),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //private void ShowPathBrowse(string)
@@ -409,18 +412,18 @@ namespace DSAnimStudio.TaeEditor
                             // Show stuff for current FileType
                             if (FileType == FileTypes.Chr)
                             {
-                                labelStep3A.Text = "3a. Choose ANIBND";
-                                labelStep3B.Text = "3b. Choose CHRBND";
+                                labelStep3A.Text = DSAnimStudio.Localization.Loc.T("3a. Choose ANIBND");
+                                labelStep3B.Text = DSAnimStudio.Localization.Loc.T("3b. Choose CHRBND");
                             }
                             else if (FileType is FileTypes.Parts)
                             {
-                                labelStep3A.Text = "3a. Choose PARTSBND";
-                                labelStep3B.Text = "3b. Choose ANIBND Within";
+                                labelStep3A.Text = DSAnimStudio.Localization.Loc.T("3a. Choose PARTSBND");
+                                labelStep3B.Text = DSAnimStudio.Localization.Loc.T("3b. Choose ANIBND Within");
                             }
                             else if (FileType is FileTypes.ObjAeg)
                             {
-                                labelStep3A.Text = zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeUsesAEG ? "3a. Choose GEOMBND" : "3a. Choose OBJBND";
-                                labelStep3B.Text = "3b. Choose ANIBND Within";
+                                labelStep3A.Text = zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeUsesAEG ? DSAnimStudio.Localization.Loc.T("3a. Choose GEOMBND") : DSAnimStudio.Localization.Loc.T("3a. Choose OBJBND");
+                                labelStep3B.Text = DSAnimStudio.Localization.Loc.T("3b. Choose ANIBND Within");
                             }
                             else
                             {
@@ -482,7 +485,7 @@ namespace DSAnimStudio.TaeEditor
                                         }
                                         else
                                         {
-                                            errorProvider1.SetError(comboBox_PartsObjAeg_SelectAnibndInPartsbnd, "Selected ANIBND has no TAE inside.");
+                                            errorProvider1.SetError(comboBox_PartsObjAeg_SelectAnibndInPartsbnd, Loc.T("Selected ANIBND has no TAE inside."));
                                         }
 
                                     }
@@ -680,8 +683,8 @@ namespace DSAnimStudio.TaeEditor
                 FileName = "",
                 CheckFileExists = false,
                 CheckPathExists = true,
-                Title = "Select Game Executable",
-                Filter = "Executables (*.exe)|*.EXE"
+                Title = Loc.T("Select Game Executable"),
+                Filter = Loc.T("Executables (*.exe)|*.EXE")
             };
             if (!string.IsNullOrWhiteSpace(dir) && System.IO.Directory.Exists(dir))
             {
@@ -698,7 +701,7 @@ namespace DSAnimStudio.TaeEditor
         {
             if (FileType == FileTypes.Chr)
             {
-                var anibnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/chr/", @".*\/c\d\d\d\d\.anibnd\.dcx$", textBoxPathMainBinder.Text, "Choose ANIBND", textBoxPathMainBinder.Text);
+                var anibnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/chr/", @".*\/c\d\d\d\d\.anibnd\.dcx$", textBoxPathMainBinder.Text, Loc.T("Choose ANIBND"), textBoxPathMainBinder.Text);
                 if (anibnd != null)
                 {
                     NewSetMainBinder(anibnd);
@@ -707,7 +710,7 @@ namespace DSAnimStudio.TaeEditor
             }
             else if (FileType == FileTypes.Parts)
             {
-                var partsbnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/parts/", @".*\.partsbnd.dcx$", textBoxPathMainBinder.Text, "Choose PARTSBND", textBoxPathMainBinder.Text);
+                var partsbnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/parts/", @".*\.partsbnd.dcx$", textBoxPathMainBinder.Text, Loc.T("Choose PARTSBND"), textBoxPathMainBinder.Text);
                 if (partsbnd != null)
                 {
                     NewSetMainBinder(partsbnd);
@@ -718,7 +721,7 @@ namespace DSAnimStudio.TaeEditor
             {
                 if (zzz_DocumentManager.CurrentDocument.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.ER or SoulsAssetPipeline.SoulsGames.ERNR)
                 {
-                    var geombnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/asset/aeg/", @".*\.geombnd.dcx$", textBoxPathMainBinder.Text, "Choose GEOMBND", textBoxPathMainBinder.Text);
+                    var geombnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/asset/aeg/", @".*\.geombnd.dcx$", textBoxPathMainBinder.Text, Loc.T("Choose GEOMBND"), textBoxPathMainBinder.Text);
                     if (geombnd != null)
                     {
                         NewSetMainBinder(geombnd);
@@ -727,7 +730,7 @@ namespace DSAnimStudio.TaeEditor
                 }
                 else if (zzz_DocumentManager.CurrentDocument.GameRoot.GameType is SoulsAssetPipeline.SoulsGames.AC6)
                 {
-                    var geombnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/asset/environment/geometry/", @".*\.geombnd.dcx$", textBoxPathMainBinder.Text, "Choose GEOMBND", textBoxPathMainBinder.Text);
+                    var geombnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/asset/environment/geometry/", @".*\.geombnd.dcx$", textBoxPathMainBinder.Text, Loc.T("Choose GEOMBND"), textBoxPathMainBinder.Text);
                     if (geombnd != null)
                     {
                         NewSetMainBinder(geombnd);
@@ -736,7 +739,7 @@ namespace DSAnimStudio.TaeEditor
                 }
                 else
                 {
-                    var objbnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/obj/", @".*\.objbnd.dcx$", textBoxPathMainBinder.Text, "Choose OBJBND", textBoxPathMainBinder.Text);
+                    var objbnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/obj/", @".*\.objbnd.dcx$", textBoxPathMainBinder.Text, Loc.T("Choose OBJBND"), textBoxPathMainBinder.Text);
                     if (objbnd != null)
                     {
                         NewSetMainBinder(objbnd);
@@ -760,7 +763,7 @@ namespace DSAnimStudio.TaeEditor
             {
                 var searchDefaultStart = Utils.GetFileNameWithoutAnyExtensions(textBoxPathMainBinder.Text);
                 searchDefaultStart = searchDefaultStart.Substring(0, searchDefaultStart.Length - 1);
-                var chrbnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/chr/", @".*\/c\d\d\d\d.chrbnd.dcx$", searchDefaultStart, "Choose CHRBND", textBoxPathMainBinder.Text.Replace(".anibnd.dcx", ".chrbnd.dcx"));
+                var chrbnd = zzz_DocumentManager.CurrentDocument.GameData.ShowPickInsideBndPath("/chr/", @".*\/c\d\d\d\d.chrbnd.dcx$", searchDefaultStart, Loc.T("Choose CHRBND"), textBoxPathMainBinder.Text.Replace(".anibnd.dcx", ".chrbnd.dcx"));
                 if (chrbnd != null)
                 {
                     textBox_Chr_PathChrbnd.Text = chrbnd;
@@ -784,11 +787,11 @@ namespace DSAnimStudio.TaeEditor
             var dir = (isPathValid && !string.IsNullOrEmpty(textBoxPathSaveLoose.Text)) ? System.IO.Path.GetDirectoryName(textBoxPathSaveLoose.Text) : null;
             var browseDlg = new SaveFileDialog()
             {
-                FileName = "GO TO DIRECTORY AND CLICK SAVE",
+                FileName = Loc.T("GO TO DIRECTORY AND CLICK SAVE"),
                 CheckFileExists = false,
                 CheckPathExists = true,
                 OverwritePrompt = false,
-                Title = "Select Project Directory"
+                Title = Loc.T("Select Project Directory")
             };
             if (!string.IsNullOrWhiteSpace(dir) && System.IO.Directory.Exists(dir))
             {
@@ -935,7 +938,7 @@ namespace DSAnimStudio.TaeEditor
             var dir = (isPathValid && !string.IsNullOrEmpty(textBoxPathModEngineDir.Text)) ? System.IO.Path.GetDirectoryName(textBoxPathModEngineDir.Text) : null;
             var browseDlg = new SaveFileDialog()
             {
-                FileName = "GO TO DIRECTORY AND CLICK SAVE",
+                FileName = Loc.T("GO TO DIRECTORY AND CLICK SAVE"),
                 CheckFileExists = false,
                 CheckPathExists = true,
                 OverwritePrompt = false,
@@ -954,18 +957,14 @@ namespace DSAnimStudio.TaeEditor
 
         private void buttonHelpCfgLoadLooseGameParam_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("If checked, DS Anim Studio will load parameters from loose GameParam file " +
-                "rather than from encrypted regulation. Works exactly like the ModEngine setting \"loadLooseParams\".",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("If checked, DS Anim Studio will load parameters from loose GameParam file rather than from encrypted regulation. Works exactly like the ModEngine setting \"loadLooseParams\"."),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonHelpCfgModEngineDir_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("If a path is entered here, it will function exactly like the mod " +
-                "override directory in ModEngine, making DS Anim Studio load files from there with first priority, " +
-                "only falling back to loading from the regular game directory if the file isn't found in the " +
-                "ModEngine directory.",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("If a path is entered here, it will function exactly like the mod override directory in ModEngine, making DS Anim Studio load files from there with first priority, only falling back to loading from the regular game directory if the file isn't found in the ModEngine directory."),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void SaveJsonCfg()
@@ -1008,10 +1007,8 @@ namespace DSAnimStudio.TaeEditor
 
         private void buttonHelpCfgLoadUnpackedGameFiles_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("If checked, DS Anim Studio will load loose files unpacked with UXM instead of the ones in the data archives. " +
-                "\nWorks exactly like the ModEngine setting \"loadUXMFiles\"." +
-                "\nHas no effect on games that do not have archive files (DeS, DS1:PTDE, BB)",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("If checked, DS Anim Studio will load loose files unpacked with UXM instead of the ones in the data archives. \nWorks exactly like the ModEngine setting \"loadUXMFiles\".\nHas no effect on games that do not have archive files (DeS, DS1:PTDE, BB)"),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonClearModEngineDir_Click(object sender, EventArgs e)
@@ -1028,8 +1025,8 @@ namespace DSAnimStudio.TaeEditor
 
         private void buttonHelpFileType_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Selects the type of file you wish to load.",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("Selects the type of file you wish to load."),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void comboBoxFileType_SelectedIndexChanged(object sender, EventArgs e)
@@ -1148,23 +1145,22 @@ namespace DSAnimStudio.TaeEditor
         {
             if (FileType is FileTypes.Chr)
             {
-                System.Windows.Forms.MessageBox.Show("Select which model file to to use from within the data archives. " +
-                     "You only need to change this from the default if you're editing enemy variants which use multiple models for the same ANIBND file (used a lot in Elden Ring).",
-                     "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.Windows.Forms.MessageBox.Show(Loc.T("Select which model file to to use from within the data archives. You only need to change this from the default if you're editing enemy variants which use multiple models for the same ANIBND file (used a lot in Elden Ring)."),
+                     Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (FileType is FileTypes.Parts)
             {
-                System.Windows.Forms.MessageBox.Show("Select which ANIBND file to load from within the PARTSBND file you chose.",
-                    "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.Windows.Forms.MessageBox.Show(Loc.T("Select which ANIBND file to load from within the PARTSBND file you chose."),
+                    Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (FileType is FileTypes.ObjAeg)
             {
                 if (zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeUsesAEG)
-                    System.Windows.Forms.MessageBox.Show("Select which ANIBND file to load from within the GEOMBND file you chose.",
-                        "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    System.Windows.Forms.MessageBox.Show(Loc.T("Select which ANIBND file to load from within the GEOMBND file you chose."),
+                        Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
-                    System.Windows.Forms.MessageBox.Show("Select which ANIBND file to load from within the OBJBND file you chose.",
-                        "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    System.Windows.Forms.MessageBox.Show(Loc.T("Select which ANIBND file to load from within the OBJBND file you chose."),
+                        Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -1176,33 +1172,25 @@ namespace DSAnimStudio.TaeEditor
         {
             if (FileType is FileTypes.Chr)
             {
-                System.Windows.Forms.MessageBox.Show("Select which animation file to edit from within the data archives. " +
-                    "See the Dark Souls Modding Wiki for lists of character IDs (http://soulsmodding.wikidot.com/reference:main)." +
-                    "The selected file will be unpacked into the workspace directory you select on step 4.",
-                    "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.Windows.Forms.MessageBox.Show(Loc.T("Select which animation file to edit from within the data archives. See the Dark Souls Modding Wiki for lists of character IDs (http://soulsmodding.wikidot.com/reference:main).The selected file will be unpacked into the workspace directory you select on step 4."),
+                    Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (FileType is FileTypes.Parts)
             {
-                System.Windows.Forms.MessageBox.Show("Select which PARTSBND file to edit from within the data archives. " +
-                    "See the Dark Souls Modding Wiki for lists of Parts IDs for some of the games (http://soulsmodding.wikidot.com/reference:main)." +
-                    "The selected file will be unpacked into the workspace directory you select on step 4.",
-                    "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.Windows.Forms.MessageBox.Show(Loc.T("Select which PARTSBND file to edit from within the data archives. See the Dark Souls Modding Wiki for lists of Parts IDs for some of the games (http://soulsmodding.wikidot.com/reference:main).The selected file will be unpacked into the workspace directory you select on step 4."),
+                    Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (FileType is FileTypes.ObjAeg)
             {
                 if (zzz_DocumentManager.CurrentDocument.GameRoot.GameTypeUsesAEG)
                 {
-                    System.Windows.Forms.MessageBox.Show("Select which GEOMBND file to edit from within the data archives. " +
-                    "See the Dark Souls Modding Wiki for lists of Asset/AEG IDs for some of the games (http://soulsmodding.wikidot.com/reference:main)." +
-                    "The selected file will be unpacked into the workspace directory you select on step 4.",
-                    "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    System.Windows.Forms.MessageBox.Show(Loc.T("Select which GEOMBND file to edit from within the data archives. See the Dark Souls Modding Wiki for lists of Asset/AEG IDs for some of the games (http://soulsmodding.wikidot.com/reference:main).The selected file will be unpacked into the workspace directory you select on step 4."),
+                    Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Select which OBJBND file to edit from within the data archives. " +
-                    "See the Dark Souls Modding Wiki for lists of Object IDs for some of the games (http://soulsmodding.wikidot.com/reference:main)." +
-                    "The selected file will be unpacked into the workspace directory you select on step 4.",
-                    "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    System.Windows.Forms.MessageBox.Show(Loc.T("Select which OBJBND file to edit from within the data archives. See the Dark Souls Modding Wiki for lists of Object IDs for some of the games (http://soulsmodding.wikidot.com/reference:main).The selected file will be unpacked into the workspace directory you select on step 4."),
+                    Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -1341,9 +1329,8 @@ namespace DSAnimStudio.TaeEditor
 
         private void buttonHelpDisableInterrootDCX_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Removes .dcx extension from all paths in the game data directory. For use with DS1 PTDE unpacked via UDSFM." +
-                "\n\nYou definitely want to enable Load Unpacked Game Files with this option.",
-                "Explanation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            System.Windows.Forms.MessageBox.Show(Loc.T("Removes .dcx extension from all paths in the game data directory. For use with DS1 PTDE unpacked via UDSFM.\n\nYou definitely want to enable Load Unpacked Game Files with this option."),
+                Loc.T("Explanation"), MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void TaeLoadFromArchivesWizard_FormClosed(object sender, FormClosedEventArgs e)

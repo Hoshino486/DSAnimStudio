@@ -13,6 +13,7 @@ using SoulsAssetPipeline;
 using DSAnimStudio.ImguiOSD;
 using SoulsAssetPipeline.Audio.MagicOrchestra;
 using SoulsFormats;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -211,10 +212,7 @@ namespace DSAnimStudio
             catch
             {
                 Main.REQUEST_DISABLE_SOUND = true;
-                System.Windows.Forms.MessageBox.Show("Unable to decode audio with vgmstream. Make sure you or your antivirus have" +
-                    " not deleted the '/Res/vgmstream/vgmstream_cmd.exe' file (re-extract the .zip to get another copy if needed)." +
-                    "\n\nDisabling sound simulation now.\n" +
-                    "After fixing the issue, you may re-enable it from the 'Simulation' tab.", "",
+                System.Windows.Forms.MessageBox.Show(Loc.T("Unable to decode audio with vgmstream. Make sure you or your antivirus have not deleted the '/Res/vgmstream/vgmstream_cmd.exe' file (re-extract the .zip to get another copy if needed).\n\nDisabling sound simulation now.\nAfter fixing the issue, you may re-enable it from the 'Simulation' tab."), "",
                     System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 
             }

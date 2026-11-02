@@ -8,6 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -16,7 +17,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.NoSave;
 
-            public override string NewImguiWindowTitle => "Tooltip";
+            public override string NewImguiWindowTitle => Loc.Win("Tooltip");
             
             private string TooltipText = "";
             private System.Numerics.Vector2 TooltipTextScale;
@@ -125,7 +126,7 @@ namespace DSAnimStudio.ImguiOSD
                     ImGui.PushTextWrapPos(wrapX);
                     try
                     {
-                        ImGui.TextWrapped($"{text}");
+                        ImGui.TextWrapped(Loc.TF("{0}", text));
                     }
                     finally
                     {
@@ -136,7 +137,7 @@ namespace DSAnimStudio.ImguiOSD
                 }
                 else
                 {
-                    ImGui.Text($"{text}");
+                    ImGui.Text(Loc.TF("{0}", text));
                 }
             }
         }

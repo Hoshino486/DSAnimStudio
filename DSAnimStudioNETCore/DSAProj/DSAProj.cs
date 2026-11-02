@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TAE = SoulsAssetPipeline.Animation.TAE;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -1597,8 +1598,8 @@ namespace DSAnimStudio
             }
             catch (Exception ex) when (Main.EnableErrorHandler.ApplyTaeTemplate)
             {
-                System.Windows.Forms.MessageBox.Show($"Failed to apply action template:\n\n{ex}",
-                    "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(Loc.TF("Failed to apply action template:\n\n{0}", ex),
+                    Loc.T("Error"), System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
         }
         public void SAFE_ApplyTemplate(SoulsAssetPipeline.Animation.TAE.Template template) => SAFE(() => INNER_ApplyTemplate(template));
@@ -1676,9 +1677,10 @@ namespace DSAnimStudio
 
             if (ParentDocument.GameRoot.GameType != GameType)
             {
-                zzz_NotificationManagerIns.PushNotificationWarn($"The .dsaproj metadata was last saved " +
-                    $"with the {GameType} game tag but the current game tag loaded " +
-                    $"is {ParentDocument.GameRoot.GameType}.", showDuration: 10);
+                zzz_NotificationManagerIns.PushNotificationWarn(
+                    Loc.T("The .dsaproj metadata was last saved ") +
+                    Loc.T("with the {GameType} game tag but the current game tag loaded ") +
+                    Loc.T("is {ParentDocument.GameRoot.GameType}."), showDuration: 10);
             }
 
             RootTaeProperties = TaeProperties.Deserialize(br, FILE_VERSION);

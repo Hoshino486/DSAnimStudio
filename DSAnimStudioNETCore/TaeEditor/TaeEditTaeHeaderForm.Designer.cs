@@ -1,4 +1,5 @@
-﻿namespace DSAnimStudio.TaeEditor
+﻿using DSAnimStudio.Localization;
+namespace DSAnimStudio.TaeEditor
 {
     partial class TaeEditTaeHeaderForm
     {
@@ -53,7 +54,7 @@
             this.buttonDiscardChanges.Name = "buttonDiscardChanges";
             this.buttonDiscardChanges.Size = new System.Drawing.Size(114, 23);
             this.buttonDiscardChanges.TabIndex = 1;
-            this.buttonDiscardChanges.Text = "Discard Changes";
+            this.buttonDiscardChanges.Text = Loc.T("Discard Changes");
             this.buttonDiscardChanges.UseVisualStyleBackColor = true;
             this.buttonDiscardChanges.Click += new System.EventHandler(this.buttonDiscardChanges_Click);
             // 
@@ -64,7 +65,7 @@
             this.buttonSaveChanges.Name = "buttonSaveChanges";
             this.buttonSaveChanges.Size = new System.Drawing.Size(105, 23);
             this.buttonSaveChanges.TabIndex = 2;
-            this.buttonSaveChanges.Text = "Keep Changes";
+            this.buttonSaveChanges.Text = Loc.T("Keep Changes");
             this.buttonSaveChanges.UseVisualStyleBackColor = true;
             this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
             // 
@@ -85,7 +86,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit TAE Header";
+            this.Text = Loc.T("Edit TAE Header");
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TaeEditAnimPropertiesForm_FormClosing);
             this.Load += new System.EventHandler(this.TaeEditTaeHeaderForm_Load);
             this.Shown += new System.EventHandler(this.TaeEditAnimPropertiesForm_Shown);

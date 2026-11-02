@@ -7,6 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -18,7 +19,7 @@ namespace DSAnimStudio.ImguiOSD
             private TaeSearch search = new TaeSearch();
             private TaeSearch.ConditionProcessType processType = TaeSearch.ConditionProcessType.AllTrue;
             private bool forceReadAllParams = true;
-            public override string NewImguiWindowTitle => "Find";
+            public override string NewImguiWindowTitle => Loc.Win("Find");
 
             private List<TaeSearch.Check> searchResults = new();
 
@@ -56,13 +57,13 @@ namespace DSAnimStudio.ImguiOSD
                 ImGui.Separator();
 
                 ImGui.PushItemWidth(128 * Main.DPI);
-                Tools.EnumPicker("Condition Check Type", ref processType, TaeSearch.ConditionProcessTypeToString);
+                Tools.EnumPicker(Loc.T("Condition Check Type"), ref processType, TaeSearch.ConditionProcessTypeToString);
                 ImGui.PopItemWidth();
                 
-                ImGui.Checkbox("Force Refresh Params In All Actions", ref forceReadAllParams);
+                ImGui.Checkbox(Loc.T("Force Refresh Params In All Actions"), ref forceReadAllParams);
 
                 ImGui.PushItemWidth(80);
-                ImGui.InputInt("Search Results Per Page", ref searchResultsPerPage, 0, 0);
+                ImGui.InputInt(Loc.T("Search Results Per Page"), ref searchResultsPerPage, 0, 0);
                 ImGui.PopItemWidth();
                 if (searchResultsPerPage < 10)
                     searchResultsPerPage = 10;
@@ -72,7 +73,7 @@ namespace DSAnimStudio.ImguiOSD
                 if (!anyConditions)
                     ImGui.BeginDisabled();
 
-                bool searchButtonClicked = Tools.SimpleClickButton("SEARCH") && anyConditions;
+                bool searchButtonClicked = Tools.SimpleClickButton(Loc.T("SEARCH")) && anyConditions;
 
                 if (!anyConditions)
                     ImGui.EndDisabled();
@@ -88,11 +89,11 @@ namespace DSAnimStudio.ImguiOSD
                     
                 searchResultPageCount = (searchResults.Count / searchResultsPerPage);
                     
-                ImGui.Text("Page:");
+                ImGui.Text(Loc.T("Page:"));
                 ImGui.SameLine();
                 ImGui.PushItemWidth(120);
                 float page = searchResultPageIndex + 1;
-                ImGui.InputFloat("##PageFloat", ref page, 1.0f, 5.0f, $"%.0f / {(searchResultPageCount + 1)}");
+                ImGui.InputFloat(Loc.T("##PageFloat"), ref page, 1.0f, 5.0f, $"%.0f / {(searchResultPageCount + 1)}");
                 searchResultPageIndex = (int)Math.Round(page - 1);
                 ImGui.PopItemWidth();
                     
@@ -106,7 +107,7 @@ namespace DSAnimStudio.ImguiOSD
                     Math.Min(((searchResultPageIndex + 1) * searchResultsPerPage) - 1, searchResults.Count - 1);
 
                 
-                ImGui.Text($"Results ({(resultIndexMin + 1)}-{(resultIndexMax + 1)} of {searchResults.Count}):");
+                ImGui.Text(Loc.TF("Results ({0}-{1} of {2}):", (resultIndexMin + 1), (resultIndexMax + 1), searchResults.Count));
                 
                 if (searchResults != null && searchResults.Count > 0)
                 {
@@ -144,21 +145,21 @@ namespace DSAnimStudio.ImguiOSD
                     //var cursorYAtListStart = ImGui.GetCursorPosY();
                     //ImGui.BeginChild("Window.Find.Child", new Vector2(LastSize.X - 16, LastSize.Y - cursorYAtListStart - 8), true, ImGuiWindowFlags.AlwaysVerticalScrollbar);
                     
-                    if (ImGui.BeginTable($"##TaeSearchResultsTable4", columnCount,
+                    if (ImGui.BeginTable(Loc.TF("##TaeSearchResultsTable4"), columnCount,
                             ImGuiTableFlags.Borders | ImGuiTableFlags.Resizable |
                             ImGuiTableFlags.NoSavedSettings | ImGuiTableFlags.ScrollY))
                     {
                         if (absoluteDeepestCondition >= TaeSearch.ConditionDepthType.Category)
-                            ImGui.TableSetupColumn("Category", ImGuiTableColumnFlags.None, 3);
+                            ImGui.TableSetupColumn(Loc.T("Category"), ImGuiTableColumnFlags.None, 3);
                         
                         if (absoluteDeepestCondition >= TaeSearch.ConditionDepthType.CategoryAnimation)
-                            ImGui.TableSetupColumn("Animation", ImGuiTableColumnFlags.None, 5);
+                            ImGui.TableSetupColumn(Loc.T("Animation"), ImGuiTableColumnFlags.None, 5);
                         
                         if (absoluteDeepestCondition >= TaeSearch.ConditionDepthType.CategoryAnimationTrack)
-                            ImGui.TableSetupColumn("Track", ImGuiTableColumnFlags.None, 3);
+                            ImGui.TableSetupColumn(Loc.T("Track"), ImGuiTableColumnFlags.None, 3);
                         
                         if (absoluteDeepestCondition >= TaeSearch.ConditionDepthType.CategoryAnimationTrackAction)
-                            ImGui.TableSetupColumn("Action", ImGuiTableColumnFlags.None, 5);
+                            ImGui.TableSetupColumn(Loc.T("Action"), ImGuiTableColumnFlags.None, 5);
                         
                         ImGui.TableSetupScrollFreeze(columnCount, 1);
     

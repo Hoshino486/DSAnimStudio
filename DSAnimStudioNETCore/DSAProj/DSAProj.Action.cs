@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static SoulsAssetPipeline.Animation.TAE;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -359,11 +360,11 @@ namespace DSAnimStudio
                                     }
                                     catch (System.IO.InvalidDataException ex)
                                     {
-                                        var txtField = p.Name != null ? $"'{p.Name}'" : $"{(i + 1)} of {Template.Count}";
+                                        var txtField = p.Name != null ? $"'{p.Name}'" : Loc.TF("{0} of {1}", (i + 1), Template.Count);
                                         var txtActionType = Template.Name != null ? $"'{Template.Name}'" : Template.ID.ToString();
 
-                                        throw new Exception($"Animation {animID}\nAction[{eventIndex}] (Type: {txtActionType})" +
-                                                $"\n  -> Assert failed on field {txtField} (Type: {p.ParamType})", ex);
+                                        throw new Exception(Loc.TF("Animation {0}\nAction[{1}] (Type: {2})", animID, eventIndex, txtActionType) +
+                                                Loc.TF("\n  -> Assert failed on field {0} (Type: {1})", txtField, p.ParamType), ex);
                                     }
                                 }
                                 else
@@ -383,11 +384,11 @@ namespace DSAnimStudio
                                 }
                                 catch (Exception ex)
                                 {
-                                    var txtField = p.Name != null ? $"'{p.Name}'" : $"{(i + 1)} of {Template.Count}";
+                                    var txtField = p.Name != null ? $"'{p.Name}'" : Loc.TF("{0} of {1}", (i + 1), Template.Count);
                                     var txtActionType = Template.Name != null ? $"'{Template.Name}'" : Template.ID.ToString();
 
-                                    throw new Exception($"Animation {animID}\nAction[{eventIndex}] (Type: {txtActionType})" +
-                                            $"\n  -> Failed to read value of field {txtField} (Type: {p.ParamType})", ex);
+                                    throw new Exception(Loc.TF("Animation {0}\nAction[{1}] (Type: {2})", animID, eventIndex, txtActionType) +
+                                            Loc.TF("\n  -> Failed to read value of field {0} (Type: {1})", txtField, p.ParamType), ex);
                                 }
                             }
                             i++;
@@ -424,11 +425,11 @@ namespace DSAnimStudio
                                     }
                                     catch (System.IO.InvalidDataException ex)
                                     {
-                                        var txtField = p.Name != null ? $"'{p.Name}'" : $"{(i + 1)} of {Template.Count}";
+                                        var txtField = p.Name != null ? $"'{p.Name}'" : Loc.TF("{0} of {1}", (i + 1), Template.Count);
                                         var txtActionType = Template.Name != null ? $"'{Template.Name}'" : Template.ID.ToString();
 
-                                        throw new Exception($"Action Type: {txtActionType}" +
-                                                $"\n  -> Assert failed on field {txtField}", ex);
+                                        throw new Exception(Loc.TF("Action Type: {0}", txtActionType) +
+                                                Loc.TF("\n  -> Assert failed on field {0}", txtField), ex);
                                     }
                                 }
                                 else
@@ -446,11 +447,11 @@ namespace DSAnimStudio
                                 }
                                 catch (Exception ex)
                                 {
-                                    var txtField = p.Name != null ? $"'{p.Name}'" : $"{(i + 1)} of {Template.Count}";
+                                    var txtField = p.Name != null ? $"'{p.Name}'" : Loc.TF("{0} of {1}", (i + 1), Template.Count);
                                     var txtActionType = Template.Name != null ? $"'{Template.Name}'" : Template.ID.ToString();
 
-                                    throw new Exception($"Action Type: {txtActionType}" +
-                                            $"\n  -> Failed to read value of field {txtField} (Type: {p.ParamType})", ex);
+                                    throw new Exception(Loc.TF("Action Type: {0}", txtActionType) +
+                                            Loc.TF("\n  -> Failed to read value of field {0} (Type: {1})", txtField, p.ParamType), ex);
                                 }
                             }
                             i++;
@@ -699,28 +700,28 @@ namespace DSAnimStudio
                 int? startFrame = TaeExtensionMethods.GetTimeInIntegerFrames(StartTime);
                 int? endFrame = TaeExtensionMethods.GetTimeInIntegerFrames(EndTime);
                 
-                sb.Append($"Start: {StartTime:0.000} sec");
+                sb.Append(Loc.TF("Start: {0:0.000} sec", StartTime));
                 if (startFrame.HasValue)
-                    sb.AppendLine($" (frame {startFrame.Value})");
+                    sb.AppendLine(Loc.TF(" (frame {0})", startFrame.Value));
                 else
                     sb.AppendLine();
                 
-                sb.Append($"End: {EndTime:0.000} sec");
+                sb.Append(Loc.TF("End: {0:0.000} sec", EndTime));
                 
                 if (endFrame.HasValue)
-                    sb.AppendLine($" (frame {endFrame.Value})");
+                    sb.AppendLine(Loc.TF(" (frame {0})", endFrame.Value));
                 else 
                     sb.AppendLine();
 
-                sb.Append($"Duration: {(EndTime - StartTime):0.000} sec");
+                sb.Append(Loc.TF("Duration: {0:0.000} sec", (EndTime - StartTime)));
                 
                 if (startFrame.HasValue && endFrame.HasValue)
                 {
                     int frameCount = endFrame.Value - startFrame.Value;
                     if (frameCount == 1)
-                        sb.AppendLine($" (1 frame)");
+                        sb.AppendLine(Loc.T(" (1 frame)"));
                     else
-                        sb.AppendLine($" ({frameCount} frames)");
+                        sb.AppendLine(Loc.TF(" ({0} frames)", frameCount));
                 }
                 else
                 {

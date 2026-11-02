@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SoulsFormats;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Dialog
@@ -25,7 +26,7 @@ namespace DSAnimStudio.ImguiOSD
             private List<Oodle.OodleLZ_Compressor> oodleCompressionTypeValues;
 
             public RootTaePropertiesEdit(DSAProj proj)
-                : base("Edit Project Root TAE Properties")
+                : base(Loc.T("Edit Project Root TAE Properties"))
             {
                 Proj = proj;
                 RootTaeProperties = proj.RootTaeProperties;
@@ -44,10 +45,10 @@ namespace DSAnimStudio.ImguiOSD
 
             protected override void BuildInsideOfWindow()
             {
-                Tools.EnumPicker("Bind Flags", ref RootTaeProperties.BindFlags);
-                ImGui.InputText("Bind Directory", ref RootTaeProperties.BindDirectory, 1024);
+                Tools.EnumPicker(Loc.T("Bind Flags"), ref RootTaeProperties.BindFlags);
+                ImGui.InputText(Loc.T("Bind Directory"), ref RootTaeProperties.BindDirectory, 1024);
 
-                if (ImGui.TreeNode("Bind DCX CompressionInfo"))
+                if (ImGui.TreeNode(Loc.T("Bind DCX CompressionInfo")))
                 {
 
                     
@@ -55,7 +56,7 @@ namespace DSAnimStudio.ImguiOSD
 
                     
 
-                    ImGui.Text($"DCX Type: {RootTaeProperties.BindDcxCompressionInfo.Type}");
+                    ImGui.Text(Loc.TF("DCX Type: {0}", RootTaeProperties.BindDcxCompressionInfo.Type));
 
                     switch (RootTaeProperties.BindDcxCompressionInfo)
                     {
@@ -120,7 +121,7 @@ namespace DSAnimStudio.ImguiOSD
                             break;
                     }
 
-                    if (ImGui.TreeNode("DCX Type Changer"))
+                    if (ImGui.TreeNode(Loc.T("DCX Type Changer")))
                     {
                         int origDcxTypeIndex = dcxTypeValues.IndexOf(RootTaeProperties.BindDcxCompressionInfo.Type);
 
@@ -128,7 +129,7 @@ namespace DSAnimStudio.ImguiOSD
                             dcxTypeIndex = dcxTypeValues.IndexOf(RootTaeProperties.BindDcxCompressionInfo.Type);
 
 
-                        ImGui.ListBox("DCX Type", ref dcxTypeIndex, dcxTypeNames, dcxTypeNames.Length);
+                        ImGui.ListBox(Loc.T("DCX Type"), ref dcxTypeIndex, dcxTypeNames, dcxTypeNames.Length);
 
                         bool differentTypeSelected = dcxTypeIndex != -1 && dcxTypeIndex != origDcxTypeIndex;
 
@@ -136,7 +137,7 @@ namespace DSAnimStudio.ImguiOSD
                         if (!differentTypeSelected)
                             ImGuiDebugDrawer.PushDisabled();
 
-                        ImGui.Button("Change DCX Type");
+                        ImGui.Button(Loc.T("Change DCX Type"));
                         if (ImGui.IsItemClicked() && differentTypeSelected)
                         {
                             RootTaeProperties.BindDcxCompressionInfo = DSAProj.GetNewDefaultDcxCompressionInfo(dcxTypeValues[dcxTypeIndex]);
@@ -157,35 +158,35 @@ namespace DSAnimStudio.ImguiOSD
 
 
 
-                ImGui.InputInt("TAE Root Bind ID", ref RootTaeProperties.TaeRootBindID);
-                Tools.EnumPicker("Format", ref RootTaeProperties.Format);
-                ImGui.Checkbox("Is Old Demons Soul's Format 0x10000", ref RootTaeProperties.IsOldDemonsSoulsFormat_0x10000);
-                ImGui.Checkbox("Is Old Demons Soul's Format 0x1000A", ref RootTaeProperties.IsOldDemonsSoulsFormat_0x1000A);
-                Tools.GhettoInputLong("'AnimCount2' Field Value", ref RootTaeProperties.AnimCount2Value);
-                ImGui.Checkbox("Is Big Endian", ref RootTaeProperties.BigEndian);
-                Tools.GhettoInputByte("Flags 1/8", ref RootTaeProperties.Flags1);
-                Tools.GhettoInputByte("Flags 2/8", ref RootTaeProperties.Flags2);
-                Tools.GhettoInputByte("Flags 3/8", ref RootTaeProperties.Flags3);
-                Tools.GhettoInputByte("Flags 4/8", ref RootTaeProperties.Flags4);
-                Tools.GhettoInputByte("Flags 5/8", ref RootTaeProperties.Flags5);
-                Tools.GhettoInputByte("Flags 6/8", ref RootTaeProperties.Flags6);
-                Tools.GhettoInputByte("Flags 7/8", ref RootTaeProperties.Flags7);
-                Tools.GhettoInputByte("Flags 8/8", ref RootTaeProperties.Flags8);
-                Tools.InputTextNullable("Skeleton Name", ref RootTaeProperties.SkeletonName, 1024, "%null%");
-                Tools.InputTextNullable("SIB Name", ref RootTaeProperties.SibName, 1024, "%null%");
-                ImGui.Checkbox("Save With Action Track Info Stripped", ref RootTaeProperties.SaveWithActionTracksStripped);
+                ImGui.InputInt(Loc.T("TAE Root Bind ID"), ref RootTaeProperties.TaeRootBindID);
+                Tools.EnumPicker(Loc.T("Format"), ref RootTaeProperties.Format);
+                ImGui.Checkbox(Loc.T("Is Old Demons Soul's Format 0x10000"), ref RootTaeProperties.IsOldDemonsSoulsFormat_0x10000);
+                ImGui.Checkbox(Loc.T("Is Old Demons Soul's Format 0x1000A"), ref RootTaeProperties.IsOldDemonsSoulsFormat_0x1000A);
+                Tools.GhettoInputLong(Loc.T("'AnimCount2' Field Value"), ref RootTaeProperties.AnimCount2Value);
+                ImGui.Checkbox(Loc.T("Is Big Endian"), ref RootTaeProperties.BigEndian);
+                Tools.GhettoInputByte(Loc.T("Flags 1/8"), ref RootTaeProperties.Flags1);
+                Tools.GhettoInputByte(Loc.T("Flags 2/8"), ref RootTaeProperties.Flags2);
+                Tools.GhettoInputByte(Loc.T("Flags 3/8"), ref RootTaeProperties.Flags3);
+                Tools.GhettoInputByte(Loc.T("Flags 4/8"), ref RootTaeProperties.Flags4);
+                Tools.GhettoInputByte(Loc.T("Flags 5/8"), ref RootTaeProperties.Flags5);
+                Tools.GhettoInputByte(Loc.T("Flags 6/8"), ref RootTaeProperties.Flags6);
+                Tools.GhettoInputByte(Loc.T("Flags 7/8"), ref RootTaeProperties.Flags7);
+                Tools.GhettoInputByte(Loc.T("Flags 8/8"), ref RootTaeProperties.Flags8);
+                Tools.InputTextNullable(Loc.T("Skeleton Name"), ref RootTaeProperties.SkeletonName, 1024, "%null%");
+                Tools.InputTextNullable(Loc.T("SIB Name"), ref RootTaeProperties.SibName, 1024, "%null%");
+                ImGui.Checkbox(Loc.T("Save With Action Track Info Stripped"), ref RootTaeProperties.SaveWithActionTracksStripped);
 
                 ImGui.Separator();
 
                 if (RootTaeProperties.SaveEachCategoryToSeparateTae)
-                    ImGui.Text("(Action Set Version is located in Anim Category Properties for c0000)");
+                    ImGui.Text(Loc.T("(Action Set Version is located in Anim Category Properties for c0000)"));
                 else
-                    ImGui.InputInt("Action Set Version", ref RootTaeProperties.ActionSetVersion_ForSingleTaeOutput);
+                    ImGui.InputInt(Loc.T("Action Set Version"), ref RootTaeProperties.ActionSetVersion_ForSingleTaeOutput);
 
 
                 ImGui.Separator();
 
-                bool clickedCancel = Tools.SimpleClickButton("Cancel") || IsTitleBarXRequested;
+                bool clickedCancel = Tools.SimpleClickButton(Loc.T("Cancel")) || IsTitleBarXRequested;
                 bool pressedEscape = IsEscapeKeyRequested;
 
                 if (clickedCancel || pressedEscape)
@@ -199,7 +200,7 @@ namespace DSAnimStudio.ImguiOSD
                     }
                     else
                     {
-                        DialogManager.AskYesNo("Unsaved Changes", "You have unsaved changes, would you like to discard them and close this dialog?", choice =>
+                        DialogManager.AskYesNo(Loc.T("Unsaved Changes"), Loc.T("You have unsaved changes, would you like to discard them and close this dialog?"), choice =>
                         {
                             if (choice == true)
                             {
@@ -210,7 +211,7 @@ namespace DSAnimStudio.ImguiOSD
                     }
                 }
 
-                if (Tools.SimpleClickButton("Save & Accept"))
+                if (Tools.SimpleClickButton(Loc.T("Save & Accept")))
                 {
                     ResultType = ResultTypes.Accept;
                     Dismiss();

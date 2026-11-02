@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DSAnimStudio.ImguiOSD;
 using DSAnimStudio.TaeEditor;
 using ImGuiNET;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -41,7 +42,7 @@ namespace DSAnimStudio
                     AnimID = animID;
                 }
 
-                public override string ShortDescription => $"There are multiple animations with ID '{AnimID.GetFormattedIDString(Proj)}'.";
+                public override string ShortDescription => Loc.TF("There are multiple animations with ID '{0}'.", AnimID.GetFormattedIDString(Proj));
                 public override void AddImguiRightClickEntry()
                 {
                     return;

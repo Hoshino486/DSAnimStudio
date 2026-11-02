@@ -8,30 +8,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public static partial class MenuBar
     {
         public static void BuildMenuBar_000_File(ref bool anyItemFocused, ref bool isAnyMenuExpanded)
         {
-            if (ImGui.BeginMenu("File"))
+            if (ImGui.BeginMenu(Loc.T("File")))
             {
                 isAnyMenuExpanded = true;
 
-                bool clickedOpen = ClickItem("Open...");
+                bool clickedOpen = ClickItem(Loc.T("Open..."));
                 if (ImGui.IsItemActive())
                     anyItemFocused = true;
                 ImGui.Separator();
-                bool clickedOpenFromArchives = ClickItem("Open From Packed Game Data Archives...");
+                bool clickedOpenFromArchives = ClickItem(Loc.T("Open From Packed Game Data Archives..."));
                 if (ImGui.IsItemActive())
                     anyItemFocused = true;
                 ImGui.Separator();
-                bool isRecentFilesExpanded = ImGui.BeginMenu("Recent Files");
+                bool isRecentFilesExpanded = ImGui.BeginMenu(Loc.T("Recent Files"));
                 if (isRecentFilesExpanded)
                 {
-                    if (ClickItem("Clear all recent files..."))
+                    if (ClickItem(Loc.T("Clear all recent files...")))
                     {
-                        DialogManager.AskYesNo("Clear Recent Files", "Clear all recent files?", choice =>
+                        DialogManager.AskYesNo(Loc.T("Clear Recent Files"), Loc.T("Clear all recent files?"), choice =>
                         {
                             if (choice)
                             {
@@ -80,15 +81,15 @@ namespace DSAnimStudio.ImguiOSD
                 }
 
                 ImGui.Separator();
-                bool clickedReloadGameParam = ClickItem("Reload GameParam and FMGs", enabled: Tae.IsFileOpen);
-                zzz_ParamManagerIns.AutoParamReloadEnabled = Checkbox("Auto Reload Params When File Is Written To", zzz_ParamManagerIns.AutoParamReloadEnabled);
+                bool clickedReloadGameParam = ClickItem(Loc.T("Reload GameParam and FMGs"), enabled: Tae.IsFileOpen);
+                zzz_ParamManagerIns.AutoParamReloadEnabled = Checkbox(Loc.T("Auto Reload Params When File Is Written To"), zzz_ParamManagerIns.AutoParamReloadEnabled);
                 ImGui.Separator();
-                zzz_GameDataIns.EnableFileCaching = Checkbox("Enable Game File Caching", zzz_GameDataIns.EnableFileCaching);
+                zzz_GameDataIns.EnableFileCaching = Checkbox(Loc.T("Enable Game File Caching"), zzz_GameDataIns.EnableFileCaching);
                 ImGui.Separator();
-                bool clickedSave = ClickItem("Save", enabled: Tae.IsFileOpen && Tae.IsModified, shortcut: "Ctrl+S");
+                bool clickedSave = ClickItem(Loc.T("Save"), enabled: Tae.IsFileOpen && Tae.IsModified, shortcut: "Ctrl+S");
                 //bool clickedSaveAs = ClickItem("Save As...", enabled: Tae.IsFileOpen, shortcut: "Ctrl+Shift+S");
                 bool extensiveBackupsValue = Checkbox(
-                    "Save New Backup On Every Save",
+                    Loc.T("Save New Backup On Every Save"),
                     Tae.Config.ExtensiveBackupsEnabled);
                 //bool clickedExportTAE = ClickItem("Export *.TAE Containing The Currently Selected Animation...", enabled: Tae.SelectedAnimCategory != null);
                 //ImGui.Separator();
@@ -132,21 +133,21 @@ namespace DSAnimStudio.ImguiOSD
                 //}
                 ImGui.Separator();
                 var canReload = Tae.IsFileOpen && LiveRefresh.RequestFileReload.CanReloadEntity(Tae?.Graph?.ViewportInteractor?.CurrentModel?.Name);
-                bool clickedLiveRefreshNow = ClickItem($"Force Ingame Entity Reload Now",
+                bool clickedLiveRefreshNow = ClickItem(Loc.TF("Force Ingame Entity Reload Now"),
                     enabled: canReload, shortcut: "F5");
                 bool liveRefreshOnSaveValue = Checkbox(
-                    "Force Ingame Entity Reload On Save\n    (does nothing if above option is grayed out)",
+                    Loc.T("Force Ingame Entity Reload On Save\n    (does nothing if above option is grayed out)"),
                     Tae.Config.LiveRefreshOnSave);
                 ImGui.NewLine();
                 ImGui.Separator();
-                bool clickedSaveConfigManually = ClickItem("Save Config File");
-                Main.DisableConfigFileAutoSave = !Checkbox("Enable Config File Autosaving", !Main.DisableConfigFileAutoSave);
-                bool clickedLoadConfigManually = ClickItem("Reload Config File");
-                bool clickedResetConfigToDefault = ClickItem("Reset Config File To Defaults...");
-                bool clickedToggleRegisterProtocolHandler = ClickItem(Main.IsProtocolHandlerInstalled() ? "Unregister Protocol Handler" : "Register Protocol Handler");
+                bool clickedSaveConfigManually = ClickItem(Loc.T("Save Config File"));
+                Main.DisableConfigFileAutoSave = !Checkbox(Loc.T("Enable Config File Autosaving"), !Main.DisableConfigFileAutoSave);
+                bool clickedLoadConfigManually = ClickItem(Loc.T("Reload Config File"));
+                bool clickedResetConfigToDefault = ClickItem(Loc.T("Reset Config File To Defaults..."));
+                bool clickedToggleRegisterProtocolHandler = ClickItem(Main.IsProtocolHandlerInstalled() ? Loc.T("Unregister Protocol Handler") : Loc.T("Register Protocol Handler"));
 
                 ImGui.Separator();
-                bool clickedExit = ClickItem("Exit");
+                bool clickedExit = ClickItem(Loc.T("Exit"));
 
                 // Only do the interaction layer with the main window if the recent files list isn't covering it...
                 if (!isRecentFilesExpanded)
@@ -173,7 +174,7 @@ namespace DSAnimStudio.ImguiOSD
                     if (clickedReloadGameParam)
                     {
                         zzz_DocumentManager.CurrentDocument.LoadingTaskMan.DoLoadingTask("FileReloadGameParam",
-                            "Reloading GameParam and FMGs...", prog =>
+                            Loc.T("Reloading GameParam and FMGs..."), prog =>
                             {
                                 zzz_DocumentManager.CurrentDocument.GameRoot.ReloadParams();
                                 zzz_DocumentManager.CurrentDocument.GameRoot.ReloadFmgs();
@@ -230,7 +231,7 @@ namespace DSAnimStudio.ImguiOSD
 
                     if (clickedResetConfigToDefault)
                     {
-                        DialogManager.AskYesNo("Reset Config", "Reset entire configuration file to defaults, losing all custom settings?",
+                        DialogManager.AskYesNo(Loc.T("Reset Config"), Loc.T("Reset entire configuration file to defaults, losing all custom settings?"),
                             choice =>
                             {
                                 if (choice)

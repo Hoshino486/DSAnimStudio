@@ -1,4 +1,5 @@
-﻿namespace DSAnimStudio
+﻿using DSAnimStudio.Localization;
+namespace DSAnimStudio
 {
     partial class ExceptionHandleForm
     {
@@ -44,7 +45,7 @@
             this.labelHeader.Name = "labelHeader";
             this.labelHeader.Size = new System.Drawing.Size(229, 26);
             this.labelHeader.TabIndex = 0;
-            this.labelHeader.Text = "[Logged to DSAnimStudio_ErrorLog.txt]\r\nFatal error encountered:";
+            this.labelHeader.Text = Loc.T("[Logged to DSAnimStudio_ErrorLog.txt]\r\nFatal error encountered:");
             // 
             // textBoxError
             // 
@@ -67,7 +68,7 @@
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(150, 26);
             this.buttonOK.TabIndex = 0;
-            this.buttonOK.Text = "IGNORE";
+            this.buttonOK.Text = Loc.T("IGNORE");
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
@@ -79,7 +80,7 @@
             this.buttonInfiniteLoop.Name = "buttonInfiniteLoop";
             this.buttonInfiniteLoop.Size = new System.Drawing.Size(161, 26);
             this.buttonInfiniteLoop.TabIndex = 2;
-            this.buttonInfiniteLoop.Text = "ABORT";
+            this.buttonInfiniteLoop.Text = Loc.T("ABORT");
             this.buttonInfiniteLoop.UseVisualStyleBackColor = true;
             this.buttonInfiniteLoop.Click += new System.EventHandler(this.buttonInfiniteLoop_Click);
             // 
@@ -91,8 +92,8 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(677, 33);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Click ABORT to close the application (useful for infinite error message loops).\r\n" +
-    "Click IGNORE to ignore the error and continue running the application";
+            this.label1.Text = Loc.T("Click ABORT to close the application (useful for infinite error message loops).\r\n"
+                    + "Click IGNORE to ignore the error and continue running the application");
             // 
             // checkBoxBackup
             // 
@@ -104,9 +105,9 @@
             this.checkBoxBackup.Name = "checkBoxBackup";
             this.checkBoxBackup.Size = new System.Drawing.Size(675, 57);
             this.checkBoxBackup.TabIndex = 4;
-            this.checkBoxBackup.Text = "Create emergency backup file of last saved version before continuing: \r\nC:\\Progra" +
-    "m Files (x86)\\Steam\\steamapps\\common\\DARK SOULS REMASTERED\\chr\\x4100.anibnd.dcx." +
-    "20201227_052000.errbak";
+            this.checkBoxBackup.Text = Loc.T("Create emergency backup file of last saved version before continuing: \r\nC:\\Progra"
+                    + "m Files (x86)\\Steam\\steamapps\\common\\DARK SOULS REMASTERED\\chr\\x4100.anibnd.dcx."
+                    + "20201227_052000.errbak");
             this.checkBoxBackup.UseVisualStyleBackColor = true;
             // 
             // ExceptionHandleForm
@@ -129,7 +130,7 @@
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Fatal Error Encountered";
+            this.Text = Loc.T("Fatal Error Encountered");
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ExceptionHandleForm_FormClosing);
             this.Load += new System.EventHandler(this.ExceptionHandleForm_Load);
             this.ResumeLayout(false);

@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
@@ -123,7 +123,30 @@ namespace DSAnimStudio
                 }
             }
 
-            SplashText = Main.GetEmbeddedResourceText($@"/EmbRes/Credits.txt");
+            SplashText = LoadCreditsText();
+        }
+
+        /// <summary>
+        /// 读取启动画面滚动的版权文本：中文环境优先读 Credits.zh-Hans.txt，
+        /// 缺失或为空时回退到英文 Credits.txt。
+        /// </summary>
+        private static string LoadCreditsText()
+        {
+            string resName = DSAnimStudio.Localization.Loc.IsChinese
+                ? "/EmbRes/Credits.zh-Hans.txt"
+                : "/EmbRes/Credits.txt";
+            string text = null;
+            try
+            {
+                text = Main.GetEmbeddedResourceText(resName);
+            }
+            catch
+            {
+                text = null;
+            }
+            if (string.IsNullOrWhiteSpace(text))
+                text = Main.GetEmbeddedResourceText("/EmbRes/Credits.txt");
+            return text;
         }
 
         public static void DrawSplash(bool clear)
@@ -254,7 +277,7 @@ namespace DSAnimStudio
             {
                 //DBG.DrawOutlinedText("Click anywhere to dismiss this screen.",
                 //    new Vector2(splashBar.X, splashBar.Y - SplashAcceptTexHeightAboveBar), Color.Yellow * SplashAlpha, scale: SplashAcceptTextScale);
-                string acceptTextStr = "Click anywhere to dismiss this screen.";
+                string acceptTextStr = DSAnimStudio.Localization.Loc.T("Click anywhere to dismiss this screen.");
                 float alpha = SplashAcceptTextSineOutput * SplashAlpha;
 
                 var acceptTextScale = ImGuiDebugDrawer.MeasureString(acceptTextStr, newFontSize_AcceptText);

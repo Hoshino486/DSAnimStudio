@@ -1,4 +1,5 @@
-﻿namespace DSAnimStudio
+﻿using DSAnimStudio.Localization;
+namespace DSAnimStudio
 {
     partial class FormAskWhatGame
     {
@@ -49,7 +50,7 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(143, 15);
             label1.TabIndex = 0;
-            label1.Text = "What game is this file for?";
+            label1.Text = Loc.T("What game is this file for?");
             // 
             // radioButtonDES
             // 
@@ -58,7 +59,7 @@
             radioButtonDES.Name = "radioButtonDES";
             radioButtonDES.Size = new System.Drawing.Size(103, 19);
             radioButtonDES.TabIndex = 1;
-            radioButtonDES.Text = "Demon's Souls";
+            radioButtonDES.Text = Loc.T("Demon's Souls");
             radioButtonDES.UseVisualStyleBackColor = true;
             radioButtonDES.CheckedChanged += radioButtonDES_CheckedChanged;
             // 
@@ -69,7 +70,7 @@
             radioButtonDS1.Name = "radioButtonDS1";
             radioButtonDS1.Size = new System.Drawing.Size(114, 19);
             radioButtonDS1.TabIndex = 2;
-            radioButtonDS1.Text = "Dark Souls: PTDE";
+            radioButtonDS1.Text = Loc.T("Dark Souls: PTDE");
             radioButtonDS1.UseVisualStyleBackColor = true;
             radioButtonDS1.CheckedChanged += radioButtonDS1_CheckedChanged;
             // 
@@ -80,7 +81,7 @@
             radioButtonDS1R.Name = "radioButtonDS1R";
             radioButtonDS1R.Size = new System.Drawing.Size(145, 19);
             radioButtonDS1R.TabIndex = 3;
-            radioButtonDS1R.Text = "Dark Souls Remastered";
+            radioButtonDS1R.Text = Loc.T("Dark Souls Remastered");
             radioButtonDS1R.UseVisualStyleBackColor = true;
             radioButtonDS1R.CheckedChanged += radioButtonDS1R_CheckedChanged;
             // 
@@ -91,7 +92,7 @@
             radioButtonDS3.Name = "radioButtonDS3";
             radioButtonDS3.Size = new System.Drawing.Size(92, 19);
             radioButtonDS3.TabIndex = 4;
-            radioButtonDS3.Text = "Dark Souls III";
+            radioButtonDS3.Text = Loc.T("Dark Souls III");
             radioButtonDS3.UseVisualStyleBackColor = true;
             radioButtonDS3.CheckedChanged += radioButtonDS3_CheckedChanged;
             // 
@@ -102,7 +103,7 @@
             radioButtonBB.Name = "radioButtonBB";
             radioButtonBB.Size = new System.Drawing.Size(87, 19);
             radioButtonBB.TabIndex = 5;
-            radioButtonBB.Text = "Bloodborne";
+            radioButtonBB.Text = Loc.T("Bloodborne");
             radioButtonBB.UseVisualStyleBackColor = true;
             radioButtonBB.CheckedChanged += radioButtonBB_CheckedChanged;
             // 
@@ -113,7 +114,7 @@
             radioButtonSDT.Name = "radioButtonSDT";
             radioButtonSDT.Size = new System.Drawing.Size(57, 19);
             radioButtonSDT.TabIndex = 6;
-            radioButtonSDT.Text = "Sekiro";
+            radioButtonSDT.Text = Loc.T("Sekiro");
             radioButtonSDT.UseVisualStyleBackColor = true;
             radioButtonSDT.CheckedChanged += radioButtonSDT_CheckedChanged;
             // 
@@ -126,7 +127,7 @@
             radioButtonER.Size = new System.Drawing.Size(81, 19);
             radioButtonER.TabIndex = 7;
             radioButtonER.TabStop = true;
-            radioButtonER.Text = "Elden Ring";
+            radioButtonER.Text = Loc.T("Elden Ring");
             radioButtonER.UseVisualStyleBackColor = true;
             radioButtonER.CheckedChanged += radioButtonER_CheckedChanged;
             // 
@@ -137,7 +138,7 @@
             radioButtonAC6.Name = "radioButtonAC6";
             radioButtonAC6.Size = new System.Drawing.Size(204, 19);
             radioButtonAC6.TabIndex = 8;
-            radioButtonAC6.Text = "Armored Core VI: Fires of Rubicon";
+            radioButtonAC6.Text = Loc.T("Armored Core VI: Fires of Rubicon");
             radioButtonAC6.UseVisualStyleBackColor = true;
             radioButtonAC6.CheckedChanged += radioButtonAC6_CheckedChanged;
             // 
@@ -148,7 +149,7 @@
             buttonOK.Name = "buttonOK";
             buttonOK.Size = new System.Drawing.Size(214, 41);
             buttonOK.TabIndex = 9;
-            buttonOK.Text = "LOAD";
+            buttonOK.Text = Loc.T("LOAD");
             buttonOK.UseVisualStyleBackColor = true;
             buttonOK.Click += buttonOK_Click;
             // 
@@ -159,7 +160,7 @@
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new System.Drawing.Size(214, 23);
             buttonCancel.TabIndex = 10;
-            buttonCancel.Text = "Cancel";
+            buttonCancel.Text = Loc.T("Cancel");
             buttonCancel.UseVisualStyleBackColor = true;
             // 
             // radioButtonERNR
@@ -169,7 +170,7 @@
             radioButtonERNR.Name = "radioButtonERNR";
             radioButtonERNR.Size = new System.Drawing.Size(141, 19);
             radioButtonERNR.TabIndex = 11;
-            radioButtonERNR.Text = "Elden Ring Nightreign";
+            radioButtonERNR.Text = Loc.T("Elden Ring Nightreign");
             radioButtonERNR.UseVisualStyleBackColor = true;
             radioButtonERNR.CheckedChanged += radioButtonERNR_CheckedChanged;
             // 

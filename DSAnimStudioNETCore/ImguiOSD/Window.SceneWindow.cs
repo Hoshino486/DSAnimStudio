@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SoulsAssetPipeline;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -17,7 +18,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.SaveAlways;
 
-            public override string NewImguiWindowTitle => "Scene";
+            public override string NewImguiWindowTitle => Loc.Win("Scene");
 
             private float debug_HkxSkelToHkxAnimWeight_min = 0;
             private float debug_HkxSkelToHkxAnimWeight_max = 1;
@@ -54,25 +55,25 @@ namespace DSAnimStudio.ImguiOSD
 
                     void DoDebugOfModel(Model model)
                     {
-                        ImGui.Checkbox($"Draw DummyPoly Transforms###Model{model.GUID}_DebugDispDummyPolyTransforms", ref model.DebugDispDummyPolyTransforms);
-                        ImGui.Checkbox($"Draw DummyPoly Texts###Model{model.GUID}_DebugDispDummyPolyText", ref model.DebugDispDummyPolyText);
+                        ImGui.Checkbox(Loc.TF("Draw DummyPoly Transforms###Model{0}_DebugDispDummyPolyTransforms", model.GUID), ref model.DebugDispDummyPolyTransforms);
+                        ImGui.Checkbox(Loc.TF("Draw DummyPoly Texts###Model{0}_DebugDispDummyPolyText", model.GUID), ref model.DebugDispDummyPolyText);
 
-                        ImGui.Checkbox($"Draw Bone Glue Joints###Model{model.GUID}_DebugDispBoneGluers", ref model.DebugDispBoneGluers);
+                        ImGui.Checkbox(Loc.TF("Draw Bone Glue Joints###Model{0}_DebugDispBoneGluers", model.GUID), ref model.DebugDispBoneGluers);
 
                         if (model.SkeletonFlver != null)
                         {
-                            ImGui.Checkbox($"Draw FLVER Skeleton Transforms###Model{model.GUID}_DebugDispFlverSkeletonTransforms", ref model.SkeletonFlver.ForceDrawBoneTransforms);
-                            ImGui.Checkbox($"Draw FLVER Skeleton Lines###Model{model.GUID}_DebugDispFlverSkeletonLines", ref model.SkeletonFlver.ForceDrawBoneLines);
-                            ImGui.Checkbox($"Draw FLVER Skeleton Boxes###Model{model.GUID}_DebugDispFlverSkeletonBoxes", ref model.SkeletonFlver.ForceDrawBoneBoxes);
-                            ImGui.Checkbox($"Draw FLVER Skeleton Texts###Model{model.GUID}_DebugDispFlverSkeletonText", ref model.SkeletonFlver.ForceDrawBoneText);
+                            ImGui.Checkbox(Loc.TF("Draw FLVER Skeleton Transforms###Model{0}_DebugDispFlverSkeletonTransforms", model.GUID), ref model.SkeletonFlver.ForceDrawBoneTransforms);
+                            ImGui.Checkbox(Loc.TF("Draw FLVER Skeleton Lines###Model{0}_DebugDispFlverSkeletonLines", model.GUID), ref model.SkeletonFlver.ForceDrawBoneLines);
+                            ImGui.Checkbox(Loc.TF("Draw FLVER Skeleton Boxes###Model{0}_DebugDispFlverSkeletonBoxes", model.GUID), ref model.SkeletonFlver.ForceDrawBoneBoxes);
+                            ImGui.Checkbox(Loc.TF("Draw FLVER Skeleton Texts###Model{0}_DebugDispFlverSkeletonText", model.GUID), ref model.SkeletonFlver.ForceDrawBoneText);
                         }
 
                         if (model.AnimContainer?.Skeleton != null)
                         {
-                            ImGui.Checkbox($"Draw HKX Skeleton Transforms###Model{model.GUID}_DebugDispHkxSkeletonTransforms", ref model.AnimContainer.Skeleton.ForceDrawBoneTransforms);
-                            ImGui.Checkbox($"Draw HKX Skeleton Lines###Model{model.GUID}_DebugDispHkxSkeletonLines", ref model.AnimContainer.Skeleton.ForceDrawBoneLines);
+                            ImGui.Checkbox(Loc.TF("Draw HKX Skeleton Transforms###Model{0}_DebugDispHkxSkeletonTransforms", model.GUID), ref model.AnimContainer.Skeleton.ForceDrawBoneTransforms);
+                            ImGui.Checkbox(Loc.TF("Draw HKX Skeleton Lines###Model{0}_DebugDispHkxSkeletonLines", model.GUID), ref model.AnimContainer.Skeleton.ForceDrawBoneLines);
                             //ImGui.Checkbox($"Draw HKX Skeleton Boxes###Model{model.GUID}_DebugDispHkxSkeletonBoxes", ref model.AnimContainer.Skeleton.ForceDrawBoneBoxes);
-                            ImGui.Checkbox($"Draw HKX Skeleton Texts###Model{model.GUID}_DebugDispHkxSkeletonText", ref model.AnimContainer.Skeleton.ForceDrawBoneText);
+                            ImGui.Checkbox(Loc.TF("Draw HKX Skeleton Texts###Model{0}_DebugDispHkxSkeletonText", model.GUID), ref model.AnimContainer.Skeleton.ForceDrawBoneText);
                         }
                         
                         ImGui.Separator();
@@ -92,7 +93,7 @@ namespace DSAnimStudio.ImguiOSD
 
                         void inner_Submeshes()
                         {
-                            var nodeOpen = ImGui.TreeNode($"Meshes###SceneManager_Mesh[{modelGUID}|{index_Mesh}]");
+                            var nodeOpen = ImGui.TreeNode(Loc.TF("Meshes###SceneManager_Mesh[{0}|{1}]", modelGUID, index_Mesh));
 
                             //if (ImGui.IsItemHovered())
                             //{
@@ -109,7 +110,7 @@ namespace DSAnimStudio.ImguiOSD
                                     ImGui.PushStyleColor(ImGuiCol.TextDisabled, isMeshGrayedOut ? new System.Numerics.Vector4(1, 0, 0, 1)
                                         : new System.Numerics.Vector4(0, 1, 0, 1));
                                     sm.IsVisible = MenuBar.CheckboxDual(sm.FullMaterialName, sm.IsVisible, enabled: true,
-                                        shortcut: (sm.NewMaterial.ModelMaskIndex >= 0 ? $"[Mask {(sm.NewMaterial.ModelMaskIndex)}]" : null));
+                                        shortcut: (sm.NewMaterial.ModelMaskIndex >= 0 ? Loc.TF("[Mask {0}]", sm.NewMaterial.ModelMaskIndex) : null));
 
                                     if (ImGui.IsItemHovered())
                                     {
@@ -125,7 +126,7 @@ namespace DSAnimStudio.ImguiOSD
 
                         void inner_Materials(ref bool anyFieldFocused_Inner)
                         {
-                            if (ImGui.TreeNode($"Materials###Model[{modelGUID}]_Materials"))
+                            if (ImGui.TreeNode(Loc.TF("Materials###Model[{0}]_Materials", modelGUID)))
                             {
                                 int index_Material = 0;
                                 foreach (var m in mesh.Materials)
@@ -140,10 +141,10 @@ namespace DSAnimStudio.ImguiOSD
 
                                     if (nodeOpen)
                                     {
-                                        ImGui.Button($"Save global shader config defaults for '{m.ShaderConfigName}'###Name###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_SaveGlobalShaderConfig");
+                                        ImGui.Button(Loc.TF("Save global shader config defaults for '{0}'###Name###SceneManager_Mesh[{1}|{2}]_Material{3}_SaveGlobalShaderConfig", m.ShaderConfigName, modelGUID, index_Mesh, index_Material));
                                         if (ImGui.IsItemClicked())
                                         {
-                                            ImguiOSD.DialogManager.AskYesNo("Save Global Defaults?", "Save global defaults for this shader type? This will affect every material that uses this shader in any file you open.", choice =>
+                                            ImguiOSD.DialogManager.AskYesNo(Loc.T("Save Global Defaults?"), Loc.T("Save global defaults for this shader type? This will affect every material that uses this shader in any file you open."), choice =>
                                             {
                                                 if (choice)
                                                 {
@@ -155,11 +156,11 @@ namespace DSAnimStudio.ImguiOSD
                                         }
 
 
-                                        ImGui.LabelText($"Name###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Name", m.Name ?? "<NULL>");
+                                        ImGui.LabelText(Loc.TF("Name###SceneManager_Mesh[{0}|{1}]_Material{2}_Name", modelGUID, index_Mesh, index_Material), m.Name ?? "<NULL>");
                                         //ImGui.LabelText($"MTD###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_MTD", m.MtdName ?? "<NULL>");
                                         ImGui.TextWrapped($"MTD : {(m.MtdName ?? "<NULL>")}");
 
-                                        if (ImGui.TreeNode($"MTD Parameters###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_MTDParameters"))
+                                        if (ImGui.TreeNode(Loc.TF("MTD Parameters###SceneManager_Mesh[{0}|{1}]_Material{2}_MTDParameters", modelGUID, index_Mesh, index_Material)))
                                         {
 
 
@@ -174,14 +175,14 @@ namespace DSAnimStudio.ImguiOSD
                                                 if (p[k] is bool asBool)
                                                 {
                                                     var v = asBool;
-                                                    ImGui.Checkbox($"{k}###{imguiKey}", ref v);
+                                                    ImGui.Checkbox(Loc.TF("{0}###{1}", k, imguiKey), ref v);
                                                     anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                     p[k] = v;
                                                 }
                                                 else if (p[k] is int asInt)
                                                 {
                                                     var v = asInt;
-                                                    ImGui.InputInt($"{k}###{imguiKey}", ref v);
+                                                    ImGui.InputInt(Loc.TF("{0}###{1}", k, imguiKey), ref v);
                                                     anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                     p[k] = v;
                                                 }
@@ -198,7 +199,7 @@ namespace DSAnimStudio.ImguiOSD
                                                 else if (p[k] is float asFloat)
                                                 {
                                                     var v = asFloat;
-                                                    ImGui.InputFloat($"{k}###{imguiKey}", ref v);
+                                                    ImGui.InputFloat(Loc.TF("{0}###{1}", k, imguiKey), ref v);
                                                     anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                     p[k] = v;
                                                 }
@@ -207,14 +208,14 @@ namespace DSAnimStudio.ImguiOSD
                                                     if (asFloatArr.Length == 1)
                                                     {
                                                         var v = asFloatArr[0];
-                                                        ImGui.InputFloat($"{k}###{imguiKey}", ref v);
+                                                        ImGui.InputFloat(Loc.TF("{0}###{1}", k, imguiKey), ref v);
                                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                         asFloatArr[0] = v;
                                                     }
                                                     else if (asFloatArr.Length == 2)
                                                     {
                                                         var v = new System.Numerics.Vector2(asFloatArr[0], asFloatArr[1]);
-                                                        ImGui.InputFloat2($"{k}###{imguiKey}", ref v);
+                                                        ImGui.InputFloat2(Loc.TF("{0}###{1}", k, imguiKey), ref v);
                                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                         asFloatArr[0] = v.X;
                                                         asFloatArr[1] = v.Y;
@@ -222,7 +223,7 @@ namespace DSAnimStudio.ImguiOSD
                                                     else if (asFloatArr.Length == 3)
                                                     {
                                                         var v = new System.Numerics.Vector3(asFloatArr[0], asFloatArr[1], asFloatArr[2]);
-                                                        ImGui.InputFloat3($"{k}###{imguiKey}", ref v);
+                                                        ImGui.InputFloat3(Loc.TF("{0}###{1}", k, imguiKey), ref v);
                                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                         asFloatArr[0] = v.X;
                                                         asFloatArr[1] = v.Y;
@@ -231,7 +232,7 @@ namespace DSAnimStudio.ImguiOSD
                                                     else if (asFloatArr.Length == 4)
                                                     {
                                                         var v = new System.Numerics.Vector4(asFloatArr[0], asFloatArr[1], asFloatArr[2], asFloatArr[3]);
-                                                        ImGui.InputFloat4($"{k}###{imguiKey}", ref v);
+                                                        ImGui.InputFloat4(Loc.TF("{0}###{1}", k, imguiKey), ref v);
                                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                         asFloatArr[0] = v.X;
                                                         asFloatArr[1] = v.Y;
@@ -259,47 +260,47 @@ namespace DSAnimStudio.ImguiOSD
                                             ImGui.TreePop();
                                         }
 
-                                        ImGui.LabelText($"Shader###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Shader", m.ShaderConfigName ?? "<NULL>");
+                                        ImGui.LabelText(Loc.TF("Shader###SceneManager_Mesh[{0}|{1}]_Material{2}_Shader", modelGUID, index_Mesh, index_Material), m.ShaderConfigName ?? "<NULL>");
 
                                         ImGui.Separator();
 
                                         System.Numerics.Vector2 uvTile1 = m.UVTileMult1.ToNumerics();
-                                        ImGui.InputFloat2($"UV Group 1 Tile Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UVTileMult1", ref uvTile1);
+                                        ImGui.InputFloat2(Loc.TF("UV Group 1 Tile Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_UVTileMult1", modelGUID, index_Mesh, index_Material), ref uvTile1);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.UVTileMult1 = uvTile1.ToXna();
 
                                         System.Numerics.Vector2 uvTile2 = m.UVTileMult2.ToNumerics();
-                                        ImGui.InputFloat2($"UV Group 2 Tile Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UVTileMult2", ref uvTile2);
+                                        ImGui.InputFloat2(Loc.TF("UV Group 2 Tile Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_UVTileMult2", modelGUID, index_Mesh, index_Material), ref uvTile2);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.UVTileMult2 = uvTile2.ToXna();
 
                                         System.Numerics.Vector2 uvTile3 = m.UVTileMult3.ToNumerics();
-                                        ImGui.InputFloat2($"UV Group 3 Tile Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UVTileMult3", ref uvTile3);
+                                        ImGui.InputFloat2(Loc.TF("UV Group 3 Tile Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_UVTileMult3", modelGUID, index_Mesh, index_Material), ref uvTile3);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.UVTileMult3 = uvTile3.ToXna();
 
                                         System.Numerics.Vector2 uvTile4 = m.UVTileMult4.ToNumerics();
-                                        ImGui.InputFloat2($"UV Group 4 Tile Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UVTileMult4", ref uvTile4);
+                                        ImGui.InputFloat2(Loc.TF("UV Group 4 Tile Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_UVTileMult4", modelGUID, index_Mesh, index_Material), ref uvTile4);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.UVTileMult4 = uvTile4.ToXna();
 
                                         System.Numerics.Vector2 uvTile5 = m.UVTileMult5.ToNumerics();
-                                        ImGui.InputFloat2($"UV Group 5 Tile Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UVTileMult5", ref uvTile5);
+                                        ImGui.InputFloat2(Loc.TF("UV Group 5 Tile Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_UVTileMult5", modelGUID, index_Mesh, index_Material), ref uvTile5);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.UVTileMult5 = uvTile5.ToXna();
 
                                         System.Numerics.Vector2 uvTile6 = m.UVTileMult6.ToNumerics();
-                                        ImGui.InputFloat2($"UV Group 6 Tile Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UVTileMult6", ref uvTile6);
+                                        ImGui.InputFloat2(Loc.TF("UV Group 6 Tile Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_UVTileMult6", modelGUID, index_Mesh, index_Material), ref uvTile6);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.UVTileMult6 = uvTile6.ToXna();
 
                                         System.Numerics.Vector2 uvTile7 = m.UVTileMult7.ToNumerics();
-                                        ImGui.InputFloat2($"UV Group 7 Tile Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UVTileMult7", ref uvTile7);
+                                        ImGui.InputFloat2(Loc.TF("UV Group 7 Tile Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_UVTileMult7", modelGUID, index_Mesh, index_Material), ref uvTile7);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.UVTileMult7 = uvTile7.ToXna();
 
                                         System.Numerics.Vector2 uvTile8 = m.UVTileMult8.ToNumerics();
-                                        ImGui.InputFloat2($"UV Group 8 Tile Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UVTileMult8", ref uvTile8);
+                                        ImGui.InputFloat2(Loc.TF("UV Group 8 Tile Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_UVTileMult8", modelGUID, index_Mesh, index_Material), ref uvTile8);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.UVTileMult8 = uvTile8.ToXna();
 
@@ -307,48 +308,48 @@ namespace DSAnimStudio.ImguiOSD
 
 
 
-                                        if (ImGui.TreeNode($"Blend Settings - Diffuse###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_BlendSettings_Diffuse"))
+                                        if (ImGui.TreeNode(Loc.TF("Blend Settings - Diffuse###SceneManager_Mesh[{0}|{1}]_Material{2}_BlendSettings_Diffuse", modelGUID, index_Mesh, index_Material)))
                                         {
-                                            FlverShaderEnums.NewBlendOperations_Picker.ShowPickerCombo("Blend Operation", $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendOperation", ref m.ShaderConfig.NewBlendOperation_Diffuse, NewBlendOperations.Multiply);
-                                            ImGui.Checkbox($"Diffuse - Reverse Blend Dir###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendReverseDir_Diffuse", ref m.ShaderConfig.NewBlendReverseDir_Diffuse);
-                                            ImGui.Checkbox($"Diffuse - Invert Blend Mask Value###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendInverseVal_Diffuse", ref m.ShaderConfig.NewBlendInverseVal_Diffuse);
+                                            FlverShaderEnums.NewBlendOperations_Picker.ShowPickerCombo(Loc.T("Blend Operation"), $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendOperation", ref m.ShaderConfig.NewBlendOperation_Diffuse, NewBlendOperations.Multiply);
+                                            ImGui.Checkbox(Loc.TF("Diffuse - Reverse Blend Dir###SceneManager_Mesh[{0}|{1}]_Material{2}_NewBlendReverseDir_Diffuse", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.NewBlendReverseDir_Diffuse);
+                                            ImGui.Checkbox(Loc.TF("Diffuse - Invert Blend Mask Value###SceneManager_Mesh[{0}|{1}]_Material{2}_NewBlendInverseVal_Diffuse", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.NewBlendInverseVal_Diffuse);
                                             ImGui.TreePop();
                                         }
 
                                         ImGui.Separator();
 
-                                        if (ImGui.TreeNode($"Blend Settings - Specular###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_BlendSettings_Specular"))
+                                        if (ImGui.TreeNode(Loc.TF("Blend Settings - Specular###SceneManager_Mesh[{0}|{1}]_Material{2}_BlendSettings_Specular", modelGUID, index_Mesh, index_Material)))
                                         {
-                                            FlverShaderEnums.NewBlendOperations_Picker.ShowPickerCombo("Specular - Blend Operation", $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendOperation_Specular", ref m.ShaderConfig.NewBlendOperation_Specular, NewBlendOperations.Multiply);
-                                            ImGui.Checkbox($"Specular - Reverse Blend Dir###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendReverseDir_Specular", ref m.ShaderConfig.NewBlendReverseDir_Specular);
-                                            ImGui.Checkbox($"Specular - Invert Blend Mask Value###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendInverseVal_Specular", ref m.ShaderConfig.NewBlendInverseVal_Specular);
+                                            FlverShaderEnums.NewBlendOperations_Picker.ShowPickerCombo(Loc.T("Specular - Blend Operation"), $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendOperation_Specular", ref m.ShaderConfig.NewBlendOperation_Specular, NewBlendOperations.Multiply);
+                                            ImGui.Checkbox(Loc.TF("Specular - Reverse Blend Dir###SceneManager_Mesh[{0}|{1}]_Material{2}_NewBlendReverseDir_Specular", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.NewBlendReverseDir_Specular);
+                                            ImGui.Checkbox(Loc.TF("Specular - Invert Blend Mask Value###SceneManager_Mesh[{0}|{1}]_Material{2}_NewBlendInverseVal_Specular", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.NewBlendInverseVal_Specular);
                                             ImGui.TreePop();
                                         }
                                         ImGui.Separator();
 
-                                        if (ImGui.TreeNode($"Blend Settings - Normal###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_BlendSettings_Normal"))
+                                        if (ImGui.TreeNode(Loc.TF("Blend Settings - Normal###SceneManager_Mesh[{0}|{1}]_Material{2}_BlendSettings_Normal", modelGUID, index_Mesh, index_Material)))
                                         {
-                                            FlverShaderEnums.NewBlendOperations_Picker.ShowPickerCombo("Normal - Blend Operation", $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendOperation_Normal", ref m.ShaderConfig.NewBlendOperation_Normal, NewBlendOperations.Multiply);
-                                            ImGui.Checkbox($"Normal - Reverse Blend Dir###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendReverseDir_Normal", ref m.ShaderConfig.NewBlendReverseDir_Normal);
-                                            ImGui.Checkbox($"Normal - Invert Blend Mask Value###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendInverseVal_Normal", ref m.ShaderConfig.NewBlendInverseVal_Normal);
+                                            FlverShaderEnums.NewBlendOperations_Picker.ShowPickerCombo(Loc.T("Normal - Blend Operation"), $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendOperation_Normal", ref m.ShaderConfig.NewBlendOperation_Normal, NewBlendOperations.Multiply);
+                                            ImGui.Checkbox(Loc.TF("Normal - Reverse Blend Dir###SceneManager_Mesh[{0}|{1}]_Material{2}_NewBlendReverseDir_Normal", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.NewBlendReverseDir_Normal);
+                                            ImGui.Checkbox(Loc.TF("Normal - Invert Blend Mask Value###SceneManager_Mesh[{0}|{1}]_Material{2}_NewBlendInverseVal_Normal", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.NewBlendInverseVal_Normal);
                                             ImGui.TreePop();
                                         }
                                         ImGui.Separator();
 
-                                        if (ImGui.TreeNode($"Blend Settings - Shininess###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_BlendSettings_Shininess"))
+                                        if (ImGui.TreeNode(Loc.TF("Blend Settings - Shininess###SceneManager_Mesh[{0}|{1}]_Material{2}_BlendSettings_Shininess", modelGUID, index_Mesh, index_Material)))
                                         {
-                                            FlverShaderEnums.NewBlendOperations_Picker.ShowPickerCombo("Shininess - Blend Operation", $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendOperation_Shininess", ref m.ShaderConfig.NewBlendOperation_Shininess, NewBlendOperations.Multiply);
-                                            ImGui.Checkbox($"Shininess - Reverse Blend Dir###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendReverseDir_Shininess", ref m.ShaderConfig.NewBlendReverseDir_Shininess);
-                                            ImGui.Checkbox($"Shininess - Invert Blend Mask Value###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendInverseVal_Shininess", ref m.ShaderConfig.NewBlendInverseVal_Shininess);
+                                            FlverShaderEnums.NewBlendOperations_Picker.ShowPickerCombo(Loc.T("Shininess - Blend Operation"), $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendOperation_Shininess", ref m.ShaderConfig.NewBlendOperation_Shininess, NewBlendOperations.Multiply);
+                                            ImGui.Checkbox(Loc.TF("Shininess - Reverse Blend Dir###SceneManager_Mesh[{0}|{1}]_Material{2}_NewBlendReverseDir_Shininess", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.NewBlendReverseDir_Shininess);
+                                            ImGui.Checkbox(Loc.TF("Shininess - Invert Blend Mask Value###SceneManager_Mesh[{0}|{1}]_Material{2}_NewBlendInverseVal_Shininess", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.NewBlendInverseVal_Shininess);
                                             ImGui.TreePop();
                                         }
                                         ImGui.Separator();
 
-                                        if (ImGui.TreeNode($"Blend Settings - Emissive###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_BlendSettings_Emissive"))
+                                        if (ImGui.TreeNode(Loc.TF("Blend Settings - Emissive###SceneManager_Mesh[{0}|{1}]_Material{2}_BlendSettings_Emissive", modelGUID, index_Mesh, index_Material)))
                                         {
-                                            FlverShaderEnums.NewBlendOperations_Picker.ShowPickerCombo("Emissive - Blend Operation", $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendOperation_Emissive", ref m.ShaderConfig.NewBlendOperation_Emissive, NewBlendOperations.Multiply);
-                                            ImGui.Checkbox($"Emissive - Reverse Blend Dir###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendReverseDir_Emissive", ref m.ShaderConfig.NewBlendReverseDir_Emissive);
-                                            ImGui.Checkbox($"Emissive - Invert Blend Mask Value###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendInverseVal_Emissive", ref m.ShaderConfig.NewBlendInverseVal_Emissive);
+                                            FlverShaderEnums.NewBlendOperations_Picker.ShowPickerCombo(Loc.T("Emissive - Blend Operation"), $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NewBlendOperation_Emissive", ref m.ShaderConfig.NewBlendOperation_Emissive, NewBlendOperations.Multiply);
+                                            ImGui.Checkbox(Loc.TF("Emissive - Reverse Blend Dir###SceneManager_Mesh[{0}|{1}]_Material{2}_NewBlendReverseDir_Emissive", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.NewBlendReverseDir_Emissive);
+                                            ImGui.Checkbox(Loc.TF("Emissive - Invert Blend Mask Value###SceneManager_Mesh[{0}|{1}]_Material{2}_NewBlendInverseVal_Emissive", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.NewBlendInverseVal_Emissive);
                                             ImGui.TreePop();
                                         }
 
@@ -357,7 +358,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                         ImGui.Separator();
 
-                                        ImGui.Checkbox($"Visible###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsVisible", ref m.IsVisible);
+                                        ImGui.Checkbox(Loc.TF("Visible###SceneManager_Mesh[{0}|{1}]_Material{2}_IsVisible", modelGUID, index_Mesh, index_Material), ref m.IsVisible);
 
                                         bool isSoloVisible = false;
                                         if (DSAnimStudio.zzz_DocumentManager.CurrentDocument.Scene.AnyMaterialSoloVisible())
@@ -365,7 +366,7 @@ namespace DSAnimStudio.ImguiOSD
                                             isSoloVisible = DSAnimStudio.zzz_DocumentManager.CurrentDocument.Scene.GetMaterialSoloVisible(model, mesh, m);
                                         }
                                         bool prevSoloVisible = isSoloVisible;
-                                        ImGui.Checkbox($"Is The ONLY One Visible###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsSoloVisible", ref isSoloVisible);
+                                        ImGui.Checkbox(Loc.TF("Is The ONLY One Visible###SceneManager_Mesh[{0}|{1}]_Material{2}_IsSoloVisible", modelGUID, index_Mesh, index_Material), ref isSoloVisible);
                                         if (isSoloVisible && !prevSoloVisible)
                                         {
                                             DSAnimStudio.zzz_DocumentManager.CurrentDocument.Scene.SetMaterialSoloVisible(model, mesh, m);
@@ -377,130 +378,130 @@ namespace DSAnimStudio.ImguiOSD
 
                                         string[] ptdeMtdTypes = new string[]
                                         {
-                                            "Default",
-                                            "Metal",
-                                            "Wet",
-                                            "Dull",
+                                            Loc.T("Default"),
+                                            Loc.T("Metal"),
+                                            Loc.T("Wet"),
+                                            Loc.T("Dull"),
                                         };
                                         int ptdeMtdTypeIndex = (int)m.PtdeMtdType;
-                                        ImGui.Combo($"DS1 PTDE MTD Type###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_PtdeMtdType",
+                                        ImGui.Combo(Loc.TF("DS1 PTDE MTD Type###SceneManager_Mesh[{0}|{1}]_Material{2}_PtdeMtdType", modelGUID, index_Mesh, index_Material),
                                             ref ptdeMtdTypeIndex, ptdeMtdTypes,
                                             ptdeMtdTypes.Length);
                                         m.PtdeMtdType = (PtdeMtdTypes)ptdeMtdTypeIndex;
 
-                                        ImGui.Checkbox($"IsDS2EmissiveFlow###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsDS2EmissiveFlow", ref m.ShaderConfig.IsDS2EmissiveFlow);
-                                        ImGui.Checkbox($"IsDS3Veil###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsDS3Veil", ref m.ShaderConfig.IsDS3Veil);
-                                        ImGui.Checkbox($"IsShaderDoubleFaceCloth###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsShaderDoubleFaceCloth", ref m.ShaderConfig.IsShaderDoubleFaceCloth);
-                                        ImGui.Checkbox($"Invert Blend Mask###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_InvertBlendMaskMap", ref m.ShaderConfig.InvertBlendMaskMap);
+                                        ImGui.Checkbox(Loc.TF("IsDS2EmissiveFlow###SceneManager_Mesh[{0}|{1}]_Material{2}_IsDS2EmissiveFlow", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.IsDS2EmissiveFlow);
+                                        ImGui.Checkbox(Loc.TF("IsDS3Veil###SceneManager_Mesh[{0}|{1}]_Material{2}_IsDS3Veil", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.IsDS3Veil);
+                                        ImGui.Checkbox(Loc.TF("IsShaderDoubleFaceCloth###SceneManager_Mesh[{0}|{1}]_Material{2}_IsShaderDoubleFaceCloth", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.IsShaderDoubleFaceCloth);
+                                        ImGui.Checkbox(Loc.TF("Invert Blend Mask###SceneManager_Mesh[{0}|{1}]_Material{2}_InvertBlendMaskMap", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.InvertBlendMaskMap);
 
                                         ImGui.Separator();
-                                        ImGui.Checkbox($"Is Metallic###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsMetallic", ref m.ShaderConfig.IsMetallic);
+                                        ImGui.Checkbox(Loc.TF("Is Metallic###SceneManager_Mesh[{0}|{1}]_Material{2}_IsMetallic", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.IsMetallic);
 
-                                        ImGui.SliderFloat($"Metallic Diffuse Decrease Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_MetallicDiffuseDecreaseMult", ref m.ShaderConfig.MetallicDiffuseDecreaseMult, 0, 1);
+                                        ImGui.SliderFloat(Loc.TF("Metallic Diffuse Decrease Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_MetallicDiffuseDecreaseMult", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.MetallicDiffuseDecreaseMult, 0, 1);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                        ImGui.SliderFloat($"Metallic Specular Increase Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_MetallicSpecularIncreaseMult", ref m.ShaderConfig.MetallicSpecularIncreaseMult, 0, 2);
+                                        ImGui.SliderFloat(Loc.TF("Metallic Specular Increase Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_MetallicSpecularIncreaseMult", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.MetallicSpecularIncreaseMult, 0, 2);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                        ImGui.SliderFloat($"Metallic Specular Increase Power###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_MetallicSpecularIncreasePower", ref m.ShaderConfig.MetallicSpecularIncreasePower, 0, 2);
+                                        ImGui.SliderFloat(Loc.TF("Metallic Specular Increase Power###SceneManager_Mesh[{0}|{1}]_Material{2}_MetallicSpecularIncreasePower", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.MetallicSpecularIncreasePower, 0, 2);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
 
-                                        ImGui.Checkbox($"Invert Metallic###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_InvertMetallic", ref m.ShaderConfig.InvertMetallic);
-                                        ImGui.Checkbox($"Is Undefined Metallic###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsUndefinedMetallic", ref m.IsUndefinedMetallic);
-                                        ImGui.SliderFloat($"Undefined Metallic Value###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UndefinedMetallicValue", ref m.ShaderConfig.UndefinedMetallicValue, 0, 1);
+                                        ImGui.Checkbox(Loc.TF("Invert Metallic###SceneManager_Mesh[{0}|{1}]_Material{2}_InvertMetallic", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.InvertMetallic);
+                                        ImGui.Checkbox(Loc.TF("Is Undefined Metallic###SceneManager_Mesh[{0}|{1}]_Material{2}_IsUndefinedMetallic", modelGUID, index_Mesh, index_Material), ref m.IsUndefinedMetallic);
+                                        ImGui.SliderFloat(Loc.TF("Undefined Metallic Value###SceneManager_Mesh[{0}|{1}]_Material{2}_UndefinedMetallicValue", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.UndefinedMetallicValue, 0, 1);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         var nonmetallicColor = m.ShaderConfig.NonMetallicSpecColor.ToNumerics();
-                                        ImGui.ColorEdit3($"NonMetallicSpecColor###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_NonMetallicSpecColor", ref nonmetallicColor, ImGuiColorEditFlags.DisplayHSV | ImGuiColorEditFlags.InputRGB);
+                                        ImGui.ColorEdit3(Loc.TF("NonMetallicSpecColor###SceneManager_Mesh[{0}|{1}]_Material{2}_NonMetallicSpecColor", modelGUID, index_Mesh, index_Material), ref nonmetallicColor, ImGuiColorEditFlags.DisplayHSV | ImGuiColorEditFlags.InputRGB);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.ShaderConfig.NonMetallicSpecColor = nonmetallicColor.ToXna();
 
                                         ImGui.Separator();
-                                        ImGui.Checkbox($"Enable Blend Mask###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_EnableBlendMask", ref m.ShaderConfig.EnableBlendMask);
-                                        ImGui.Checkbox($"Is Undefined Blend Mask###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsUndefinedBlendMask", ref m.IsUndefinedBlendMask);
-                                        ImGui.SliderFloat($"Undefined Blend Mask Value###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UndefinedBlendMaskValue", ref m.ShaderConfig.UndefinedBlendMaskValue, 0, 1);
+                                        ImGui.Checkbox(Loc.TF("Enable Blend Mask###SceneManager_Mesh[{0}|{1}]_Material{2}_EnableBlendMask", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.EnableBlendMask);
+                                        ImGui.Checkbox(Loc.TF("Is Undefined Blend Mask###SceneManager_Mesh[{0}|{1}]_Material{2}_IsUndefinedBlendMask", modelGUID, index_Mesh, index_Material), ref m.IsUndefinedBlendMask);
+                                        ImGui.SliderFloat(Loc.TF("Undefined Blend Mask Value###SceneManager_Mesh[{0}|{1}]_Material{2}_UndefinedBlendMaskValue", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.UndefinedBlendMaskValue, 0, 1);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                        ImGui.Checkbox($"Get Blend Mask From Normal Map 1 Alpha###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_BlendMaskFromNormalMap1Alpha", ref m.ShaderConfig.BlendMaskFromNormalMap1Alpha);
-                                        ImGui.Checkbox($"Get Blend Mask From Normal Map 1 Alpha - Is Inverted###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_BlendMaskFromNormalMap1Alpha_IsReverse", ref m.ShaderConfig.BlendMaskFromNormalMap1Alpha_IsReverse);
-                                        ImGui.Checkbox($"Mult Blend Mask By Albedo Map 2 Alpha###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_BlendMaskMultByAlbedoMap2Alpha", ref m.ShaderConfig.BlendMaskMultByAlbedoMap2Alpha);
-                                        ImGui.Checkbox($"Mult Blend Mask By Albedo Map 2 Alpha - Is Inverted###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_BlendMaskMultByAlbedoMap2Alpha_IsReverse", ref m.ShaderConfig.BlendMaskMultByAlbedoMap2Alpha_IsReverse);
+                                        ImGui.Checkbox(Loc.TF("Get Blend Mask From Normal Map 1 Alpha###SceneManager_Mesh[{0}|{1}]_Material{2}_BlendMaskFromNormalMap1Alpha", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.BlendMaskFromNormalMap1Alpha);
+                                        ImGui.Checkbox(Loc.TF("Get Blend Mask From Normal Map 1 Alpha - Is Inverted###SceneManager_Mesh[{0}|{1}]_Material{2}_BlendMaskFromNormalMap1Alpha_IsReverse", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.BlendMaskFromNormalMap1Alpha_IsReverse);
+                                        ImGui.Checkbox(Loc.TF("Mult Blend Mask By Albedo Map 2 Alpha###SceneManager_Mesh[{0}|{1}]_Material{2}_BlendMaskMultByAlbedoMap2Alpha", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.BlendMaskMultByAlbedoMap2Alpha);
+                                        ImGui.Checkbox(Loc.TF("Mult Blend Mask By Albedo Map 2 Alpha - Is Inverted###SceneManager_Mesh[{0}|{1}]_Material{2}_BlendMaskMultByAlbedoMap2Alpha_IsReverse", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.BlendMaskMultByAlbedoMap2Alpha_IsReverse);
                                         ImGui.Separator();
 
-                                        ImGui.Checkbox($"Enable Texture Alphas###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_EnableAlphas", ref m.ShaderConfig.EnableAlphas);
-                                        ImGui.Checkbox($"Use Fancy Texture Alphas###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UseFancyAlphas", ref m.ShaderConfig.UseFancyAlphas);
-                                        ImGui.SliderFloat($"Fancy Texture Alpha Cutoff###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_FancyAlphaCutoff", ref m.ShaderConfig.FancyAlphaCutoff, 0, 1, (m.ShaderConfig.FancyAlphaCutoff < 1) ? "%.2f" : "(Use Default)");
+                                        ImGui.Checkbox(Loc.TF("Enable Texture Alphas###SceneManager_Mesh[{0}|{1}]_Material{2}_EnableAlphas", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.EnableAlphas);
+                                        ImGui.Checkbox(Loc.TF("Use Fancy Texture Alphas###SceneManager_Mesh[{0}|{1}]_Material{2}_UseFancyAlphas", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.UseFancyAlphas);
+                                        ImGui.SliderFloat(Loc.TF("Fancy Texture Alpha Cutoff###SceneManager_Mesh[{0}|{1}]_Material{2}_FancyAlphaCutoff", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.FancyAlphaCutoff, 0, 1, (m.ShaderConfig.FancyAlphaCutoff < 1) ? "%.2f" : Loc.T("(Use Default)"));
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         //ImGui.Checkbox("Enable Texture Blending", ref GFX.FlverEnableTextureBlending);
 
-                                        ImGui.Checkbox($"Albedo Alpha Mult In Normal Map Alpha###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsAlbedoAlphaMultInNormalAlpha", ref m.ShaderConfig.IsAlbedoAlphaMultInNormalAlpha);
+                                        ImGui.Checkbox(Loc.TF("Albedo Alpha Mult In Normal Map Alpha###SceneManager_Mesh[{0}|{1}]_Material{2}_IsAlbedoAlphaMultInNormalAlpha", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.IsAlbedoAlphaMultInNormalAlpha);
 
                                         ImGui.Separator();
 
-                                        ImGui.SliderFloat($"Direct Light Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_DirectLightMult", ref m.ShaderConfig.DirectLightingMult, 0, 3);
+                                        ImGui.SliderFloat(Loc.TF("Direct Light Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_DirectLightMult", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.DirectLightingMult, 0, 3);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
 
-                                        OSD.TooltipManager_Scene.DoTooltip("Direct Light Multiplier", "Multiplies the brightness of light reflected directly off" +
-                                            "\nthe surface of the model.");
+                                        OSD.TooltipManager_Scene.DoTooltip(Loc.T("Direct Light Multiplier"), Loc.T("Multiplies the brightness of light reflected directly off" +
+                                            "\nthe surface of the model."));
 
 
-                                        ImGui.SliderFloat($"Indirect Light Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IndirectLightMult", ref m.ShaderConfig.IndirectLightingMult, 0, 3);
+                                        ImGui.SliderFloat(Loc.TF("Indirect Light Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_IndirectLightMult", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.IndirectLightingMult, 0, 3);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                        OSD.TooltipManager_Scene.DoTooltip("Indirect Light Multiplier", "Multiplies the brightness of environment map lighting reflected.");
+                                        OSD.TooltipManager_Scene.DoTooltip(Loc.T("Indirect Light Multiplier"), Loc.T("Multiplies the brightness of environment map lighting reflected."));
 
-                                        ImGui.SliderFloat("Direct Diffuse Mult", ref m.ShaderConfig.DirectDiffuseMult, 0, 3);
+                                        ImGui.SliderFloat(Loc.T("Direct Diffuse Mult"), ref m.ShaderConfig.DirectDiffuseMult, 0, 3);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                        ImGui.SliderFloat("Direct Specular Mult", ref m.ShaderConfig.DirectSpecularMult, 0, 3);
+                                        ImGui.SliderFloat(Loc.T("Direct Specular Mult"), ref m.ShaderConfig.DirectSpecularMult, 0, 3);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                        ImGui.SliderFloat("Indirect Diffuse Mult", ref m.ShaderConfig.IndirectDiffuseMult, 0, 3);
+                                        ImGui.SliderFloat(Loc.T("Indirect Diffuse Mult"), ref m.ShaderConfig.IndirectDiffuseMult, 0, 3);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                        ImGui.SliderFloat("Indirect Specular Mult", ref m.ShaderConfig.IndirectSpecularMult, 0, 3);
+                                        ImGui.SliderFloat(Loc.T("Indirect Specular Mult"), ref m.ShaderConfig.IndirectSpecularMult, 0, 3);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
 
                                         //ImGui.SliderFloat("Ambient Light Mult", ref Environment.AmbientLightMult, 0, 3);
-                                        ImGui.SliderFloat($"Specular Power Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_SpecularPowerMult", ref m.ShaderConfig.SpecularPowerMult, 1, 8);
+                                        ImGui.SliderFloat(Loc.TF("Specular Power Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_SpecularPowerMult", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.SpecularPowerMult, 1, 8);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                        OSD.TooltipManager_Scene.DoTooltip("Specular Power Multiplier", "Multiplies the specular power of the lighting. " +
+                                        OSD.TooltipManager_Scene.DoTooltip(Loc.T("Specular Power Multiplier"), Loc.T("Multiplies the specular power of the lighting. " +
                                             "\nHigher makes thing's very glossy. " +
-                                            "\nMight make some Bloodborne kin of the cosmos look more accurate.");
-                                        ImGui.SliderFloat($"LdotN Power Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_LdotNPowerMult", ref m.ShaderConfig.LdotNPowerMult, 1, 8);
+                                            "\nMight make some Bloodborne kin of the cosmos look more accurate."));
+                                        ImGui.SliderFloat(Loc.TF("LdotN Power Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_LdotNPowerMult", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.LdotNPowerMult, 1, 8);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                        OSD.TooltipManager_Scene.DoTooltip("L dot N Vector Power Multiplier", "Advanced setting. If you know you know.");
+                                        OSD.TooltipManager_Scene.DoTooltip(Loc.T("L dot N Vector Power Multiplier"), Loc.T("Advanced setting. If you know you know."));
 
-                                        ImGui.SliderFloat($"Emissive Light Mult###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_EmissiveLightMult", ref m.ShaderConfig.EmissiveMult, 0, 3);
+                                        ImGui.SliderFloat(Loc.TF("Emissive Light Mult###SceneManager_Mesh[{0}|{1}]_Material{2}_EmissiveLightMult", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.EmissiveMult, 0, 3);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
 
-                                        OSD.TooltipManager_Scene.DoTooltip("Emissive Light Mult", "Multiplies the brightness of light emitted by the model's " +
-                                            "\nemissive texture map, if applicable.");
+                                        OSD.TooltipManager_Scene.DoTooltip(Loc.T("Emissive Light Mult"), Loc.T("Multiplies the brightness of light emitted by the model's " +
+                                            "\nemissive texture map, if applicable."));
 
 
-                                        ImGui.Checkbox($"Get Emissive Color From Albedo###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_EmissiveColorFromAlbedo", ref m.ShaderConfig.EmissiveColorFromAlbedo);
+                                        ImGui.Checkbox(Loc.TF("Get Emissive Color From Albedo###SceneManager_Mesh[{0}|{1}]_Material{2}_EmissiveColorFromAlbedo", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.EmissiveColorFromAlbedo);
 
 
                                         ImGui.Separator();
 
-                                        ImGui.Checkbox($"Reflectance Mult In Normal Map Alpha###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsReflectMultInNormalAlpha", ref m.ShaderConfig.IsReflectMultInNormalAlpha);
-                                        ImGui.Checkbox($"Metallic Mult In Normal Map Alpha###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_IsMetallicMultInNormalAlpha", ref m.ShaderConfig.IsMetallicInNormalAlpha);
-                                        ImGui.Checkbox($"Swap X & Y Channels In Normal Map###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_SwapNormalXY", ref m.ShaderConfig.SwapNormalXY);
+                                        ImGui.Checkbox(Loc.TF("Reflectance Mult In Normal Map Alpha###SceneManager_Mesh[{0}|{1}]_Material{2}_IsReflectMultInNormalAlpha", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.IsReflectMultInNormalAlpha);
+                                        ImGui.Checkbox(Loc.TF("Metallic Mult In Normal Map Alpha###SceneManager_Mesh[{0}|{1}]_Material{2}_IsMetallicMultInNormalAlpha", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.IsMetallicInNormalAlpha);
+                                        ImGui.Checkbox(Loc.TF("Swap X & Y Channels In Normal Map###SceneManager_Mesh[{0}|{1}]_Material{2}_SwapNormalXY", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.SwapNormalXY);
 
                                         ImGui.Separator();
 
                                         int curChrCustomizeType = m.ShaderConfig.chrCustomizeType_Values.IndexOf(m.ShaderConfig.ChrCustomizeType);
-                                        ImGui.ListBox($"ChrCustomize Type###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_ChrCustomizeType", ref curChrCustomizeType, m.ShaderConfig.chrCustomizeType_Names, m.ShaderConfig.chrCustomizeType_Names.Length);
+                                        ImGui.ListBox(Loc.TF("ChrCustomize Type###SceneManager_Mesh[{0}|{1}]_Material{2}_ChrCustomizeType", modelGUID, index_Mesh, index_Material), ref curChrCustomizeType, m.ShaderConfig.chrCustomizeType_Names, m.ShaderConfig.chrCustomizeType_Names.Length);
                                         if (curChrCustomizeType == -1)
                                             curChrCustomizeType = 0;
                                         m.ShaderConfig.ChrCustomizeType = m.ShaderConfig.chrCustomizeType_Values[curChrCustomizeType];
 
-                                        ImGui.Checkbox($"ChrCustomize Uses Normal Map Alpha###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_ChrCustomizeUseNormalMapAlpha",
+                                        ImGui.Checkbox(Loc.TF("ChrCustomize Uses Normal Map Alpha###SceneManager_Mesh[{0}|{1}]_Material{2}_ChrCustomizeUseNormalMapAlpha", modelGUID, index_Mesh, index_Material),
                                             ref m.ShaderConfig.ChrCustomizeUseNormalMapAlpha);
                                         
-                                        ImGui.Checkbox($"Enable SSS###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_UseSSS", ref m.ShaderConfig.EnableSSS);
+                                        ImGui.Checkbox(Loc.TF("Enable SSS###SceneManager_Mesh[{0}|{1}]_Material{2}_UseSSS", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.EnableSSS);
                                         var sssColor = m.ShaderConfig.SSSColor.ToCS();
-                                        ImGui.DragFloat3($"SSS Color###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_SSSColor", ref sssColor);
+                                        ImGui.DragFloat3(Loc.TF("SSS Color###SceneManager_Mesh[{0}|{1}]_Material{2}_SSSColor", modelGUID, index_Mesh, index_Material), ref sssColor);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.ShaderConfig.SSSColor = sssColor.ToXna();
-                                        ImGui.DragFloat($"SSS Intensity###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_SSSIntensity", ref m.ShaderConfig.SSSIntensity, 0.01f);
+                                        ImGui.DragFloat(Loc.TF("SSS Intensity###SceneManager_Mesh[{0}|{1}]_Material{2}_SSSIntensity", modelGUID, index_Mesh, index_Material), ref m.ShaderConfig.SSSIntensity, 0.01f);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
 
                                         ImGui.Separator();
 
-                                        FlverShaderEnums.NewDebugTypes_Picker.ShowPickerCombo($"Shader Debug Type", $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_ShaderDebugType", ref m.NewDebugType, NewDebugTypes.None);
+                                        FlverShaderEnums.NewDebugTypes_Picker.ShowPickerCombo(Loc.T("Shader Debug Type"), $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_ShaderDebugType", ref m.NewDebugType, NewDebugTypes.None);
 
                                         //int drawStepIndex = GFX.DRAW_STEP_LIST.ToList().IndexOf(m.DrawStep);
                                         //var drawStepNames = GFX.DRAW_STEP_LIST.Select(x => x.ToString()).ToArray();
@@ -518,21 +519,21 @@ namespace DSAnimStudio.ImguiOSD
                                         ImGui.Separator();
                                         
                                         float uvOffsetX = m.DebugUVOffset.X, uvOffsetY = m.DebugUVOffset.Y;
-                                        ImGui.DragFloat($"[For Testing]UV Offset X###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_DebugUVOffsetX", ref uvOffsetX, 0.001f);
+                                        ImGui.DragFloat(Loc.TF("[For Testing]UV Offset X###SceneManager_Mesh[{0}|{1}]_Material{2}_DebugUVOffsetX", modelGUID, index_Mesh, index_Material), ref uvOffsetX, 0.001f);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                        ImGui.DragFloat($"[For Testing]UV Offset Y###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_DebugUVOffsetY", ref uvOffsetY, 0.001f);
+                                        ImGui.DragFloat(Loc.TF("[For Testing]UV Offset Y###SceneManager_Mesh[{0}|{1}]_Material{2}_DebugUVOffsetY", modelGUID, index_Mesh, index_Material), ref uvOffsetY, 0.001f);
                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                         m.DebugUVOffset = new Microsoft.Xna.Framework.Vector2(uvOffsetX, uvOffsetY);
                                         
                                         ImGui.Separator();
                                         
-                                        if (ImGui.TreeNode($"Samplers###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Samplers"))
+                                        if (ImGui.TreeNode(Loc.TF("Samplers###SceneManager_Mesh[{0}|{1}]_Material{2}_Samplers", modelGUID, index_Mesh, index_Material)))
                                         {
                                             bool anySamplerDebugView = m.Samplers.Any(smp => smp.IsDebugView);
 
                                             foreach (var s in m.Samplers)
                                             {
-                                                bool samplerNodeOpen = ImGui.TreeNode($"{s.Name} [{s.TexPath}]###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Sampler{index_Sampler}");
+                                                bool samplerNodeOpen = ImGui.TreeNode(Loc.TF("{0} [{1}]###SceneManager_Mesh[{2}|{3}]_Material{4}_Sampler{5}", s.Name, s.TexPath, modelGUID, index_Mesh, index_Material, index_Sampler));
                                                 var matchingSamplerConfig = m.GetSamplerConfig(s.Name);
                                                 if (ImGui.IsItemHovered() && !anySamplerDebugView)
                                                 {
@@ -547,7 +548,7 @@ namespace DSAnimStudio.ImguiOSD
                                                     if (matchingSamplerConfig != null)
                                                     {
                                                         int texTypeIndex = FlverMaterial.AllTextureTypes.IndexOf(matchingSamplerConfig.TexType);
-                                                        ImGui.Combo($"Texture Type###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Sampler{index_Sampler}_TextureType", ref texTypeIndex, FlverMaterial.AllTextureTypeNames, FlverMaterial.AllTextureTypeNames.Length);
+                                                        ImGui.Combo(Loc.TF("Texture Type###SceneManager_Mesh[{0}|{1}]_Material{2}_Sampler{3}_TextureType", modelGUID, index_Mesh, index_Material, index_Sampler), ref texTypeIndex, FlverMaterial.AllTextureTypeNames, FlverMaterial.AllTextureTypeNames.Length);
                                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                         if (texTypeIndex < 0)
                                                             texTypeIndex = 0;
@@ -556,7 +557,7 @@ namespace DSAnimStudio.ImguiOSD
                                                         matchingSamplerConfig.TexType = FlverMaterial.AllTextureTypes[texTypeIndex];
 
                                                         int uvIndexPlusOne = matchingSamplerConfig.UVIndex + 1;
-                                                        ImGui.InputInt($"UV Map###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Sampler{index_Sampler}_UVMapIndex", ref uvIndexPlusOne);
+                                                        ImGui.InputInt(Loc.TF("UV Map###SceneManager_Mesh[{0}|{1}]_Material{2}_Sampler{3}_UVMapIndex", modelGUID, index_Mesh, index_Material, index_Sampler), ref uvIndexPlusOne);
                                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                         if (uvIndexPlusOne < 1)
                                                             uvIndexPlusOne = 1;
@@ -566,7 +567,7 @@ namespace DSAnimStudio.ImguiOSD
 
 
                                                         int uvGroupPlusOne = matchingSamplerConfig.UVGroup + 1;
-                                                        ImGui.InputInt($"UV Group###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Sampler{index_Sampler}_UVMapGroup", ref uvGroupPlusOne);
+                                                        ImGui.InputInt(Loc.TF("UV Group###SceneManager_Mesh[{0}|{1}]_Material{2}_Sampler{3}_UVMapGroup", modelGUID, index_Mesh, index_Material, index_Sampler), ref uvGroupPlusOne);
                                                         anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                         if (uvGroupPlusOne < 1)
                                                             uvGroupPlusOne = 1;
@@ -575,18 +576,18 @@ namespace DSAnimStudio.ImguiOSD
                                                         matchingSamplerConfig.UVGroup = uvGroupPlusOne - 1;
 
 
-                                                        ImGui.LabelText($"Default Texture###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Sampler{index_Sampler}_DefaultTexName", matchingSamplerConfig.DefaultTexPath ?? "<NULL>");
+                                                        ImGui.LabelText(Loc.TF("Default Texture###SceneManager_Mesh[{0}|{1}]_Material{2}_Sampler{3}_DefaultTexName", modelGUID, index_Mesh, index_Material, index_Sampler), matchingSamplerConfig.DefaultTexPath ?? "<NULL>");
                                                     }
                                                     else
                                                     {
-                                                        ImGui.LabelText(" ", "Error: SamplerConfig not found.");
+                                                        ImGui.LabelText(Loc.T(" "), Loc.T("Error: SamplerConfig not found."));
                                                     }
 
                                                     
                                                     float uvSizeX = s.UVScale.X, uvSizeY = s.UVScale.Y;
-                                                    ImGui.InputFloat($"UV Scale X###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Sampler{index_Sampler}_UVScaleX", ref uvSizeX);
+                                                    ImGui.InputFloat(Loc.TF("UV Scale X###SceneManager_Mesh[{0}|{1}]_Material{2}_Sampler{3}_UVScaleX", modelGUID, index_Mesh, index_Material, index_Sampler), ref uvSizeX);
                                                     anyFieldFocused_Inner |= ImGui.IsItemActive();
-                                                    ImGui.InputFloat($"UV Scale Y###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Sampler{index_Sampler}_UVScaleY", ref uvSizeY);
+                                                    ImGui.InputFloat(Loc.TF("UV Scale Y###SceneManager_Mesh[{0}|{1}]_Material{2}_Sampler{3}_UVScaleY", modelGUID, index_Mesh, index_Material, index_Sampler), ref uvSizeY);
                                                     anyFieldFocused_Inner |= ImGui.IsItemActive();
                                                     s.UVScale = new Microsoft.Xna.Framework.Vector2(uvSizeX, uvSizeY);
                                                     
@@ -600,8 +601,8 @@ namespace DSAnimStudio.ImguiOSD
 
                                                     bool prevDebugView = s.IsDebugView;
 
-                                                    ImGui.Checkbox($"Lock Debug Render On###SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Sampler{index_Sampler}_IsDebugView", ref s.IsDebugView);
-                                                    FlverShaderEnums.NewDebug_ShowTex_ChannelConfigs_Picker.ShowPickerCombo("Debug Render Channels", 
+                                                    ImGui.Checkbox(Loc.TF("Lock Debug Render On###SceneManager_Mesh[{0}|{1}]_Material{2}_Sampler{3}_IsDebugView", modelGUID, index_Mesh, index_Material, index_Sampler), ref s.IsDebugView);
+                                                    FlverShaderEnums.NewDebug_ShowTex_ChannelConfigs_Picker.ShowPickerCombo(Loc.T("Debug Render Channels"), 
                                                         $"SceneManager_Mesh[{modelGUID}|{index_Mesh}]_Material{index_Material}_Sampler{index_Sampler}_ChannelConfig_ForDebug", 
                                                         ref s.ChannelConfig_ForDebug, NewDebug_ShowTex_ChannelConfigs.RGBA);
 
@@ -636,7 +637,7 @@ namespace DSAnimStudio.ImguiOSD
 
 
                                         ImGui.Separator();
-                                        ImGui.LabelText(" ", " ");
+                                        ImGui.LabelText(Loc.T(" "), " ");
                                         ImGui.Separator();
 
                                         ImGui.TreePop();
@@ -683,7 +684,7 @@ namespace DSAnimStudio.ImguiOSD
                     void DoDummyPolyOfModel(Model model)
                     {
                         bool thisFrameHover_DummyPoly = false;
-                        if (ImGui.TreeNode("[DummyPoly]"))
+                        if (ImGui.TreeNode(Loc.T("[DummyPoly]")))
                         {
                             if (model.DummyPolyMan != null)
                             {
@@ -697,7 +698,7 @@ namespace DSAnimStudio.ImguiOSD
                                     if (OSD.RequestExpandAllTreeNodes)
                                         ImGui.SetNextItemOpen(true);
 
-                                    ImGui.Button($"Show All");
+                                    ImGui.Button(Loc.TF("Show All"));
                                     if (ImGui.IsItemClicked())
                                     {
                                         foreach (var kvp in dmyPolyMan.DummyPolyByRefID)
@@ -706,7 +707,7 @@ namespace DSAnimStudio.ImguiOSD
                                         }
                                     }
 
-                                    ImGui.Button($"Hide All");
+                                    ImGui.Button(Loc.TF("Hide All"));
                                     if (ImGui.IsItemClicked())
                                     {
                                         foreach (var kvp in dmyPolyMan.DummyPolyByRefID)
@@ -715,7 +716,7 @@ namespace DSAnimStudio.ImguiOSD
                                         }
                                     }
 
-                                    ImGui.Button($"Invert All");
+                                    ImGui.Button(Loc.TF("Invert All"));
                                     if (ImGui.IsItemClicked())
                                     {
                                         foreach (var kvp in dmyPolyMan.DummyPolyByRefID)
@@ -740,7 +741,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                             //ImGui.Checkbox($"{kvp.Key} ({kvp.Value.Count}x)                                       ", ref dmyVis);
 
-                                            ImGui.Selectable($"{kvp.Key} ({kvp.Value.Count}x)                                       ", ref dmyVis);
+                                            ImGui.Selectable(Loc.TF("{0} ({1}x)                                       ", kvp.Key, kvp.Value.Count), ref dmyVis);
 
                                             dmyPolyMan.SetDummyPolyVisibility(kvp.Key, dmyVis);
                                             if (!thisFrameHover_DummyPoly && ImGui.IsItemHovered())
@@ -842,7 +843,7 @@ namespace DSAnimStudio.ImguiOSD
                                 //    //}
                                 //}
 
-                                DoDummyPolyManager(model.DummyPolyMan, "Body");
+                                DoDummyPolyManager(model.DummyPolyMan, Loc.T("Body"));
 
                                 //if (model.ChrAsm != null)
                                 //{
@@ -879,7 +880,7 @@ namespace DSAnimStudio.ImguiOSD
                         
                         if (mdl.SkeletonFlver != null)
                         {
-                            if (ImGui.TreeNode($"[FLVER Skeleton]##{mdl.GUID}_FlverSkeleton"))
+                            if (ImGui.TreeNode(Loc.TF("[FLVER Skeleton]##{0}_FlverSkeleton", mdl.GUID)))
                             {
                                 ImGui.PushID($"{mdl.GUID}_FlverSkeleton_InsideTree");
 
@@ -904,7 +905,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                     //bool boneNodeOpen = (ImGui.TreeNode(bone.Name));
                                     ImGui.BeginDisabled();
-                                    ImGui.TreeNodeEx($"{bone.Index}##Skeleton{skeleton.GUID}_Bone{bone.Index}_Index", ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen);
+                                    ImGui.TreeNodeEx(Loc.TF("{0}##Skeleton{1}_Bone{2}_Index", bone.Index, skeleton.GUID, bone.Index), ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen);
                                     ImGui.EndDisabled();
                                     ImGui.SameLine();
                                     ImGui.Selectable(bone.Name, ref boneDrawEnabled);
@@ -948,17 +949,17 @@ namespace DSAnimStudio.ImguiOSD
 
                                 }
 
-                                ImGui.Button("Show All");
+                                ImGui.Button(Loc.T("Show All"));
                                 if (ImGui.IsItemClicked())
                                     foreach (var b in mdl.SkeletonFlver.Bones)
                                         b.EnablePrimDraw = true;
 
-                                ImGui.Button("Hide All");
+                                ImGui.Button(Loc.T("Hide All"));
                                 if (ImGui.IsItemClicked())
                                     foreach (var b in mdl.SkeletonFlver.Bones)
                                         b.EnablePrimDraw = false;
 
-                                ImGui.Button("Invert All");
+                                ImGui.Button(Loc.T("Invert All"));
                                 if (ImGui.IsItemClicked())
                                     foreach (var b in mdl.SkeletonFlver.Bones)
                                         b.EnablePrimDraw = !b.EnablePrimDraw;
@@ -976,39 +977,39 @@ namespace DSAnimStudio.ImguiOSD
                                 ImGui.TreePop();
                             }
 
-                            if (ImGui.TreeNode($"[Bone Weight Debug]##{mdl.GUID}_FlverBoneWeightDebug"))
+                            if (ImGui.TreeNode(Loc.TF("[Bone Weight Debug]##{0}_FlverBoneWeightDebug", mdl.GUID)))
                             {
                                 ImGui.PushID($"{mdl.GUID}_FlverBoneWeightDebug");
                                 lock (mdl.SkeletonFlver._lock_DebugViewWeightOfBone)
                                 {
-                                    if (ImGui.TreeNode($"[Weight Shading Settings]##{mdl.GUID}_FlverBoneWeightDebug_WeightShadingSettings"))
+                                    if (ImGui.TreeNode(Loc.TF("[Weight Shading Settings]##{0}_FlverBoneWeightDebug_WeightShadingSettings", mdl.GUID)))
                                     {
                                         ImGui.PushID($"{mdl.GUID}_FlverBoneWeightDebug_WeightShadingSettings");
 
 
 
 
-                                        ImGui.DragFloat3("Unweighted Color (RGB)", ref GFX.FlverShader_DebugViewWeightOfBone_BaseColor, 0.001f, 0, 2);
-                                        ImGui.DragFloat3("Weighted Color (RGB)", ref GFX.FlverShader_DebugViewWeightOfBone_WeightColor, 0.001f, 0, 2);
+                                        ImGui.DragFloat3(Loc.T("Unweighted Color (RGB)"), ref GFX.FlverShader_DebugViewWeightOfBone_BaseColor, 0.001f, 0, 2);
+                                        ImGui.DragFloat3(Loc.T("Weighted Color (RGB)"), ref GFX.FlverShader_DebugViewWeightOfBone_WeightColor, 0.001f, 0, 2);
                                         ImGui.Separator();
-                                        ImGui.Checkbox("Lighting Enabled", ref GFX.FlverShader_DebugViewWeightOfBone_EnableLighting);
-                                        ImGui.DragFloat("Lighting Mult", ref GFX.FlverShader_DebugViewWeightOfBone_LightingMult, 0.001f, -1, 1);
-                                        ImGui.DragFloat("Lighting Gain", ref GFX.FlverShader_DebugViewWeightOfBone_LightingGain, 0.001f, -1, 1);
-                                        ImGui.DragFloat("Lighting Power", ref GFX.FlverShader_DebugViewWeightOfBone_LightingPower, 0.01f, 1, 16);
-                                        ImGui.DragFloat("Albedo Mult", ref GFX.FlverShader_DebugViewWeightOfBone_Lighting_AlbedoMult, 0.01f, 0, 1);
-                                        ImGui.DragFloat("Reflectance Mult", ref GFX.FlverShader_DebugViewWeightOfBone_Lighting_ReflectanceMult, 0.01f, 0, 4);
-                                        ImGui.DragFloat("Gloss", ref GFX.FlverShader_DebugViewWeightOfBone_Lighting_Gloss, 0.01f, 0, 1);
+                                        ImGui.Checkbox(Loc.T("Lighting Enabled"), ref GFX.FlverShader_DebugViewWeightOfBone_EnableLighting);
+                                        ImGui.DragFloat(Loc.T("Lighting Mult"), ref GFX.FlverShader_DebugViewWeightOfBone_LightingMult, 0.001f, -1, 1);
+                                        ImGui.DragFloat(Loc.T("Lighting Gain"), ref GFX.FlverShader_DebugViewWeightOfBone_LightingGain, 0.001f, -1, 1);
+                                        ImGui.DragFloat(Loc.T("Lighting Power"), ref GFX.FlverShader_DebugViewWeightOfBone_LightingPower, 0.01f, 1, 16);
+                                        ImGui.DragFloat(Loc.T("Albedo Mult"), ref GFX.FlverShader_DebugViewWeightOfBone_Lighting_AlbedoMult, 0.01f, 0, 1);
+                                        ImGui.DragFloat(Loc.T("Reflectance Mult"), ref GFX.FlverShader_DebugViewWeightOfBone_Lighting_ReflectanceMult, 0.01f, 0, 4);
+                                        ImGui.DragFloat(Loc.T("Gloss"), ref GFX.FlverShader_DebugViewWeightOfBone_Lighting_Gloss, 0.01f, 0, 1);
                                         ImGui.Separator();
-                                        ImGui.Checkbox("Use Texture Alphas", ref GFX.FlverShader_DebugViewWeightOfBone_EnableTextureAlphas);
-                                        ImGui.Checkbox("Wireframe Overlay Enabled", ref GFX.FlverShader_DebugViewWeightOfBone_WireframeOverlay_Enabled);
-                                        ImGui.Checkbox("Wireframe Overlay Obeys Tex Alphas", ref GFX.FlverShader_DebugViewWeightOfBone_WireframeOverlay_ObeysTextureAlphas);
+                                        ImGui.Checkbox(Loc.T("Use Texture Alphas"), ref GFX.FlverShader_DebugViewWeightOfBone_EnableTextureAlphas);
+                                        ImGui.Checkbox(Loc.T("Wireframe Overlay Enabled"), ref GFX.FlverShader_DebugViewWeightOfBone_WireframeOverlay_Enabled);
+                                        ImGui.Checkbox(Loc.T("Wireframe Overlay Obeys Tex Alphas"), ref GFX.FlverShader_DebugViewWeightOfBone_WireframeOverlay_ObeysTextureAlphas);
                                         ImGui.PushItemWidth(OSD.DefaultItemWidth * 2);
-                                        ImGui.DragFloat4("Wireframe Overlay Color Unweighted (RGB)", ref GFX.FlverShader_DebugViewWeightOfBone_WireframeOverlay_Color, 0.01f, 0, 1);
-                                        ImGui.DragFloat4("Wireframe Overlay Color Weighted (RGB)", ref GFX.FlverShader_DebugViewWeightOfBone_WireframeWeightColor, 0.01f, 0, 1);
+                                        ImGui.DragFloat4(Loc.T("Wireframe Overlay Color Unweighted (RGB)"), ref GFX.FlverShader_DebugViewWeightOfBone_WireframeOverlay_Color, 0.01f, 0, 1);
+                                        ImGui.DragFloat4(Loc.T("Wireframe Overlay Color Weighted (RGB)"), ref GFX.FlverShader_DebugViewWeightOfBone_WireframeWeightColor, 0.01f, 0, 1);
                                         ImGui.PopItemWidth();
-                                        ImGui.Checkbox("Hide Unweighted Geometry", ref GFX.FlverShader_DebugViewWeightOfBone_ClipUnweightedGeometry);
+                                        ImGui.Checkbox(Loc.T("Hide Unweighted Geometry"), ref GFX.FlverShader_DebugViewWeightOfBone_ClipUnweightedGeometry);
                                         ImGui.Separator();
-                                        if (Tools.SimpleClickButton("Reset to Defaults"))
+                                        if (Tools.SimpleClickButton(Loc.T("Reset to Defaults")))
                                         {
                                             GFX.FlverShader_DebugViewWeightOfBone_BaseColor = new Vector3(0, 0.25f, 0.5f);
                                             GFX.FlverShader_DebugViewWeightOfBone_WeightColor = new Vector3(1, 0, 0);
@@ -1047,7 +1048,7 @@ namespace DSAnimStudio.ImguiOSD
                                     }
                                     int curIndex = skel.DebugViewWeightOfBone_ImguiIndex + 1;
                                     int prevIndex = curIndex;
-                                    ImGui.ListBox("Bone", ref curIndex,
+                                    ImGui.ListBox(Loc.T("Bone"), ref curIndex,
                                         skel.DebugViewWeightOfBone_BoneNames,
                                         skel.DebugViewWeightOfBone_BoneNames.Length);
                                     ImGui.PopItemWidth();
@@ -1064,7 +1065,7 @@ namespace DSAnimStudio.ImguiOSD
 
                         if (mdl.AnimContainer?.Skeleton != null)
                         {
-                            if (ImGui.TreeNode($"[HKX Skeleton]##{mdl.GUID}_HkxSkeleton"))
+                            if (ImGui.TreeNode(Loc.TF("[HKX Skeleton]##{0}_HkxSkeleton", mdl.GUID)))
                             {
                                 ImGui.PushID($"{mdl.GUID}_HkxSkeleton_InsideTree");
 
@@ -1087,7 +1088,7 @@ namespace DSAnimStudio.ImguiOSD
                                     //bool boneNodeOpen = (ImGui.TreeNode(bone.Name));
                                     bool boneDrawEnabled = false;
                                     ImGui.BeginDisabled();
-                                    ImGui.TreeNodeEx($"{bone.Index}##Skeleton{skeleton.GUID}_Bone{bone.Index}_Index", ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen);
+                                    ImGui.TreeNodeEx(Loc.TF("{0}##Skeleton{1}_Bone{2}_Index", bone.Index, skeleton.GUID, bone.Index), ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen);
                                     ImGui.EndDisabled();
                                     ImGui.SameLine();
                                     ImGui.Selectable(bone.Name, ref boneDrawEnabled);
@@ -1124,18 +1125,18 @@ namespace DSAnimStudio.ImguiOSD
                             }
                         }
 
-                        if (ImGui.TreeNode("[Skeleton Debug]"))
+                        if (ImGui.TreeNode(Loc.T("[Skeleton Debug]")))
                         {
                             if (mdl.SkeletonFlver != null)
                             {
-                                ImGui.InputFloat($"Min###Mdl_{mdl.GUID}_HkxSkelToHkxAnimWeight_Min",
+                                ImGui.InputFloat(Loc.TF("Min###Mdl_{0}_HkxSkelToHkxAnimWeight_Min", mdl.GUID),
                                     ref debug_HkxSkelToHkxAnimWeight_min);
                                 
-                                ImGui.InputFloat($"Max###Mdl_{mdl.GUID}_HkxSkelToHkxAnimWeight_Max",
+                                ImGui.InputFloat(Loc.TF("Max###Mdl_{0}_HkxSkelToHkxAnimWeight_Max", mdl.GUID),
                                     ref debug_HkxSkelToHkxAnimWeight_max);
                                 
                                 float animWeight = mdl.AnimContainer.DebugAnimWeight;
-                                ImGui.SliderFloat($"HKX Skel -> HKX Anim Weight###Mdl_{mdl.GUID}_HkxSkelToHkxAnimWeight", ref animWeight, debug_HkxSkelToHkxAnimWeight_min, debug_HkxSkelToHkxAnimWeight_max);
+                                ImGui.SliderFloat(Loc.TF("HKX Skel -> HKX Anim Weight###Mdl_{0}_HkxSkelToHkxAnimWeight", mdl.GUID), ref animWeight, debug_HkxSkelToHkxAnimWeight_min, debug_HkxSkelToHkxAnimWeight_max);
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 if (animWeight != mdl.AnimContainer.DebugAnimWeight)
                                 {
@@ -1144,22 +1145,22 @@ namespace DSAnimStudio.ImguiOSD
                                 }
 
                                 float animWeight2 = mdl.DebugAnimWeight_Deprecated;
-                                ImGui.SliderFloat($"FLVER Skel -> HKX Skel Weight###Mdl_{mdl.GUID}_FlverSkelToHkxSkelWeight", ref animWeight2, debug_HkxSkelToHkxAnimWeight_min, debug_HkxSkelToHkxAnimWeight_max);
+                                ImGui.SliderFloat(Loc.TF("FLVER Skel -> HKX Skel Weight###Mdl_{0}_FlverSkelToHkxSkelWeight", mdl.GUID), ref animWeight2, debug_HkxSkelToHkxAnimWeight_min, debug_HkxSkelToHkxAnimWeight_max);
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 mdl.DebugAnimWeight_Deprecated = animWeight2;
 
                                 bool bind = mdl.EnableSkinning;
-                                ImGui.Checkbox($"Enable FLVER Skel -> HKX Skel###Mdl_{mdl.GUID}_EnableFlverSkelToHkxSkel", ref bind);
+                                ImGui.Checkbox(Loc.TF("Enable FLVER Skel -> HKX Skel###Mdl_{0}_EnableFlverSkelToHkxSkel", mdl.GUID), ref bind);
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 mdl.EnableSkinning = bind;
                                 
                                 
                                 ImGui.Separator();
 
-                                ImGui.Checkbox($"Enable Bone Glue Joints###Mdl_{mdl.GUID}_EnableBoneGluers", ref mdl.EnableBoneGluers);
+                                ImGui.Checkbox(Loc.TF("Enable Bone Glue Joints###Mdl_{0}_EnableBoneGluers", mdl.GUID), ref mdl.EnableBoneGluers);
                                 anyFieldFocused |= ImGui.IsItemActive();
 
-                                ImGui.Checkbox($"Enable Skeleton Mappers###Mdl_{mdl.GUID}_EnableSkeletonMappers", ref mdl.EnableSkeletonMappers);
+                                ImGui.Checkbox(Loc.TF("Enable Skeleton Mappers###Mdl_{0}_EnableSkeletonMappers", mdl.GUID), ref mdl.EnableSkeletonMappers);
                                 anyFieldFocused |= ImGui.IsItemActive();
                                 
                                 
@@ -1173,15 +1174,15 @@ namespace DSAnimStudio.ImguiOSD
                                     if (skel != null)
                                     {
                                         if (ImGui.TreeNode(
-                                                $"[{skelKey} Bone Weights]###Mdl_{mdl.GUID}_BoneWeightNode_{skelKey}"))
+                                                Loc.TF("[{0} Bone Weights]###Mdl_{1}_BoneWeightNode_{2}", skelKey, mdl.GUID, skelKey)))
                                         {
                                             ImGui.PushItemWidth(256);
                                             float namesWidth = skel.ImGuiDebugWeightListNameWidth;
                                             float barWidth = skel.ImGuiDebugWeightListBarWidth;
-                                            ImGui.SliderFloat($"Bone Name Width###Mdl_{mdl.GUID}_boneNameWidth_{skelKey}", ref namesWidth, 0, 1000);
+                                            ImGui.SliderFloat(Loc.TF("Bone Name Width###Mdl_{0}_boneNameWidth_{1}", mdl.GUID, skelKey), ref namesWidth, 0, 1000);
                                             if (namesWidth < 0)
                                                 namesWidth = 0;
-                                            ImGui.SliderFloat($"Weight Bar Width###Mdl_{mdl.GUID}_weightBarWidth_{skelKey}", ref barWidth, 0, 1000);
+                                            ImGui.SliderFloat(Loc.TF("Weight Bar Width###Mdl_{0}_weightBarWidth_{1}", mdl.GUID, skelKey), ref barWidth, 0, 1000);
                                             if (barWidth < 0)
                                                 barWidth = 0;
                                             skel.ImGuiDebugWeightListNameWidth = namesWidth;
@@ -1189,9 +1190,9 @@ namespace DSAnimStudio.ImguiOSD
 
                                             ImGui.Separator();
 
-                                            bool setAllWeightsButton = Tools.SimpleClickButton($"Click To Set All Weights To:##Mdl_{mdl.GUID}_SetAllWeightsTo_Button");
+                                            bool setAllWeightsButton = Tools.SimpleClickButton(Loc.TF("Click To Set All Weights To:##Mdl_{0}_SetAllWeightsTo_Button", mdl.GUID));
                                             //ImGui.SameLine();
-                                            ImGui.SliderFloat($"##Mdl_{mdl.GUID}_SetAllWeightsTo_Slider", ref skel.Debug_SetAllWeightsTo_Slider, 0, 1);
+                                            ImGui.SliderFloat(Loc.TF("##Mdl_{0}_SetAllWeightsTo_Slider", mdl.GUID), ref skel.Debug_SetAllWeightsTo_Slider, 0, 1);
                                             if (setAllWeightsButton)
                                             {
                                                 for (int boneIndex = 0; boneIndex < skel.Bones.Count; boneIndex++)
@@ -1200,7 +1201,7 @@ namespace DSAnimStudio.ImguiOSD
                                                 }
                                             }
 
-                                            bool enableAllTogglesButton = Tools.SimpleClickButton($"Click To Enable All Bone Toggles##Mdl_{mdl.GUID}_EnableAllToggles_Button");
+                                            bool enableAllTogglesButton = Tools.SimpleClickButton(Loc.TF("Click To Enable All Bone Toggles##Mdl_{0}_EnableAllToggles_Button", mdl.GUID));
                                             if (enableAllTogglesButton)
                                             {
                                                 for (int boneIndex = 0; boneIndex < skel.Bones.Count; boneIndex++)
@@ -1212,7 +1213,7 @@ namespace DSAnimStudio.ImguiOSD
                                                 }
                                             }
 
-                                            bool disableAllTogglesButton = Tools.SimpleClickButton($"Click To Disable All Bone Toggles##Mdl_{mdl.GUID}_DisableAllToggles_Button");
+                                            bool disableAllTogglesButton = Tools.SimpleClickButton(Loc.TF("Click To Disable All Bone Toggles##Mdl_{0}_DisableAllToggles_Button", mdl.GUID));
                                             if (disableAllTogglesButton)
                                             {
                                                 for (int boneIndex = 0; boneIndex < skel.Bones.Count; boneIndex++)
@@ -1227,9 +1228,9 @@ namespace DSAnimStudio.ImguiOSD
                                             ImGui.Separator();
 
 
-                                            bool setAllWeightsButton_Translation = Tools.SimpleClickButton($"Click To Set All Weights To (Translation):##Mdl_{mdl.GUID}_SetAllWeightsTo_Button__Translation");
+                                            bool setAllWeightsButton_Translation = Tools.SimpleClickButton(Loc.TF("Click To Set All Weights To (Translation):##Mdl_{0}_SetAllWeightsTo_Button__Translation", mdl.GUID));
                                             //ImGui.SameLine();
-                                            ImGui.SliderFloat($"##Mdl_{mdl.GUID}_SetAllWeightsTo_Slider__Translation", ref skel.Debug_SetAllWeightsTo_Translation_Slider, 0, 1);
+                                            ImGui.SliderFloat(Loc.TF("##Mdl_{0}_SetAllWeightsTo_Slider__Translation", mdl.GUID), ref skel.Debug_SetAllWeightsTo_Translation_Slider, 0, 1);
                                             if (setAllWeightsButton_Translation)
                                             {
                                                 for (int boneIndex = 0; boneIndex < skel.Bones.Count; boneIndex++)
@@ -1241,9 +1242,9 @@ namespace DSAnimStudio.ImguiOSD
                                             ImGui.Separator();
 
 
-                                            bool setAllWeightsButton_Rotation = Tools.SimpleClickButton($"Click To Set All Weights To (Rotation):##Mdl_{mdl.GUID}_SetAllWeightsTo_Button__Rotation");
+                                            bool setAllWeightsButton_Rotation = Tools.SimpleClickButton(Loc.TF("Click To Set All Weights To (Rotation):##Mdl_{0}_SetAllWeightsTo_Button__Rotation", mdl.GUID));
                                             //ImGui.SameLine();
-                                            ImGui.SliderFloat($"##Mdl_{mdl.GUID}_SetAllWeightsTo_Slider__Rotation", ref skel.Debug_SetAllWeightsTo_Rotation_Slider, 0, 1);
+                                            ImGui.SliderFloat(Loc.TF("##Mdl_{0}_SetAllWeightsTo_Slider__Rotation", mdl.GUID), ref skel.Debug_SetAllWeightsTo_Rotation_Slider, 0, 1);
                                             if (setAllWeightsButton_Rotation)
                                             {
                                                 for (int boneIndex = 0; boneIndex < skel.Bones.Count; boneIndex++)
@@ -1253,9 +1254,9 @@ namespace DSAnimStudio.ImguiOSD
                                             }
                                             ImGui.Separator();
 
-                                            bool setAllWeightsButton_Scale = Tools.SimpleClickButton($"Click To Set All Weights To (Scale):##Mdl_{mdl.GUID}_SetAllWeightsTo_Button__Scale");
+                                            bool setAllWeightsButton_Scale = Tools.SimpleClickButton(Loc.TF("Click To Set All Weights To (Scale):##Mdl_{0}_SetAllWeightsTo_Button__Scale", mdl.GUID));
                                             //ImGui.SameLine();
-                                            ImGui.SliderFloat($"##Mdl_{mdl.GUID}_SetAllWeightsTo_Slider__Scale", ref skel.Debug_SetAllWeightsTo_Scale_Slider, 0, 1);
+                                            ImGui.SliderFloat(Loc.TF("##Mdl_{0}_SetAllWeightsTo_Slider__Scale", mdl.GUID), ref skel.Debug_SetAllWeightsTo_Scale_Slider, 0, 1);
                                             if (setAllWeightsButton_Scale)
                                             {
                                                 for (int boneIndex = 0; boneIndex < skel.Bones.Count; boneIndex++)
@@ -1266,9 +1267,9 @@ namespace DSAnimStudio.ImguiOSD
 
                                             ImGui.Separator();
 
-                                            bool setDebugMultsButton = Tools.SimpleClickButton($"Click To Set All Debug Mults:##Mdl_{mdl.GUID}_SetDebugMults_Button");
+                                            bool setDebugMultsButton = Tools.SimpleClickButton(Loc.TF("Click To Set All Debug Mults:##Mdl_{0}_SetDebugMults_Button", mdl.GUID));
                                             //ImGui.SameLine();
-                                            ImGui.SliderFloat($"##Mdl_{mdl.GUID}_SetDebugMults_Slider", ref skel.Debug_SetDebugMults_Slider, 0, 1);
+                                            ImGui.SliderFloat(Loc.TF("##Mdl_{0}_SetDebugMults_Slider", mdl.GUID), ref skel.Debug_SetDebugMults_Slider, 0, 1);
                                             if (setDebugMultsButton)
                                             {
                                                 for (int boneIndex = 0; boneIndex < skel.Bones.Count; boneIndex++)
@@ -1279,9 +1280,9 @@ namespace DSAnimStudio.ImguiOSD
 
                                             ImGui.Separator();
 
-                                            bool setDebugMultsButton_Translation = Tools.SimpleClickButton($"Click To Set All Debug Mults (Translation):##Mdl_{mdl.GUID}_SetDebugMults_Button__Translation");
+                                            bool setDebugMultsButton_Translation = Tools.SimpleClickButton(Loc.TF("Click To Set All Debug Mults (Translation):##Mdl_{0}_SetDebugMults_Button__Translation", mdl.GUID));
                                             //ImGui.SameLine();
-                                            ImGui.SliderFloat($"##Mdl_{mdl.GUID}_SetDebugMults_Slider__Translation", ref skel.Debug_SetDebugMults_Translation_Slider, 0, 1);
+                                            ImGui.SliderFloat(Loc.TF("##Mdl_{0}_SetDebugMults_Slider__Translation", mdl.GUID), ref skel.Debug_SetDebugMults_Translation_Slider, 0, 1);
                                             if (setDebugMultsButton_Translation)
                                             {
                                                 for (int boneIndex = 0; boneIndex < skel.Bones.Count; boneIndex++)
@@ -1292,9 +1293,9 @@ namespace DSAnimStudio.ImguiOSD
 
                                             ImGui.Separator();
 
-                                            bool setDebugMultsButton_Rotation = Tools.SimpleClickButton($"Click To Set All Debug Mults (Rotation):##Mdl_{mdl.GUID}_SetDebugMults_Button__Rotation");
+                                            bool setDebugMultsButton_Rotation = Tools.SimpleClickButton(Loc.TF("Click To Set All Debug Mults (Rotation):##Mdl_{0}_SetDebugMults_Button__Rotation", mdl.GUID));
                                             //ImGui.SameLine();
-                                            ImGui.SliderFloat($"##Mdl_{mdl.GUID}_SetDebugMults_Slider__Rotation", ref skel.Debug_SetDebugMults_Rotation_Slider, 0, 1);
+                                            ImGui.SliderFloat(Loc.TF("##Mdl_{0}_SetDebugMults_Slider__Rotation", mdl.GUID), ref skel.Debug_SetDebugMults_Rotation_Slider, 0, 1);
                                             if (setDebugMultsButton_Rotation)
                                             {
                                                 for (int boneIndex = 0; boneIndex < skel.Bones.Count; boneIndex++)
@@ -1307,9 +1308,9 @@ namespace DSAnimStudio.ImguiOSD
 
                                             ImGui.Separator();
 
-                                            bool setDebugMultsButton_Scale = Tools.SimpleClickButton($"Click To Set All Debug Mults (Scale):##Mdl_{mdl.GUID}_SetDebugMults_Button__Scale");
+                                            bool setDebugMultsButton_Scale = Tools.SimpleClickButton(Loc.TF("Click To Set All Debug Mults (Scale):##Mdl_{0}_SetDebugMults_Button__Scale", mdl.GUID));
                                             //ImGui.SameLine();
-                                            ImGui.SliderFloat($"##Mdl_{mdl.GUID}_SetDebugMults_Slider__Scale", ref skel.Debug_SetDebugMults_Scale_Slider, 0.05f, 1);
+                                            ImGui.SliderFloat(Loc.TF("##Mdl_{0}_SetDebugMults_Slider__Scale", mdl.GUID), ref skel.Debug_SetDebugMults_Scale_Slider, 0.05f, 1);
                                             if (setDebugMultsButton_Scale)
                                             {
                                                 //if (skel.Debug_SetDebugMults_Scale_Slider < 0.05f)
@@ -1330,7 +1331,7 @@ namespace DSAnimStudio.ImguiOSD
                                                 var bone = skel.Bones[boneIndex];
                                                 for (int d = 0; d < bone.NestDeepness; d++)
                                                 {
-                                                    ImGui.Text(" ");
+                                                    ImGui.Text(Loc.T(" "));
                                                     ImGui.SameLine();
                                                 }
 
@@ -1343,11 +1344,11 @@ namespace DSAnimStudio.ImguiOSD
                                                 //ImGui.PushItemWidth(namesWidth);
 
                                                 ImGui.BeginDisabled();
-                                                ImGui.TreeNodeEx($"{bone.Index}##Skeleton{skelKey}_Bone{bone.Index}_Index", ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen);
+                                                ImGui.TreeNodeEx(Loc.TF("{0}##Skeleton{1}_Bone{2}_Index", bone.Index, skelKey, bone.Index), ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen);
                                                 ImGui.EndDisabled();
                                                 ImGui.SameLine();
 
-                                                ImGui.Selectable($"{bone.Name}###Mdl_{mdl.GUID}_boneWeightCheckbox_{skelKey}_{bone.Name}", ref weightEnabled, ImGuiSelectableFlags.None, new Vector2(namesWidth, ImGui.GetTextLineHeight()));
+                                                ImGui.Selectable(Loc.TF("{0}###Mdl_{1}_boneWeightCheckbox_{2}_{3}", bone.Name, mdl.GUID, skelKey, bone.Name), ref weightEnabled, ImGuiSelectableFlags.None, new Vector2(namesWidth, ImGui.GetTextLineHeight()));
                                                 if (ImGui.IsItemHovered())
                                                 {
                                                     skel.DebugDrawTransformOfFlverBoneIndex = boneIndex;
@@ -1376,7 +1377,7 @@ namespace DSAnimStudio.ImguiOSD
                                                 float boneWeight = bone.SetWeight;
                                                 ImGui.PushItemWidth(barWidth);
                                                 ImGui.SliderFloat(
-                                                    $"###Mdl_{mdl.GUID}_boneWeight_{skelKey}_{bone.Name}",
+                                                    Loc.TF("###Mdl_{0}_boneWeight_{1}_{2}", mdl.GUID, skelKey, bone.Name),
                                                     ref boneWeight, 0, 1, "%.2f");
                                                 anyFieldFocused |= ImGui.IsItemActive();
                                                 ImGui.PopItemWidth();
@@ -1420,16 +1421,16 @@ namespace DSAnimStudio.ImguiOSD
                             mdl.DummyPolyMan.GlobalForceDummyPolyIDVisible = -2;
                     }
 
-                    if (ImGui.TreeNode("Models"))
+                    if (ImGui.TreeNode(Loc.T("Models")))
                     {
-                        GFX.HideFLVERs = !MenuBar.CheckboxDual("Render Models", !GFX.HideFLVERs);
+                        GFX.HideFLVERs = !MenuBar.CheckboxDual(Loc.T("Render Models"), !GFX.HideFLVERs);
 
                         ImGui.Separator();
 
                         bool clearMaterialSoloEnabled = DSAnimStudio.zzz_DocumentManager.CurrentDocument.Scene.AnyMaterialSoloVisible();
                         if (!clearMaterialSoloEnabled)
                             ImGuiDebugDrawer.PushDisabled();
-                        bool clearMaterialSoloClicked = Tools.SimpleClickButton("Clear current \"Is The ONLY One Visible\" option set.\n(In case you forgot which material you set it on)");
+                        bool clearMaterialSoloClicked = Tools.SimpleClickButton(Loc.T("Clear current \"Is The ONLY One Visible\" option set.\n(In case you forgot which material you set it on)"));
                         if (!clearMaterialSoloEnabled)
                             ImGuiDebugDrawer.PopDisabled();
                         if (clearMaterialSoloClicked)
@@ -1447,7 +1448,7 @@ namespace DSAnimStudio.ImguiOSD
                             var mdlGUID = mdl.GUID;
                             bool mdlTreeNode = false;
 
-                            ImGui.Checkbox($"###Model[{mdlGUID}]_IsVisibleByUserCheckboxForNode", ref mdl.IsVisibleByUser);
+                            ImGui.Checkbox(Loc.TF("###Model[{0}]_IsVisibleByUserCheckboxForNode", mdlGUID), ref mdl.IsVisibleByUser);
 
                             
 
@@ -1469,9 +1470,9 @@ namespace DSAnimStudio.ImguiOSD
                                     nodeName = $"{modelKindName}<{nodeName}>";
 
                                 if (nestLevel == 0 && !isMainModelOrDescendant)
-                                    nodeName = $"#INACTIVE# {nodeName}";
+                                    nodeName = Loc.T("#INACTIVE# ") + nodeName;
 
-                                mdlTreeNode = ImGui.TreeNode($"{nodeName}###Model[{mdlGUID}]_Tree");
+                                mdlTreeNode = ImGui.TreeNode(Loc.TF("{0}###Model[{1}]_Tree", nodeName, mdlGUID));
 
                                 if (ImGui.IsItemHovered())
                                 {
@@ -1493,19 +1494,19 @@ namespace DSAnimStudio.ImguiOSD
                                     
                                     if (mdl.IsHiddenByAbsorpPos)
                                     {
-                                        ImGui.Text("Note: Model is hidden by WepAbsorpPosParam.");
+                                        ImGui.Text(Loc.T("Note: Model is hidden by WepAbsorpPosParam."));
                                     }
 
                                     if (mdl.IsHiddenByTae)
                                     {
-                                        ImGui.Text("Note: Model is hidden by weapon hide TAE events in graph.");
+                                        ImGui.Text(Loc.T("Note: Model is hidden by weapon hide TAE events in graph."));
                                     }
 
-                                    ImGui.Checkbox($"Debug - Force Model Visible No Matter What###Model[{mdlGUID}]_IsDebug_ForceShowNoMatterWhat", ref mdl.Debug_ForceShowNoMatterWhat);
+                                    ImGui.Checkbox(Loc.TF("Debug - Force Model Visible No Matter What###Model[{0}]_IsDebug_ForceShowNoMatterWhat", mdlGUID), ref mdl.Debug_ForceShowNoMatterWhat);
 
                                     ImGui.PushItemWidth(256);
                                     mdl.DebugOpacity =
-                                        MenuBar.FloatSlider($"Opacity###Model[{mdlGUID}]_DebugOpacity", mdl.DebugOpacity * 100, 0, 100, "%.2f%%", 0, 100) / 100f;
+                                        MenuBar.FloatSlider(Loc.TF("Opacity###Model[{0}]_DebugOpacity", mdlGUID), mdl.DebugOpacity * 100, 0, 100, "%.2f%%", 0, 100) / 100f;
                                     ImGui.PopItemWidth();
                                     ImGui.Separator();
 
@@ -1514,7 +1515,7 @@ namespace DSAnimStudio.ImguiOSD
                                     if (nestLevel == 0)
                                     {
                                         bool isMainModelOrDescendant_NewVal = isMainModelOrDescendant;
-                                        ImGui.Checkbox($"IS ACTIVE ROOT MODEL###Model[{mdlGUID}]_IsMainModel", ref isMainModelOrDescendant_NewVal);
+                                        ImGui.Checkbox(Loc.TF("IS ACTIVE ROOT MODEL###Model[{0}]_IsMainModel", mdlGUID), ref isMainModelOrDescendant_NewVal);
                                         //var isMainModel_NewVal = MenuBar.CheckboxDual($"Active:###Model{mdlIndex}_IsMainModel", isMainModel);
                                         if (isMainModelOrDescendant_NewVal && !isMainModelOrDescendant)
                                         {
@@ -1559,7 +1560,7 @@ namespace DSAnimStudio.ImguiOSD
                                         foreach (var kvp in maskDict)
                                         {
                                             if (kvp.Key >= 0)
-                                                mdl.DefaultDrawMask[kvp.Key] = MenuBar.CheckboxDual($"Mask {kvp.Key}###Model[{mdlGUID}]_Mask{kvp.Key}", mdl.DefaultDrawMask[kvp.Key]);
+                                                mdl.DefaultDrawMask[kvp.Key] = MenuBar.CheckboxDual(Loc.TF("Mask {0}###Model[{1}]_Mask{2}", kvp.Key, mdlGUID, kvp.Key), mdl.DefaultDrawMask[kvp.Key]);
                                         }
 
                                         //ImGui.Separator();
@@ -1581,14 +1582,14 @@ namespace DSAnimStudio.ImguiOSD
                                     
                                         if (mdl.AnimContainer != null)
                                         {
-                                            if (ImGui.TreeNode("[Animations(HKX)]"))
+                                            if (ImGui.TreeNode(Loc.T("[Animations(HKX)]")))
                                             {
                                                 var animNameMap = mdl.AnimContainer.GetAnimationNameMap();
                                                 string[] animNames = animNameMap.Values.ToArray();
                                                 List<SplitAnimID> animIDs = animNameMap.Keys.ToList();
                                                 int curItem = mdl.AnimContainer.CurrentAnimationID == null ? -1 : animIDs.IndexOf(mdl.AnimContainer.CurrentAnimationID);
                                                 int prevSelItem = curItem;
-                                                ImGui.ListBox("Animation(HKX)", ref curItem, animNames, animNames.Length);
+                                                ImGui.ListBox(Loc.T("Animation(HKX)"), ref curItem, animNames, animNames.Length);
                                                 if (curItem != prevSelItem)
                                                 {
                                                     mdl.AnimContainer.RequestAnim(NewAnimSlot.SlotTypes.Base, curItem >= 0 ? animIDs[curItem] : SplitAnimID.Invalid, true, 1, 0, 0);
@@ -1605,7 +1606,7 @@ namespace DSAnimStudio.ImguiOSD
                                     
                                         if (mdl.AnimContainer != null && mdl.TaeManager_ForParts != null)
                                         {
-                                            if (ImGui.TreeNode("[Animations(TAE)]"))
+                                            if (ImGui.TreeNode(Loc.T("[Animations(TAE)]")))
                                             {
                                                 if (mdl.TaeManager_ForParts.TaeCategory != null)
                                                 {
@@ -1616,7 +1617,7 @@ namespace DSAnimStudio.ImguiOSD
                                                         animListCopy.IndexOf(
                                                             mdl.TaeManager_ForParts.Anim);
                                                     int prevSelItem = curItem;
-                                                    ImGui.ListBox("Animation(TAE)", ref curItem, animNames,
+                                                    ImGui.ListBox(Loc.T("Animation(TAE)"), ref curItem, animNames,
                                                         animNames.Length);
                                                     if (curItem >= 0 && curItem != prevSelItem)
                                                     {
@@ -1627,7 +1628,7 @@ namespace DSAnimStudio.ImguiOSD
                                                 }
                                                 else
                                                 {
-                                                    ImGui.Text("TAE Animation Container Null");
+                                                    ImGui.Text(Loc.T("TAE Animation Container Null"));
                                                 }
 
                                                 ImGui.TreePop();
@@ -1720,7 +1721,7 @@ namespace DSAnimStudio.ImguiOSD
                                 }
                                 else
                                 {
-                                    ImGui.Text("Model file is empty.");
+                                    ImGui.Text(Loc.T("Model file is empty."));
                                 }
 
                                 ImGui.TreePop();
@@ -1736,7 +1737,7 @@ namespace DSAnimStudio.ImguiOSD
                         ImGui.TreePop();
                     }
 
-                    if (ImGui.TreeNode("Helpers"))
+                    if (ImGui.TreeNode(Loc.T("Helpers")))
                     {
                         lock (DBG._lock_DebugDrawEnablers)
                         {

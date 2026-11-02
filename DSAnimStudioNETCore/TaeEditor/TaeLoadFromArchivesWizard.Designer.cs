@@ -1,4 +1,5 @@
-﻿namespace DSAnimStudio.TaeEditor
+﻿using DSAnimStudio.Localization;
+namespace DSAnimStudio.TaeEditor
 {
     partial class TaeLoadFromArchivesWizard
     {
@@ -77,7 +78,7 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(115, 15);
             label1.TabIndex = 0;
-            label1.Text = "1. Choose Game EXE";
+            label1.Text = Loc.T("1. Choose Game EXE");
             // 
             // textBoxPathInterroot
             // 
@@ -169,7 +170,7 @@
             labelStep3A.Name = "labelStep3A";
             labelStep3A.Size = new System.Drawing.Size(112, 15);
             labelStep3A.TabIndex = 9;
-            labelStep3A.Text = "3a. Choose ANIBND";
+            labelStep3A.Text = Loc.T("3a. Choose ANIBND");
             // 
             // labelStep3B
             // 
@@ -178,7 +179,7 @@
             labelStep3B.Name = "labelStep3B";
             labelStep3B.Size = new System.Drawing.Size(117, 15);
             labelStep3B.TabIndex = 10;
-            labelStep3B.Text = "3b. Choose CHRBND";
+            labelStep3B.Text = Loc.T("3b. Choose CHRBND");
             // 
             // buttonHelpSaveLoose
             // 
@@ -227,7 +228,7 @@
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(156, 15);
             label4.TabIndex = 15;
-            label4.Text = "4. Choose Workspace Folder";
+            label4.Text = Loc.T("4. Choose Workspace Folder");
             // 
             // buttonCreateProject
             // 
@@ -237,7 +238,7 @@
             buttonCreateProject.Name = "buttonCreateProject";
             buttonCreateProject.Size = new System.Drawing.Size(119, 23);
             buttonCreateProject.TabIndex = 16;
-            buttonCreateProject.Text = "Create Project";
+            buttonCreateProject.Text = Loc.T("Create Project");
             buttonCreateProject.UseVisualStyleBackColor = true;
             buttonCreateProject.Click += buttonCreateProject_Click;
             // 
@@ -252,7 +253,7 @@
             labelLoadingText.Name = "labelLoadingText";
             labelLoadingText.Size = new System.Drawing.Size(223, 23);
             labelLoadingText.TabIndex = 17;
-            labelLoadingText.Text = "Decrypting archive headers, please wait...";
+            labelLoadingText.Text = Loc.T("Decrypting archive headers, please wait...");
             labelLoadingText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // progressBarLoading
@@ -274,7 +275,7 @@
             checkBoxLoadLooseParams.Name = "checkBoxLoadLooseParams";
             checkBoxLoadLooseParams.Size = new System.Drawing.Size(151, 19);
             checkBoxLoadLooseParams.TabIndex = 19;
-            checkBoxLoadLooseParams.Text = "Load loose GameParam";
+            checkBoxLoadLooseParams.Text = Loc.T("Load loose GameParam");
             checkBoxLoadLooseParams.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -296,7 +297,7 @@
             groupBox1.Size = new System.Drawing.Size(920, 144);
             groupBox1.TabIndex = 20;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Options";
+            groupBox1.Text = Loc.T("Options");
             // 
             // buttonHelpDisableInterrootDCX
             // 
@@ -315,7 +316,7 @@
             checkBoxDisableInterrootDCX.Name = "checkBoxDisableInterrootDCX";
             checkBoxDisableInterrootDCX.Size = new System.Drawing.Size(139, 19);
             checkBoxDisableInterrootDCX.TabIndex = 28;
-            checkBoxDisableInterrootDCX.Text = "Disable Interroot DCX";
+            checkBoxDisableInterrootDCX.Text = Loc.T("Disable Interroot DCX");
             checkBoxDisableInterrootDCX.UseVisualStyleBackColor = true;
             // 
             // buttonClearModEngineDir
@@ -346,7 +347,7 @@
             checkBoxCfgLoadUnpackedGameFiles.Name = "checkBoxCfgLoadUnpackedGameFiles";
             checkBoxCfgLoadUnpackedGameFiles.Size = new System.Drawing.Size(168, 19);
             checkBoxCfgLoadUnpackedGameFiles.TabIndex = 25;
-            checkBoxCfgLoadUnpackedGameFiles.Text = "Load Unpacked Game Files";
+            checkBoxCfgLoadUnpackedGameFiles.Text = Loc.T("Load Unpacked Game Files");
             checkBoxCfgLoadUnpackedGameFiles.UseVisualStyleBackColor = true;
             // 
             // buttonHelpCfgLoadLooseGameParam
@@ -396,7 +397,7 @@
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(220, 15);
             label5.TabIndex = 20;
-            label5.Text = "ModEngine '/mod/' directory (optional):";
+            label5.Text = Loc.T("ModEngine '/mod/' directory (optional):");
             // 
             // buttonCancel
             // 
@@ -406,7 +407,7 @@
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new System.Drawing.Size(84, 23);
             buttonCancel.TabIndex = 21;
-            buttonCancel.Text = "Cancel";
+            buttonCancel.Text = Loc.T("Cancel");
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;
             // 
@@ -420,7 +421,7 @@
             comboBoxFileType.Name = "comboBoxFileType";
             comboBoxFileType.Size = new System.Drawing.Size(638, 23);
             comboBoxFileType.TabIndex = 22;
-            comboBoxFileType.Text = "Character (\"/chr/\")";
+            comboBoxFileType.Text = Loc.T("Character (\"/chr/\")");
             comboBoxFileType.SelectedIndexChanged += comboBoxFileType_SelectedIndexChanged;
             // 
             // label6
@@ -430,7 +431,7 @@
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(108, 15);
             label6.TabIndex = 23;
-            label6.Text = "2. Choose File Type";
+            label6.Text = Loc.T("2. Choose File Type");
             // 
             // buttonHelpFileType
             // 

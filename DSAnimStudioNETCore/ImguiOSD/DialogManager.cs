@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public static class DialogManager
@@ -86,7 +87,7 @@ namespace DSAnimStudio.ImguiOSD
         public static void DialogOK(string title, string text)
         {
             AskForMultiChoice(title ?? "Notice", text, null, allowedResults: Dialog.ResultTypes.Accept | Dialog.ResultTypes.Cancel,
-                inputFlags: Dialog.InputFlag.EnterKeyToAccept | Dialog.InputFlag.EscapeKeyToCancel | Dialog.InputFlag.TitleBarXToCancel,  "OK");
+                inputFlags: Dialog.InputFlag.EnterKeyToAccept | Dialog.InputFlag.EscapeKeyToCancel | Dialog.InputFlag.TitleBarXToCancel,  Loc.T("OK"));
         }
 
         public static void ShowWelcome()
@@ -152,8 +153,8 @@ namespace DSAnimStudio.ImguiOSD
 
                             if (proj.SAFE_GetAnimCategoriesCount() <= 1)
                             {
-                                DialogOK("Can't Delete Last Animation Category",
-                                    "Cannot delete the only animation category remaining in the project.");
+                                DialogOK(Loc.T("Can't Delete Last Animation Category"),
+                                    Loc.T("Cannot delete the only animation category remaining in the project."));
                             }
                             else
                             {
@@ -165,7 +166,7 @@ namespace DSAnimStudio.ImguiOSD
                                     Tae.NextAnim(shiftPressed: false, ctrlPressed: true); 
                                     // Delete category
                                     proj.SAFE_RemoveAnimCategory(cate);
-                                }, actionDescription: $"Delete animation category {category.CategoryID}");
+                                }, actionDescription: Loc.TF("Delete animation category {0}", category.CategoryID));
 
                                 
 
@@ -195,7 +196,7 @@ namespace DSAnimStudio.ImguiOSD
                                 //else
                                 //    anim.Header.AnimFileName = dlg.TaeAnimName;
                                 //anim.Info.CustomColor = dlg.TaeAnimCustomColor;
-                            }, actionDescription: $"Edit animation category {category.CategoryID} properties");
+                            }, actionDescription: Loc.TF("Edit animation category {0} properties", category.CategoryID));
 
                             
                             category.SAFE_SetIsModified(true);
@@ -247,7 +248,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                 //anim.Info.CustomColor = dlg.TaeAnimCustomColor;
                                 
-                            }, actionDescription: $"Change animation {anim.SplitID.GetFormattedIDString(proj)} properties");
+                            }, actionDescription: Loc.TF("Change animation {0} properties", anim.SplitID.GetFormattedIDString(proj)));
                             anim.SAFE_SetIsModified(true);
                             Tae.RecreateAnimList();
                             Tae.UpdateSelectedTaeAnimInfoText();
@@ -274,7 +275,7 @@ namespace DSAnimStudio.ImguiOSD
                         {
                             //anim.ActionTracks[trackIndex] = dlg.TrackCopy;
                             anim.SAFE_SetActionTrackAtIndex(trackIndex, dlg.TrackCopy);
-                        }, actionDescription: $"Changed action track {trackIndex} properties");
+                        }, actionDescription: Loc.TF("Changed action track {0} properties", trackIndex));
                             
                     }
                 };
@@ -301,7 +302,7 @@ namespace DSAnimStudio.ImguiOSD
                     //else if (cancelType == Dialog.ResultTypes.Ca)
                     //    onChoose?.Invoke(true);
 
-                }, allowedResults, inputFlags, "YES", "NO");
+                }, allowedResults, inputFlags, Loc.T("YES"), Loc.T("NO"));
             }));
         }
 

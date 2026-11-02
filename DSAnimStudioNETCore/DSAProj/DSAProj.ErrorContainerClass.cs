@@ -8,6 +8,7 @@ using DSAnimStudio.ImguiOSD;
 using DSAnimStudio.TaeEditor;
 using ImGuiNET;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public partial class DSAProj
@@ -87,13 +88,13 @@ namespace DSAnimStudio
                 lock (_lock)
                 {
                     TooltipStringBuilder.Clear();
-                    TooltipStringBuilder.AppendLine($"Found {Errors.Count} error{(Errors.Count != 1 ? "s" : "")}:");
+                    TooltipStringBuilder.AppendLine(Loc.IsChinese ? Loc.TF("Found {0} errors:", Errors.Count) : $"Found {Errors.Count} error{(Errors.Count != 1 ? "s" : "")}:");
                     foreach (var er in Errors)
                     {
                         TooltipStringBuilder.AppendLine($"    -{er.ShortDescription}");
                     }
 
-                    TooltipStringBuilder.AppendLine("\nRight click for a shortcut to the error window.");
+                    TooltipStringBuilder.AppendLine("\n" + Loc.T("Right click for a shortcut to the error window."));
 
                     TooltipString = TooltipStringBuilder.ToString();
                 }
@@ -119,7 +120,7 @@ namespace DSAnimStudio
                         
                         
                         var text =
-                            $"[Category {err.SourceAnimCategory.CategoryID} -> Anim {err.SourceAnimation.SplitID.GetFormattedIDString(mainScreen.Proj)}] {err.ShortDescription}";
+                            Loc.TF("[Category {0} -> Anim {1}] {2}", err.SourceAnimCategory.CategoryID, err.SourceAnimation.SplitID.GetFormattedIDString(mainScreen.Proj), err.ShortDescription);
 
                          
                         
@@ -151,7 +152,7 @@ namespace DSAnimStudio
                         
                         ImGui.SetCursorPos(cursorPos);
                         
-                        ImGui.Selectable($"##AnimContainer_{GUID}_JumpToError_{errorIndex}"
+                        ImGui.Selectable(Loc.TF("##AnimContainer_{0}_JumpToError_{1}", GUID, errorIndex)
                             ,
                             ref selected, ImGuiSelectableFlags.SpanAllColumns, selectableSize);
                         if (selected && !prevSelected)
@@ -189,7 +190,7 @@ namespace DSAnimStudio
                     {
                         if (!input.AnyMouseButtonHeld)
                             OSD.TooltipManager_AnimationList.DoTooltipManual($"ErrorContainer{GUID}",
-                                TooltipString ?? "Invalid error info. If you see this, tell Meow about it.",
+                                TooltipString ?? Loc.T("Invalid error info. If you see this, tell Meow about it."),
                                 !RightClickMenuOpen);
 
                         if (input.RightClickUp)
@@ -204,7 +205,7 @@ namespace DSAnimStudio
                         // close popup?
                     }
                     
-                    if (ImGui.BeginPopup($"Popup{GUID}"))
+                    if (ImGui.BeginPopup(Loc.TF("Popup{0}", GUID)))
                     {
                         OSD.SetAuxFocus();
                         RightClickMenuOpen = true;
@@ -213,7 +214,7 @@ namespace DSAnimStudio
                         //    er.AddImguiRightClickEntry();
                         //}
 
-                        ImGui.MenuItem($"Open ERRORS panel");
+                        ImGui.MenuItem(Loc.TF("Open ERRORS panel"));
 
                         if (ImGui.IsItemClicked())
                         {

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public class zzz_ParamManagerIns
@@ -263,7 +264,7 @@ namespace DSAnimStudio
 
                 var thisGamesParambnd = ParamBNDs[ParentDocument.GameRoot.GameType];
                 if (thisGamesParambnd == null)
-                    ImguiOSD.DialogManager.DialogOK("Error", "Unable to load GameParam. Make sure your project directory options such as game data directory, ModEngine /mod/ path, and Load Loose Params options are all correct for your game/mod setup.");
+                    ImguiOSD.DialogManager.DialogOK(Loc.T("Error"), Loc.T("Unable to load GameParam. Make sure your project directory options such as game data directory, ModEngine /mod/ path, and Load Loose Params options are all correct for your game/mod setup."));
                 else
                 {
                     foreach (var f in ParamBNDs[ParentDocument.GameRoot.GameType].Files)
@@ -313,7 +314,7 @@ namespace DSAnimStudio
                 {
                     var thisGamesParambnd = ParamBNDs[ParentDocument.GameRoot.GameType];
                     if (thisGamesParambnd == null)
-                        ImguiOSD.DialogManager.DialogOK("Error", "Unable to load GameParam. Make sure your project directory options such as game data directory, ModEngine /mod/ path, and Load Loose Params options are all correct for your game/mod setup.");
+                        ImguiOSD.DialogManager.DialogOK(Loc.T("Error"), Loc.T("Unable to load GameParam. Make sure your project directory options such as game data directory, ModEngine /mod/ path, and Load Loose Params options are all correct for your game/mod setup."));
                     else
                     {
                         foreach (var f in ParamBNDs[ParentDocument.GameRoot.GameType].Files)
@@ -687,24 +688,8 @@ namespace DSAnimStudio
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    $"GameParam (also known as Regulation in some games) has failed to load."
-                    + "\n" + $""
-                    + "\n" + $"Ensure that:"
-                    + "\n" + $""
-                    + "\n" + $"    1) It is not corrupted"
-                    + "\n" + $""
-                    + "\n" + $"    2) (for Regulation) the editor you're using is saving in 'DCX.DFLT' format."
-                    + "\n" + $""
-                    + "\n" + $"    3) (for Regulation) The regulation key file for this game in DS Anim Studio's '/res/RegulationKeys/' folder hasn't been tampered with."
-                    + "\n" + $""
-                    + "\n" + $""
-                    + "\n" + $"!! MANY ELEMENTS OF THIS APP DO NOT FUNCTION WITH GAMEPARAM MISSING !!"
-                    + "\n" + $""
-                    + "\n" + $""
-                    + "\n" + $"Error text:"
-                    + "\n" + $""
-                    + "\n" + $"{ex.Message.ToString()}",
-                    "Critical Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Loc.TF("GameParam (also known as Regulation in some games) has failed to load.\n\nEnsure that:\n\n    1) It is not corrupted\n\n    2) (for Regulation) the editor you're using is saving in 'DCX.DFLT' format.\n\n    3) (for Regulation) The regulation key file for this game in DS Anim Studio's '/res/RegulationKeys/' folder hasn't been tampered with.\n\n\n!! MANY ELEMENTS OF THIS APP DO NOT FUNCTION WITH GAMEPARAM MISSING !!\n\n\nError text:\n\n{0}", ex.Message.ToString()),
+                    Loc.T("Critical Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
             }

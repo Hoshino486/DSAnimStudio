@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.ImguiOSD
 {
@@ -15,7 +16,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.SaveAlways;
 
-            public override string NewImguiWindowTitle => "ERRORS";
+            public override string NewImguiWindowTitle => Loc.Win("ERRORS");
             public DSAProj GetProj()
             {
                 return MainTaeScreen?.FileContainer?.Proj;

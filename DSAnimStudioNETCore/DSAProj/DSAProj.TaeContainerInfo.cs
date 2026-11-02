@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio
 {
@@ -154,14 +155,14 @@ namespace DSAnimStudio
                         }
                         else
                         {
-                            errorMsg = $"ANIBND file '{AnibndPath}' exists but is corrupted/invalid.";
+                            errorMsg = Loc.TF("ANIBND file '{0}' exists but is corrupted/invalid.", AnibndPath);
                             return false;
                         }
                         
                     }
                     else
                     {
-                        errorMsg = $"ANIBND file '{AnibndPath}' does not exist.";
+                        errorMsg = Loc.TF("ANIBND file '{0}' does not exist.", AnibndPath);
                         return false;
                     }
                 }
@@ -243,19 +244,19 @@ namespace DSAnimStudio
                             }
                             else
                             {
-                                errorMsg = $"Binder '{BinderPath}' contains no file binded to ID {BindID}";
+                                errorMsg = Loc.TF("Binder '{0}' contains no file binded to ID {1}", BinderPath, BindID);
                                 return false;
                             }
                         }
                         else
                         {
-                            errorMsg = $"Binder file '{BinderPath}' exists but is corrupted/invalid.";
+                            errorMsg = Loc.TF("Binder file '{0}' exists but is corrupted/invalid.", BinderPath);
                             return false;
                         }
                     }
                     else
                     {
-                        errorMsg = $"Binder file '{BinderPath}' does not exist.";
+                        errorMsg = Loc.TF("Binder file '{0}' does not exist.", BinderPath);
                         return false;
                     }
                     

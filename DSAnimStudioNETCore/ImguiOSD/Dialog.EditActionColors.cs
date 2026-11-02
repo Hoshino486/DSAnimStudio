@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Dialog
@@ -16,7 +17,7 @@ namespace DSAnimStudio.ImguiOSD
             public Color SelectedColor;
 
             public EditActionColors()
-                : base("Set Custom Color Of Selected Action(s)")
+                : base(Loc.T("Set Custom Color Of Selected Action(s)"))
             {
                 //CancleHandledByInheritor = true;
                 //AcceptHandledByInheritor = true;
@@ -42,7 +43,7 @@ namespace DSAnimStudio.ImguiOSD
                 }
 
                 ImGui.Separator();
-                ImGui.Button("Remove Custom Color");
+                ImGui.Button(Loc.T("Remove Custom Color"));
                 if (ImGui.IsItemClicked())
                 {
                     IsCustomColorSet = false;
@@ -52,14 +53,14 @@ namespace DSAnimStudio.ImguiOSD
 
                 ImGui.Separator();
 
-                ImGui.Button("Accept");
+                ImGui.Button(Loc.T("Accept"));
                 if (ImGui.IsItemClicked())
                 {
                     ResultType = ResultTypes.Accept;
                     Dismiss();
                 }
 
-                ImGui.Button("Cancel");
+                ImGui.Button(Loc.T("Cancel"));
                 if (ImGui.IsItemClicked())
                 {
                     ResultType = ResultTypes.Cancel;

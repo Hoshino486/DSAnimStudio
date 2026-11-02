@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TAE = SoulsAssetPipeline.Animation.TAE;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio
 {
     public class zzz_GameRootIns
@@ -414,8 +415,8 @@ namespace DSAnimStudio
         {
             Main.MainThreadLazyDispatch(() =>
             {
-                System.Windows.Forms.MessageBox.Show("Unable to determine what game this file is for. Cancelling load operation.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(Loc.T("Unable to determine what game this file is for. Cancelling load operation."),
+                    Loc.T("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             });
         }
 
@@ -1062,16 +1063,16 @@ namespace DSAnimStudio
                     IBinder checkChrbnd = ParentDocument.GameData.ReadBinder(checkChrbndPath);
                     if (checkChrbnd == null)
                     {
-                        var res = System.Windows.Forms.MessageBox.Show($"Character model '{checkChrbndPath}' does not exist. Would you like to select a different one?",
-                            "Error", System.Windows.Forms.MessageBoxButtons.YesNo);
+                        var res = System.Windows.Forms.MessageBox.Show(Loc.TF("Character model '{0}' does not exist. Would you like to select a different one?", checkChrbndPath),
+                            Loc.T("Error"), System.Windows.Forms.MessageBoxButtons.YesNo);
                         if (res == System.Windows.Forms.DialogResult.Yes)
                         {
                             var newChrbndName = ParentDocument.GameData.ShowPickInsideBndPath(" /chr/", @".*\/c\d\d\d\d.chrbnd.dcx$", modelBrowseSearchDefaultStart, $"Choose Character Model for '{anibndID}.anibnd.dcx'", defaultModelGameDataPath);
                             if (newChrbndName == null)
                             {
                                 ParentDocument.RequestClose_ForceDelete = true;
-                                System.Windows.Forms.MessageBox.Show($"No character models found. Make sure your game directory is set correctly.",
-                            "Error", System.Windows.Forms.MessageBoxButtons.OK);
+                                System.Windows.Forms.MessageBox.Show(Loc.T("No character models found. Make sure your game directory is set correctly."),
+                            Loc.T("Error"), System.Windows.Forms.MessageBoxButtons.OK);
                                 return false;
                             }
                             else
@@ -1123,7 +1124,7 @@ namespace DSAnimStudio
 
                     if (foundTaeInSelectedAnibnd)
                     {
-                        ImguiOSD.DialogManager.DialogOK("Warning", $"Warning: TimeAct data (.TAE) was found in the ANIBND matching the ID of the model you selected to load.\n" +
+                        ImguiOSD.DialogManager.DialogOK(Loc.T("Warning"), $"Warning: TimeAct data (.TAE) was found in the ANIBND matching the ID of the model you selected to load.\n" +
                             $"You should probably just load that ANIBND ('{anibndCheckName}') instead.");
                     }
                 }

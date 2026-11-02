@@ -18,6 +18,7 @@ using NVector4 = System.Numerics.Vector4;
 using NQuaternion = System.Numerics.Quaternion;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -28,7 +29,7 @@ namespace DSAnimStudio.ImguiOSD
 
             public bool IsInEditMode = true;
 
-            public override string NewImguiWindowTitle => "Animations";
+            public override string NewImguiWindowTitle => Loc.Win("Animations");
 
             public zzz_DocumentIns Document;
 
@@ -413,7 +414,7 @@ namespace DSAnimStudio.ImguiOSD
                             //Color defaultAnimationColor = adsfasdfasdf
 
                             var tree = ImGui.TreeNodeEx(
-                                $"[{category.Info.DisplayName}]###NewTaeList_TaeTreeNode_{category.CategoryID}_IDStr",
+                                Loc.TF("[{0}]###NewTaeList_TaeTreeNode_{1}_IDStr", category.Info.DisplayName, category.CategoryID),
                                 ImGuiTreeNodeFlags.OpenOnDoubleClick | ImGuiTreeNodeFlags.OpenOnArrow |
                                 ImGuiTreeNodeFlags.Framed, $"###NewTaeList_TaeTreeNode_{category.CategoryID}_DispText");
 
@@ -541,7 +542,7 @@ namespace DSAnimStudio.ImguiOSD
                                 ImGui.SetCursorPosY(ImGui.GetCursorPosY() - 12);
                                 //ImGui.SameLine();
                                 //test
-                                if (Tools.SimpleClickButton("Properties..."))
+                                if (Tools.SimpleClickButton(Loc.T("Properties...")))
                                 {
                                     MainTaeScreen.ShowDialogEditAnimCategoryProperties(category);
                                 }
@@ -549,7 +550,7 @@ namespace DSAnimStudio.ImguiOSD
                                 if (isDuplicateTaeSectionEnabled)
                                 {
                                     ImGui.SameLine();
-                                    if (Tools.SimpleClickButton("Duplicate..."))
+                                    if (Tools.SimpleClickButton(Loc.T("Duplicate...")))
                                     {
                                         MainTaeScreen.ShowDialogDuplicateToNewTaeSection(proj, category);
                                     }
@@ -678,7 +679,7 @@ namespace DSAnimStudio.ImguiOSD
                                         //ImGui.Selectable($"###NewTaeList_Tae{tae.TaeBindIndex}_Anim[{animIndex}]", ref newSelected_Left);
                                         var topCursorPos = ImGui.GetCursorPosY() + 2; //animNameCursorPos.Y;
                                         //ImGui.MenuItem($"###NewTaeList_Tae{tae.TaeBindIndex}_Anim[{animIndex}]", "shortcut", ref newSelected_Left);
-                                        ImGui.TreeNodeEx($"###NewTaeList_Tae{category.CategoryID}_Anim[{animIndex}]",
+                                        ImGui.TreeNodeEx(Loc.TF("###NewTaeList_Tae{0}_Anim[{1}]", category.CategoryID, animIndex),
                                             ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen |
                                             ImGuiTreeNodeFlags.SpanFullWidth | ImGuiTreeNodeFlags.FramePadding |
                                             ImGuiTreeNodeFlags.Framed, $" ");
@@ -756,7 +757,7 @@ namespace DSAnimStudio.ImguiOSD
 
                                             if (anim.IS_DUMMY_ANIM)
                                             {
-                                                finalAnimIDStr = "  <Empty Category>";
+                                                finalAnimIDStr = Loc.T("  <Empty Category>");
                                                 //textColor = animFileDispNameColor;
                                                 //textShadowColor = animFileDispNameShadowColor;
                                             }
@@ -886,7 +887,7 @@ namespace DSAnimStudio.ImguiOSD
                                                 || string.IsNullOrWhiteSpace(animFileDispNameThing)))
                                             {
                                                 if (!string.IsNullOrWhiteSpace(animFileDispNameThing))
-                                                    animFileDispNameThing2 = $"<{animFileDispNameThing2}>";
+                                                    animFileDispNameThing2 = "<" + animFileDispNameThing2 + ">";
 
                                                 animFileDispNameColor = animFileDispNameColor.MultBrightness(0.75f);
                                                 animFileDispNameShadowColor = animFileDispNameShadowColor.MultBrightness(0.75f);
@@ -1359,7 +1360,7 @@ namespace DSAnimStudio.ImguiOSD
                                         Math.Abs(fontSize - CurrentTreeNodeSize_FontScaleItsFor) > 0.001f)
                                     {
                                         float startCursorY_Font = ImGui.GetCursorPosY();
-                                        ImGui.TreeNodeEx($"###NewTaeList_CalibrationNode",
+                                        ImGui.TreeNodeEx(Loc.TF("###NewTaeList_CalibrationNode"),
                                             ImGuiTreeNodeFlags.Leaf | ImGuiTreeNodeFlags.NoTreePushOnOpen |
                                             ImGuiTreeNodeFlags.SpanFullWidth | ImGuiTreeNodeFlags.FramePadding |
                                             ImGuiTreeNodeFlags.Framed, $" ");
@@ -1393,7 +1394,7 @@ namespace DSAnimStudio.ImguiOSD
                             }
 
                             // Dummy so it can scroll down even when stuff near the end of the list is culled.
-                            ImGui.Text(" ");
+                            ImGui.Text(Loc.T(" "));
 
                             if (jumptoTae != null && jumpToAnimation != null &&
                                 !cancelJumpThisFrameDueToExtraButtonBeingClicked)
@@ -1436,7 +1437,7 @@ namespace DSAnimStudio.ImguiOSD
                                 new NVector2(0, ImGui.GetScrollY()), 0xFFFFFF00);
 
                             var sb = new StringBuilder();
-                            sb.AppendLine("TAE blocks rendered last frame:");
+                            sb.AppendLine(Loc.T("TAE blocks rendered last frame:"));
                             var taeBlocksRenderedThisFrame =
                                 TaeBlockCaches.Where(kvp => kvp.Value.Debug_WasRenderedLastFrame).ToList();
                             foreach (var blockKvp in taeBlocksRenderedThisFrame)

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using static DSAnimStudio.zzz_SoundManagerIns;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public abstract partial class Window
@@ -19,7 +20,7 @@ namespace DSAnimStudio.ImguiOSD
         {
             public override SaveOpenStateTypes GetSaveOpenStateType() => SaveOpenStateTypes.SaveAlways;
 
-            public override string NewImguiWindowTitle => "Sound";
+            public override string NewImguiWindowTitle => Loc.Win("Sound");
 
             private string addBankTextField = "";
 
@@ -30,9 +31,9 @@ namespace DSAnimStudio.ImguiOSD
 
             protected override void BuildContents(ref bool anyFieldFocused)
             {
-                ImGui.SliderFloat($"Volume", ref zzz_DocumentManager.CurrentDocument.SoundManager.AdjustSoundVolume, 0, 200, "%.2f%%");
+                ImGui.SliderFloat(Loc.TF("Volume"), ref zzz_DocumentManager.CurrentDocument.SoundManager.AdjustSoundVolume, 0, 200, "%.2f%%");
                 anyFieldFocused |= ImGui.IsItemActive();
-                ImGui.Button("Reset to 100%");
+                ImGui.Button(Loc.T("Reset to 100%"));
                 if (ImGui.IsItemClicked())
                     zzz_DocumentManager.CurrentDocument.SoundManager.AdjustSoundVolume = 100;
                 
@@ -47,7 +48,7 @@ namespace DSAnimStudio.ImguiOSD
 
                 
 
-                ImGui.Checkbox("SHOW DEBUG DIAGNOSTICS", ref soundManager.DebugShowDiagnostics);
+                ImGui.Checkbox(Loc.T("SHOW DEBUG DIAGNOSTICS"), ref soundManager.DebugShowDiagnostics);
 
                 ImGui.Separator();
 
@@ -63,14 +64,14 @@ namespace DSAnimStudio.ImguiOSD
                     }
                     else if (soundManager.EngineType is EngineTypes.Wwise)
                     {
-                        ImGui.Checkbox("Wwise - KEEP CONVERT TEMP FILES", ref zzz_WwiseManagerInst.DEBUG_KEEP_CONVERT_TEMP_FILES);
+                        ImGui.Checkbox(Loc.T("Wwise - KEEP CONVERT TEMP FILES"), ref zzz_WwiseManagerInst.DEBUG_KEEP_CONVERT_TEMP_FILES);
                     }
                     else if (soundManager.EngineType is EngineTypes.MagicOrchestra)
                     {
-                        ImGui.Checkbox("MagicOrchestra - KEEP CONVERT TEMP FILES", ref zzz_MagicOrchestraManagerInst.DEBUG_KEEP_CONVERT_TEMP_FILES);
+                        ImGui.Checkbox(Loc.T("MagicOrchestra - KEEP CONVERT TEMP FILES"), ref zzz_MagicOrchestraManagerInst.DEBUG_KEEP_CONVERT_TEMP_FILES);
                     }
 
-                    ImGui.Button("Clear /Temp/");
+                    ImGui.Button(Loc.T("Clear /Temp/"));
                     if (ImGui.IsItemClicked())
                     {
                         var dir = $@"{Main.Directory}\Temp";
@@ -86,7 +87,7 @@ namespace DSAnimStudio.ImguiOSD
                 
 
                 bool soundEnabled = !zzz_SoundManagerIns.SOUND_DISABLED;
-                ImGui.Checkbox("Enable Audio System", ref soundEnabled);
+                ImGui.Checkbox(Loc.T("Enable Audio System"), ref soundEnabled);
                 if (!soundEnabled != zzz_SoundManagerIns.SOUND_DISABLED)
                 {
                     zzz_SoundManagerIns.SOUND_DISABLED = !soundEnabled;
@@ -103,11 +104,11 @@ namespace DSAnimStudio.ImguiOSD
                 }
                 ImGui.Separator();
 
-                ImGui.Button("Stop All Sounds");
+                ImGui.Button(Loc.T("Stop All Sounds"));
                 if (ImGui.IsItemClicked())
                     soundManager.StopAllSounds();
 
-                ImGui.Button("Purge Sound Cache");
+                ImGui.Button(Loc.T("Purge Sound Cache"));
                 if (ImGui.IsItemClicked())
                 {
                     soundManager.PurgeLoadedAssets();
@@ -115,7 +116,7 @@ namespace DSAnimStudio.ImguiOSD
                     GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, false);
                 }
 
-                ImGui.Button("Reset To Default Bank Load Order");
+                ImGui.Button(Loc.T("Reset To Default Bank Load Order"));
                 if (ImGui.IsItemClicked())
                 {
                     soundManager.InitDefaultSoundBanksToLoad();
@@ -137,7 +138,7 @@ namespace DSAnimStudio.ImguiOSD
                     if (bankListHeightInItems < 2)
                         bankListHeightInItems = 2;
 
-                    if (ImGui.BeginTable("test_table", 2, ImGuiTableFlags.Borders | ImGuiTableFlags.NoSavedSettings))
+                    if (ImGui.BeginTable(Loc.T("test_table"), 2, ImGuiTableFlags.Borders | ImGuiTableFlags.NoSavedSettings))
                     {
 
                         ImGui.TableNextColumn();
@@ -146,9 +147,9 @@ namespace DSAnimStudio.ImguiOSD
                         {
                             if (soundManager.BankNameArray != null)
                             {
-                                ImGui.Text("Add Bank From List:");
+                                ImGui.Text(Loc.T("Add Bank From List:"));
 
-                                ImGui.ListBox("###All Banks", ref soundManager.BankNameArray_SelectedIndex,
+                                ImGui.ListBox(Loc.T("###All Banks"), ref soundManager.BankNameArray_SelectedIndex,
                                     soundManager.BankNameArray,
                                     soundManager.BankNameArray.Length,
                                     bankListHeightInItems - 1);
@@ -159,7 +160,7 @@ namespace DSAnimStudio.ImguiOSD
                                 int selNameIndex = soundManager.BankNameArray_SelectedIndex;
                                 if (selNameIndex < 0)
                                     ImGuiDebugDrawer.PushDisabled();
-                                if (Tools.SimpleClickButton("Add Selected From List"))
+                                if (Tools.SimpleClickButton(Loc.T("Add Selected From List")))
                                 {
                                     var selected = soundManager.BankNameArray[selNameIndex];
 
@@ -186,14 +187,14 @@ namespace DSAnimStudio.ImguiOSD
                                     ImGuiDebugDrawer.PopDisabled();
 
 
-                                ImGui.Text("Add Exact Bank:");
+                                ImGui.Text(Loc.T("Add Exact Bank:"));
 
-                                ImGui.InputText("###AddBankTextField", ref addBankTextField, 64);
+                                ImGui.InputText(Loc.T("###AddBankTextField"), ref addBankTextField, 64);
                                 if (ImGui.IsItemFocused())
                                     anyFieldFocused = true;
 
                                 ImGui.SameLine();
-                                if (Tools.SimpleClickButton("Add"))
+                                if (Tools.SimpleClickButton(Loc.T("Add")))
                                 {
 
                                     var banks = soundManager.LookupBanks.ToList();
@@ -216,9 +217,9 @@ namespace DSAnimStudio.ImguiOSD
 
                         if (soundManager.LookupBanks != null)
                         {
-                            ImGui.Text("Sound Bank Load Order:");
+                            ImGui.Text(Loc.T("Sound Bank Load Order:"));
 
-                            ImGui.ListBox("###Banks To Lookup Sounds From", ref soundManager.LookupBanks_SelectedIndex,
+                            ImGui.ListBox(Loc.T("###Banks To Lookup Sounds From"), ref soundManager.LookupBanks_SelectedIndex,
                                 soundManager.LookupBanks,
                                 soundManager.LookupBanks.Length,
                                 bankListHeightInItems);
@@ -233,9 +234,9 @@ namespace DSAnimStudio.ImguiOSD
                             //if (selIndex < 0)
                             //    ImGuiDebugDrawer.PushDisabled();
 
-                            ImGui.Text("For selected bank:");
+                            ImGui.Text(Loc.T("For selected bank:"));
 
-                            if (Tools.SimpleClickButton("×###Remove Selected Bank", selIndex >= 0 && selIndex < count))
+                            if (Tools.SimpleClickButton(Loc.T("×###Remove Selected Bank"), selIndex >= 0 && selIndex < count))
                             {
                                 if (selIndex >= 0 && selIndex < count)
                                 {
@@ -261,7 +262,7 @@ namespace DSAnimStudio.ImguiOSD
 
                             ImGui.SameLine();
 
-                            if (Tools.SimpleClickButton("↑###Move Selected Bank Up", selIndex >= 1 && selIndex < count))
+                            if (Tools.SimpleClickButton(Loc.T("↑###Move Selected Bank Up"), selIndex >= 1 && selIndex < count))
                             {
                                 if (selIndex >= 1 && selIndex < count)
                                 {
@@ -284,9 +285,9 @@ namespace DSAnimStudio.ImguiOSD
 
                             ImGui.SameLine();
 
-                            bool moveDownBtn = Tools.SimpleClickButton("↓###Move Selected Bank Down", selIndex >= 0 && selIndex < count - 1);
+                            bool moveDownBtn = Tools.SimpleClickButton(Loc.T("↓###Move Selected Bank Down"), selIndex >= 0 && selIndex < count - 1);
                             if (ImGui.IsItemHovered())
-                                ImGui.SetTooltip("Move Down");
+                                ImGui.SetTooltip(Loc.T("Move Down"));
 
                             if (moveDownBtn)
                             {
@@ -335,7 +336,7 @@ namespace DSAnimStudio.ImguiOSD
                 if (soundManager.EngineType is EngineTypes.Wwise)
                 {
 
-                    Main.Config.Wwise_ShowMissingBankWarnings = MenuBar.CheckboxBig("Show Wwise Bank Not Found Warnings", Main.Config.Wwise_ShowMissingBankWarnings);
+                    Main.Config.Wwise_ShowMissingBankWarnings = MenuBar.CheckboxBig(Loc.T("Show Wwise Bank Not Found Warnings"), Main.Config.Wwise_ShowMissingBankWarnings);
 
 
 
@@ -347,7 +348,7 @@ namespace DSAnimStudio.ImguiOSD
 
                     ImGui.PushItemWidth(OSD.DefaultItemWidth * 3);
                     if (WW.DefensiveMaterialNames != null && WW.DefensiveMaterialNames.Length > 0)
-                        ImGui.ListBox("Floor Material", ref WW.DefensiveMaterialIndex, WW.DefensiveMaterialNames, WW.DefensiveMaterialNames.Length);
+                        ImGui.ListBox(Loc.T("Floor Material"), ref WW.DefensiveMaterialIndex, WW.DefensiveMaterialNames, WW.DefensiveMaterialNames.Length);
                     if (ImGui.IsItemFocused())
                         anyFieldFocused = true;
 
@@ -358,7 +359,7 @@ namespace DSAnimStudio.ImguiOSD
 
                     ImGui.Separator();
 
-                    if (ImguiOSD.Tools.SimpleClickButton("Re-Init Switch Groups"))
+                    if (ImguiOSD.Tools.SimpleClickButton(Loc.T("Re-Init Switch Groups")))
                     {
                         WW.InitDefaultSwitchGroups();
                     }
@@ -388,7 +389,7 @@ namespace DSAnimStudio.ImguiOSD
 
                     ImGui.Separator();
 
-                    if (MenuBar.ClickItem("STOP ALL SOUNDS", NewFmodIns.EventSys != null, "Escape"))
+                    if (MenuBar.ClickItem(Loc.T("STOP ALL SOUNDS"), NewFmodIns.EventSys != null, Loc.T("Escape")))
                     {
                         soundManager.StopAllSounds();
                     }
@@ -446,11 +447,11 @@ namespace DSAnimStudio.ImguiOSD
                     //            { FmodManager.ArmorMaterialType.None, "Naked" },
                     //    });
 
-                    if (ImGui.BeginListBox("Footstep Material"))
+                    if (ImGui.BeginListBox(Loc.T("Footstep Material")))
                     {
                         foreach (var mat in fmod.FloorMaterialNames)
                         {
-                            if (MenuBar.CheckboxBig($"Material {mat.Key:D2}", mat.Key == fmod.FloorMaterial))
+                            if (MenuBar.CheckboxBig(Loc.TF("Material {0:D2}", mat.Key), mat.Key == fmod.FloorMaterial))
                             {
                                 fmod.FloorMaterial = mat.Key;
                             }
@@ -459,7 +460,7 @@ namespace DSAnimStudio.ImguiOSD
                         ImGui.EndListBox();
                     }
 
-                    ImGui.Text("\n\n\n\n");
+                    ImGui.Text(Loc.T("\n\n\n\n"));
 
                     ImGui.PopItemWidth();
                 }
@@ -473,11 +474,11 @@ namespace DSAnimStudio.ImguiOSD
 
                     var fmod = document.Fmod;
 
-                    if (ImGui.BeginListBox("Footstep Material"))
+                    if (ImGui.BeginListBox(Loc.T("Footstep Material")))
                     {
                         foreach (var mat in fmod.FloorMaterialNames)
                         {
-                            if (MenuBar.CheckboxBig($"Material {mat.Key:D2}", mat.Key == fmod.FloorMaterial))
+                            if (MenuBar.CheckboxBig(Loc.TF("Material {0:D2}", mat.Key), mat.Key == fmod.FloorMaterial))
                             {
                                 fmod.FloorMaterial = mat.Key;
                             }

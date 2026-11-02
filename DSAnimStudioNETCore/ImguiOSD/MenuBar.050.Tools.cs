@@ -8,13 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using DSAnimStudio.Localization;
 namespace DSAnimStudio.ImguiOSD
 {
     public static partial class MenuBar
     {
         public static void BuildMenuBar_050_Tools(ref bool anyItemFocused, ref bool isAnyMenuExpanded)
         {
-            if (ImGui.BeginMenu("Tools"))
+            if (ImGui.BeginMenu(Loc.T("Tools")))
             {
                 isAnyMenuExpanded = true;
 
@@ -25,28 +26,28 @@ namespace DSAnimStudio.ImguiOSD
                 {
                     ImGui.Separator();
                     
-                    if (ClickItem("Scan for Unused Animations", shortcut: "[DEBUG]",
+                    if (ClickItem(Loc.T("Scan for Unused Animations"), shortcut: Loc.T("[DEBUG]"),
                             textColor: Color.Red, shortcutColor: Color.Red))
                         Main.MainThreadLazyDispatch(() =>
                         {
                             Tae.Tools_ScanForUnusedAnimations();
                         });
                     
-                    // if (ClickItem("[DEBUG] Manage Anim Sections", shortcut: "[DEBUG]",
+                    // if (ClickItem("[DEBUG] Manage Anim Sections", shortcut: Loc.T("[DEBUG]"),
                     //         textColor: Color.Red, shortcutColor: Color.Red))
                     //     Main.MainThreadLazyDispatch(() =>
                     //     {
                     //         Tae.ShowManageTaeSectionsDialog();
                     //     });
                     //
-                    // if (ClickItem("[DEBUG] Manage Animations", shortcut: "[DEBUG]",
+                    // if (ClickItem("[DEBUG] Manage Animations", shortcut: Loc.T("[DEBUG]"),
                     //         textColor: Color.Red, shortcutColor: Color.Red))
                     //     Main.MainThreadLazyDispatch(() =>
                     //     {
                     //         Tae.ShowManageAnimationsDialog();
                     //     });
                     
-                    if (ClickItem("[DEBUG] Import FBX Animation", shortcut: "[DEBUG]",
+                    if (ClickItem(Loc.T("[DEBUG] Import FBX Animation"), shortcut: Loc.T("[DEBUG]"),
                             textColor: Color.Red, shortcutColor: Color.Red))
                         Main.MainThreadLazyDispatch(() =>
                         {
@@ -56,7 +57,7 @@ namespace DSAnimStudio.ImguiOSD
 
                 ImGui.Separator();
 
-                if (ClickItem("Export Skeleton & Animations...", enabled: Tae?.IsFileOpen == true && !zzz_DocumentManager.CurrentDocument.LoadingTaskMan.AnyInteractionBlockingTasks()))
+                if (ClickItem(Loc.T("Export Skeleton & Animations..."), enabled: Tae?.IsFileOpen == true && !zzz_DocumentManager.CurrentDocument.LoadingTaskMan.AnyInteractionBlockingTasks()))
                     Main.MainThreadLazyDispatch(() =>
                     {
                         Tae.ShowExportAllAnimsMenu();
@@ -64,7 +65,7 @@ namespace DSAnimStudio.ImguiOSD
 
                 ImGui.Separator();
 
-                if (ClickItem("Export All Actions to Text File...", enabled: Tae?.IsFileOpen == true && !zzz_DocumentManager.CurrentDocument.LoadingTaskMan.AnyInteractionBlockingTasks()))
+                if (ClickItem(Loc.T("Export All Actions to Text File..."), enabled: Tae?.IsFileOpen == true && !zzz_DocumentManager.CurrentDocument.LoadingTaskMan.AnyInteractionBlockingTasks()))
                     Main.MainThreadLazyDispatch(() =>
                     {
                         Tae.ShowExportAllActionsToTextFileDialog();
@@ -72,13 +73,13 @@ namespace DSAnimStudio.ImguiOSD
 
                 ImGui.Separator();
 
-                if (ClickItem("Export All Animation Names...", enabled: Tae?.IsFileOpen == true && !zzz_DocumentManager.CurrentDocument.LoadingTaskMan.AnyInteractionBlockingTasks()))
+                if (ClickItem(Loc.T("Export All Animation Names..."), enabled: Tae?.IsFileOpen == true && !zzz_DocumentManager.CurrentDocument.LoadingTaskMan.AnyInteractionBlockingTasks()))
                     Main.MainThreadLazyDispatch(() =>
                     {
                         Tae.ShowExportAllAnimNamesDialog();
                     });
 
-                if (ClickItem("Import All Animation Names...", enabled: Tae?.IsFileOpen == true && !zzz_DocumentManager.CurrentDocument.LoadingTaskMan.AnyInteractionBlockingTasks()))
+                if (ClickItem(Loc.T("Import All Animation Names..."), enabled: Tae?.IsFileOpen == true && !zzz_DocumentManager.CurrentDocument.LoadingTaskMan.AnyInteractionBlockingTasks()))
                     Main.MainThreadLazyDispatch(() =>
                     {
                         Tae.ShowImportAllAnimNamesDialog();
@@ -87,7 +88,7 @@ namespace DSAnimStudio.ImguiOSD
                 ImGui.Separator();
 
                 Main.Config.EnableGameDataIOLogging = Checkbox(
-                    "Enable GameData Logging",
+                    Loc.T("Enable GameData Logging"),
                     Main.Config.EnableGameDataIOLogging);
                 
                 ImGui.EndMenu();

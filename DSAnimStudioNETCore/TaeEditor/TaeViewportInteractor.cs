@@ -16,6 +16,7 @@ using SoulsAssetPipeline;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
 using System.Runtime;
+using DSAnimStudio.Localization;
 
 namespace DSAnimStudio.TaeEditor
 {
@@ -804,8 +805,7 @@ namespace DSAnimStudio.TaeEditor
                             }
                             else
                             {
-                                System.Windows.Forms.MessageBox.Show("Unable to find any characters in game data. " +
-                                    "Make sure your directories are setup properly on the 'Setup Project Directories' menu.", "Error", System.Windows.Forms.MessageBoxButtons.OK,
+                                System.Windows.Forms.MessageBox.Show(Loc.T("Unable to find any characters in game data. Make sure your directories are setup properly on the 'Setup Project Directories' menu."), Loc.T("Error"), System.Windows.Forms.MessageBoxButtons.OK,
                                     System.Windows.Forms.MessageBoxIcon.Error);
 
                                 //Main.REQUEST_REINIT_EDITOR = true;
